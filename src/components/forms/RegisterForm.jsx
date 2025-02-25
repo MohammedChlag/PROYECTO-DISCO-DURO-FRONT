@@ -1,14 +1,15 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '../Button.jsx';
 import Form from './Form.jsx';
 import { Input } from './Input.jsx';
 import { useNavigate } from 'react-router-dom';
 import { registerUserService } from '../../services/fetchApi.js';
 import { toast } from 'react-toastify';
+import { registerUserShema } from '../../schemas/registerUserShema.js';
 
 export const RegisterForm = () => {
-    const { info, errors, handleChange } = useContext(FormContext);
-    const [isLoading, setIsLoading] = useState(false);
+    const { info, errors, validate, handleChange } = useFormHook();
+    const [loading, setLoading] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false);
     const navigate = useNavigate();
 
@@ -20,10 +21,10 @@ export const RegisterForm = () => {
                 toast.error('Debes aceptar los términos y condiciones');
                 return;
             }
-            // const value = validation(registerUserShema); luego se hace
-            setIsLoading(true);
+            const value = validate(registerUserShema);
+            setLoading(true);
 
-            const message = await registerUserService();
+            const message = await registerUserService(value);
 
             const params = new URLSearchParams({
                 type: 'success',
@@ -35,7 +36,7 @@ export const RegisterForm = () => {
         } catch (error) {
             toast.error(error.message || 'Error al registrar el usuario');
         } finally {
-            setIsLoading(false);
+            setLoading(false);
         }
     };
 
@@ -58,7 +59,7 @@ export const RegisterForm = () => {
                 handleChange={handleChange}
             />
             <Input
-                label="Date of birth"
+                label="Date-of-birth"
                 type="date"
                 name="birthday"
                 value={info.birthday}
@@ -91,19 +92,21 @@ export const RegisterForm = () => {
             />
             <div>
                 <input
-                    label="Aceptar términos y condiciones"
+                    id="terms"
                     type="checkbox"
                     name="termsAccepted"
                     checked={termsAccepted}
                     onChange={() => setTermsAccepted(!termsAccepted)}
-                />
-                {/* <label htmlFor="terms">Aceptar términos y condiciones</label> */}
+                ></input>
+                <label htmlFor="terms">
+                    Aceptar los términos y condiciones
+                </label>
             </div>
             <Button
                 id="register"
                 className="submit"
                 type="submit"
-                isLoading={isLoading}
+                loading={loading}
             >
                 Registrarse
             </Button>
