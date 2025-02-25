@@ -22,5 +22,35 @@ nav ul {
 }
 
 nav.menu {
-    width: 10rem;
+    width: 8rem;
+    height: fit-content;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+
+    position: fixed;
+    top: 3.65rem;
+}
+
+nav.menu {
+    right: 0;
+}
+
+nav.menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+nav.menu li {
+    width: 100%;
+}
+nav.menu button {
+    width: 100%;
+
+    display: flex;
+}
+
+nav.menu button span.text {
+    flex-grow: 1;
+    font-size: 1rem;
 }
