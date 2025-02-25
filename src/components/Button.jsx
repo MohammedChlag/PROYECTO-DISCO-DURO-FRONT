@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types';
-
-export const Button = ({ children }) => {
-    return <button>{children}</button>;
-};
-
-Button.propTypes = {
-    children: PropTypes.node.isRequired,
+export const Button = ({ id, type, loading, children }) => {
+    return (
+        <button id={id} type={type} disabled={loading}>
+            {children}
+        </button>
+    );
 };

@@ -1,4 +1,4 @@
-import { LayoutComun } from '../components/LayoutComun/LayoutComun.jsx';
+import { LayoutComun } from '../components/LayoutComun1/LayoutComun.jsx';
 
 export const LandingPage = () => {
     return (
