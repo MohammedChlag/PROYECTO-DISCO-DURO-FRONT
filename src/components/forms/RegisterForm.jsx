@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button } from '../Button.jsx';
-import Form from './Form.jsx';
 import { Input } from './Input.jsx';
 import { useNavigate } from 'react-router-dom';
 import { registerUserService } from '../../services/fetchApi.js';
@@ -8,6 +7,7 @@ import { toast } from 'react-toastify';
 import { registerUserShema } from '../../schemas/registerUserShema.js';
 import { useFormHook } from '../../hooks/useFormHook.js';
 import { Icon } from '../Icon.jsx';
+import { Form } from './Form.jsx';
 
 export const RegisterForm = () => {
     const { info, errors, validate, handleChange } = useFormHook();
@@ -93,7 +93,8 @@ export const RegisterForm = () => {
                     id="terms"
                     type="checkbox"
                     name="termsAccepted"
-                    checked
+                    checked={info.terms || false}
+                    onChange={handleChange}
                 ></input>
                 <label htmlFor="terms">
                     Aceptar los términos y condiciones
