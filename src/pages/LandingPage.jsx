@@ -1,19 +1,22 @@
-import { Menu } from '../components/Menu/Menu.jsx';
+import { Header } from '../components/Header/Header.jsx';
 
 export const LandingPage = () => {
     return (
         <>
-            <header>
-                <img src="" alt="" />
-                <Menu />
-            </header>
+            <Header />
             <main>
-                <h2>Guarda y comparte tus archivos</h2>
-                <p>
-                    Herramienta que te permite guardar tus documentos en la nube
-                    y tener acceso a ellos en cualquier momento.
-                </p>
+                <section>
+                    <h2>Guarda y comparte tus archivos</h2>
+                    <p>
+                        Herramienta que te permite guardar tus documentos en la
+                        nube y tener acceso a ellos en cualquier momento.
+                    </p>
+                </section>
                 <button>Regístrate</button>
+                <section>
+                    <h3>Esto es lo que opinan nuestros usuarios:</h3>
+                    <article>Votación</article>
+                </section>
             </main>
             <footer>
                 <img src="" alt="" />

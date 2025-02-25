@@ -1,4 +1,5 @@
 import { RegisterForm } from '../components/forms/RegisterForm.jsx';
+import { Header } from '../components/Header/Header.jsx';
 import { Menu } from '../components/Menu/Menu.jsx';
 
 export const RegisterPage = () => {
