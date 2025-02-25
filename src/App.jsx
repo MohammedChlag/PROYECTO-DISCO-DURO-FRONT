@@ -10,7 +10,6 @@ import { LoginPage } from './pages/LoginPage.jsx';
 function App() {
     return (
         <>
-            <LandingPage />
             <Routes>
                 <Route path="/" element={<LayoutPage />}>
                     <Route index element={<LandingPage />} />

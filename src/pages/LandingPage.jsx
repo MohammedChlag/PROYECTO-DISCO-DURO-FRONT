@@ -3,7 +3,7 @@ import { Menu } from '../components/Menu/Menu.jsx';
 export const LandingPage = () => {
     return (
         <>
-            {/* <header>
+            <header>
                 <img src="" alt="" />
                 <Menu />
             </header>
@@ -20,7 +20,7 @@ export const LandingPage = () => {
                 <a href="">Registrarse</a>
                 <a href="">Iniciar Sesión</a>
                 <p>Copyright© Hackloud</p>
-            </footer> */}
+            </footer>
         </>
     );
 };
