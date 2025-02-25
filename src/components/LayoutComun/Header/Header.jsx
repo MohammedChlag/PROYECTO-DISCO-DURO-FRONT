@@ -1,18 +1,15 @@
-import React from 'react';
-import { Menu } from './Menu/Menu.jsx';
+import logo from '../../../assets/img/logo-hackloud-solo.png';
 
-import './header.css';
 export const Header = () => {
     return (
-        <nav>
-            <ul>
-                <li>
-                    <h2>Hackloud</h2>
-                </li>
-                <li>
-                    <Menu />
-                </li>
-            </ul>
-        </nav>
+        <header className="flex items-center justify-between px-6 py-4 bg-gray-300 gap-3">
+            <img className="w-28" src={logo} alt="Logo Hackloud" />
+            <nav className="space-x-3 text-xs">
+                <a href="/users/register" className="">
+                    Registrarse
+                </a>
+                <a href="/users/login">Iniciar Sesión</a>
+            </nav>
+        </header>
     );
 };
