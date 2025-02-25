@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export const Button = ({ children }) => {
-    return <button>Button</button>;
+    return <button>{children}</button>;
 };
 
 Button.propTypes = {

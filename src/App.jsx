@@ -1,9 +1,7 @@
 import './App.css';
-import { LandingPage } from './pages/LandingPage.jsx';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import { LayoutPage } from './pages/LayoutPage.jsx';
 import { LandingPage } from './pages/LandingPage.jsx';
+import { LayoutPage } from './pages/LayoutPage.jsx';
 import { HomePage } from './pages/HomePage.jsx';
 import { RegisterPage } from './pages/RegisterPage.jsx';
 import { ValidationPage } from './pages/ValidationPage.jsx';

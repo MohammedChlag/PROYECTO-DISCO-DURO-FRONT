@@ -1,0 +1,16 @@
+nav {
+    height: 4rem;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: gray;
+
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
