@@ -1,11 +1,9 @@
 [
     {
-        "name": "register",
         "text": "Registrarse",
         "url": "/RegisterPage"
     },
     {
-        "name": "login",
         "text": "Iniciar Sesion",
         "url": "/LoginPage"
     }

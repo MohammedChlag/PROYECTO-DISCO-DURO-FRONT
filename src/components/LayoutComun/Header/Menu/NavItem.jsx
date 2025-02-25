@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '../../Button.jsx';
-import { Icon } from '../../Icon.jsx';
+import { Button } from '../../../Button.jsx';
+import { Icon } from '../../../Icon.jsx';
 
 export const NavItem = ({ item }) => {
     return (

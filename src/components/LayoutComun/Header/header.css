@@ -6,11 +6,21 @@ nav {
 
     display: flex;
     align-items: center;
+
+    position: fixed;
+    top: 0;
+    z-index: 2;
 }
 
 nav ul {
     width: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+}
+
+nav.menu {
+    width: 10rem;
 }

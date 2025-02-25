@@ -7,7 +7,7 @@ export const Header = () => {
         <nav>
             <ul>
                 <li>
-                    <img src="" alt="" />
+                    <h2>Hackloud</h2>
                 </li>
                 <li>
                     <Menu />
