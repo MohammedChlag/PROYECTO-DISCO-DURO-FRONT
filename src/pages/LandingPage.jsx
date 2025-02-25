@@ -1,6 +1,4 @@
 import { LayoutComun } from '../components/LayoutComun1/LayoutComun.jsx';
-import { LayoutComun } from '../components/LayoutComun/LayoutComun.jsx';
-import { Button } from '../components/Button.jsx';
 
 export const LandingPage = () => {
     return (
