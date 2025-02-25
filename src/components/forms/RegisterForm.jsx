@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-
+import { useContext, useState } from 'react';
 import { Button } from '../Button.jsx';
 import Form from './Form.jsx';
 import { Input } from './Input.jsx';
@@ -8,7 +7,7 @@ import { registerUserService } from '../../services/fetchApi.js';
 import { toast } from 'react-toastify';
 
 export const RegisterForm = () => {
-    const { info, errors, handleChange } = useContext(); //FormContext falta
+    const { info, errors, handleChange } = useContext(FormContext);
     const [isLoading, setIsLoading] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false);
     const navigate = useNavigate();
@@ -17,6 +16,10 @@ export const RegisterForm = () => {
         try {
             e.preventDefault();
 
+            if (!termsAccepted) {
+                toast.error('Debes aceptar los términos y condiciones');
+                return;
+            }
             // const value = validation(registerUserShema); luego se hace
             setIsLoading(true);
 
@@ -88,20 +91,22 @@ export const RegisterForm = () => {
             />
             <div>
                 <input
+                    label="Aceptar términos y condiciones"
                     type="checkbox"
                     name="termsAccepted"
-                    // id="terms"
                     checked={termsAccepted}
                     onChange={() => setTermsAccepted(!termsAccepted)}
                 />
-                <label htmlFor="terms">Aceptar términos y condiciones</label>
+                {/* <label htmlFor="terms">Aceptar términos y condiciones</label> */}
             </div>
             <Button
                 id="register"
                 className="submit"
                 type="submit"
                 isLoading={isLoading}
-            ></Button>
+            >
+                Registrarse
+            </Button>
         </Form>
     );
 };
