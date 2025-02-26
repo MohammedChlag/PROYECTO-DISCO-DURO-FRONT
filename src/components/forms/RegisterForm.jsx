@@ -6,7 +6,6 @@ import { registerUserService } from '../../services/fetchApi.js';
 import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
 import { toast } from 'react-toastify';
 import { useFormHook } from '../../hooks/useFormHook.js';
-import { Icon } from '../Icon.jsx';
 import { Form } from './Form.jsx';
 
 export const RegisterForm = () => {
