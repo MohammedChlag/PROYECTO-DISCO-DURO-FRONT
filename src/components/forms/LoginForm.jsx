@@ -6,7 +6,6 @@ import { loginUserService } from '../../services/fetchApi.js';
 import { Form } from './Form.jsx';
 import { Button } from '../Button.jsx';
 import { toast } from 'react-toastify';
-import { Icon } from '../Icon.jsx';
 import { loginUserSchema } from '../../schemas/users/loginUserSchema.js';
 import { Input } from './Input.jsx';
 
