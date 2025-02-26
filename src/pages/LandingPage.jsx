@@ -1,10 +1,10 @@
-import { LayoutComun } from '../components/LayoutComun/LayoutComun.jsx';
+import { LayoutPublic } from '../components/LayoutPublic/LayoutPublic.jsx';
 
 import nubelogo from '../assets/img/5390309.png';
 
 export const LandingPage = () => {
     return (
-        <LayoutComun>
+        <LayoutPublic>
             <section className="flex flex-col items-center justify-center min-h-[calc(100vh-24rem)] text-center text-[#009EB5]">
                 <img className="w-40 " src={nubelogo} alt="Nube Informática" />
                 <h2 className="text-2xl font-bold ">
@@ -21,6 +21,6 @@ export const LandingPage = () => {
                 </h3>
                 <article>Votación</article>
             </section>
-        </LayoutComun>
+        </LayoutPublic>
     );
 };

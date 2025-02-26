@@ -22,7 +22,7 @@ function App() {
                     />
                     <Route path="/users/login" element={<LoginPage />} />
                     <Route path="/storage" element={<HomePage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/users/profile" element={<ProfilePage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
