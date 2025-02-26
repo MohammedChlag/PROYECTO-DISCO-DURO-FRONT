@@ -5,8 +5,8 @@ import nubelogo from '../assets/img/5390309.png';
 export const LandingPage = () => {
     return (
         <LayoutComun>
-            <section className="flex flex-col items-center justify-center min-h-[calc(100vh-20rem)] text-center text-[#009EB5]">
-                <img className="w-28 " src={nubelogo} alt="Nube Informática" />
+            <section className="flex flex-col items-center justify-center min-h-[calc(100vh-24rem)] text-center text-[#009EB5]">
+                <img className="w-40 " src={nubelogo} alt="Nube Informática" />
                 <h2 className="text-2xl font-bold ">
                     Guarda y comparte tus archivos
                 </h2>
