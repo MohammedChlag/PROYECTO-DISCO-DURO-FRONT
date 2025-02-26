@@ -17,7 +17,7 @@ function App() {
                     <Route index element={<LandingPage />} />
                     <Route path="/users/register" element={<RegisterPage />} />
                     <Route
-                        path="/users/validation"
+                        path="/users/validation/:registrationCode"
                         element={<ValidationPage />}
                     />
                     <Route path="/users/login" element={<LoginPage />} />
