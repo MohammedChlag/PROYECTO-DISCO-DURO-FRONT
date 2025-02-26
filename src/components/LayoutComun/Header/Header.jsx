@@ -7,14 +7,14 @@ export const Header = () => {
             <img className="w-28" src={logo} alt="Logo Hackloud" />
             <nav className="space-x-3 text-sm">
                 <Link
-                    className="hover:bg-gray-200 border-b-2 border-transparent hover:border-yellow-300 focus:border-2 focus:border-yellow-300 rounded-md"
+                    className="hover:bg-gray-200 border-b-2 border-transparent outline-yellow-300 hover:border-yellow-300 p-1 rounded-md"
                     to="/users/register"
                 >
                     Registrarse
                 </Link>
                 <Link
                     to="/users/login"
-                    className="hover:bg-gray-200 border-b-2 border-transparent hover:border-green-300 rounded-md"
+                    className="hover:bg-gray-200 border-b-2 border-transparent hover:border-green-300 p-1 rounded-md"
                 >
                     Iniciar Sesión
                 </Link>
