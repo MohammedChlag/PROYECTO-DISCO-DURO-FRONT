@@ -78,6 +78,15 @@ export const RegisterForm = () => {
                 handleChange={handleChange}
             />
             <Input
+                id="email"
+                label="Correo Electrónico"
+                type="email"
+                name="email"
+                value={info.email}
+                errors={errors}
+                handleChange={handleChange}
+            />
+            <Input
                 id="password"
                 label="Contraseña"
                 type="password"
