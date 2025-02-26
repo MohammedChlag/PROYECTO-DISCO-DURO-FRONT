@@ -5,12 +5,9 @@ import { FormProvider } from '../context/Form/FormProvider.jsx';
 export const RegisterPage = () => {
     return (
         <LayoutComun>
-            <section>
-                <h2> Regístrate </h2>
-                <FormProvider>
-                    <RegisterForm />
-                </FormProvider>
-            </section>
+            <FormProvider>
+                <RegisterForm />
+            </FormProvider>
         </LayoutComun>
     );
 };

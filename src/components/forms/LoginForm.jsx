@@ -36,76 +36,41 @@ export const LoginForm = () => {
         }
     };
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-[#E5F3F2] p-4">
-            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-                <Form handleSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label
-                            htmlFor="email"
-                            className="block text-gray-600 text-sm font-medium mb-1"
-                        >
-                            Correo Electrónico
-                        </label>
-                        <Input
-                            id="email"
-                            type="email"
-                            name="email"
-                            value={info.email}
-                            errors={errors}
-                            handleChange={handleChange}
-                            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                        />
-                        {errors.email && (
-                            <p className="text-sm text-red-500 mt-1">
-                                {errors.email}
-                            </p>
-                        )}
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="password"
-                            className="block text-gray-600 text-sm font-medium mb-1"
-                        >
-                            Contraseña
-                        </label>
-                        <Input
-                            id="password"
-                            type="password"
-                            name="password"
-                            value={info.password}
-                            errors={errors}
-                            handleChange={handleChange}
-                            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                        />
-                        {errors.password && (
-                            <p className="text-sm text-red-500 mt-1">
-                                {errors.password}
-                            </p>
-                        )}
-                    </div>
-                    <Button
-                        id="login"
-                        type="submit"
-                        loading={loading}
-                        disabled={loading}
-                        className="w-full bg-[#237D77] text-white py-2 rounded-lg hover:bg-[#1A5C58] focus:ring-2 focus:ring-blue-400 focus:outline-none disabled:opacity-50 flex items-center justify-center gap-2"
-                    >
-                        <Icon name="send" />
-                        <span>
-                            {loading ? 'Cargando...' : 'Iniciar sesión'}
-                        </span>
-                    </Button>
-                </Form>
-                <p className="text-center text-sm text-gray-500 mt-4">
-                    ¿No tienes una cuenta?{' '}
-                    <a
-                        href="/register"
-                        className="text-blue-600 hover:underline"
-                    >
-                        Regístrate aquí
-                    </a>
-                </p>
-            </div>
-        </div>
+        <Form
+            className="flex flex-col gap-6 p-8 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto"
+            handleSubmit={handleSubmit}
+        >
+            <h3 className="text-3xl font-bold text-black text-center mb-4">
+                Iniciar sesión
+            </h3>
+
+            <Input
+                id="email"
+                label="Correo Electrónico"
+                type="email"
+                name="email"
+                value={info.email}
+                errors={errors}
+                handleChange={handleChange}
+            />
+
+            <Input
+                id="password"
+                label="Contraseña"
+                type="password"
+                name="password"
+                value={info.password}
+                errors={errors}
+                handleChange={handleChange}
+            />
+
+            <Button
+                type="submit"
+                className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
+                disabled={loading}
+            >
+                {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+            </Button>
+        </Form>
     );
 };

@@ -3,8 +3,8 @@ import { Button } from '../Button.jsx';
 import { Input } from './Input.jsx';
 import { useNavigate } from 'react-router-dom';
 import { registerUserService } from '../../services/fetchApi.js';
+import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
 import { toast } from 'react-toastify';
-import { registerUserShema } from '../../schemas/registerUserShema.js';
 import { useFormHook } from '../../hooks/useFormHook.js';
 import { Icon } from '../Icon.jsx';
 import { Form } from './Form.jsx';
@@ -12,25 +12,19 @@ import { Form } from './Form.jsx';
 export const RegisterForm = () => {
     const { info, errors, validate, handleChange } = useFormHook();
     const [loading, setLoading] = useState(false);
-
     const navigate = useNavigate();
 
-    const hadleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-
-            const value = validate(registerUserShema);
             setLoading(true);
+
+            const value = await validate(registerUserSchema);
 
             const message = await registerUserService(value);
 
-            const params = new URLSearchParams({
-                type: 'success',
-                message,
-            });
-
-            navigate(`/login?${params.toString()}`);
-            toast.info('Verifica tu correo para activar tu cuenta');
+            toast.success(message);
+            navigate(`/users/login`);
         } catch (error) {
             toast.error(error.message || 'Error al registrar el usuario');
         } finally {
@@ -39,9 +33,17 @@ export const RegisterForm = () => {
     };
 
     return (
-        <Form className="register-form" hadleSubmit={hadleSubmit}>
+        <Form
+            className="flex flex-col gap-6 p-8 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto"
+            handleSubmit={handleSubmit}
+        >
+            <h3 className="text-3xl font-bold text-black text-center mb-4">
+                Regístrate
+            </h3>
+
             <Input
-                label="Name"
+                id="firstName"
+                label="Nombre"
                 type="text"
                 name="firstName"
                 value={info.firstName}
@@ -49,7 +51,8 @@ export const RegisterForm = () => {
                 handleChange={handleChange}
             />
             <Input
-                label="Lastname"
+                id="lastName"
+                label="Apellido"
                 type="text"
                 name="lastName"
                 value={info.lastName}
@@ -57,15 +60,8 @@ export const RegisterForm = () => {
                 handleChange={handleChange}
             />
             <Input
-                label="Date-of-birth"
-                type="date"
-                name="birthday"
-                value={info.birthday}
-                errors={errors}
-                handleChange={handleChange}
-            />
-            <Input
-                label="User Name"
+                id="username"
+                label="Username"
                 type="text"
                 name="username"
                 value={info.username}
@@ -73,36 +69,42 @@ export const RegisterForm = () => {
                 handleChange={handleChange}
             />
             <Input
-                label="Email"
-                type="email"
-                name="email"
-                value={info.email}
+                id="birthday"
+                label="Fecha nacimiento"
+                type="date"
+                name="birthday"
+                value={info.birthday}
                 errors={errors}
                 handleChange={handleChange}
             />
             <Input
-                label="Password"
+                id="password"
+                label="Contraseña"
                 type="password"
                 name="password"
                 value={info.password}
                 errors={errors}
                 handleChange={handleChange}
             />
-            <div>
-                <input
+
+            <div className="flex items-center gap-2">
+                <Input
                     id="terms"
                     type="checkbox"
-                    name="termsAccepted"
-                    checked={info.terms || false}
-                    onChange={handleChange}
-                ></input>
-                <label htmlFor="terms">
-                    Aceptar los términos y condiciones
-                </label>
+                    name="terms"
+                    label="Aceptar términos y condiciones"
+                    checked={info.terms}
+                    errors={errors}
+                    handleChange={handleChange}
+                />
             </div>
-            <Button id="register" type="submit" loading={loading}>
-                <Icon name="send" />
-                <span>{loading ? 'Cargando ...' : 'Registrar'}</span>
+
+            <Button
+                type="submit"
+                className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
+                disabled={loading}
+            >
+                {loading ? 'Registrando...' : 'Registrarse'}
             </Button>
         </Form>
     );

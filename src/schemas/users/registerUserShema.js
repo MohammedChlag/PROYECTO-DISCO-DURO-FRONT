@@ -1,10 +1,10 @@
 import joi from 'joi';
-import { joiErrorMessages } from './joiErrorMessages.js';
+import { joiErrorMessages } from '../joiErrorMessages.js';
 
-export const registerUserShema = joi.object({
+export const registerUserSchema = joi.object({
     firstName: joi.string().max(40).allow('', null).messages(joiErrorMessages),
     lastName: joi.string().max(40).allow('', null).messages(joiErrorMessages),
-    birthday: joi.date().iso().required().messages(joiErrorMessages),
+    birthday: joi.date().required().messages(joiErrorMessages),
     email: joi
         .string()
         .required()
@@ -14,7 +14,7 @@ export const registerUserShema = joi.object({
     password: joi
         .string()
         .pattern(
-            /^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[¡!@$%^&()_+|~=`{}:";'<>¿?,.])[a-zA-Z0-9¡!@$%^&()_+|~=`{}:";'<>¿?,.]{8,}$/
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!@$%^&()_+|~=`{}:";'<>¿?,.])[a-zA-Z0-9¡!@$%^&()_+|~=`{}:";'<>¿?,.]{8,}$/
         )
         .required()
         .messages(joiErrorMessages),
@@ -22,5 +22,8 @@ export const registerUserShema = joi.object({
         .boolean()
         .valid(true)
         .required()
-        .messages({ 'any.only': ' Debes aceptar los términos y condiciones' }),
+        .messages({
+            ...joiErrorMessages,
+            'any.only': 'Debes aceptar los términos y condiciones',
+        }),
 });

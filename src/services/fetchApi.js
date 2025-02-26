@@ -33,12 +33,25 @@ export const loginUserService = async (value) => {
 };
 
 export const registerUserService = async (value) => {
+    // Formatear la fecha antes de enviar
+    const formattedData = {
+        ...value,
+        birthday:
+            value.birthday instanceof Date
+                ? value.birthday.toISOString().split('T')[0]
+                : typeof value.birthday === 'string'
+                ? value.birthday.split('T')[0]
+                : value.birthday,
+    };
+
+    console.log('Datos formateados a enviar:', formattedData);
+
     const response = await fetch(`${apiPath}/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(value),
+        body: JSON.stringify(formattedData),
     });
 
     const { message } = await response.json();

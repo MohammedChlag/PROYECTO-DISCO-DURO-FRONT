@@ -1,3 +1,7 @@
-export const Form = ({ handleSubmit, children }) => {
-    return <form onSubmit={handleSubmit}>{children}</form>;
+export const Form = ({ handleSubmit, children, className }) => {
+    return (
+        <form onSubmit={handleSubmit} className={className}>
+            {children}
+        </form>
+    );
 };

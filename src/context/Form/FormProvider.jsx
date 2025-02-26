@@ -10,7 +10,7 @@ export const FormProvider = ({ children }) => {
     const validate = async (schema) => {
         const { value, error } = await validateSchemaUtil(schema, info);
         if (error) {
-            setErrors(error);
+            setErrors(error.details);
             throw new Error(error.details.map((error) => error.message));
         } else {
             setErrors([]);
@@ -19,10 +19,38 @@ export const FormProvider = ({ children }) => {
     };
 
     const handleChange = (event) => {
-        const { type, name, value, files } = event.target;
+        let { type, name, value, checked } = event.target;
+
+        console.log('Antes:', {
+            type,
+            name,
+            value,
+            checked,
+        });
+
+        // Para inputs de fecha, asegurarnos de que solo enviamos YYYY-MM-DD
+        if (type === 'date' && value) {
+            try {
+                // Asegurarnos de que tenemos una fecha válida
+                const date = new Date(value);
+                if (!isNaN(date.getTime())) {
+                    // La fecha es válida, formatearla como YYYY-MM-DD
+                    value = date.toISOString().split('T')[0];
+                }
+            } catch (error) {
+                console.error('Error al procesar la fecha:', error);
+            }
+        }
+
+        console.log('Después:', {
+            type,
+            name,
+            value,
+        });
+
         setInfo((prev) => ({
             ...prev,
-            [name]: type === 'file' ? files[0] || null : value,
+            [name]: type === 'checkbox' ? checked : value,
         }));
     };
 
