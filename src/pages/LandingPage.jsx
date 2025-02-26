@@ -1,22 +1,25 @@
-import { LayoutComun } from '../components/LayoutComun1/LayoutComun.jsx';
+import { LayoutComun } from '../components/LayoutComun/LayoutComun.jsx';
+
+import nubelogo from '../assets/img/5390309.png';
 
 export const LandingPage = () => {
     return (
         <LayoutComun>
-            <section className="text-center mt-10">
-                <h2 className="text-3xl font-bold">
-                    Guarda y comparte tus archivos.
+            <section className="flex flex-col items-center justify-center min-h-[calc(100vh-24rem)] text-center text-[#009EB5]">
+                <img className="w-40 " src={nubelogo} alt="Nube Informática" />
+                <h2 className="text-2xl font-bold ">
+                    Guarda y comparte tus archivos
                 </h2>
-                <p className="mt-4 text-gray-600">
-                    Herramienta que te permite guardar tus documentos en la nube
-                    y tener acceso a ellos en cualquier momento.
+                <p className="mt-5 text-xs text-black">
+                    Almacena tus documentos en la nube y ten acceso a ellos en
+                    cualquier momento.
                 </p>
-                <a
-                    href="/users/register"
-                    className="mt-6 inline-block bg-blue-500 text-white py-2 px-6 rounded"
-                >
-                    Registrate
-                </a>
+            </section>
+            <section>
+                <h3 className="mt-10 text-xs text-black">
+                    e Esto es lo que opinan nuestros usuarios:
+                </h3>
+                <article>Votación</article>
             </section>
         </LayoutComun>
     );
