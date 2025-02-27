@@ -5,7 +5,7 @@ import { getOwnUserService } from '../../services/fetchApi.js';
 
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(getFromLocalStorage('DDToken') || null);
-    const [currenUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
         const loadUser = async () => {
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, currenUser, onLogin, onLogout }}>
+        <AuthContext.Provider value={{ token, currentUser, onLogin, onLogout }}>
             {children}
         </AuthContext.Provider>
     );

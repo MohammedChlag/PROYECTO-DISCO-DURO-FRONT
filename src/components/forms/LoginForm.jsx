@@ -8,6 +8,7 @@ import { Button } from '../Button.jsx';
 import { toast } from 'react-toastify';
 import { loginUserSchema } from '../../schemas/users/loginUserSchema.js';
 import { Input } from './Input.jsx';
+import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
     const { info, errors, validate, handleChange } = useFormHook();
@@ -70,6 +71,25 @@ export const LoginForm = () => {
             >
                 {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
             </Button>
+            <div className="text-center mt-4">
+                <p className="text-sm text-gray-600">
+                    ¿No tienes una cuenta?{' '}
+                    <Link
+                        to="/users/register"
+                        className="text-[#00B4D8] hover:underline"
+                    >
+                        Regístrate aquí
+                    </Link>
+                </p>
+            </div>
+            <div className="text-center">
+                <Link
+                    to="/users/recovery"
+                    className="text-sm text-[#00B4D8] hover:underline"
+                >
+                    ¿Olvidaste tu contraseña?
+                </Link>
+            </div>
         </Form>
     );
 };

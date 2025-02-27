@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useFormHook } from '../../hooks/useFormHook.js';
 import { Icon } from '../Icon.jsx';
+import { PasswordStrength } from './PasswordStrength.jsx';
 
 export const Input = ({
     label,
@@ -17,26 +18,15 @@ export const Input = ({
 
     const handleInputChange = (event) => {
         const { type, name, checked, value } = event.target;
-        console.log('Input onChange:', { type, name, checked, value });
 
-        if (type === 'checkbox') {
-            handleChange({
-                target: {
-                    type,
-                    name,
-                    checked,
-                    value: checked,
-                },
-            });
-        } else {
-            handleChange({
-                target: {
-                    type,
-                    name,
-                    value,
-                },
-            });
-        }
+        handleChange({
+            target: {
+                type,
+                name,
+                value: type === 'checkbox' ? checked : value,
+                checked: type === 'checkbox' ? checked : undefined,
+            },
+        });
     };
 
     return (
@@ -46,7 +36,7 @@ export const Input = ({
             )}
             <div
                 className={`relative ${
-                    type === 'checkbox' ? 'flex items-center' : ''
+                    type === 'checkbox' ? 'flex items-center gap-2' : ''
                 }`}
             >
                 <input
@@ -67,26 +57,30 @@ export const Input = ({
                     onChange={handleInputChange}
                     className={`${
                         type === 'checkbox'
-                            ? 'mr-2 h-4 w-4 rounded border-gray-300 text-[#00B4D8] focus:ring-[#00B4D8]'
+                            ? 'h-4 w-4 rounded border-gray-300 text-[#00B4D8] focus:ring-[#00B4D8]'
                             : `w-full p-3 bg-[#F7FBFC] border rounded-md focus:outline-none focus:ring-2 placeholder-gray-400 ${
                                   error
                                       ? 'border-red-500 focus:ring-red-200'
                                       : 'border-gray-200 focus:ring-[#00B4D8] focus:border-[#00B4D8]'
-                              } ${type === 'password' ? 'pr-10' : ''}`
+                              } ${type === 'password' ? 'pr-12' : ''}`
                     }`}
                 />
                 {type === 'password' && (
-                    <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                    >
-                        <Icon
-                            name={
-                                showPassword ? 'visibility_off' : 'visibility'
-                            }
-                        />
-                    </button>
+                    <div className="absolute inset-y-0 right-3 flex items-center">
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                        >
+                            <Icon
+                                name={
+                                    showPassword
+                                        ? 'visibility_off'
+                                        : 'visibility'
+                                }
+                            />
+                        </button>
+                    </div>
                 )}
                 {type === 'checkbox' && (
                     <span className="text-sm text-gray-600">{label}</span>
@@ -96,6 +90,10 @@ export const Input = ({
                 <span className="text-sm text-red-500 mt-1">
                     {error.message}
                 </span>
+            )}
+
+            {type === 'password' && value && (
+                <PasswordStrength password={value} />
             )}
         </label>
     );

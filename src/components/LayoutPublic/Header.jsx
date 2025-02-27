@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/img/logo-hackloud-solo.png';
+import logo from '../../assets/img/logo-hackloud-solo.png';
 
 export const Header = () => {
     return (

@@ -1,30 +1,49 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { LayoutPage } from './pages/LayoutPage.jsx';
+import { LayoutPublic } from './components/LayoutPublic/LayoutPublic.jsx';
+import { LayoutPrivate } from './components/LayoutPrivate/LayoutPrivate.jsx';
+
+// Páginas Publicas
 import { LandingPage } from './pages/LandingPage.jsx';
+import { AboutPage } from './pages/AboutPage.jsx';
+import { AssessmentsPage } from './pages/AssessmentsPage.jsx';
 import { RegisterPage } from './pages/RegisterPage.jsx';
-import { ValidationPage } from './pages/ValidationPage.jsx';
 import { LoginPage } from './pages/LoginPage.jsx';
+import { ValidationPage } from './pages/ValidationPage.jsx';
+// Páginas Privadas
 import { HomePage } from './pages/HomePage.jsx';
 import { ProfilePage } from './pages/ProfilePage.jsx';
+// Página 404
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
 
 function App() {
     return (
         <>
             <Routes>
-                <Route path="/" element={<LayoutPage />}>
+                {/* Rutas Públicas */}
+                <Route path="/" element={<LayoutPublic />}>
                     <Route index element={<LandingPage />} />
-                    <Route path="/users/register" element={<RegisterPage />} />
-                    <Route
-                        path="/users/validation/:registrationCode"
-                        element={<ValidationPage />}
-                    />
-                    <Route path="/users/login" element={<LoginPage />} />
-                    <Route path="/storage" element={<HomePage />} />
-                    <Route path="/users/profile" element={<ProfilePage />} />
-                    <Route path="*" element={<NotFoundPage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/assessments" element={<AssessmentsPage />} />
+                    <Route path="/users">
+                        <Route path="login" element={<LoginPage />} />
+                        <Route path="register" element={<RegisterPage />} />
+                        <Route
+                            path="validation/:registrationCode"
+                            element={<ValidationPage />}
+                        />
+                    </Route>
                 </Route>
+
+                {/* Rutas Privadas */}
+                <Route element={<LayoutPrivate />}>
+                    <Route path="/storage" element={<HomePage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+                    {/* <Route path="/admin" element={<AdminPage />} /> */}
+                </Route>
+
+                {/* Ruta 404 */}
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </>
     );

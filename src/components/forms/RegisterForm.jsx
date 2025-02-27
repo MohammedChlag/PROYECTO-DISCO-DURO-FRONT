@@ -7,6 +7,7 @@ import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
 import { toast } from 'react-toastify';
 import { useFormHook } from '../../hooks/useFormHook.js';
 import { Form } from './Form.jsx';
+import { Link } from 'react-router-dom';
 
 export const RegisterForm = () => {
     const { info, errors, validate, handleChange } = useFormHook();
@@ -95,7 +96,7 @@ export const RegisterForm = () => {
                 handleChange={handleChange}
             />
 
-            <div className="flex items-center gap-2">
+            <div>
                 <Input
                     id="terms"
                     type="checkbox"
@@ -114,6 +115,17 @@ export const RegisterForm = () => {
             >
                 {loading ? 'Registrando...' : 'Registrarse'}
             </Button>
+            <section className="text-center mt-4">
+                <p className="text-sm text-gray-600">
+                    ¿Ya tienes una cuenta?{' '}
+                    <Link
+                        to="/users/login"
+                        className="text-[#00B4D8] hover:underline"
+                    >
+                        Inicia sesión
+                    </Link>
+                </p>
+            </section>
         </Form>
     );
 };
