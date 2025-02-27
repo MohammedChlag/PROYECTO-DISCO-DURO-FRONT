@@ -1,6 +1,6 @@
 export const ProfilePage = () => {
     return (
-        <LayoutPrivate>
+        <>
             <h2>Username</h2>
             <section>
                 <p>Editar perfil</p>
@@ -29,6 +29,6 @@ export const ProfilePage = () => {
                 <p>Confirmar contraseña</p>
                 <p>Confirmar contraseña</p>
             </section>
-        </LayoutPrivate>
+        </>
     );
 };

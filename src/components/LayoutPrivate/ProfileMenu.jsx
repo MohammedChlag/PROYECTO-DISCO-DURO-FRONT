@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProfileOptions } from './ProfileOptions.jsx';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { Icon } from '../Icon.jsx';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { ProfileOptions } from './ProfileOptions.jsx';
 
 export const ProfileMenu = () => {
     const navigate = useNavigate();
@@ -104,7 +104,7 @@ export const ProfileMenu = () => {
                 <ProfileOptions
                     items={menuItems}
                     userAvatar={avatarUrl}
-                    userName={currentUser?.name || 'Usuario'}
+                    userName={currentUser?.username || 'Usuario'}
                 />
             )}
         </div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { LayoutPublic } from '../components/LayoutPublic/LayoutPublic.jsx';
 
 export const ValidationPage = () => {
     const { registrationCode } = useParams();

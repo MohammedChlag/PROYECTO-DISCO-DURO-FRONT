@@ -92,6 +92,7 @@ export const Input = ({
                 </span>
             )}
 
+            {/* Renderizar PasswordStrength solo si es un campo de contraseña */}
             {type === 'password' && value && (
                 <PasswordStrength password={value} />
             )}
