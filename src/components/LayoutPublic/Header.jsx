@@ -3,11 +3,7 @@ import { Logo } from '../Logo.jsx';
 
 export const Header = () => {
     return (
-<<<<<<< HEAD
         <header className="flex items-center justify-between w-[90vw] mx-auto gap-3 border-b-2 border-black py-4 h-15">
-=======
-        <header className="flex items-center justify-between w-[90vw] mx-auto gap-3 border-b-2 border-black py-4">
->>>>>>> profile
             <Logo />
             <nav className="space-x-3 text-xs">
                 <Link
