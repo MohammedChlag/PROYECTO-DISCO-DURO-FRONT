@@ -24,6 +24,7 @@ export const RegisterForm = () => {
             const message = await registerUserService(value);
 
             toast.success(message);
+            toast.info('Verifica tú email');
             navigate(`/users/login`);
         } catch (error) {
             toast.error(error.message || 'Error al registrar el usuario');
