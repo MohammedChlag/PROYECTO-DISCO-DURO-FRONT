@@ -6,50 +6,98 @@ import { LayoutPublic } from '../components/LayoutPublic/LayoutPublic.jsx';
 export const ValidationPage = () => {
     const { registrationCode } = useParams();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
+    const [status, setStatus] = useState('loading'); // loading, success, error
     const apiPath = import.meta.env.VITE_BACKEND_HOST;
 
     useEffect(() => {
-        toast.info('En proceso de validar tú cuenta');
         const userActivation = async () => {
             try {
                 const response = await fetch(
                     `${apiPath}/users/activate/${registrationCode}`,
                     { method: 'PUT' }
                 );
+                const result = await response.json();
+
                 if (response.ok) {
-                    const result = await response.json();
-                    const params = new URLSearchParams({
-                        type: 'success',
-                        message: result.message,
+                    setStatus('success');
+                    toast.success('¡Cuenta validada correctamente!', {
+                        onClose: () => {
+                            navigate('/users/login', {
+                                state: {
+                                    message: result.message,
+                                    type: 'success',
+                                },
+                            });
+                        },
                     });
-                    navigate(`/users/login?${params.toString()}`);
-                    return;
                 } else {
-                    const result = await response.json();
-                    const params = new URLSearchParams({
-                        type: 'error',
-                        message: result.message,
-                    });
-                    navigate(`/users/login?${params.toString()}`);
-                    return;
+                    setStatus('error');
+                    toast.error(
+                        result.message || 'Error al validar la cuenta',
+                        {
+                            onClose: () => {
+                                navigate('/users/login', {
+                                    state: {
+                                        message: result.message,
+                                        type: 'error',
+                                    },
+                                });
+                            },
+                        }
+                    );
                 }
             } catch (error) {
-                toast.error(error.message);
+                setStatus('error');
+                toast.error('Error de conexión. Inténtalo más tarde.', {
+                    onClose: () => {
+                        navigate('/users/login', {
+                            state: {
+                                message: 'Error de conexión',
+                                type: 'error',
+                            },
+                        });
+                    },
+                });
             }
         };
-        const timer = setTimeout(() => {
-            userActivation();
-            setLoading(false);
-        }, 6000);
-        return () => clearTimeout(timer);
-    }, [registrationCode]);
+
+        userActivation();
+    }, [registrationCode, navigate, apiPath]);
+
     return (
-        <LayoutPublic>
-            <section>
-                {loading && <p>Cargando...</p>}
-                {!loading && <p>Usuario acivado correctamente</p>}
-            </section>
-        </LayoutPublic>
+        <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center p-8 max-w-md mx-auto">
+                {status === 'loading' && (
+                    <div className="space-y-4">
+                        <div className="animate-spin h-12 w-12 mx-auto border-4 border-cyan-300 border-t-transparent rounded-full"></div>
+                        <p className="text-gray-600">Validando tu cuenta...</p>
+                    </div>
+                )}
+
+                {status === 'success' && (
+                    <div className="space-y-4">
+                        <div className="text-green-500 text-6xl">✓</div>
+                        <h2 className="text-2xl font-semibold text-gray-800">
+                            ¡Cuenta validada!
+                        </h2>
+                        <p className="text-gray-600">
+                            Redirigiendo al inicio de sesión...
+                        </p>
+                    </div>
+                )}
+
+                {status === 'error' && (
+                    <div className="space-y-4">
+                        <div className="text-red-500 text-6xl">✗</div>
+                        <h2 className="text-2xl font-semibold text-gray-800">
+                            Error de validación
+                        </h2>
+                        <p className="text-gray-600">
+                            Redirigiendo al inicio de sesión...
+                        </p>
+                    </div>
+                )}
+            </div>
+        </div>
     );
 };
