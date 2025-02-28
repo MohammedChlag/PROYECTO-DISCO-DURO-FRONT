@@ -37,7 +37,7 @@ export const LoginForm = () => {
     };
     return (
         <Form
-            className="flex flex-col gap-6 p-8 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto"
+            className="flex flex-col gap-2 p-8 bg-[#F7FBFC] rounded-lg w-full max-w-md my-8 mx-auto"
             handleSubmit={handleSubmit}
         >
             <h3 className="text-3xl font-bold text-black text-center mb-4">

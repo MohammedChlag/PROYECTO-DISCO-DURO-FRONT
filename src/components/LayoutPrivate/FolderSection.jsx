@@ -1,6 +1,6 @@
 import { Carpeta } from '../Storage/Carpeta';
 
-export const FolderSection = ({ folders = [], loading }) => {
+export const FolderSection = ({ folders = [], loading, onFolderClick }) => {
     if (loading) {
         return (
             <section className="flex items-center justify-center py-4 sm:py-6">
@@ -29,11 +29,13 @@ export const FolderSection = ({ folders = [], loading }) => {
             <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4">
                 Carpetas
             </h2>
-            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 list-none p-0">
+            <ul className="space-y-2 sm:space-y-3 list-none p-0">
                 {folders.map((folder) => (
-                    <li key={folder.id}>
-                        <Carpeta folder={folder} />
-                    </li>
+                    <Carpeta
+                        key={folder.id}
+                        folder={folder}
+                        onFolderClick={onFolderClick}
+                    />
                 ))}
             </ul>
         </section>

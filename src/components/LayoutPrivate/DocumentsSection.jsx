@@ -1,13 +1,5 @@
 import { Archivo } from '../Storage/Archivo';
 
-const formatFileSize = (bytes) => {
-    if (!bytes) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
-};
-
 export const DocumentsSection = ({ documents = [], loading, error }) => {
     if (loading) {
         return (
@@ -45,9 +37,7 @@ export const DocumentsSection = ({ documents = [], loading, error }) => {
             ) : (
                 <ul className="space-y-2 sm:space-y-3 list-none p-0">
                     {documents.map((doc) => (
-                        <li key={doc.id}>
-                            <Archivo file={doc} />
-                        </li>
+                        <Archivo key={doc.id} file={doc} />
                     ))}
                 </ul>
             )}
