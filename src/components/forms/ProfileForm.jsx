@@ -54,9 +54,12 @@ export const ProfileForm = () => {
                         )}
                     </>
                 )}
+<<<<<<< HEAD
                 {isEditing && (
                     <div className="flex items-center gap-2"></div>
                 )}
+=======
+>>>>>>> notfound
                 <Button className="font-bold">Editar avatar</Button>
                 <Input
                     id="username"

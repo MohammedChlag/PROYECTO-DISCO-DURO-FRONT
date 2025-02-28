@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Button } from '../Button.jsx';
-import { Input } from './Input.jsx';
 import { useNavigate } from 'react-router-dom';
+import { useFormHook } from '../../hooks/useFormHook.js';
+import { toast } from 'react-toastify';
+import { Form } from './Form.jsx';
+import { Input } from './Input.jsx';
+import { Button } from '../Button.jsx';
 import { registerUserService } from '../../services/fetchApi.js';
 import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
-import { toast } from 'react-toastify';
-import { useFormHook } from '../../hooks/useFormHook.js';
-import { Form } from './Form.jsx';
 import { Link } from 'react-router-dom';
 
 export const RegisterForm = () => {
