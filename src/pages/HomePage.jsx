@@ -5,12 +5,15 @@ import { FolderSection } from '../components/LayoutPrivate/FolderSection.jsx';
 import { DocumentsSection } from '../components/LayoutPrivate/DocumentsSection.jsx';
 import { ActionButton } from '../components/LayoutPrivate/ActionButton.jsx';
 import { ActionMenu } from '../components/LayoutPrivate/ActionMenu.jsx';
-import { CreateFolderModal } from '../components/LayoutPrivate/CreateFolderModal.jsx';
+import { CreateFolderModal } from '../components/LayoutPrivate/Modals/CreateFolderModal.jsx';
+import { SearchBar } from '../components/LayoutPrivate/Search/SearchBar.jsx';
+import { SearchSection } from '../components/LayoutPrivate/Search/SearchSection.jsx';
 import { FolderPage } from './FolderPage.jsx';
 import { useAuthHook } from '../hooks/useAuthHook.js';
 import {
     uploadFileService,
     createFolderService,
+    searchStorageService,
 } from '../services/fetchApi.js';
 import { toast } from 'react-toastify';
 
@@ -20,6 +23,8 @@ export const HomePage = () => {
     const [showActionMenu, setShowActionMenu] = useState(false);
     const [selectedFolderId, setSelectedFolderId] = useState(null);
     const [showCreateFolderModal, setShowCreateFolderModal] = useState(false);
+    const [searchResults, setSearchResults] = useState(null);
+    const [isSearching, setIsSearching] = useState(false);
     const fileInputRef = useRef(null);
     const { token } = useAuthHook();
 
@@ -62,6 +67,51 @@ export const HomePage = () => {
                 return { folders, documents };
         }
     }, [storage, activeTab]);
+
+    const handleSearch = async (searchParams) => {
+        console.log('handleSearch called with:', searchParams);
+
+        // Si no hay query, limpiar resultados y mostrar todo
+        if (!searchParams?.query?.trim()) {
+            console.log('Empty query, showing all content');
+            setSearchResults(null);
+            setIsSearching(false);
+            return;
+        }
+
+        try {
+            setIsSearching(true);
+            console.log('Calling searchStorageService...');
+
+            // Extraer solo los parámetros válidos
+            const validParams = {
+                query: searchParams.query.trim(),
+                token,
+            };
+
+            // Añadir parámetros opcionales solo si tienen valor
+            if (searchParams.minSize)
+                validParams.minSize = searchParams.minSize;
+            if (searchParams.maxSize)
+                validParams.maxSize = searchParams.maxSize;
+            if (searchParams.orderBy)
+                validParams.orderBy = searchParams.orderBy;
+            if (searchParams.orderDirection)
+                validParams.orderDirection = searchParams.orderDirection;
+
+            console.log('Searching with params:', validParams);
+            const results = await searchStorageService(validParams);
+
+            console.log('Search results received:', results);
+            setSearchResults(Array.isArray(results) ? results : []);
+        } catch (error) {
+            console.error('Error en la búsqueda:', error);
+            toast.error('Error al realizar la búsqueda');
+            setSearchResults([]);
+        } finally {
+            setIsSearching(false);
+        }
+    };
 
     const handleUpload = () => {
         fileInputRef.current.click();
@@ -119,87 +169,66 @@ export const HomePage = () => {
 
     return (
         <>
-            <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                className="hidden"
-            />
+            <SearchBar onSearch={handleSearch} />
 
-            <CreateFolderModal
-                isOpen={showCreateFolderModal}
-                onClose={() => setShowCreateFolderModal(false)}
-                onCreateFolder={handleCreateFolderSubmit}
-            />
-
-            {selectedFolderId ? (
-                <FolderPage
-                    folderId={selectedFolderId}
-                    storage={storage}
-                    loading={loading}
-                    error={error}
-                    onBack={handleBack}
-                    onUpload={handleUpload}
-                />
+            {/* Contenido principal */}
+            {isSearching ? (
+                // Spinner de carga durante la búsqueda
+                <div className="flex items-center justify-center p-4 md:p-6">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                </div>
+            ) : searchResults ? (
+                // Vista de búsqueda
+                <div className="mt-4 mb-4">
+                    <SearchSection
+                        results={searchResults}
+                        onFolderClick={handleFolderClick}
+                    />
+                </div>
             ) : (
+                // Vista normal (solo se muestra si no hay búsqueda)
                 <>
-                    <nav>
-                        <ul className="flex space-x-2 sm:space-x-8 size-10 sm:px-0 whitespace-nowrap">
-                            <li>
-                                <TabButton
-                                    active={activeTab === 'principal'}
-                                    onClick={() => setActiveTab('principal')}
-                                >
-                                    Principal
-                                </TabButton>
-                            </li>
-                            <li>
-                                <TabButton
-                                    active={activeTab === 'documentos'}
-                                    onClick={() => setActiveTab('documentos')}
-                                >
-                                    Documentos
-                                </TabButton>
-                            </li>
-                            <li>
-                                <TabButton
-                                    active={activeTab === 'compartidos'}
-                                    onClick={() => setActiveTab('compartidos')}
-                                >
-                                    Compartidos
-                                </TabButton>
-                            </li>
-                        </ul>
+                    {/* Navbar con tabs */}
+                    <nav className="flex space-x-4 px-4 py-3 overflow-x-auto bg-white shadow-sm">
+                        <TabButton
+                            active={activeTab === 'principal'}
+                            onClick={() => setActiveTab('principal')}
+                        >
+                            Principal
+                        </TabButton>
+                        <TabButton
+                            active={activeTab === 'documentos'}
+                            onClick={() => setActiveTab('documentos')}
+                        >
+                            Archivos
+                        </TabButton>
+                        <TabButton
+                            active={activeTab === 'compartidos'}
+                            onClick={() => setActiveTab('compartidos')}
+                        >
+                            Compartidos
+                        </TabButton>
                     </nav>
 
-                    {activeTab === 'principal' && (
-                        <>
-                            <FolderSection
-                                folders={filteredContent.folders}
-                                loading={loading}
-                                onFolderClick={handleFolderClick}
-                            />
-                            <DocumentsSection
-                                documents={filteredContent.documents}
-                                loading={loading}
-                                error={error}
-                            />
-                        </>
-                    )}
-                    {activeTab === 'documentos' && (
-                        <DocumentsSection
-                            documents={filteredContent.documents}
+                    {/* Contenido según el estado */}
+                    {selectedFolderId ? (
+                        <FolderPage
+                            folderId={selectedFolderId}
+                            storage={storage}
                             loading={loading}
                             error={error}
+                            onBack={handleBack}
+                            onUpload={handleUpload}
                         />
-                    )}
-                    {activeTab === 'compartidos' && (
+                    ) : (
                         <>
-                            <FolderSection
-                                folders={filteredContent.folders}
-                                loading={loading}
-                                onFolderClick={handleFolderClick}
-                            />
+                            {activeTab !== 'documentos' && (
+                                <FolderSection
+                                    folders={filteredContent.folders}
+                                    loading={loading}
+                                    onFolderClick={handleFolderClick}
+                                />
+                            )}
                             <DocumentsSection
                                 documents={filteredContent.documents}
                                 loading={loading}
@@ -208,8 +237,9 @@ export const HomePage = () => {
                         </>
                     )}
 
-                    {activeTab !== 'compartidos' && (
-                        <aside className="fixed bottom-16 sm:bottom-20 right-4 sm:right-8 z-40">
+                    {/* Botón de acción flotante */}
+                    <aside className="fixed bottom-16 right-4 sm:right-8 z-50">
+                        <div className="relative">
                             <ActionButton
                                 onClick={() =>
                                     setShowActionMenu(!showActionMenu)
@@ -219,16 +249,26 @@ export const HomePage = () => {
                                 show={showActionMenu}
                                 onClose={() => setShowActionMenu(false)}
                                 onUpload={handleUpload}
-                                onCreateFolder={
-                                    activeTab === 'principal'
-                                        ? handleCreateFolder
-                                        : undefined
-                                }
+                                onCreateFolder={handleCreateFolder}
+                                className="absolute bottom-12 right-0"
                             />
-                        </aside>
-                    )}
+                        </div>
+                    </aside>
                 </>
             )}
+
+            {/* Modales y elementos ocultos */}
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="hidden"
+            />
+            <CreateFolderModal
+                isOpen={showCreateFolderModal}
+                onClose={() => setShowCreateFolderModal(false)}
+                onCreateFolder={handleCreateFolderSubmit}
+            />
         </>
     );
 };

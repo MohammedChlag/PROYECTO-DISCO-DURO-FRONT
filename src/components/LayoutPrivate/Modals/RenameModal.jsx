@@ -1,8 +1,28 @@
 import { useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-export const RenameModal = ({ isOpen, onClose, onSubmit, itemName }) => {
-    const [newName, setNewName] = useState(itemName);
+const truncateName = (name, type, maxLength = 25) => {
+    if (name.length <= maxLength) return name;
+
+    if (type === 'folder') {
+        return name.slice(0, maxLength - 3) + '...';
+    }
+
+    // Para archivos
+    const extension = name.split('.').pop();
+    const nameWithoutExt = name.slice(0, -(extension.length + 1));
+    const truncatedName = nameWithoutExt.slice(0, maxLength - 3) + '...';
+    return `${truncatedName}.${extension}`;
+};
+
+export const RenameModal = ({
+    isOpen,
+    onClose,
+    onSubmit,
+    currentName = '',
+    type = '',
+}) => {
+    const [newName, setNewName] = useState(currentName || '');
     const [error, setError] = useState('');
 
     const handleSubmit = (e) => {
@@ -42,7 +62,8 @@ export const RenameModal = ({ isOpen, onClose, onSubmit, itemName }) => {
 
                     {/* Título */}
                     <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
-                        {`Renombrar "${itemName}"`}
+                        Renombrar {type === 'folder' ? 'carpeta' : 'archivo'}:{' '}
+                        {truncateName(currentName, type)}
                     </h3>
 
                     {/* Formulario */}

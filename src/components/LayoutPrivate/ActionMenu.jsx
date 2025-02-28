@@ -1,18 +1,26 @@
 import { ArrowUpTrayIcon, FolderPlusIcon } from '@heroicons/react/24/solid';
 
-export const ActionMenu = ({ show, onClose, onUpload, onCreateFolder }) => {
+export const ActionMenu = ({
+    show,
+    onClose,
+    onUpload,
+    onCreateFolder,
+    className = '',
+}) => {
     if (!show) return null;
 
     return (
         <>
             {/* Overlay */}
             <div
-                className="fixed inset-0 bg-black bg-opacity-25"
+                className="fixed inset-0 bg-black bg-opacity-25 z-40"
                 onClick={onClose}
             />
 
             {/* Menu */}
-            <div className="fixed bottom-28 left-14 bg-white rounded-lg shadow-xl overflow-hidden p-2">
+            <div
+                className={`bg-white rounded-lg shadow-xl overflow-hidden p-2 min-w-[200px] z-50 ${className}`}
+            >
                 <button
                     onClick={() => {
                         onUpload();

@@ -1,15 +1,16 @@
-import { useState } from 'react';
 import {
     DocumentIcon,
-    EllipsisVerticalIcon,
-    PencilSquareIcon,
-    ShareIcon,
+    PencilIcon,
     TrashIcon,
+    EllipsisVerticalIcon,
+    ShareIcon,
     UsersIcon,
     ArrowDownTrayIcon,
 } from '@heroicons/react/24/outline';
 import { useItemsHook } from '../../hooks/useItemsHook.js';
-import { RenameModal } from '../LayoutPrivate/RenameModal';
+import { RenameModal } from '../LayoutPrivate/Modals/RenameModal.jsx';
+import { ShareModal } from '../LayoutPrivate/Modals/ShareModal';
+import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
 
 const formatFileSize = (bytes) => {
     if (!bytes) return '0 B';
@@ -32,6 +33,9 @@ export const Archivo = ({ file }) => {
     const {
         showOptions,
         showRenameModal,
+        showShareModal,
+        showDeleteModal,
+        setShowDeleteModal,
         handleOptionsClick,
         closeOptions,
         handleRename,
@@ -39,83 +43,104 @@ export const Archivo = ({ file }) => {
         setShowRenameModal,
         handleShare,
         handleDelete,
+        handleDeleteConfirm,
         handleDownload,
+        shareUrls,
+        setShowShareModal,
     } = useItemsHook(file, 'file');
 
     return (
         <>
-            <li className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 w-[95vw]">
-                <article className="flex items-center">
-                    <DocumentIcon className="h-6 w-6 text-blue-500 mr-3" />
-                    <h3 className="font-medium" title={file.name}>
-                        {truncateFileName(file.name)}
-                    </h3>
-                    {file.shareToken && (
-                        <UsersIcon
-                            className="h-4 w-4 text-gray-500 ml-2"
-                            title="Compartido"
-                        />
-                    )}
-                </article>
-
-                <article className="flex items-center">
-                    <span className="text-sm text-gray-500 mr-2">
-                        {formatFileSize(file.size)}
-                    </span>
-                    <div className="relative">
-                        <button
-                            onClick={handleOptionsClick}
-                            className="p-2 hover:bg-gray-100 rounded-full"
-                        >
-                            <EllipsisVerticalIcon className="h-5 w-5 text-gray-500" />
-                        </button>
-
-                        {showOptions && (
-                            <>
-                                <div
-                                    className="fixed inset-0 z-10"
-                                    onClick={closeOptions}
-                                />
-                                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-20">
-                                    <button
-                                        onClick={handleDownload}
-                                        className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                                    >
-                                        <ArrowDownTrayIcon className="h-4 w-4 mr-3" />
-                                        <span>Descargar</span>
-                                    </button>
-                                    <button
-                                        onClick={handleRename}
-                                        className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                                    >
-                                        <PencilSquareIcon className="h-4 w-4 mr-3" />
-                                        <span>Renombrar</span>
-                                    </button>
-                                    <button
-                                        onClick={handleShare}
-                                        className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                                    >
-                                        <ShareIcon className="h-4 w-4 mr-3" />
-                                        <span>Compartir</span>
-                                    </button>
-                                    <button
-                                        onClick={handleDelete}
-                                        className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 text-red-600"
-                                    >
-                                        <TrashIcon className="h-4 w-4 mr-3" />
-                                        <span>Eliminar</span>
-                                    </button>
-                                </div>
-                            </>
-                        )}
+            <li className="relative group flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+                <article className="flex items-center m-1 p-1">
+                    <DocumentIcon className="h-6 w-6 text-gray-500 mr-3" />
+                    <div className="flex flex-col">
+                        <h3 className="text-sm font-medium text-gray-900">
+                            {truncateFileName(file.name)}
+                        </h3>
+                        <div className="flex items-center mt-1">
+                            <UsersIcon className="h-4 w-4 text-gray-400 mr-1" />
+                            <span className="text-xs text-gray-500">
+                                {file.shareToken ? 'Compartido' : 'Privado'}
+                            </span>
+                            <span className="text-xs text-gray-500 ml-4">
+                                {formatFileSize(file.size)}
+                            </span>
+                        </div>
                     </div>
                 </article>
+
+                <div className="file-options flex items-center space-x-1">
+                    <button
+                        onClick={handleDownload}
+                        className="p-2 hover:bg-gray-100 rounded-full"
+                        title="Descargar"
+                    >
+                        <ArrowDownTrayIcon className="h-5 w-5 text-gray-500" />
+                    </button>
+                    <button
+                        onClick={handleOptionsClick}
+                        className="p-2 hover:bg-gray-100 rounded-full"
+                    >
+                        <EllipsisVerticalIcon className="h-5 w-5 text-gray-500" />
+                    </button>
+
+                    {showOptions && (
+                        <>
+                            <div
+                                className="fixed inset-0 z-10"
+                                onClick={closeOptions}
+                            />
+                            <div className="absolute right-0 top-12 z-20 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+                                <button
+                                    onClick={handleRename}
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                                >
+                                    <PencilIcon className="h-4 w-4 mr-2" />
+                                    <span>Renombrar</span>
+                                </button>
+                                <button
+                                    onClick={handleShare}
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                                >
+                                    <ShareIcon className="h-4 w-4 mr-2" />
+                                    <span>Compartir</span>
+                                </button>
+                                <button
+                                    onClick={handleDelete}
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 text-red-600"
+                                >
+                                    <TrashIcon className="h-4 w-4 mr-2" />
+                                    <span>Eliminar</span>
+                                </button>
+                            </div>
+                        </>
+                    )}
+                </div>
             </li>
+
             <RenameModal
                 isOpen={showRenameModal}
                 onClose={() => setShowRenameModal(false)}
-                onSubmit={handleRenameSubmit}
+                onRename={handleRenameSubmit}
+                currentName={file.name}
+                type="file"
+            />
+
+            <ShareModal
+                isOpen={showShareModal}
+                onClose={() => setShowShareModal(false)}
+                urls={shareUrls}
+                type="file"
+                title={`Compartir "${file.name}"`}
+            />
+
+            <DeleteConfirmModal
+                isOpen={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                onConfirm={handleDeleteConfirm}
                 itemName={file.name}
+                type="file"
             />
         </>
     );

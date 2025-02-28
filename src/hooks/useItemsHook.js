@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useStorageHook } from './useStorageHook.js';
-import { renameStorageItemService } from '../services/fetchApi.js';
+import {
+    renameStorageItemService,
+    shareStorageItemService,
+    deleteStorageItemService,
+    downloadFileService,
+} from '../services/fetchApi.js';
 import { useAuthHook } from './useAuthHook.js';
 
 export const useItemsHook = (item, type = 'file') => {
@@ -9,6 +14,9 @@ export const useItemsHook = (item, type = 'file') => {
     const { token } = useAuthHook();
     const [showOptions, setShowOptions] = useState(false);
     const [showRenameModal, setShowRenameModal] = useState(false);
+    const [showShareModal, setShowShareModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [shareUrls, setShareUrls] = useState(null);
 
     const handleOptionsClick = (e) => {
         if (e) {
@@ -34,7 +42,7 @@ export const useItemsHook = (item, type = 'file') => {
                 token
             );
 
-            const newStorage = await refetchStorage();
+            await refetchStorage();
             setShowRenameModal(false);
             toast.success(message);
         } catch (error) {
@@ -42,26 +50,60 @@ export const useItemsHook = (item, type = 'file') => {
         }
     };
 
-    const handleShare = () => {
-        console.log('Compartir', item.name);
-        closeOptions();
+    const handleShare = async () => {
+        try {
+            const response = await shareStorageItemService(item.id, token);
+
+            const urls =
+                type === 'folder'
+                    ? { share: response.url }
+                    : { share: response.download }; // Para archivos, usamos la URL de descarga
+
+            setShareUrls(urls);
+            setShowShareModal(true);
+            closeOptions();
+        } catch (error) {
+            toast.error(error.message || 'Error al compartir el elemento');
+        }
     };
 
     const handleDelete = () => {
-        console.log('Eliminar', item.name);
+        setShowDeleteModal(true);
         closeOptions();
     };
 
-    const handleDownload = () => {
+    const handleDeleteConfirm = async () => {
+        try {
+            const message = await deleteStorageItemService(
+                item.id,
+                type,
+                token
+            );
+            await refetchStorage();
+            setShowDeleteModal(false);
+            toast.success(message);
+        } catch (error) {
+            toast.error(error.message || 'Error al eliminar el elemento');
+        }
+    };
+
+    const handleDownload = async () => {
         if (type === 'file') {
-            console.log('Descargar', item.name);
-            closeOptions();
+            try {
+                const message = await downloadFileService(item.id, token);
+                closeOptions();
+                toast.success(message);
+            } catch (error) {
+                toast.error(error.message || 'Error al descargar el archivo');
+            }
         }
     };
 
     return {
         showOptions,
         showRenameModal,
+        showDeleteModal,
+        setShowDeleteModal,
         handleOptionsClick,
         closeOptions,
         handleRename,
@@ -69,6 +111,10 @@ export const useItemsHook = (item, type = 'file') => {
         setShowRenameModal,
         handleShare,
         handleDelete,
+        handleDeleteConfirm,
         handleDownload,
+        showShareModal,
+        setShowShareModal,
+        shareUrls,
     };
 };

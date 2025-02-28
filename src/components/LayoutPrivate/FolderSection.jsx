@@ -25,7 +25,7 @@ export const FolderSection = ({ folders = [], loading, onFolderClick }) => {
     }
 
     return (
-        <section className="bg-gray-50 rounded-lg py-4 sm:py-6">
+        <section className="bg-gray-50 rounded-lg px-4 mb-2 sm:py-6">
             <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4">
                 Carpetas
             </h2>

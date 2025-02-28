@@ -5,7 +5,7 @@ export const DocumentsSection = ({ documents = [], loading, error }) => {
         return (
             <section className="flex items-center justify-center py-4 sm:py-6">
                 <p className="animate-pulse text-gray-500" role="status">
-                    Cargando documentos...
+                    Cargando archivos...
                 </p>
             </section>
         );
@@ -15,23 +15,23 @@ export const DocumentsSection = ({ documents = [], loading, error }) => {
         return (
             <section className="flex items-center justify-center py-4 sm:py-6">
                 <p className="text-red-500" role="alert">
-                    Error al cargar los documentos: {error.message}
+                    Error al cargar los archivos: {error.message}
                 </p>
             </section>
         );
     }
 
     return (
-        <section className="bg-gray-50 rounded-lg py-4 sm:py-6">
+        <section className="mb-8 bg-gray-50 rounded-lg px-4 sm:py-6">
             <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4 ml-1">
-                Documentos
+                Archivos
             </h2>
 
             {/* Lista de documentos */}
             {!documents.length ? (
                 <section className="bg-gray-50 rounded-lg py-4 sm:py-6">
                     <p className="text-gray-500 text-center">
-                        No hay documentos para mostrar
+                        No hay archivos para mostrar
                     </p>
                 </section>
             ) : (
