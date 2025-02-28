@@ -32,7 +32,7 @@ export const PasswordForm = () => {
         <>
             <p>Cambiar contraseña</p>
             <Form
-                className="flex flex-col gap-2 p-8 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto text-center"
+                className="flex flex-col items-center gap-1 p-6 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto text-center"
                 handleSubmit={handleSubmit}
             >
                 <Input
