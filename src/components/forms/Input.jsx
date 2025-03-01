@@ -32,7 +32,7 @@ export const Input = ({
     return (
         <label className={`block ${error ? 'text-red-500' : 'text-gray-600'}`}>
             {type !== 'checkbox' && (
-                <span className="block mb-2 text-sm font-medium">{label}</span>
+                <span className="block mb-1 text-sm font-medium">{label}</span>
             )}
             <div
                 className={`relative ${

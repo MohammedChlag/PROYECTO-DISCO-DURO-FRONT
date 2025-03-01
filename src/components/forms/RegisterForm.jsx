@@ -35,10 +35,10 @@ export const RegisterForm = () => {
 
     return (
         <Form
-            className="flex flex-col gap-2 px-8 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto mt-2"
+            className="flex flex-col gap-1 px-4 bg-[#F7FBFC] rounded-lg w-full max-w-80 mx-auto mt-1 sm:mt-2"
             handleSubmit={handleSubmit}
         >
-            <h3 className="text-3xl font-bold text-black text-center mb-4">
+            <h3 className="text-2xl font-bold text-black text-center mb-1">
                 Regístrate
             </h3>
 

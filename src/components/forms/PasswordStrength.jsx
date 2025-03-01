@@ -33,8 +33,8 @@ export const PasswordStrength = ({ password }) => {
     const strength = calculateStrength(password);
 
     return (
-        <div className="mt-2">
-            <div className="flex justify-between mb-1">
+        <div className="mt-1">
+            <div className="flex justify-between">
                 <span className="text-xs text-gray-600">Fortaleza:</span>
                 <span
                     className={`text-xs ${
