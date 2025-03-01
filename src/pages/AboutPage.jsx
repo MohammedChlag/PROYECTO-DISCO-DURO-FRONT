@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logo-hackloud-solo.png';
 export const AboutPage = () => {
+    const navigate = useNavigate();
     return (
         <>
             <div className="justify-center items-center text-center px-6 py-8 flex flex-col">
@@ -30,7 +32,10 @@ export const AboutPage = () => {
                     <button className="text-white px-4 py-2  rounded-lg bg-[#009EB5] shadow.md hover:bg-[#009ec3] ">
                         Valoraciones de la App
                     </button>
-                    <button className="text-white px-4 py-2 rounded-lg bg-[#009EB5] hover:bg-[#009ec3]">
+                    <button
+                        onClick={() => navigate('/assessments')}
+                        className="text-white px-4 py-2 rounded-lg bg-[#009EB5] hover:bg-[#009ec3]"
+                    >
                         Dejar una Valoracion
                     </button>
                 </div>
