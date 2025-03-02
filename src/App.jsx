@@ -40,6 +40,11 @@ function App() {
                 <Route element={<LayoutPrivate />}>
                     <Route path="/storage" element={<HomePage />} />
                     <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/aboutUse" element={<AboutPage />} />{' '}
+                    <Route
+                        path="/assessmentsUse"
+                        element={<AssessmentsPage />}
+                    />
                     <Route path="/admin/users" element={<UsersListPage />} />
                 </Route>
 

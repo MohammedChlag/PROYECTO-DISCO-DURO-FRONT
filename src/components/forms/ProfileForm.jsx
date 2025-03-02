@@ -323,7 +323,7 @@ export const ProfileForm = () => {
                 <Button
                     type="button"
                     handleClick={handleEdit}
-                    className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-md transition-colors"
+                    className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
                     aria-label={
                         isEditing ? 'Cancelar edición' : 'Editar información'
                     }

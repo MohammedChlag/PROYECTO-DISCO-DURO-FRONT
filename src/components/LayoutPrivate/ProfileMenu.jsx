@@ -12,6 +12,8 @@ export const ProfileMenu = () => {
     const [avatarError, setAvatarError] = useState(false);
     const menuRef = useRef(null);
 
+    const redirectPath = currentUser ? '/storage' : '/';
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -61,7 +63,7 @@ export const ProfileMenu = () => {
         {
             label: 'About',
             onClick: () => {
-                navigate('/About');
+                navigate('/aboutUse');
                 setShowMenu(false);
             },
         },
