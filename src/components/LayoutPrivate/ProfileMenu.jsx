@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProfileOptions } from './ProfileOptions.jsx';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { Icon } from '../Icon.jsx';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { ProfileOptions } from './ProfileOptions.jsx';
 
 export const ProfileMenu = () => {
     const navigate = useNavigate();
@@ -25,9 +25,7 @@ export const ProfileMenu = () => {
         };
     }, []);
 
-    useEffect(() => {
-        console.log('Current User:', currentUser);
-    }, [currentUser]);
+    useEffect(() => {}, [currentUser]);
 
     // Construir la URL completa del avatar
     const avatarUrl =
@@ -36,7 +34,6 @@ export const ProfileMenu = () => {
             : null;
 
     useEffect(() => {
-        console.log('Avatar URL:', avatarUrl);
         // Resetear el error cuando cambia la URL
         setAvatarError(false);
     }, [avatarUrl]);
@@ -50,9 +47,9 @@ export const ProfileMenu = () => {
             },
         },
         {
-            label: 'Valorar Plataforma',
+            label: 'About',
             onClick: () => {
-                navigate('/assessments');
+                navigate('/About');
                 setShowMenu(false);
             },
         },
@@ -89,7 +86,6 @@ export const ProfileMenu = () => {
                         alt="Avatar del usuario"
                         className="h-8 w-8 rounded-full object-cover ring-2 ring-white"
                         onError={(e) => {
-                            console.log('Error loading avatar:', e);
                             setAvatarError(true);
                             e.target.src = '/default-avatar.png';
                         }}
@@ -104,7 +100,7 @@ export const ProfileMenu = () => {
                 <ProfileOptions
                     items={menuItems}
                     userAvatar={avatarUrl}
-                    userName={currentUser?.name || 'Usuario'}
+                    userName={currentUser?.username || 'Usuario'}
                 />
             )}
         </div>

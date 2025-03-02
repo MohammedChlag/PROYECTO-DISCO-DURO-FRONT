@@ -7,7 +7,7 @@ export const Logo = () => {
     const redirectPath = currentUser ? '/storage' : '/';
 
     return (
-        <Link to={redirectPath} className="block">
+        <Link to={redirectPath}>
             <img
                 src={logo}
                 alt="Hackloud"
