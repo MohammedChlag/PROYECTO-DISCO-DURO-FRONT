@@ -10,6 +10,7 @@ export const Input = ({
     value = '',
     checked = false,
     handleChange,
+    disabled = false,
 }) => {
     const { errors } = useFormHook();
     const [showPassword, setShowPassword] = useState(false);
@@ -55,6 +56,7 @@ export const Input = ({
                         type !== 'checkbox' ? `new-${name}` : undefined
                     }
                     onChange={handleInputChange}
+                    disabled={disabled}
                     className={`${
                         type === 'checkbox'
                             ? 'h-4 w-4 rounded border-gray-300 text-[#00B4D8] focus:ring-[#00B4D8]'

@@ -180,7 +180,10 @@ export const shareStorageItemService = async (id, token) => {
 };
 
 export const updateUserService = async (info, token) => {
-    const response = await fetch(`${apiPath}/users`, {
+    console.log('updateUserService - Info a enviar:', info);
+    console.log('updateUserService - Token:', token);
+
+    const response = await fetch(`${apiPath}/users/own`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -189,16 +192,54 @@ export const updateUserService = async (info, token) => {
         body: JSON.stringify(info),
     });
 
-    const { message, data } = await response.json();
+    const responseData = await response.json();
+    console.log('updateUserService - Respuesta completa:', responseData);
 
-    if (!response.ok) throw new Error(message);
+    if (!response.ok) {
+        console.error('updateUserService - Error:', responseData.message);
+        throw new Error(responseData.message);
+    }
 
-    return data.user;
+    return responseData.data.user;
 };
 
-export const updateAvatarService = async (info, token) => {
+export const updatePasswordService = async (passwords, token) => {
+    console.log('updatePasswordService - Actualizando contraseña');
+
+    const response = await fetch(`${apiPath}/users/password`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            oldPassword: passwords.oldPassword,
+            newPassword: passwords.newPassword,
+            confirmNewPassword: passwords.confirmNewPassword,
+        }),
+    });
+
+    const responseData = await response.json();
+    console.log('updatePasswordService - Respuesta:', responseData);
+
+    if (!response.ok) {
+        console.error('updatePasswordService - Error:', responseData.message);
+        throw new Error(responseData.message);
+    }
+
+    return responseData;
+};
+
+export const updateAvatarService = async (file, token) => {
+    console.log('Token', token);
+    if (!file) {
+        throw new Error('Debes enviar un archivo.');
+    }
+
     const formData = new FormData();
-    formData.append('avatar', info.avatar);
+    formData.append('avatar', file);
+
+    console.log('FormData enviado:', formData); // Para debug
 
     const response = await fetch(`${apiPath}/users/avatar`, {
         method: 'PUT',
@@ -208,11 +249,28 @@ export const updateAvatarService = async (info, token) => {
         body: formData,
     });
 
-    const { message, data } = await response.json();
+    const { message } = await response.json();
+
+    if (!response.ok) {
+        throw new Error(message || 'Error al actualizar el avatar');
+    }
+
+    return message;
+};
+
+export const deleteAvatarService = async (token) => {
+    const response = await fetch(`${apiPath}/users/avatar`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    const { message } = await response.json();
 
     if (!response.ok) throw new Error(message);
 
-    return data.user;
+    return message;
 };
 
 export const deleteStorageItemService = async (id, type, token) => {

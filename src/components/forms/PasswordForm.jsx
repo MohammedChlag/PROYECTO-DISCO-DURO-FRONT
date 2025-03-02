@@ -1,75 +1,103 @@
 import { useState } from 'react';
-import { useFormHook } from '../../hooks/useFormHook.js';
+import { useUserHook } from '../../hooks/useUserHook.js';
+import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { toast } from 'react-toastify';
-import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
-import { registerUserService } from '../../services/fetchApi.js';
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
 import { Button } from '../Button.jsx';
 
 export const PasswordForm = () => {
-    const { info, errors, validate, handleChange } = useFormHook();
-    const [loading, setLoading] = useState(false);
+    const { token } = useAuthHook();
+    const { updatePassword, loading, error } = useUserHook(null, token);
+    const [formData, setFormData] = useState({
+        oldPassword: '',
+        newPassword: '',
+        confirmNewPassword: '',
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Validar que las contraseñas coincidan
+        if (formData.newPassword !== formData.confirmNewPassword) {
+            toast.error('Las contraseñas no coinciden');
+            return;
+        }
+
         try {
-            e.preventDefault();
-            setLoading(true);
+            const result = await updatePassword(formData);
 
-            const value = await validate(registerUserSchema);
-
-            const message = await registerUserService(value);
-
-            toast.success(message);
-            toast.info('Verifica tú email');
+            if (result.success) {
+                toast.success('Contraseña actualizada correctamente');
+                // Limpiar el formulario
+                setFormData({
+                    oldPassword: '',
+                    newPassword: '',
+                    confirmNewPassword: '',
+                });
+            } else {
+                toast.error(
+                    result.error || 'Error al actualizar la contraseña'
+                );
+            }
         } catch (error) {
-            toast.error(error.message || 'Error al registrar el usuario');
-        } finally {
-            setLoading(false);
+            console.error('Error al cambiar la contraseña:', error);
+            toast.error('Error al actualizar la contraseña');
         }
     };
+
     return (
-        <>
-            <p>Cambiar contraseña</p>
-            <Form
-                className="flex flex-col items-center gap-1 p-6 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto text-center"
-                handleSubmit={handleSubmit}
+        <Form
+            handleSubmit={handleSubmit}
+            className="flex flex-col items-center gap-2 p-3 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto text-center mt-4"
+        >
+            <h3 className="text-xl font-semibold mb-4">Cambiar Contraseña</h3>
+
+            {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+
+            <Input
+                id="oldPassword"
+                label="Contraseña Actual"
+                type="password"
+                name="oldPassword"
+                value={formData.oldPassword}
+                handleChange={handleInputChange}
+                errors={error}
+            />
+            <Input
+                id="newPassword"
+                label="Nueva Contraseña"
+                type="password"
+                name="newPassword"
+                value={formData.newPassword}
+                handleChange={handleInputChange}
+                errors={error}
+            />
+            <Input
+                id="confirmNewPassword"
+                label="Confirmar Nueva Contraseña"
+                type="password"
+                name="confirmNewPassword"
+                value={formData.confirmNewPassword}
+                handleChange={handleInputChange}
+                errors={error}
+            />
+
+            <Button
+                type="submit"
+                className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
+                disabled={loading}
             >
-                <Input
-                    id="username"
-                    label="Contraseña"
-                    type="text"
-                    name="username"
-                    value={info.username}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-                <Input
-                    id="firstName"
-                    label="Nueva Contraseña"
-                    type="text"
-                    name="firstName"
-                    value={info.firstName}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-                <Input
-                    id="lastName"
-                    label="Confirmar contraseña"
-                    type="text"
-                    name="lastName"
-                    value={info.lastName}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-                <Button
-                    type="submit"
-                    className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
-                    disabled={loading}
-                >
-                    {loading ? 'Cambiando...' : 'Cambiar contraseña'}
-                </Button>
-            </Form>
-        </>
+                {loading ? 'Actualizando...' : 'Actualizar Contraseña'}
+            </Button>
+        </Form>
     );
 };
