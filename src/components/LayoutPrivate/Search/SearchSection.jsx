@@ -2,22 +2,20 @@ import { Archivo } from '../../Storage/Archivo.jsx';
 import { Carpeta } from '../../Storage/Carpeta.jsx';
 
 export const SearchSection = ({ results, onFolderClick }) => {
-    console.log('SearchSection recibió resultados:', results);
+    // Asegurarnos de que results sea un array
+    const searchResults = Array.isArray(results?.data) ? results.data : [];
 
-    if (!results || results.length === 0) {
+    if (searchResults.length === 0) {
         return (
-            <div className="text-center py-8 text-gray-500">
-                No se encontraron resultados
+            <div className="text-center py-8">
+                <p className="text-gray-500">No se encontraron resultados</p>
             </div>
         );
     }
 
     // Filtrar por el type que viene del backend
-    const folders = results.filter((item) => item.type === 'folder');
-    const files = results.filter((item) => item.type === 'file');
-
-    console.log('Carpetas encontradas:', folders);
-    console.log('Archivos encontrados:', files);
+    const folders = searchResults.filter((item) => item.type === 'folder');
+    const files = searchResults.filter((item) => item.type === 'file');
 
     return (
         <div className="space-y-6 px-4">

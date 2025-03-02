@@ -226,41 +226,14 @@ export const downloadFileService = async (id, token) => {
     return 'Archivo descargado correctamente';
 };
 
-export const searchStorageService = async ({
-    query,
-    minSize = '',
-    maxSize = '',
-    orderBy = 'name',
-    orderDirection = 'asc',
-    token,
-}) => {
+export const searchStorageService = async ({ query, token }) => {
     if (!token) throw new Error('Token inválido');
-
-    // Solo incluir parámetros que acepta el backend
-    const params = {};
-
-    if (query?.trim()) {
-        params.name = query.trim();
-    }
-
-    // Manejar filtros de tamaño
-    const hasActiveFilters =
-        (minSize && minSize !== '0') || (maxSize && maxSize !== '0');
-
-    if (minSize && minSize !== '0') params.minSize = minSize;
-    if (maxSize && maxSize !== '0') params.maxSize = maxSize;
-
-    // Ordenación
-    if (orderBy) params.orderBy = orderBy;
-    if (orderDirection) params.orderDirection = orderDirection;
-
-    const searchParams = new URLSearchParams(params);
-    console.log('Enviando búsqueda:', Object.fromEntries(searchParams));
 
     try {
         const response = await fetch(
-            `${apiPath}/storage/search?${searchParams.toString()}`,
+            `${apiPath}/storage/search?name=${encodeURIComponent(query)}`,
             {
+                method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -268,36 +241,14 @@ export const searchStorageService = async ({
             }
         );
 
-        const responseData = await response.json();
-        console.log('Respuesta del servidor:', responseData);
-
         if (!response.ok) {
-            throw new Error(responseData.message || 'Error en la búsqueda');
+            throw new Error('Error en la búsqueda');
         }
 
-        const results = Array.isArray(responseData.data)
-            ? responseData.data
-            : [];
-
-        // Solo filtrar si hay filtros activos de tamaño
-        if (hasActiveFilters) {
-            return results.filter(
-                (item) =>
-                    item.type === 'folder' || // Siempre incluir carpetas
-                    (item.type === 'file' && // Para archivos, verificar tamaño
-                        (!minSize ||
-                            minSize === '0' ||
-                            item.size >= parseInt(minSize)) &&
-                        (!maxSize ||
-                            maxSize === '0' ||
-                            item.size <= parseInt(maxSize)))
-            );
-        }
-
-        // Si no hay filtros activos, devolver todos los resultados
-        return results;
+        const data = await response.json();
+        return data;
     } catch (error) {
-        console.error('Error en búsqueda:', error);
+        console.error('Error en searchStorage:', error);
         throw error;
     }
 };

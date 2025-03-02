@@ -21,13 +21,6 @@ export const FormProvider = ({ children }) => {
     const handleChange = (event) => {
         let { type, name, value, checked } = event.target;
 
-        console.log('Antes:', {
-            type,
-            name,
-            value,
-            checked,
-        });
-
         // Para inputs de fecha, asegurarnos de que solo enviamos YYYY-MM-DD
         if (type === 'date' && value) {
             try {
@@ -41,12 +34,6 @@ export const FormProvider = ({ children }) => {
                 console.error('Error al procesar la fecha:', error);
             }
         }
-
-        console.log('Después:', {
-            type,
-            name,
-            value,
-        });
 
         setInfo((prev) => ({
             ...prev,

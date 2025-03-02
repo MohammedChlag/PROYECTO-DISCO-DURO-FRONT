@@ -19,6 +19,7 @@ import { toast } from 'react-toastify';
 
 export const HomePage = () => {
     const { storage, error, loading, refetchStorage } = useStorageHook();
+    const { token } = useAuthHook();
     const [activeTab, setActiveTab] = useState('principal');
     const [showActionMenu, setShowActionMenu] = useState(false);
     const [selectedFolderId, setSelectedFolderId] = useState(null);
@@ -26,9 +27,6 @@ export const HomePage = () => {
     const [searchResults, setSearchResults] = useState(null);
     const [isSearching, setIsSearching] = useState(false);
     const fileInputRef = useRef(null);
-    const { token } = useAuthHook();
-
-    useEffect(() => {}, [storage]);
 
     const filteredContent = useMemo(() => {
         if (!storage || !Array.isArray(storage)) {
@@ -68,49 +66,24 @@ export const HomePage = () => {
         }
     }, [storage, activeTab]);
 
-    const handleSearch = async (searchParams) => {
-        console.log('handleSearch called with:', searchParams);
-
-        // Si no hay query, limpiar resultados y mostrar todo
-        if (!searchParams?.query?.trim()) {
-            console.log('Empty query, showing all content');
-            setSearchResults(null);
-            setIsSearching(false);
-            return;
-        }
-
+    const handleSearch = async ({ query }) => {
+        setIsSearching(true);
         try {
-            setIsSearching(true);
-            console.log('Calling searchStorageService...');
-
-            // Extraer solo los parámetros válidos
-            const validParams = {
-                query: searchParams.query.trim(),
+            const response = await searchStorageService({
+                query,
                 token,
-            };
-
-            // Añadir parámetros opcionales solo si tienen valor
-            if (searchParams.minSize)
-                validParams.minSize = searchParams.minSize;
-            if (searchParams.maxSize)
-                validParams.maxSize = searchParams.maxSize;
-            if (searchParams.orderBy)
-                validParams.orderBy = searchParams.orderBy;
-            if (searchParams.orderDirection)
-                validParams.orderDirection = searchParams.orderDirection;
-
-            console.log('Searching with params:', validParams);
-            const results = await searchStorageService(validParams);
-
-            console.log('Search results received:', results);
-            setSearchResults(Array.isArray(results) ? results : []);
+            });
+            setSearchResults(response);
         } catch (error) {
-            console.error('Error en la búsqueda:', error);
-            toast.error('Error al realizar la búsqueda');
-            setSearchResults([]);
+            console.error('Error searching:', error);
+            toast.error('Error al buscar archivos');
         } finally {
             setIsSearching(false);
         }
+    };
+
+    const handleClearSearch = () => {
+        setSearchResults(null);
     };
 
     const handleUpload = () => {
@@ -127,11 +100,7 @@ export const HomePage = () => {
                   })?.name
                 : null;
 
-            const uploadedFile = await uploadFileService(
-                file,
-                token,
-                folderName
-            );
+            await uploadFileService(file, token, folderName);
 
             await refetchStorage();
 
@@ -161,6 +130,8 @@ export const HomePage = () => {
 
     const handleFolderClick = (folderId) => {
         setSelectedFolderId(folderId);
+        setSearchResults(null); // Limpiar los resultados de búsqueda
+        setIsSearching(false); // Salir del modo búsqueda
     };
 
     const handleBack = () => {
@@ -169,7 +140,10 @@ export const HomePage = () => {
 
     return (
         <>
-            <SearchBar onSearch={handleSearch} />
+            <SearchBar
+                onSearch={handleSearch}
+                onClearSearch={handleClearSearch}
+            />
 
             {/* Contenido principal */}
             {isSearching ? (
@@ -188,27 +162,29 @@ export const HomePage = () => {
             ) : (
                 // Vista normal (solo se muestra si no hay búsqueda)
                 <>
-                    {/* Navbar con tabs */}
-                    <nav className="flex space-x-4 px-4 py-3 overflow-x-auto bg-white shadow-sm">
-                        <TabButton
-                            active={activeTab === 'principal'}
-                            onClick={() => setActiveTab('principal')}
-                        >
-                            Principal
-                        </TabButton>
-                        <TabButton
-                            active={activeTab === 'documentos'}
-                            onClick={() => setActiveTab('documentos')}
-                        >
-                            Archivos
-                        </TabButton>
-                        <TabButton
-                            active={activeTab === 'compartidos'}
-                            onClick={() => setActiveTab('compartidos')}
-                        >
-                            Compartidos
-                        </TabButton>
-                    </nav>
+                    {/* Mostrar el navbar solo si no hay una carpeta seleccionada */}
+                    {!selectedFolderId && (
+                        <nav className="flex space-x-4 px-4 py-3 overflow-x-auto bg-white shadow-sm animate-fade">
+                            <TabButton
+                                active={activeTab === 'principal'}
+                                onClick={() => setActiveTab('principal')}
+                            >
+                                Principal
+                            </TabButton>
+                            <TabButton
+                                active={activeTab === 'documentos'}
+                                onClick={() => setActiveTab('documentos')}
+                            >
+                                Archivos
+                            </TabButton>
+                            <TabButton
+                                active={activeTab === 'compartidos'}
+                                onClick={() => setActiveTab('compartidos')}
+                            >
+                                Compartidos
+                            </TabButton>
+                        </nav>
+                    )}
 
                     {/* Contenido según el estado */}
                     {selectedFolderId ? (
@@ -234,26 +210,24 @@ export const HomePage = () => {
                                 loading={loading}
                                 error={error}
                             />
+
+                            {/* Botón de acción flotante */}
+                            <aside className="fixed bottom-16 right-4 sm:right-8 z-50">
+                                <ActionButton
+                                    onClick={() =>
+                                        setShowActionMenu(!showActionMenu)
+                                    }
+                                />
+                                <ActionMenu
+                                    show={showActionMenu}
+                                    onClose={() => setShowActionMenu(false)}
+                                    onUpload={handleUpload}
+                                    onCreateFolder={handleCreateFolder}
+                                    className="absolute bottom-12 right-8"
+                                />
+                            </aside>
                         </>
                     )}
-
-                    {/* Botón de acción flotante */}
-                    <aside className="fixed bottom-16 right-4 sm:right-8 z-50">
-                        <div className="relative">
-                            <ActionButton
-                                onClick={() =>
-                                    setShowActionMenu(!showActionMenu)
-                                }
-                            />
-                            <ActionMenu
-                                show={showActionMenu}
-                                onClose={() => setShowActionMenu(false)}
-                                onUpload={handleUpload}
-                                onCreateFolder={handleCreateFolder}
-                                className="absolute bottom-12 right-0"
-                            />
-                        </div>
-                    </aside>
                 </>
             )}
 

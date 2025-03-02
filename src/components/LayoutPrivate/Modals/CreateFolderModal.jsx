@@ -81,7 +81,7 @@ export const CreateFolderModal = ({ isOpen, onClose, onCreateFolder }) => {
                             <button
                                 type="button"
                                 onClick={onClose}
-                                className="rounded-md border bg-[#fecaca] border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-[#f87171] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="px-4 py-2 text-sm font-medium text-gray-700 focus:outline-none"
                             >
                                 Cancelar
                             </button>
