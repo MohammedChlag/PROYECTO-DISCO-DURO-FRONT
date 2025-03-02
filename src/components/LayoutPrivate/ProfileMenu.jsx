@@ -7,7 +7,7 @@ import { ProfileOptions } from './ProfileOptions.jsx';
 
 export const ProfileMenu = () => {
     const navigate = useNavigate();
-    const { onLogout, currentUser } = useAuthHook();
+    const { onLogout, currentUser, isAdmin } = useAuthHook();
     const [showMenu, setShowMenu] = useState(false);
     const [avatarError, setAvatarError] = useState(false);
     const menuRef = useRef(null);
@@ -46,6 +46,18 @@ export const ProfileMenu = () => {
                 setShowMenu(false);
             },
         },
+        // Opción solo visible para administradores
+        ...(isAdmin
+            ? [
+                  {
+                      label: 'Listar Usuarios',
+                      onClick: () => {
+                          navigate('/admin/users');
+                          setShowMenu(false);
+                      },
+                  },
+              ]
+            : []),
         {
             label: 'About',
             onClick: () => {

@@ -15,6 +15,7 @@ import { HomePage } from './pages/HomePage.jsx';
 import { ProfilePage } from './pages/ProfilePage.jsx';
 // Página 404
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
+import { UsersListPage } from './pages/UsersListPage.jsx';
 
 function App() {
     return (
@@ -39,7 +40,7 @@ function App() {
                 <Route element={<LayoutPrivate />}>
                     <Route path="/storage" element={<HomePage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    {/* <Route path="/admin" element={<AdminPage />} /> */}
+                    <Route path="/admin/users" element={<UsersListPage />} />
                 </Route>
 
                 {/* Ruta 404 */}

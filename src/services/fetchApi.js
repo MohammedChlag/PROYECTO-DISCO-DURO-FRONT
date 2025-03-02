@@ -358,3 +358,69 @@ export const searchStorageService = async ({ query, token }) => {
         throw error;
     }
 };
+
+export const getAllUsersService = async (token) => {
+    console.log('getAllUsersService - Obteniendo lista de usuarios');
+
+    const response = await fetch(`${apiPath}/users/list`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+        console.error('getAllUsersService - Error:', responseData.message);
+        throw new Error(responseData.message || 'Error al obtener usuarios');
+    }
+
+    return responseData.data.users;
+};
+
+export const toggleUserActiveService = async (userId, currentActive, token) => {
+    console.log(
+        'toggleUserActiveService - Cambiando estado del usuario:',
+        userId
+    );
+
+    const response = await fetch(`${apiPath}/users/status/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ active: !currentActive }), // Enviamos el opuesto del estado actual
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+        console.error('toggleUserActiveService - Error:', responseData.message);
+        throw new Error(
+            responseData.message || 'Error al cambiar estado del usuario'
+        );
+    }
+
+    return responseData.data.user;
+};
+
+export const deleteUserService = async (userId, token) => {
+    console.log('deleteUserService - Eliminando usuario:', userId);
+
+    const response = await fetch(`${apiPath}/admin/user/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+        console.error('deleteUserService - Error:', responseData.message);
+        throw new Error(responseData.message || 'Error al eliminar usuario');
+    }
+
+    return responseData;
+};

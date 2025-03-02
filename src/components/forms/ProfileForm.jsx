@@ -179,20 +179,28 @@ export const ProfileForm = () => {
             handleSubmit={handleSubmit}
             className="flex flex-col items-center gap-2 p-3 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto text-center mt-6"
         >
-            <h3 className="text-xl font-semibold mb-4">{user?.username}</h3>
-            <div className="flex flex-col items-center mb-6">
-                <div className="relative group">
+            <header>
+                <h1 className="text-xl font-semibold mb-4">{user?.username}</h1>
+            </header>
+
+            <section
+                className="flex flex-col items-center mb-6"
+                aria-label="Gestión de avatar"
+            >
+                <figure className="relative group">
                     <input
                         type="file"
                         ref={fileInputRef}
                         className="hidden"
                         onChange={handleAvatarChange}
+                        accept="image/*"
+                        aria-label="Seleccionar nuevo avatar"
                     />
                     {avatarUrl ? (
                         <div className="relative">
                             <img
                                 src={avatarUrl}
-                                alt="Avatar del usuario"
+                                alt={`Avatar de ${user?.username}`}
                                 className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
                                 onClick={handleAvatarClick}
                                 onError={(e) => {
@@ -200,14 +208,21 @@ export const ProfileForm = () => {
                                     setAvatarError(true);
                                 }}
                             />
-                            <div className="absolute -bottom-2 right-0 flex gap-2">
+                            <nav
+                                className="absolute -bottom-2 right-0 flex gap-2"
+                                aria-label="Opciones de avatar"
+                            >
                                 <Button
                                     type="button"
                                     handleClick={handleAvatarClick}
                                     className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-md"
                                     title="Cambiar avatar"
+                                    aria-label="Cambiar avatar"
                                 >
-                                    <PencilIcon className="h-4 w-4" />
+                                    <PencilIcon
+                                        className="h-4 w-4"
+                                        aria-hidden="true"
+                                    />
                                 </Button>
                                 {!avatarError && (
                                     <Button
@@ -215,79 +230,103 @@ export const ProfileForm = () => {
                                         handleClick={handleDeleteClick}
                                         className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-md"
                                         title="Eliminar avatar"
+                                        aria-label="Eliminar avatar"
                                     >
-                                        <TrashIcon className="h-4 w-4" />
+                                        <TrashIcon
+                                            className="h-4 w-4"
+                                            aria-hidden="true"
+                                        />
                                     </Button>
                                 )}
-                            </div>
+                            </nav>
                         </div>
                     ) : (
                         <div className="relative">
                             <UserCircleIcon
                                 className="w-24 h-24 text-gray-400 cursor-pointer border-4 border-white rounded-full shadow-lg"
                                 onClick={handleAvatarClick}
+                                aria-label="Avatar por defecto"
                             />
                             <Button
                                 type="button"
                                 handleClick={handleAvatarClick}
                                 className="absolute -bottom-2 right-0 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-md"
                                 title="Añadir avatar"
+                                aria-label="Añadir avatar"
                             >
-                                <PencilIcon className="h-4 w-4" />
+                                <PencilIcon
+                                    className="h-4 w-4"
+                                    aria-hidden="true"
+                                />
                             </Button>
                         </div>
                     )}
-                </div>
-            </div>
+                </figure>
+            </section>
 
-            {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+            {error && (
+                <p role="alert" className="text-red-500 text-sm mb-2">
+                    {error}
+                </p>
+            )}
 
-            <Input
-                id="username"
-                label="Username"
-                type="text"
-                name="username"
-                value={formData.username}
-                handleChange={handleInputChange}
-                disabled={!isEditing}
-                errors={error}
-            />
-            <Input
-                id="firstName"
-                label="Nombre"
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                handleChange={handleInputChange}
-                disabled={!isEditing}
-                errors={error}
-            />
-            <Input
-                id="lastName"
-                label="Apellido"
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                handleChange={handleInputChange}
-                disabled={!isEditing}
-                errors={error}
-            />
-            <Input
-                id="email"
-                label="Correo Electrónico"
-                type="email"
-                name="email"
-                value={formData.email}
-                handleChange={handleInputChange}
-                disabled={!isEditing}
-                errors={error}
-            />
+            <fieldset className="w-full space-y-4" disabled={!isEditing}>
+                <legend className="sr-only">Información del perfil</legend>
 
-            <div className="flex gap-2 w-full">
+                <Input
+                    id="username"
+                    label="Username"
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    handleChange={handleInputChange}
+                    disabled={!isEditing}
+                    errors={error}
+                    required
+                    aria-required="true"
+                />
+                <Input
+                    id="firstName"
+                    label="Nombre"
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    handleChange={handleInputChange}
+                    disabled={!isEditing}
+                    errors={error}
+                />
+                <Input
+                    id="lastName"
+                    label="Apellido"
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    handleChange={handleInputChange}
+                    disabled={!isEditing}
+                    errors={error}
+                />
+                <Input
+                    id="email"
+                    label="Correo Electrónico"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    handleChange={handleInputChange}
+                    disabled={!isEditing}
+                    errors={error}
+                    required
+                    aria-required="true"
+                />
+            </fieldset>
+
+            <footer className="flex gap-2 w-full mt-6">
                 <Button
                     type="button"
                     handleClick={handleEdit}
                     className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-md transition-colors"
+                    aria-label={
+                        isEditing ? 'Cancelar edición' : 'Editar información'
+                    }
                 >
                     {isEditing ? 'Cancelar' : 'Editar Información'}
                 </Button>
@@ -297,11 +336,14 @@ export const ProfileForm = () => {
                         type="submit"
                         className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
                         disabled={loading}
+                        aria-label={
+                            loading ? 'Guardando cambios' : 'Guardar cambios'
+                        }
                     >
                         {loading ? 'Guardando...' : 'Guardar'}
                     </Button>
                 )}
-            </div>
+            </footer>
         </Form>
     );
 };
