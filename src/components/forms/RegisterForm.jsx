@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Button } from '../Button.jsx';
-import { Input } from './Input.jsx';
 import { useNavigate } from 'react-router-dom';
+import { useFormHook } from '../../hooks/useFormHook.js';
+import { toast } from 'react-toastify';
+import { Form } from './Form.jsx';
+import { Input } from './Input.jsx';
+import { Button } from '../Button.jsx';
 import { registerUserService } from '../../services/fetchApi.js';
 import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
-import { toast } from 'react-toastify';
-import { useFormHook } from '../../hooks/useFormHook.js';
-import { Form } from './Form.jsx';
 import { Link } from 'react-router-dom';
 
 export const RegisterForm = () => {
@@ -35,10 +35,10 @@ export const RegisterForm = () => {
 
     return (
         <Form
-            className="flex flex-col gap-2 p-8 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto"
+            className="flex flex-col gap-1 px-4 bg-[#F7FBFC] rounded-lg w-full max-w-80 mx-auto mt-1 sm:mt-2"
             handleSubmit={handleSubmit}
         >
-            <h3 className="text-3xl font-bold text-black text-center mb-4">
+            <h3 className="text-2xl font-bold text-black text-center mb-1">
                 Regístrate
             </h3>
 
