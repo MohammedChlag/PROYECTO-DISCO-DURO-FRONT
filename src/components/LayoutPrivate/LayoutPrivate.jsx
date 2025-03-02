@@ -8,7 +8,7 @@ export const LayoutPrivate = () => {
         <>
             <Header />
 
-            <main className="flex-1 relative">
+            <main className="flex flex-col flex-1 text-xs md:text-base p-1">
                 <Outlet />
             </main>
             <Footer />
