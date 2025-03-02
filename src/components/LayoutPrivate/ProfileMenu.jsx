@@ -70,7 +70,7 @@ export const ProfileMenu = () => {
         {
             label: 'Cerrar sesión',
             onClick: () => {
-                navigate('/users/login');
+                navigate('/');
                 onLogout();
                 setShowMenu(false);
             },

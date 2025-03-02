@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect } from 'react';
+import { useMemo, useRef, useState, useEffect, useCallback } from 'react';
 import { useStorageHook } from '../hooks/useStorageHook.js';
 import { TabButton } from '../components/LayoutPrivate/TabButton.jsx';
 import { FolderSection } from '../components/LayoutPrivate/FolderSection.jsx';
@@ -27,6 +27,15 @@ export const HomePage = () => {
     const [searchResults, setSearchResults] = useState(null);
     const [isSearching, setIsSearching] = useState(false);
     const fileInputRef = useRef(null);
+    const [key, setKey] = useState(0);
+
+    const forceRerender = useCallback(() => {
+        setKey((prevKey) => prevKey + 1);
+    }, []);
+
+    useEffect(() => {
+        forceRerender();
+    }, [storage, forceRerender]);
 
     const filteredContent = useMemo(() => {
         if (!storage || !Array.isArray(storage)) {
@@ -139,7 +148,7 @@ export const HomePage = () => {
     };
 
     return (
-        <>
+        <main className="container mx-auto px-4 py-8">
             <SearchBar
                 onSearch={handleSearch}
                 onClearSearch={handleClearSearch}
@@ -161,10 +170,10 @@ export const HomePage = () => {
                 </div>
             ) : (
                 // Vista normal (solo se muestra si no hay búsqueda)
-                <>
+                <div key={key}>
                     {/* Mostrar el navbar solo si no hay una carpeta seleccionada */}
                     {!selectedFolderId && (
-                        <nav className="flex space-x-4 px-4 py-3 overflow-x-auto bg-white shadow-sm animate-fade">
+                        <nav className="flex space-x-4 px-4 py-3 bg-white shadow-sm animate-fade">
                             <TabButton
                                 active={activeTab === 'principal'}
                                 onClick={() => setActiveTab('principal')}
@@ -228,7 +237,7 @@ export const HomePage = () => {
                             </aside>
                         </>
                     )}
-                </>
+                </div>
             )}
 
             {/* Modales y elementos ocultos */}
@@ -243,6 +252,6 @@ export const HomePage = () => {
                 onClose={() => setShowCreateFolderModal(false)}
                 onCreateFolder={handleCreateFolderSubmit}
             />
-        </>
+        </main>
     );
 };
