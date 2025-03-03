@@ -14,6 +14,9 @@ import {
     uploadFileService,
     createFolderService,
     searchStorageService,
+    renameStorageItemService,
+    deleteStorageItemService,
+    shareStorageItemService,
 } from '../services/fetchApi.js';
 import { toast } from 'react-toastify';
 
@@ -138,6 +141,47 @@ export const HomePage = () => {
         setSelectedFolderId(null);
     };
 
+    const handleRenameItem = async (itemId, newName) => {
+        try {
+            const message = await renameStorageItemService(
+                itemId,
+                newName,
+                token
+            );
+            await refetchStorage();
+            toast.success(message);
+        } catch (error) {
+            toast.error(error.message || 'Error al renombrar');
+        }
+    };
+
+    const handleDeleteItem = async (itemId, type) => {
+        try {
+            await deleteStorageItemService(itemId, type, token);
+            await refetchStorage();
+            toast.success('Elemento eliminado correctamente');
+        } catch (error) {
+            toast.error(error.message || 'Error al eliminar');
+        }
+    };
+
+    const handleShareItem = async (itemId) => {
+        try {
+            const response = await shareStorageItemService(itemId, token);
+            await refetchStorage();
+
+            if (response && (response.url || response.download)) {
+                toast.success('Elemento compartido correctamente');
+                return response;
+            } else {
+                throw new Error('No se recibieron los enlaces de compartir');
+            }
+        } catch (error) {
+            toast.error(error.message || 'Error al compartir');
+            return null;
+        }
+    };
+
     return (
         <>
             <SearchBar
@@ -192,12 +236,18 @@ export const HomePage = () => {
                                         folders={filteredContent.folders}
                                         loading={loading}
                                         onFolderClick={handleFolderClick}
+                                        onRename={handleRenameItem}
+                                        onDelete={handleDeleteItem}
+                                        onShare={handleShareItem}
                                     />
                                 )}
                                 <DocumentsSection
                                     documents={filteredContent.documents}
                                     loading={loading}
                                     error={error}
+                                    onRename={handleRenameItem}
+                                    onDelete={handleDeleteItem}
+                                    onShare={handleShareItem}
                                 />
                             </div>
                         </div>

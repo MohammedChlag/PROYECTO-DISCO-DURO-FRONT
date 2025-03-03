@@ -45,7 +45,7 @@ export const LoginForm = () => {
                     Iniciar sesión
                 </h3>
                 <p className="text-sm text-gray-500">
-                    Bienvenido de nuevo a Haddoud
+                    Bienvenido de nuevo a Hackloud
                 </p>
             </div>
 

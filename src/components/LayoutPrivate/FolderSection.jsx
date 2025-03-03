@@ -1,6 +1,13 @@
 import { Carpeta } from '../Storage/Carpeta';
 
-export const FolderSection = ({ folders = [], loading, onFolderClick }) => {
+export const FolderSection = ({
+    folders = [],
+    loading,
+    onFolderClick,
+    onRename,
+    onDelete,
+    onShare,
+}) => {
     if (loading) {
         return (
             <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
@@ -48,6 +55,9 @@ export const FolderSection = ({ folders = [], loading, onFolderClick }) => {
                             key={folder.id}
                             folder={folder}
                             onFolderClick={onFolderClick}
+                            onRename={onRename}
+                            onDelete={onDelete}
+                            onShare={onShare}
                         />
                     ))}
                 </ul>
