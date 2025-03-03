@@ -35,98 +35,97 @@ export const RegisterForm = () => {
 
     return (
         <Form
-            className="flex flex-col gap-1 px-4 bg-[#F7FBFC] rounded-lg w-full max-w-80 mx-auto mt-1 sm:mt-2"
+            className="flex flex-col gap-6 p-8 bg-white rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
             handleSubmit={handleSubmit}
         >
-            <h3 className="text-2xl font-bold text-black text-center mb-1">
-                Regístrate
-            </h3>
+            <div className="text-center space-y-2">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Crear cuenta
+                </h3>
+                <p className="text-sm text-gray-500">
+                    Únete a Hackloud hoy mismo
+                </p>
+            </div>
 
-            <Input
-                id="firstName"
-                label="Nombre"
-                type="text"
-                name="firstName"
-                value={info.firstName}
-                errors={errors}
-                handleChange={handleChange}
-            />
-            <Input
-                id="lastName"
-                label="Apellido"
-                type="text"
-                name="lastName"
-                value={info.lastName}
-                errors={errors}
-                handleChange={handleChange}
-            />
-            <Input
-                id="username"
-                label="Username"
-                type="text"
-                name="username"
-                value={info.username}
-                errors={errors}
-                handleChange={handleChange}
-            />
-            <Input
-                id="birthday"
-                label="Fecha nacimiento"
-                type="date"
-                name="birthday"
-                value={info.birthday}
-                errors={errors}
-                handleChange={handleChange}
-            />
-            <Input
-                id="email"
-                label="Correo Electrónico"
-                type="email"
-                name="email"
-                value={info.email}
-                errors={errors}
-                handleChange={handleChange}
-            />
-            <Input
-                id="password"
-                label="Contraseña"
-                type="password"
-                name="password"
-                value={info.password}
-                errors={errors}
-                handleChange={handleChange}
-            />
-
-            <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
-                    id="terms"
-                    type="checkbox"
-                    name="terms"
-                    label="Aceptar términos y condiciones"
-                    checked={info.terms}
+                    id="firstName"
+                    label="Nombre"
+                    type="text"
+                    name="firstName"
+                    value={info.firstName}
+                    errors={errors}
+                    handleChange={handleChange}
+                />
+                <Input
+                    id="lastName"
+                    label="Apellido"
+                    type="text"
+                    name="lastName"
+                    value={info.lastName}
                     errors={errors}
                     handleChange={handleChange}
                 />
             </div>
 
-            <Button
-                type="submit"
-                className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
-                disabled={loading}
-            >
-                {loading ? 'Registrando...' : 'Registrarse'}
-            </Button>
-            <section className="text-center mt-4">
-                <p className="text-sm text-gray-600">
+            <div className="space-y-4">
+                <Input
+                    id="username"
+                    label="Nombre de usuario"
+                    type="text"
+                    name="username"
+                    value={info.username}
+                    errors={errors}
+                    handleChange={handleChange}
+                />
+                <Input
+                    id="birthday"
+                    label="Fecha de nacimiento"
+                    type="date"
+                    name="birthday"
+                    value={info.birthday}
+                    errors={errors}
+                    handleChange={handleChange}
+                />
+                <Input
+                    id="email"
+                    label="Correo Electrónico"
+                    type="email"
+                    name="email"
+                    value={info.email}
+                    errors={errors}
+                    handleChange={handleChange}
+                />
+                <Input
+                    id="password"
+                    label="Contraseña"
+                    type="password"
+                    name="password"
+                    value={info.password}
+                    errors={errors}
+                    handleChange={handleChange}
+                />
+            </div>
+
+            <div className="space-y-4">
+                <Button
+                    type="submit"
+                    className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] active:translate-y-[1px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                    disabled={loading}
+                >
+                    {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+                </Button>
+
+                <p className="text-center text-sm text-gray-600">
                     ¿Ya tienes una cuenta?{' '}
                     <Link
                         to="/users/login"
-                        className="text-[#00B4D8] hover:underline"
+                        className="text-[#00B4D8] hover:text-[#0096B4] font-medium hover:underline"
                     >
-                        Inicia sesión
+                        Inicia sesión aquí
                     </Link>
                 </p>
-            </section>
+            </div>
         </Form>
     );
 };

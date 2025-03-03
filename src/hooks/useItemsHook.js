@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useStorageHook } from './useStorageHook.js';
-import {
-    renameStorageItemService,
-    shareStorageItemService,
-    deleteStorageItemService,
-    downloadFileService,
-} from '../services/fetchApi.js';
+import { downloadFileService } from '../services/fetchApi.js';
 import { useAuthHook } from './useAuthHook.js';
 
-export const useItemsHook = (item, type = 'file') => {
-    const { refetchStorage } = useStorageHook();
+export const useItemsHook = (
+    item,
+    type = 'file',
+    { onDelete, onShare } = {}
+) => {
     const { token } = useAuthHook();
     const [showOptions, setShowOptions] = useState(false);
     const [showRenameModal, setShowRenameModal] = useState(false);
@@ -34,36 +31,48 @@ export const useItemsHook = (item, type = 'file') => {
         closeOptions();
     };
 
-    const handleRenameSubmit = async (newName) => {
-        try {
-            const message = await renameStorageItemService(
-                item.id,
-                newName,
-                token
-            );
-
-            await refetchStorage();
-            setShowRenameModal(false);
-            toast.success(message);
-        } catch (error) {
-            toast.error(error.message || 'Error al renombrar el elemento');
-        }
-    };
-
     const handleShare = async () => {
         try {
-            const response = await shareStorageItemService(item.id, token);
+            console.log('1. Iniciando handleShare en hook para:', {
+                id: item.id,
+                type,
+            });
 
-            const urls =
-                type === 'folder'
-                    ? { share: response.url }
-                    : { share: response.download }; // Para archivos, usamos la URL de descarga
-
-            setShareUrls(urls);
+            // Reiniciar estados
+            setShareUrls(null);
             setShowShareModal(true);
             closeOptions();
+
+            console.log('3. Estado inicial del modal:', { showShareModal });
+
+            console.log('4. Llamando a onShare');
+            const response = await onShare(item.id);
+            console.log('5. Respuesta del servicio:', response);
+
+            if (response?.status === 'ok') {
+                const urls =
+                    type === 'folder'
+                        ? { url: response.url }
+                        : { download: response.download };
+
+                console.log('6. URLs transformadas:', urls);
+                setShareUrls(urls);
+                // Mantener el modal abierto
+                setShowShareModal(true);
+
+                console.log('7. Estado actualizado:', {
+                    showShareModal: true,
+                    shareUrls: urls,
+                });
+            } else {
+                console.log('5.1 No hay respuesta válida del servicio');
+                toast.error('Error al obtener el enlace de compartir');
+                setShowShareModal(false);
+            }
         } catch (error) {
+            console.error('Error en handleShare:', error);
             toast.error(error.message || 'Error al compartir el elemento');
+            setShowShareModal(false);
         }
     };
 
@@ -74,15 +83,10 @@ export const useItemsHook = (item, type = 'file') => {
 
     const handleDeleteConfirm = async () => {
         try {
-            const message = await deleteStorageItemService(
-                item.id,
-                type,
-                token
-            );
-            await refetchStorage();
+            await onDelete(item.id, type);
             setShowDeleteModal(false);
-            toast.success(message);
         } catch (error) {
+            console.error('Error al eliminar:', error);
             toast.error(error.message || 'Error al eliminar el elemento');
         }
     };
@@ -102,19 +106,18 @@ export const useItemsHook = (item, type = 'file') => {
     return {
         showOptions,
         showRenameModal,
+        showShareModal,
         showDeleteModal,
-        setShowDeleteModal,
+        shareUrls,
         handleOptionsClick,
-        closeOptions,
         handleRename,
-        handleRenameSubmit,
-        setShowRenameModal,
         handleShare,
         handleDelete,
         handleDeleteConfirm,
-        handleDownload,
-        showShareModal,
+        closeOptions,
+        setShowRenameModal,
         setShowShareModal,
-        shareUrls,
+        setShowDeleteModal,
+        handleDownload,
     };
 };

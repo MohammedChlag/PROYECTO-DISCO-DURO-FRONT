@@ -7,10 +7,14 @@ import {
     UsersIcon,
     ArrowDownTrayIcon,
 } from '@heroicons/react/24/outline';
-import { useItemsHook } from '../../hooks/useItemsHook.js';
+import { useState } from 'react';
 import { RenameModal } from '../LayoutPrivate/Modals/RenameModal.jsx';
 import { ShareModal } from '../LayoutPrivate/Modals/ShareModal';
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
+import { downloadFileService } from '../../services/fetchApi.js';
+import { useAuthHook } from '../../hooks/useAuthHook.js';
+import { useItemsHook } from '../../hooks/useItemsHook.js';
+import { toast } from 'react-toastify';
 
 const formatFileSize = (bytes) => {
     if (!bytes) return '0 B';
@@ -29,40 +33,53 @@ const truncateFileName = (name, maxLength = 25) => {
     return `${truncatedName}.${extension}`;
 };
 
-export const Archivo = ({ file }) => {
+export const Archivo = ({ file, onRename, onDelete, onShare }) => {
+    const { token } = useAuthHook();
     const {
         showOptions,
         showRenameModal,
         showShareModal,
         showDeleteModal,
-        setShowDeleteModal,
+        shareUrls,
         handleOptionsClick,
-        closeOptions,
         handleRename,
-        handleRenameSubmit,
-        setShowRenameModal,
         handleShare,
         handleDelete,
         handleDeleteConfirm,
-        handleDownload,
-        shareUrls,
+        closeOptions,
+        setShowRenameModal,
         setShowShareModal,
-    } = useItemsHook(file, 'file');
+        setShowDeleteModal,
+    } = useItemsHook(file, 'file', { onDelete, onShare });
+
+    console.log('Estado del modal en Archivo:', { showShareModal, shareUrls });
+
+    const handleRenameSubmit = async (newName) => {
+        await onRename(file.id, newName);
+        setShowRenameModal(false);
+    };
+
+    const handleDownload = async () => {
+        try {
+            const message = await downloadFileService(file.id, token);
+            closeOptions();
+            toast.success(message);
+        } catch (error) {
+            toast.error(error.message || 'Error al descargar el archivo');
+        }
+    };
 
     return (
         <>
-            <li className="relative group flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
-                <article className="flex items-center m-1 p-1">
-                    <DocumentIcon className="h-6 w-6 text-gray-500 mr-3" />
-                    <div className="flex flex-col">
-                        <h3 className="text-sm font-medium text-gray-900">
+            <li className="relative group flex flex-col p-4 border rounded-lg hover:bg-gray-50">
+                <article className="flex items-center mb-3">
+                    <DocumentIcon className="h-6 w-6 text-gray-500 mr-3 flex-shrink-0" />
+                    <div className="flex flex-col min-w-0">
+                        <h3 className="text-sm font-medium text-gray-900 truncate">
                             {truncateFileName(file.name)}
                         </h3>
                         <div className="flex items-center mt-1">
-                            <UsersIcon className="h-4 w-4 text-gray-400 mr-1" />
-                            <span className="text-xs text-gray-500">
-                                {file.shareToken ? 'Compartido' : 'Privado'}
-                            </span>
+                            <UsersIcon className="h-4 w-4 text-gray-400 mr-1 flex-shrink-0" />
                             <span className="text-xs text-gray-500 ml-4">
                                 {formatFileSize(file.size)}
                             </span>
@@ -70,17 +87,17 @@ export const Archivo = ({ file }) => {
                     </div>
                 </article>
 
-                <div className="file-options flex items-center space-x-1">
+                <div className="flex items-center justify-end space-x-1 mt-2">
                     <button
                         onClick={handleDownload}
-                        className="p-2 hover:bg-gray-100 rounded-full"
+                        className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                         title="Descargar"
                     >
                         <ArrowDownTrayIcon className="h-5 w-5 text-gray-500" />
                     </button>
                     <button
                         onClick={handleOptionsClick}
-                        className="p-2 hover:bg-gray-100 rounded-full"
+                        className="p-2 hover:bg-gray-100 rounded-full transition-colors relative"
                     >
                         <EllipsisVerticalIcon className="h-5 w-5 text-gray-500" />
                     </button>
@@ -91,7 +108,7 @@ export const Archivo = ({ file }) => {
                                 className="fixed inset-0 z-10"
                                 onClick={closeOptions}
                             />
-                            <div className="absolute right-0 top-12 z-20 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+                            <div className="absolute right-0 top-full mt-2 z-20 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
                                 <button
                                     onClick={handleRename}
                                     className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
@@ -108,7 +125,7 @@ export const Archivo = ({ file }) => {
                                 </button>
                                 <button
                                     onClick={handleDelete}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 text-red-600"
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100"
                                 >
                                     <TrashIcon className="h-4 w-4 mr-2" />
                                     <span>Eliminar</span>
@@ -122,25 +139,27 @@ export const Archivo = ({ file }) => {
             <RenameModal
                 isOpen={showRenameModal}
                 onClose={() => setShowRenameModal(false)}
-                onRename={handleRenameSubmit}
+                onSubmit={handleRenameSubmit}
                 currentName={file.name}
                 type="file"
-            />
-
-            <ShareModal
-                isOpen={showShareModal}
-                onClose={() => setShowShareModal(false)}
-                urls={shareUrls}
-                type="file"
-                title={`Compartir "${file.name}"`}
             />
 
             <DeleteConfirmModal
                 isOpen={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
                 onConfirm={handleDeleteConfirm}
-                itemName={file.name}
                 type="file"
+            />
+
+            <ShareModal
+                isOpen={showShareModal}
+                onClose={() => {
+                    console.log('Cerrando modal');
+                    setShowShareModal(false);
+                }}
+                urls={shareUrls}
+                type="file"
+                title={file.name}
             />
         </>
     );

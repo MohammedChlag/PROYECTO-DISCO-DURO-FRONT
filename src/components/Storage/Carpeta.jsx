@@ -8,32 +8,44 @@ import {
 } from '@heroicons/react/24/outline';
 import { useItemsHook } from '../../hooks/useItemsHook.js';
 import { RenameModal } from '../LayoutPrivate/Modals/RenameModal.jsx';
-import { ShareModal } from '../LayoutPrivate/Modals/ShareModal';
-import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
+import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal.jsx';
+import { ShareModal } from '../LayoutPrivate/Modals/ShareModal.jsx';
 
 const truncateFolderName = (name, maxLength = 25) => {
     if (name.length <= maxLength) return name;
     return name.slice(0, maxLength - 3) + '...';
 };
 
-export const Carpeta = ({ folder, onFolderClick }) => {
+export const Carpeta = ({
+    folder,
+    onFolderClick,
+    onRename,
+    onDelete,
+    onShare,
+}) => {
     const {
         showOptions,
         showRenameModal,
         showShareModal,
         showDeleteModal,
-        setShowDeleteModal,
-        setShowShareModal,
         shareUrls,
         handleOptionsClick,
-        closeOptions,
         handleRename,
-        handleRenameSubmit,
-        setShowRenameModal,
         handleShare,
         handleDelete,
         handleDeleteConfirm,
-    } = useItemsHook(folder, 'folder');
+        closeOptions,
+        setShowRenameModal,
+        setShowShareModal,
+        setShowDeleteModal,
+    } = useItemsHook(folder, 'folder', { onDelete, onShare });
+
+    console.log('Estado del modal en Carpeta:', { showShareModal, shareUrls });
+
+    const handleRenameSubmit = async (newName) => {
+        await onRename(folder.id, newName);
+        setShowRenameModal(false);
+    };
 
     const handleFolderClick = (e) => {
         if (e.target.closest('.folder-options')) {
@@ -41,6 +53,7 @@ export const Carpeta = ({ folder, onFolderClick }) => {
         }
         onFolderClick(folder.id);
     };
+    console.log();
 
     return (
         <>
@@ -50,7 +63,7 @@ export const Carpeta = ({ folder, onFolderClick }) => {
             >
                 <article className="flex items-center m-1 p-1">
                     <FolderIcon className="h-6 w-6 text-blue-500 mr-3" />
-                    <h3 className="font-medium" title={folder.name}>
+                    <h3 className="font-medium mr-4" title={folder.name}>
                         {truncateFolderName(folder.name)}
                     </h3>
                     {folder.shareToken && (
@@ -71,11 +84,7 @@ export const Carpeta = ({ folder, onFolderClick }) => {
 
                     {showOptions && (
                         <>
-                            <div
-                                className="fixed inset-0 z-10"
-                                onClick={closeOptions}
-                            />
-                            <div className="absolute right-0 top-12 z-20 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+                            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 border">
                                 <button
                                     onClick={handleRename}
                                     className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
@@ -92,7 +101,7 @@ export const Carpeta = ({ folder, onFolderClick }) => {
                                 </button>
                                 <button
                                     onClick={handleDelete}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 text-red-600"
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100"
                                 >
                                     <TrashIcon className="h-4 w-4 mr-2" />
                                     <span>Eliminar</span>
@@ -102,6 +111,7 @@ export const Carpeta = ({ folder, onFolderClick }) => {
                     )}
                 </div>
             </li>
+
             <RenameModal
                 isOpen={showRenameModal}
                 onClose={() => setShowRenameModal(false)}
@@ -109,19 +119,20 @@ export const Carpeta = ({ folder, onFolderClick }) => {
                 currentName={folder.name}
                 type="folder"
             />
-            {showShareModal && (
-                <ShareModal
-                    isOpen={showShareModal}
-                    onClose={() => setShowShareModal(false)}
-                    urls={shareUrls}
-                    type="folder"
-                />
-            )}
+
             <DeleteConfirmModal
                 isOpen={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
                 onConfirm={handleDeleteConfirm}
                 type="folder"
+            />
+
+            <ShareModal
+                isOpen={showShareModal}
+                onClose={() => setShowShareModal(false)}
+                urls={shareUrls}
+                type="folder"
+                title={folder.name}
             />
         </>
     );

@@ -7,7 +7,7 @@ export const LayoutPublic = () => {
     return (
         <>
             <Header />
-            <main className="flex flex-col flex-1 text-xs md:text-base p-1">
+            <main>
                 <Outlet />
             </main>
             <Footer />

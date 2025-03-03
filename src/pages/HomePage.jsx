@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect, useCallback } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useStorageHook } from '../hooks/useStorageHook.js';
 import { TabButton } from '../components/LayoutPrivate/TabButton.jsx';
 import { FolderSection } from '../components/LayoutPrivate/FolderSection.jsx';
@@ -14,6 +14,9 @@ import {
     uploadFileService,
     createFolderService,
     searchStorageService,
+    renameStorageItemService,
+    deleteStorageItemService,
+    shareStorageItemService,
 } from '../services/fetchApi.js';
 import { toast } from 'react-toastify';
 
@@ -27,15 +30,6 @@ export const HomePage = () => {
     const [searchResults, setSearchResults] = useState(null);
     const [isSearching, setIsSearching] = useState(false);
     const fileInputRef = useRef(null);
-    const [key, setKey] = useState(0);
-
-    const forceRerender = useCallback(() => {
-        setKey((prevKey) => prevKey + 1);
-    }, []);
-
-    useEffect(() => {
-        forceRerender();
-    }, [storage, forceRerender]);
 
     const filteredContent = useMemo(() => {
         if (!storage || !Array.isArray(storage)) {
@@ -147,8 +141,49 @@ export const HomePage = () => {
         setSelectedFolderId(null);
     };
 
+    const handleRenameItem = async (itemId, newName) => {
+        try {
+            const message = await renameStorageItemService(
+                itemId,
+                newName,
+                token
+            );
+            await refetchStorage();
+            toast.success(message);
+        } catch (error) {
+            toast.error(error.message || 'Error al renombrar');
+        }
+    };
+
+    const handleDeleteItem = async (itemId, type) => {
+        try {
+            await deleteStorageItemService(itemId, type, token);
+            await refetchStorage();
+            toast.success('Elemento eliminado correctamente');
+        } catch (error) {
+            toast.error(error.message || 'Error al eliminar');
+        }
+    };
+
+    const handleShareItem = async (itemId) => {
+        try {
+            const response = await shareStorageItemService(itemId, token);
+            await refetchStorage();
+
+            if (response && (response.url || response.download)) {
+                toast.success('Elemento compartido correctamente');
+                return response;
+            } else {
+                throw new Error('No se recibieron los enlaces de compartir');
+            }
+        } catch (error) {
+            toast.error(error.message || 'Error al compartir');
+            return null;
+        }
+    };
+
     return (
-        <main className="container mx-auto px-4 py-8">
+        <>
             <SearchBar
                 onSearch={handleSearch}
                 onClearSearch={handleClearSearch}
@@ -170,33 +205,56 @@ export const HomePage = () => {
                 </div>
             ) : (
                 // Vista normal (solo se muestra si no hay búsqueda)
-                <div key={key}>
+                <>
                     {/* Mostrar el navbar solo si no hay una carpeta seleccionada */}
                     {!selectedFolderId && (
-                        <nav className="flex space-x-4 px-4 py-3 bg-white shadow-sm animate-fade">
-                            <TabButton
-                                active={activeTab === 'principal'}
-                                onClick={() => setActiveTab('principal')}
-                            >
-                                Principal
-                            </TabButton>
-                            <TabButton
-                                active={activeTab === 'documentos'}
-                                onClick={() => setActiveTab('documentos')}
-                            >
-                                Archivos
-                            </TabButton>
-                            <TabButton
-                                active={activeTab === 'compartidos'}
-                                onClick={() => setActiveTab('compartidos')}
-                            >
-                                Compartidos
-                            </TabButton>
-                        </nav>
+                        <div className="flex flex-col w-full min-w-0">
+                            <nav className="flex items-start gap-2 sm:gap-4 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-white shadow-sm animate-fade text-sm sm:text-base">
+                                <TabButton
+                                    active={activeTab === 'principal'}
+                                    onClick={() => setActiveTab('principal')}
+                                >
+                                    Principal
+                                </TabButton>
+                                <TabButton
+                                    active={activeTab === 'documentos'}
+                                    onClick={() => setActiveTab('documentos')}
+                                >
+                                    Archivos
+                                </TabButton>
+                                <TabButton
+                                    active={activeTab === 'compartidos'}
+                                    onClick={() => setActiveTab('compartidos')}
+                                >
+                                    Compartidos
+                                </TabButton>
+                            </nav>
+
+                            <div className="flex flex-col min-w-0 gap-4 py-3 mt-2 px-4 sm:px-6 lg:px-8">
+                                {activeTab !== 'documentos' && (
+                                    <FolderSection
+                                        folders={filteredContent.folders}
+                                        loading={loading}
+                                        onFolderClick={handleFolderClick}
+                                        onRename={handleRenameItem}
+                                        onDelete={handleDeleteItem}
+                                        onShare={handleShareItem}
+                                    />
+                                )}
+                                <DocumentsSection
+                                    documents={filteredContent.documents}
+                                    loading={loading}
+                                    error={error}
+                                    onRename={handleRenameItem}
+                                    onDelete={handleDeleteItem}
+                                    onShare={handleShareItem}
+                                />
+                            </div>
+                        </div>
                     )}
 
                     {/* Contenido según el estado */}
-                    {selectedFolderId ? (
+                    {selectedFolderId && (
                         <FolderPage
                             folderId={selectedFolderId}
                             storage={storage}
@@ -205,40 +263,23 @@ export const HomePage = () => {
                             onBack={handleBack}
                             onUpload={handleUpload}
                         />
-                    ) : (
-                        <>
-                            {activeTab !== 'documentos' && (
-                                <FolderSection
-                                    folders={filteredContent.folders}
-                                    loading={loading}
-                                    onFolderClick={handleFolderClick}
-                                />
-                            )}
-                            <DocumentsSection
-                                documents={filteredContent.documents}
-                                loading={loading}
-                                error={error}
-                            />
-
-                            {/* Botón de acción flotante */}
-                            <aside className="fixed bottom-16 right-4 sm:right-8 z-50">
-                                <ActionButton
-                                    onClick={() =>
-                                        setShowActionMenu(!showActionMenu)
-                                    }
-                                />
-                                <ActionMenu
-                                    show={showActionMenu}
-                                    onClose={() => setShowActionMenu(false)}
-                                    onUpload={handleUpload}
-                                    onCreateFolder={handleCreateFolder}
-                                    className="absolute bottom-12 right-8"
-                                />
-                            </aside>
-                        </>
                     )}
-                </div>
+                </>
             )}
+
+            {/* Botón de acción flotante */}
+            <aside className="fixed bottom-16 right-4 sm:bottom-28 sm:right-8 z-50">
+                <ActionButton
+                    onClick={() => setShowActionMenu(!showActionMenu)}
+                />
+                <ActionMenu
+                    show={showActionMenu}
+                    onClose={() => setShowActionMenu(false)}
+                    onUpload={handleUpload}
+                    onCreateFolder={handleCreateFolder}
+                    className="absolute bottom-12 right-10 sm:bottom-14 sm:right-12"
+                />
+            </aside>
 
             {/* Modales y elementos ocultos */}
             <input
@@ -252,6 +293,6 @@ export const HomePage = () => {
                 onClose={() => setShowCreateFolderModal(false)}
                 onCreateFolder={handleCreateFolderSubmit}
             />
-        </main>
+        </>
     );
 };
