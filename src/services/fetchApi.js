@@ -358,3 +358,49 @@ export const searchStorageService = async ({ query, token }) => {
         throw error;
     }
 };
+
+// Service que envia el email del usuario al backend
+export const recoveryPasswordService = async (email) => {
+    //Envia codigo al correo del usuario
+    try {
+        const response = await fetch(`${apiPath}/users/password/recover`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+        console.log('Respuesta del backend:', data);
+
+        if (!response.ok) {
+            throw new Error(data.message || 'No se pudo enviar el código');
+        }
+        return true; //Èxito
+    } catch (error) {
+        console.error('Error en recoveryPasswordService:', error);
+        return false; //falló
+    }
+};
+
+export const resetPasswordService = async (recoveryPassCode, newPassword) => {
+    //Usa el código para cambiar contraseña
+
+    const response = await fetch(`${apiPath}/users/password/recover`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ recoveryPassCode, newPassword }),
+    });
+    const responseData = await response.json();
+    console.log('Respuesta del backend:', responseData);
+
+    if (!response.ok) {
+        throw new Error(
+            responseData.message || 'No se pudo restablecer la contraseña'
+        );
+    }
+    return true; // Éxito
+};
