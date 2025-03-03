@@ -63,7 +63,7 @@ export const LandingPage = () => {
                 </Button>
             </section>
 
-            <section className="py-6 px-4 text-center bg-gray-50 rounded-lg shadow-md mt-6 max-w-2xl mx-auto">
+            <section className="py-6 px-4 text-center bg-gray-50 rounded-lg shadow-md mt-6 max-w-2xl mx-auto md:mt-16">
                 <h3 className="text-lg font-semibold text-gray-700">
                     Esto es lo que opinan nuestros usuarios:
                 </h3>
