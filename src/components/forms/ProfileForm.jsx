@@ -112,7 +112,7 @@ export const ProfileForm = () => {
             '%c Click en eliminar avatar',
             'background: #222; color: #bada55'
         );
-        // Por ahora solo confirmamos con un console.log
+        // Por ahora solo confirmamos con un Alert :/
         if (window.confirm('¿Estás seguro de que deseas eliminar tu avatar?')) {
             handleDeleteAvatar();
         }
@@ -128,7 +128,7 @@ export const ProfileForm = () => {
                 toast.error(result.error || 'Error al eliminar el avatar');
             }
         } catch (error) {
-            toast.error('Error al eliminar el avatar');
+            toast.error(error.message || 'Error al eliminar el avatar');
         }
     };
 

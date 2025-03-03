@@ -117,9 +117,9 @@ export const UsersListPage = () => {
     }
 
     return (
-        <main className="container mx-auto px-4 py-8">
+        <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <header className="mb-6 flex justify-between items-center">
-                <h1 className="text-2xl font-bold">Usuarios</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Usuarios</h1>
                 <button
                     onClick={loadUsers}
                     className="p-2 rounded-full hover:bg-gray-100 transition-colors"
@@ -129,107 +129,113 @@ export const UsersListPage = () => {
                 </button>
             </header>
 
-            <section className="grid grid-cols-1 gap-4">
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6">
                 {users
                     .filter((user) => user.role !== 'admin')
                     .map((user) => (
                         <article
                             key={user.id}
-                            className="bg-white rounded-lg shadow p-4 flex items-center justify-between"
+                            className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col"
                         >
-                            <figure className="flex items-center space-x-4">
-                                {user.avatar ? (
-                                    <img
-                                        className="h-12 w-12 rounded-full"
-                                        src={`/uploads/${user.id}/avatars/${user.avatar}`}
-                                        alt={`Avatar de ${user.username}`}
-                                    />
-                                ) : (
-                                    <span
-                                        className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center"
-                                        aria-label="Avatar por defecto"
-                                    >
-                                        <span className="text-gray-500">
+                            <div className="flex items-start justify-between mb-4">
+                                <figure className="flex items-center space-x-3">
+                                    {user.avatar ? (
+                                        <img
+                                            className="h-12 w-12 rounded-full object-cover border-2 border-gray-200"
+                                            src={`/uploads/${user.id}/avatars/${user.avatar}`}
+                                            alt={`Avatar de ${user.username}`}
+                                        />
+                                    ) : (
+                                        <span
+                                            className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-semibold text-lg"
+                                            aria-label="Avatar por defecto"
+                                        >
                                             {user.username
                                                 .charAt(0)
                                                 .toUpperCase()}
                                         </span>
-                                    </span>
-                                )}
-                                <figcaption>
-                                    <p className="font-medium text-gray-900">
-                                        {user.username}
-                                    </p>
-                                    <p className="text-sm text-gray-500">
-                                        {user.email}
-                                    </p>
-                                    <p
-                                        className={`text-sm ${
-                                            user.active
-                                                ? 'text-cyan-500'
-                                                : 'text-red-500'
-                                        }`}
-                                    >
-                                        {user.active
-                                            ? 'Habilitado'
-                                            : 'Deshabilitado'}
-                                    </p>
-                                </figcaption>
-                            </figure>
+                                    )}
+                                    <figcaption className="flex-1 min-w-0">
+                                        <p className="font-medium text-gray-900 truncate">
+                                            {user.username}
+                                        </p>
+                                        <p className="text-sm text-gray-500 truncate">
+                                            {user.email}
+                                        </p>
+                                    </figcaption>
+                                </figure>
 
-                            <nav
-                                className="relative"
-                                ref={(el) => (menuRefs.current[user.id] = el)}
-                            >
-                                <button
-                                    className="text-gray-400 hover:text-gray-600"
-                                    onClick={() =>
-                                        setOpenMenuId(
-                                            openMenuId === user.id
-                                                ? null
-                                                : user.id
-                                        )
+                                <nav
+                                    className="relative ml-2"
+                                    ref={(el) =>
+                                        (menuRefs.current[user.id] = el)
                                     }
-                                    aria-label="Menú de opciones"
-                                    aria-expanded={openMenuId === user.id}
                                 >
-                                    <EllipsisVerticalIcon className="h-5 w-5" />
-                                </button>
+                                    <button
+                                        className="p-1 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
+                                        onClick={() =>
+                                            setOpenMenuId(
+                                                openMenuId === user.id
+                                                    ? null
+                                                    : user.id
+                                            )
+                                        }
+                                        aria-label="Menú de opciones"
+                                        aria-expanded={openMenuId === user.id}
+                                    >
+                                        <EllipsisVerticalIcon className="h-5 w-5" />
+                                    </button>
 
-                                {openMenuId === user.id && (
-                                    <menu className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                                        <li className="py-1">
-                                            <button
-                                                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                onClick={() =>
-                                                    handleToggleActive(
-                                                        user.id,
-                                                        user.active
-                                                    )
-                                                }
-                                            >
-                                                {user.active
-                                                    ? 'Deshabilitar'
-                                                    : 'Habilitar'}
-                                            </button>
-                                            <button
-                                                className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                                                onClick={() =>
-                                                    handleDeleteUser(
-                                                        user.id,
-                                                        user.username
-                                                    )
-                                                }
-                                            >
-                                                Eliminar
-                                            </button>
-                                        </li>
-                                    </menu>
-                                )}
-                            </nav>
+                                    {openMenuId === user.id && (
+                                        <menu className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                            <li className="py-1">
+                                                <button
+                                                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    onClick={() =>
+                                                        handleToggleActive(
+                                                            user.id,
+                                                            user.active
+                                                        )
+                                                    }
+                                                >
+                                                    {user.active
+                                                        ? 'Deshabilitar'
+                                                        : 'Habilitar'}
+                                                </button>
+                                                <button
+                                                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                                                    onClick={() =>
+                                                        handleDeleteUser(
+                                                            user.id,
+                                                            user.username
+                                                        )
+                                                    }
+                                                >
+                                                    Eliminar
+                                                </button>
+                                            </li>
+                                        </menu>
+                                    )}
+                                </nav>
+                            </div>
+
+                            <div className="mt-auto pt-3 border-t border-gray-100">
+                                <span
+                                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                        user.active
+                                            ? 'bg-cyan-100 text-cyan-800'
+                                            : 'bg-red-100 text-red-800'
+                                    }`}
+                                >
+                                    {user.active
+                                        ? 'Habilitado'
+                                        : 'Deshabilitado'}
+                                </span>
+                            </div>
                         </article>
                     ))}
             </section>
+
             <DeleteUserModal
                 isOpen={deleteModal.isOpen}
                 onClose={() =>

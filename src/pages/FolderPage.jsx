@@ -22,7 +22,7 @@ export const FolderPage = ({
     }, [storage, folderId]);
 
     return (
-        <section className="w-[90vw] px-4 sm:px-6 lg:px-8">
+        <section className="flex flex-col gap-4 mt-2 max-w-[90vw] px-4 sm:px-6 lg:px-8">
             {/* Navegación */}
             <nav className="flex items-center gap-4 my-4">
                 <button
@@ -47,7 +47,7 @@ export const FolderPage = ({
             {/* Botón flotante para subir archivos */}
             <ActionButton
                 onClick={onUpload}
-                className="fixed bottom-20 right-4 sm:right-8 z-50"
+                className="fixed bottom-16 right-4 sm:bottom-28 sm:right-8 z-50"
             />
         </section>
     );

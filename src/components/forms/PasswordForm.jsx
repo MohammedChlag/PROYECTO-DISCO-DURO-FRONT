@@ -9,6 +9,7 @@ import { Button } from '../Button.jsx';
 export const PasswordForm = () => {
     const { token } = useAuthHook();
     const { updatePassword, loading, error } = useUserHook(null, token);
+
     const [formData, setFormData] = useState({
         oldPassword: '',
         newPassword: '',
@@ -17,16 +18,12 @@ export const PasswordForm = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validar que las contraseñas coincidan
         if (formData.newPassword !== formData.confirmNewPassword) {
             toast.error('Las contraseñas no coinciden');
             return;
@@ -34,10 +31,8 @@ export const PasswordForm = () => {
 
         try {
             const result = await updatePassword(formData);
-
             if (result.success) {
                 toast.success('Contraseña actualizada correctamente');
-                // Limpiar el formulario
                 setFormData({
                     oldPassword: '',
                     newPassword: '',
@@ -48,8 +43,7 @@ export const PasswordForm = () => {
                     result.error || 'Error al actualizar la contraseña'
                 );
             }
-        } catch (error) {
-            console.error('Error al cambiar la contraseña:', error);
+        } catch {
             toast.error('Error al actualizar la contraseña');
         }
     };
@@ -63,7 +57,7 @@ export const PasswordForm = () => {
                 Cambiar Contraseña
             </h3>
 
-            {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <fieldset className="w-full space-y-4" disabled={loading}>
                 <legend className="sr-only">
@@ -77,9 +71,7 @@ export const PasswordForm = () => {
                     name="oldPassword"
                     value={formData.oldPassword}
                     handleChange={handleInputChange}
-                    errors={error}
                     required
-                    aria-required="true"
                 />
                 <Input
                     id="newPassword"
@@ -88,9 +80,7 @@ export const PasswordForm = () => {
                     name="newPassword"
                     value={formData.newPassword}
                     handleChange={handleInputChange}
-                    errors={error}
                     required
-                    aria-required="true"
                 />
                 <Input
                     id="confirmNewPassword"
@@ -99,9 +89,7 @@ export const PasswordForm = () => {
                     name="confirmNewPassword"
                     value={formData.confirmNewPassword}
                     handleChange={handleInputChange}
-                    errors={error}
                     required
-                    aria-required="true"
                 />
             </fieldset>
 
@@ -109,11 +97,6 @@ export const PasswordForm = () => {
                 type="submit"
                 className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
                 disabled={loading}
-                aria-label={
-                    loading
-                        ? 'Actualizando contraseña'
-                        : 'Actualizar contraseña'
-                }
             >
                 {loading ? 'Actualizando...' : 'Actualizar Contraseña'}
             </Button>
