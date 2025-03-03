@@ -22,12 +22,12 @@ export const DocumentsSection = ({ documents = [], loading, error }) => {
     }
 
     return (
-        <section className="mb-8 bg-gray-50 rounded-lg px-4 sm:py-6">
+        <section className=" bg-gray-50 rounded-lg px-4 sm:py-6">
             <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4 ml-1">
                 Archivos
             </h2>
 
-            {/* Lista de documentos */}
+            {/* Lista de documentos con grid responsivo */}
             {!documents.length ? (
                 <section className="bg-gray-50 rounded-lg py-4 sm:py-6">
                     <p className="text-gray-500 text-center">
@@ -35,7 +35,7 @@ export const DocumentsSection = ({ documents = [], loading, error }) => {
                     </p>
                 </section>
             ) : (
-                <ul className="space-y-2 sm:space-y-3 list-none p-0">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0">
                     {documents.map((doc) => (
                         <Archivo key={doc.id} file={doc} />
                     ))}

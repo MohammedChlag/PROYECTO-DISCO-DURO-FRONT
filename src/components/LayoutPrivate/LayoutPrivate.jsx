@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Footer } from '../LayoutPublic/Footer.jsx';
-import { Header } from './Header.jsx';
+import { Header } from '../LayoutPublic/Header.jsx';
 
 export const LayoutPrivate = () => {
     return (
         <>
             <Header />
 
-            <main className="flex-1 relative">
+            <main className="flex-1 relative max-w-screen-lg mx-auto px-2 sm:px-4 py-6">
                 <Outlet />
             </main>
             <Footer />

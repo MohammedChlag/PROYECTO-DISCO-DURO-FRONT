@@ -177,10 +177,12 @@ export const ProfileForm = () => {
     return (
         <Form
             handleSubmit={handleSubmit}
-            className="flex flex-col items-center gap-2 p-3 bg-[#F7FBFC] rounded-lg w-full max-w-md mx-auto text-center mt-6"
+            className="flex flex-col items-center gap-4 p-6 bg-white rounded-lg shadow-md w-full max-w-lg mx-auto text-center mt-6 border border-gray-200"
         >
             <header>
-                <h1 className="text-xl font-semibold mb-4">{user?.username}</h1>
+                <h1 className="text-2xl font-bold text-gray-700 mb-4">
+                    {user?.username}
+                </h1>
             </header>
 
             <section
@@ -201,7 +203,7 @@ export const ProfileForm = () => {
                             <img
                                 src={avatarUrl}
                                 alt={`Avatar de ${user?.username}`}
-                                className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
+                                className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg cursor-pointer hover:ring-2 hover:ring-blue-500"
                                 onClick={handleAvatarClick}
                                 onError={(e) => {
                                     e.target.src = '/default-avatar.png';
@@ -243,7 +245,7 @@ export const ProfileForm = () => {
                     ) : (
                         <div className="relative">
                             <UserCircleIcon
-                                className="w-24 h-24 text-gray-400 cursor-pointer border-4 border-white rounded-full shadow-lg"
+                                className="w-28 h-28 text-gray-400 cursor-pointer border-4 border-white rounded-full shadow-lg hover:ring-2 hover:ring-blue-500"
                                 onClick={handleAvatarClick}
                                 aria-label="Avatar por defecto"
                             />

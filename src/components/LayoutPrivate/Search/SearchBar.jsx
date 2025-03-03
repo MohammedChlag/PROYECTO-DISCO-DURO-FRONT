@@ -42,7 +42,10 @@ export const SearchBar = ({ onSearch, onClearSearch }) => {
     };
 
     return (
-        <div className="w-full max-w-4xl mt-3 px-4 py-2 relative flex-1">
+        <form
+            role="search"
+            className="w-full max-w-4xl mt-3 px-4 py-2 relative flex-1"
+        >
             <input
                 type="text"
                 value={searchTerm}
@@ -59,6 +62,6 @@ export const SearchBar = ({ onSearch, onClearSearch }) => {
                     ✖
                 </button>
             )}
-        </div>
+        </form>
     );
 };

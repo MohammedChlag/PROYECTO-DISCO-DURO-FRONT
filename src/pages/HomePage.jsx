@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect, useCallback } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useStorageHook } from '../hooks/useStorageHook.js';
 import { TabButton } from '../components/LayoutPrivate/TabButton.jsx';
 import { FolderSection } from '../components/LayoutPrivate/FolderSection.jsx';
@@ -27,15 +27,6 @@ export const HomePage = () => {
     const [searchResults, setSearchResults] = useState(null);
     const [isSearching, setIsSearching] = useState(false);
     const fileInputRef = useRef(null);
-    const [key, setKey] = useState(0);
-
-    const forceRerender = useCallback(() => {
-        setKey((prevKey) => prevKey + 1);
-    }, []);
-
-    useEffect(() => {
-        forceRerender();
-    }, [storage, forceRerender]);
 
     const filteredContent = useMemo(() => {
         if (!storage || !Array.isArray(storage)) {
@@ -148,7 +139,7 @@ export const HomePage = () => {
     };
 
     return (
-        <main className="container mx-auto px-4 py-8">
+        <>
             <SearchBar
                 onSearch={handleSearch}
                 onClearSearch={handleClearSearch}
@@ -170,10 +161,10 @@ export const HomePage = () => {
                 </div>
             ) : (
                 // Vista normal (solo se muestra si no hay búsqueda)
-                <div key={key}>
+                <>
                     {/* Mostrar el navbar solo si no hay una carpeta seleccionada */}
                     {!selectedFolderId && (
-                        <nav className="flex space-x-4 px-4 py-3 bg-white shadow-sm animate-fade">
+                        <nav className="flex gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3 bg-white shadow-sm animate-fade text-sm sm:text-base">
                             <TabButton
                                 active={activeTab === 'principal'}
                                 onClick={() => setActiveTab('principal')}
@@ -207,21 +198,23 @@ export const HomePage = () => {
                         />
                     ) : (
                         <>
-                            {activeTab !== 'documentos' && (
-                                <FolderSection
-                                    folders={filteredContent.folders}
+                            <div className="flex flex-col gap-4 mt-2 w-[90vw] px-4 sm:px-6 lg:px-8">
+                                {activeTab !== 'documentos' && (
+                                    <FolderSection
+                                        folders={filteredContent.folders}
+                                        loading={loading}
+                                        onFolderClick={handleFolderClick}
+                                    />
+                                )}
+                                <DocumentsSection
+                                    documents={filteredContent.documents}
                                     loading={loading}
-                                    onFolderClick={handleFolderClick}
+                                    error={error}
                                 />
-                            )}
-                            <DocumentsSection
-                                documents={filteredContent.documents}
-                                loading={loading}
-                                error={error}
-                            />
+                            </div>
 
                             {/* Botón de acción flotante */}
-                            <aside className="fixed bottom-16 right-4 sm:right-8 z-50">
+                            <aside className="fixed bottom-16 right-4 sm:bottom-28 sm:right-8 z-50">
                                 <ActionButton
                                     onClick={() =>
                                         setShowActionMenu(!showActionMenu)
@@ -232,12 +225,12 @@ export const HomePage = () => {
                                     onClose={() => setShowActionMenu(false)}
                                     onUpload={handleUpload}
                                     onCreateFolder={handleCreateFolder}
-                                    className="absolute bottom-12 right-8"
+                                    className="absolute bottom-12 right-10 sm:bottom-14 sm:right-12"
                                 />
                             </aside>
                         </>
                     )}
-                </div>
+                </>
             )}
 
             {/* Modales y elementos ocultos */}
@@ -252,6 +245,6 @@ export const HomePage = () => {
                 onClose={() => setShowCreateFolderModal(false)}
                 onCreateFolder={handleCreateFolderSubmit}
             />
-        </main>
+        </>
     );
 };

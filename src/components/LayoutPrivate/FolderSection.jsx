@@ -13,8 +13,8 @@ export const FolderSection = ({ folders = [], loading, onFolderClick }) => {
 
     if (!folders.length) {
         return (
-            <section className="bg-gray-50 rounded-lg py-4 sm:py-6 ml-1">
-                <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4">
+            <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
+                <h2 className="ml-1 text-base sm:text-lg font-semibold mb-2 sm:mb-4">
                     Carpetas
                 </h2>
                 <p className="text-center text-gray-500">
@@ -26,7 +26,7 @@ export const FolderSection = ({ folders = [], loading, onFolderClick }) => {
 
     return (
         <section className="bg-gray-50 rounded-lg px-4 mb-2 sm:py-6">
-            <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4">
+            <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4 ml-1">
                 Carpetas
             </h2>
             <ul className="space-y-2 sm:space-y-3 list-none p-0">
