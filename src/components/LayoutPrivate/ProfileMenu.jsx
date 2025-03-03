@@ -59,6 +59,13 @@ export const ProfileMenu = () => {
               ]
             : []),
         {
+            label: 'Valoraciones',
+            onClick: () => {
+                navigate('/assessments');
+                setShowMenu(false);
+            },
+        },
+        {
             label: 'About',
             onClick: () => {
                 navigate('/About');
@@ -90,20 +97,35 @@ export const ProfileMenu = () => {
         <div className="relative z-40" ref={menuRef}>
             <button
                 onClick={() => setShowMenu(!showMenu)}
-                className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-full"
+                className={`flex items-center space-x-2 focus:outline-none focus:ring-2 ${
+                    isAdmin ? 'focus:ring-red-500' : 'focus:ring-blue-500'
+                } focus:ring-offset-2 rounded-full`}
             >
                 {avatarUrl && !avatarError ? (
                     <img
                         src={avatarUrl}
                         alt="Avatar del usuario"
-                        className="h-8 w-8 rounded-full object-cover ring-2 ring-white"
+                        className={`h-8 w-8 rounded-full object-cover ${
+                            isAdmin
+                                ? 'ring-2 ring-red-500'
+                                : 'ring-2 ring-white'
+                        }`}
                         onError={(e) => {
                             setAvatarError(true);
-                            e.target.src = '/default-avatar.png';
                         }}
                     />
                 ) : (
-                    <UserCircleIcon className="h-8 w-8 text-gray-400" />
+                    <UserCircleIcon
+                        className={`h-8 w-8 ${
+                            isAdmin ? 'text-red-500' : 'text-gray-400'
+                        }`}
+                    />
+                )}
+                {isAdmin && (
+                    <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
                 )}
                 <Icon name="expand_more" className="text-gray-600" />
             </button>
