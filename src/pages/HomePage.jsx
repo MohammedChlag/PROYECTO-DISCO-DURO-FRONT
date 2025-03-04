@@ -19,6 +19,7 @@ import {
     shareStorageItemService,
 } from '../services/fetchApi.js';
 import { toast } from 'react-toastify';
+import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const HomePage = () => {
     const { storage, error, loading, refetchStorage } = useStorageHook();
@@ -209,47 +210,56 @@ export const HomePage = () => {
                     {/* Mostrar el navbar solo si no hay una carpeta seleccionada */}
                     {!selectedFolderId && (
                         <div className="flex flex-col w-full min-w-0">
-                            <nav className="flex items-start gap-2 sm:gap-4 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-white shadow-sm animate-fade text-sm sm:text-base">
-                                <TabButton
-                                    active={activeTab === 'principal'}
-                                    onClick={() => setActiveTab('principal')}
-                                >
-                                    Principal
-                                </TabButton>
-                                <TabButton
-                                    active={activeTab === 'documentos'}
-                                    onClick={() => setActiveTab('documentos')}
-                                >
-                                    Archivos
-                                </TabButton>
-                                <TabButton
-                                    active={activeTab === 'compartidos'}
-                                    onClick={() => setActiveTab('compartidos')}
-                                >
-                                    Compartidos
-                                </TabButton>
-                            </nav>
-
-                            <div className="flex flex-col min-w-0 gap-4 py-3 mt-2 px-4 sm:px-6 lg:px-8">
-                                {activeTab !== 'documentos' && (
-                                    <FolderSection
-                                        folders={filteredContent.folders}
+                            <Boundary>
+                                <nav className="flex items-start gap-2 sm:gap-4 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-white shadow-sm animate-fade text-sm sm:text-base">
+                                    <TabButton
+                                        active={activeTab === 'principal'}
+                                        onClick={() =>
+                                            setActiveTab('principal')
+                                        }
+                                    >
+                                        Principal
+                                    </TabButton>
+                                    <TabButton
+                                        active={activeTab === 'documentos'}
+                                        onClick={() =>
+                                            setActiveTab('documentos')
+                                        }
+                                    >
+                                        Archivos
+                                    </TabButton>
+                                    <TabButton
+                                        active={activeTab === 'compartidos'}
+                                        onClick={() =>
+                                            setActiveTab('compartidos')
+                                        }
+                                    >
+                                        Compartidos
+                                    </TabButton>
+                                </nav>
+                            </Boundary>
+                            <Boundary>
+                                <div className="flex flex-col min-w-0 gap-4 py-3 mt-2 px-4 sm:px-6 lg:px-8">
+                                    {activeTab !== 'documentos' && (
+                                        <FolderSection
+                                            folders={filteredContent.folders}
+                                            loading={loading}
+                                            onFolderClick={handleFolderClick}
+                                            onRename={handleRenameItem}
+                                            onDelete={handleDeleteItem}
+                                            onShare={handleShareItem}
+                                        />
+                                    )}
+                                    <DocumentsSection
+                                        documents={filteredContent.documents}
                                         loading={loading}
-                                        onFolderClick={handleFolderClick}
+                                        error={error}
                                         onRename={handleRenameItem}
                                         onDelete={handleDeleteItem}
                                         onShare={handleShareItem}
                                     />
-                                )}
-                                <DocumentsSection
-                                    documents={filteredContent.documents}
-                                    loading={loading}
-                                    error={error}
-                                    onRename={handleRenameItem}
-                                    onDelete={handleDeleteItem}
-                                    onShare={handleShareItem}
-                                />
-                            </div>
+                                </div>
+                            </Boundary>
                         </div>
                     )}
 
@@ -268,18 +278,20 @@ export const HomePage = () => {
             )}
 
             {/* Botón de acción flotante */}
-            <aside className="fixed bottom-16 right-4 sm:bottom-28 sm:right-8 z-50">
-                <ActionButton
-                    onClick={() => setShowActionMenu(!showActionMenu)}
-                />
-                <ActionMenu
-                    show={showActionMenu}
-                    onClose={() => setShowActionMenu(false)}
-                    onUpload={handleUpload}
-                    onCreateFolder={handleCreateFolder}
-                    className="absolute bottom-12 right-10 sm:bottom-14 sm:right-12"
-                />
-            </aside>
+            <Boundary>
+                <aside className="fixed bottom-16 right-4 sm:bottom-28 sm:right-8 z-50">
+                    <ActionButton
+                        onClick={() => setShowActionMenu(!showActionMenu)}
+                    />
+                    <ActionMenu
+                        show={showActionMenu}
+                        onClose={() => setShowActionMenu(false)}
+                        onUpload={handleUpload}
+                        onCreateFolder={handleCreateFolder}
+                        className="absolute bottom-12 right-10 sm:bottom-14 sm:right-12"
+                    />
+                </aside>
+            </Boundary>
 
             {/* Modales y elementos ocultos */}
             <input
@@ -288,11 +300,14 @@ export const HomePage = () => {
                 onChange={handleFileChange}
                 className="hidden"
             />
-            <CreateFolderModal
-                isOpen={showCreateFolderModal}
-                onClose={() => setShowCreateFolderModal(false)}
-                onCreateFolder={handleCreateFolderSubmit}
-            />
+
+            <Boundary>
+                <CreateFolderModal
+                    isOpen={showCreateFolderModal}
+                    onClose={() => setShowCreateFolderModal(false)}
+                    onCreateFolder={handleCreateFolderSubmit}
+                />
+            </Boundary>
         </>
     );
 };

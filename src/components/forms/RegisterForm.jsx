@@ -8,6 +8,7 @@ import { Button } from '../Button.jsx';
 import { registerUserService } from '../../services/fetchApi.js';
 import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
 import { Link } from 'react-router-dom';
+import { Boundary } from '../../services/ErrorBoundary.jsx';
 
 export const RegisterForm = () => {
     const { info, errors, validate, handleChange } = useFormHook();
@@ -47,85 +48,90 @@ export const RegisterForm = () => {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Input
-                    id="firstName"
-                    label="Nombre"
-                    type="text"
-                    name="firstName"
-                    value={info.firstName}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-                <Input
-                    id="lastName"
-                    label="Apellido"
-                    type="text"
-                    name="lastName"
-                    value={info.lastName}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-            </div>
+            <Boundary>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                        id="firstName"
+                        label="Nombre"
+                        type="text"
+                        name="firstName"
+                        value={info.firstName}
+                        errors={errors}
+                        handleChange={handleChange}
+                    />
+                    <Input
+                        id="lastName"
+                        label="Apellido"
+                        type="text"
+                        name="lastName"
+                        value={info.lastName}
+                        errors={errors}
+                        handleChange={handleChange}
+                    />
+                </div>
+            </Boundary>
 
-            <div className="space-y-4">
-                <Input
-                    id="username"
-                    label="Nombre de usuario"
-                    type="text"
-                    name="username"
-                    value={info.username}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-                <Input
-                    id="birthday"
-                    label="Fecha de nacimiento"
-                    type="date"
-                    name="birthday"
-                    value={info.birthday}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-                <Input
-                    id="email"
-                    label="Correo Electrónico"
-                    type="email"
-                    name="email"
-                    value={info.email}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-                <Input
-                    id="password"
-                    label="Contraseña"
-                    type="password"
-                    name="password"
-                    value={info.password}
-                    errors={errors}
-                    handleChange={handleChange}
-                />
-            </div>
-
-            <div className="space-y-4">
-                <Button
-                    type="submit"
-                    className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] active:translate-y-[1px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
-                    disabled={loading}
-                >
-                    {loading ? 'Creando cuenta...' : 'Crear cuenta'}
-                </Button>
-
-                <p className="text-center text-sm text-gray-600">
-                    ¿Ya tienes una cuenta?{' '}
-                    <Link
-                        to="/users/login"
-                        className="text-[#00B4D8] hover:text-[#0096B4] font-medium hover:underline"
+            <Boundary>
+                <div className="space-y-4">
+                    <Input
+                        id="username"
+                        label="Nombre de usuario"
+                        type="text"
+                        name="username"
+                        value={info.username}
+                        errors={errors}
+                        handleChange={handleChange}
+                    />
+                    <Input
+                        id="birthday"
+                        label="Fecha de nacimiento"
+                        type="date"
+                        name="birthday"
+                        value={info.birthday}
+                        errors={errors}
+                        handleChange={handleChange}
+                    />
+                    <Input
+                        id="email"
+                        label="Correo Electrónico"
+                        type="email"
+                        name="email"
+                        value={info.email}
+                        errors={errors}
+                        handleChange={handleChange}
+                    />
+                    <Input
+                        id="password"
+                        label="Contraseña"
+                        type="password"
+                        name="password"
+                        value={info.password}
+                        errors={errors}
+                        handleChange={handleChange}
+                    />
+                </div>
+            </Boundary>
+            <Boundary>
+                <div className="space-y-4">
+                    <Button
+                        type="submit"
+                        className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] active:translate-y-[1px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                        disabled={loading}
                     >
-                        Inicia sesión aquí
-                    </Link>
-                </p>
-            </div>
+                        {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+                    </Button>
+
+                    <p className="text-center text-sm text-gray-600">
+                        ¿Ya tienes una cuenta?{' '}
+                        <Link
+                            to="/users/login"
+                            className="text-[#00B4D8] hover:text-[#0096B4] font-medium hover:underline"
+                        >
+                            Inicia sesión aquí
+                        </Link>
+                    </p>
+                </div>
+            </Boundary>
         </Form>
     );
 };

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logo-hackloud-solo.png';
+import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const AboutPage = () => {
     const navigate = useNavigate();
@@ -32,17 +33,19 @@ export const AboutPage = () => {
                 </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-sm sm:max-w-md">
-                <button className="w-full sm:w-auto text-white px-4 py-2 rounded-lg bg-[#009EB5] shadow-md hover:bg-[#007e94] transition-all">
-                    Valoraciones de la App
-                </button>
-                <button
-                    onClick={() => navigate('/assessments')}
-                    className="w-full sm:w-auto text-white px-4 py-2 rounded-lg bg-[#009EB5] shadow-md hover:bg-[#007e94] transition-all"
-                >
-                    Dejar una Valoración
-                </button>
-            </div>
+            <Boundary>
+                <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-sm sm:max-w-md">
+                    <button className="w-full sm:w-auto text-white px-4 py-2 rounded-lg bg-[#009EB5] shadow-md hover:bg-[#007e94] transition-all">
+                        Valoraciones de la App
+                    </button>
+                    <button
+                        onClick={() => navigate('/assessments')}
+                        className="w-full sm:w-auto text-white px-4 py-2 rounded-lg bg-[#009EB5] shadow-md hover:bg-[#007e94] transition-all"
+                    >
+                        Dejar una Valoración
+                    </button>
+                </div>
+            </Boundary>
         </section>
     );
 };

@@ -12,6 +12,7 @@ import {
     EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
 import { DeleteUserModal } from '../components/LayoutPrivate/Modals/DeleteUserModal';
+import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const UsersListPage = () => {
     const navigate = useNavigate();
@@ -138,116 +139,125 @@ export const UsersListPage = () => {
                             className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col"
                         >
                             <div className="flex items-start justify-between mb-4">
-                                <figure className="flex items-center space-x-3">
-                                    {user.avatar ? (
-                                        <img
-                                            className="h-12 w-12 rounded-full object-cover border-2 border-gray-200"
-                                            src={`/uploads/${user.id}/avatars/${user.avatar}`}
-                                            alt={`Avatar de ${user.username}`}
-                                        />
-                                    ) : (
-                                        <span
-                                            className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-semibold text-lg"
-                                            aria-label="Avatar por defecto"
-                                        >
-                                            {user.username
-                                                .charAt(0)
-                                                .toUpperCase()}
-                                        </span>
-                                    )}
-                                    <figcaption className="flex-1 min-w-0">
-                                        <p className="font-medium text-gray-900 truncate">
-                                            {user.username}
-                                        </p>
-                                        <p className="text-sm text-gray-500 truncate">
-                                            {user.email}
-                                        </p>
-                                    </figcaption>
-                                </figure>
+                                <Boundary>
+                                    <figure className="flex items-center space-x-3">
+                                        {user.avatar ? (
+                                            <img
+                                                className="h-12 w-12 rounded-full object-cover border-2 border-gray-200"
+                                                src={`/uploads/${user.id}/avatars/${user.avatar}`}
+                                                alt={`Avatar de ${user.username}`}
+                                            />
+                                        ) : (
+                                            <span
+                                                className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-semibold text-lg"
+                                                aria-label="Avatar por defecto"
+                                            >
+                                                {user.username
+                                                    .charAt(0)
+                                                    .toUpperCase()}
+                                            </span>
+                                        )}
+                                        <figcaption className="flex-1 min-w-0">
+                                            <p className="font-medium text-gray-900 truncate">
+                                                {user.username}
+                                            </p>
+                                            <p className="text-sm text-gray-500 truncate">
+                                                {user.email}
+                                            </p>
+                                        </figcaption>
+                                    </figure>
+                                </Boundary>
 
-                                <nav
-                                    className="relative ml-2"
-                                    ref={(el) =>
-                                        (menuRefs.current[user.id] = el)
-                                    }
-                                >
-                                    <button
-                                        className="p-1 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
-                                        onClick={() =>
-                                            setOpenMenuId(
-                                                openMenuId === user.id
-                                                    ? null
-                                                    : user.id
-                                            )
+                                <Boundary>
+                                    <nav
+                                        className="relative ml-2"
+                                        ref={(el) =>
+                                            (menuRefs.current[user.id] = el)
                                         }
-                                        aria-label="Menú de opciones"
-                                        aria-expanded={openMenuId === user.id}
                                     >
-                                        <EllipsisVerticalIcon className="h-5 w-5" />
-                                    </button>
-
-                                    {openMenuId === user.id && (
-                                        <menu className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                                            <li className="py-1">
-                                                <button
-                                                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                    onClick={() =>
-                                                        handleToggleActive(
-                                                            user.id,
-                                                            user.active
-                                                        )
-                                                    }
-                                                >
-                                                    {user.active
-                                                        ? 'Deshabilitar'
-                                                        : 'Habilitar'}
-                                                </button>
-                                                <button
-                                                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                                                    onClick={() =>
-                                                        handleDeleteUser(
-                                                            user.id,
-                                                            user.username
-                                                        )
-                                                    }
-                                                >
-                                                    Eliminar
-                                                </button>
-                                            </li>
-                                        </menu>
-                                    )}
-                                </nav>
+                                        <button
+                                            className="p-1 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
+                                            onClick={() =>
+                                                setOpenMenuId(
+                                                    openMenuId === user.id
+                                                        ? null
+                                                        : user.id
+                                                )
+                                            }
+                                            aria-label="Menú de opciones"
+                                            aria-expanded={
+                                                openMenuId === user.id
+                                            }
+                                        >
+                                            <EllipsisVerticalIcon className="h-5 w-5" />
+                                        </button>
+                                        {openMenuId === user.id && (
+                                            <menu className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                                <li className="py-1">
+                                                    <button
+                                                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                        onClick={() =>
+                                                            handleToggleActive(
+                                                                user.id,
+                                                                user.active
+                                                            )
+                                                        }
+                                                    >
+                                                        {user.active
+                                                            ? 'Deshabilitar'
+                                                            : 'Habilitar'}
+                                                    </button>
+                                                    <button
+                                                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                                                        onClick={() =>
+                                                            handleDeleteUser(
+                                                                user.id,
+                                                                user.username
+                                                            )
+                                                        }
+                                                    >
+                                                        Eliminar
+                                                    </button>
+                                                </li>
+                                            </menu>
+                                        )}
+                                    </nav>
+                                </Boundary>
                             </div>
 
-                            <div className="mt-auto pt-3 border-t border-gray-100">
-                                <span
-                                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                        user.active
-                                            ? 'bg-cyan-100 text-cyan-800'
-                                            : 'bg-red-100 text-red-800'
-                                    }`}
-                                >
-                                    {user.active
-                                        ? 'Habilitado'
-                                        : 'Deshabilitado'}
-                                </span>
-                            </div>
+                            <Boundary>
+                                <div className="mt-auto pt-3 border-t border-gray-100">
+                                    <span
+                                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                            user.active
+                                                ? 'bg-cyan-100 text-cyan-800'
+                                                : 'bg-red-100 text-red-800'
+                                        }`}
+                                    >
+                                        {user.active
+                                            ? 'Habilitado'
+                                            : 'Deshabilitado'}
+                                    </span>
+                                </div>
+                            </Boundary>
                         </article>
                     ))}
             </section>
 
-            <DeleteUserModal
-                isOpen={deleteModal.isOpen}
-                onClose={() =>
-                    setDeleteModal({
-                        isOpen: false,
-                        userId: null,
-                        username: '',
-                    })
-                }
-                onConfirm={confirmDelete}
-                username={deleteModal.username}
-            />
+            <Boundary>
+                <DeleteUserModal
+                    isOpen={deleteModal.isOpen}
+                    onClose={() =>
+                        setDeleteModal({
+                            isOpen: false,
+                            userId: null,
+                            username: '',
+                        })
+                    }
+                    onConfirm={confirmDelete}
+                    username={deleteModal.username}
+                />
+            </Boundary>
         </main>
     );
 };
