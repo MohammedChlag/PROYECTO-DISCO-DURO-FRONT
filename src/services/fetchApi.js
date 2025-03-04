@@ -163,20 +163,37 @@ export const renameStorageItemService = async (id, newName, token) => {
 };
 
 export const shareStorageItemService = async (id, token) => {
-    const response = await fetch(`${apiPath}/storage/share/${id}`, {
-        method: 'POST',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    try {
+        const response = await fetch(`${apiPath}/storage/share/${id}`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (!response.ok) {
-        throw new Error(data.message || 'Error al compartir el elemento');
+        console.log('RESPUESTA DEL SERVICIO SHARE:', data);
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Error al compartir el elemento');
+        }
+
+        // Verificar que la respuesta tenga el formato esperado
+        if (data.status !== 'ok') {
+            throw new Error('No se pudo compartir el archivo');
+        }
+
+        // Devolver un objeto consistente con las URLs disponibles
+        return {
+            status: data.status,
+            url: data.url || null,
+            download: data.download || null,
+        };
+    } catch (error) {
+        console.error('Error en shareStorageItemService:', error);
+        throw error;
     }
-
-    return data;
 };
 
 export const updateUserService = async (info, token) => {
@@ -332,6 +349,50 @@ export const downloadFileService = async (id, token) => {
     return 'Archivo descargado correctamente';
 };
 
+export const downloadSharedFileService = async (shareToken) => {
+    try {
+        const response = await fetch(
+            `${apiPath}/storage/share/download/${shareToken}`
+        );
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(
+                error.message || 'Error al descargar el archivo compartido'
+            );
+        }
+
+        // Convertir la respuesta a blob
+        const blob = await response.blob();
+
+        // Crear URL del blob
+        const url = window.URL.createObjectURL(blob);
+
+        // Crear enlace temporal
+        const link = document.createElement('a');
+        link.href = url;
+
+        // Obtener nombre del archivo del header si existe
+        const contentDisposition = response.headers.get('content-disposition');
+        const fileName = contentDisposition
+            ? contentDisposition.split('filename=')[1].replace(/['"]/g, '')
+            : 'archivo_compartido';
+
+        link.setAttribute('download', fileName);
+
+        // Simular clic y limpiar
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        return 'Archivo compartido descargado correctamente';
+    } catch (error) {
+        console.error('Error en downloadSharedFileService:', error);
+        throw error;
+    }
+};
+
 export const searchStorageService = async ({ query, token }) => {
     if (!token) throw new Error('Token inválido');
 
@@ -423,4 +484,27 @@ export const deleteUserService = async (userId, token) => {
     }
 
     return responseData;
+};
+
+export const getSharedLinkService = async (shareToken) => {
+    try {
+        const response = await fetch(
+            `${apiPath}/storage/share/link/${shareToken}`,
+            {
+                method: 'GET',
+            }
+        );
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(
+                error.message || 'Error al obtener la carpeta compartida'
+            );
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error en getSharedLinkService:', error);
+        throw error;
+    }
 };

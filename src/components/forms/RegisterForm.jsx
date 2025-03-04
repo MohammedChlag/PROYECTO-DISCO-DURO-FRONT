@@ -105,6 +105,15 @@ export const RegisterForm = () => {
                     errors={errors}
                     handleChange={handleChange}
                 />
+                <Input
+                    id="terms"
+                    type="checkbox"
+                    name="terms"
+                    label="Aceptar y condiciones"
+                    checked={info.terms}
+                    errors={errors}
+                    handleChange={handleChange}
+                />
             </div>
 
             <div className="space-y-4">

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { Icon } from '../Icon.jsx';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
@@ -7,9 +7,11 @@ import { ProfileOptions } from './ProfileOptions.jsx';
 
 export const ProfileMenu = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { onLogout, currentUser, isAdmin } = useAuthHook();
     const [showMenu, setShowMenu] = useState(false);
     const [avatarError, setAvatarError] = useState(false);
+    const [avatarUrl, setAvatarUrl] = useState(null);
     const menuRef = useRef(null);
 
     const redirectPath = currentUser ? '/storage' : '/';
@@ -27,20 +29,37 @@ export const ProfileMenu = () => {
         };
     }, []);
 
-    useEffect(() => {}, [currentUser]);
-
-    // Construir la URL completa del avatar
-    const avatarUrl =
-        !avatarError && currentUser?.avatar
-            ? `/uploads/${currentUser.id}/avatars/${currentUser.avatar}`
-            : null;
-
+    // Actualizar el avatarUrl cuando cambia currentUser
     useEffect(() => {
-        // Resetear el error cuando cambia la URL
+        console.log('ProfileMenu: currentUser cambió', currentUser);
+        if (currentUser?.avatar) {
+            const newAvatarUrl = `/uploads/${currentUser.id}/avatars/${currentUser.avatar}`;
+            console.log('ProfileMenu: nuevo avatarUrl', newAvatarUrl);
+            setAvatarUrl(newAvatarUrl);
+            setAvatarError(false);
+        } else {
+            setAvatarUrl(null);
+        }
+    }, [currentUser]);
+
+    // Resetear el error cuando cambia la URL
+    useEffect(() => {
         setAvatarError(false);
     }, [avatarUrl]);
 
     const menuItems = [
+        // Opción de Inicio solo visible si no estamos en la página principal
+        ...(location.pathname !== '/storage'
+            ? [
+                  {
+                      label: 'Inicio',
+                      onClick: () => {
+                          navigate('/storage');
+                          setShowMenu(false);
+                      },
+                  },
+              ]
+            : []),
         {
             label: 'Editar perfil',
             onClick: () => {
@@ -77,7 +96,7 @@ export const ProfileMenu = () => {
         {
             label: 'Cerrar sesión',
             onClick: () => {
-                navigate('/');
+                navigate('/about');
                 onLogout();
                 setShowMenu(false);
             },
@@ -113,6 +132,9 @@ export const ProfileMenu = () => {
                                 : 'ring-2 ring-white'
                         }`}
                         onError={(e) => {
+                            console.error(
+                                'Error al cargar el avatar en ProfileMenu'
+                            );
                             setAvatarError(true);
                         }}
                     />

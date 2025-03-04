@@ -10,6 +10,9 @@ export const FolderPage = ({
     error,
     onBack,
     onUpload,
+    onRename,
+    onDelete,
+    onRefetchStorage,
 }) => {
     const folderContent = useMemo(() => {
         if (!storage) return { documents: [] };
@@ -20,6 +23,13 @@ export const FolderPage = ({
             ),
         };
     }, [storage, folderId]);
+
+    // Determinar si la carpeta actual tiene shareToken
+    const currentFolder = useMemo(() => {
+        return storage?.find((item) => item.id === folderId);
+    }, [storage, folderId]);
+
+    const isSharedFolder = !!currentFolder?.shareToken;
 
     return (
         <section className="flex flex-col gap-4 mt-2 max-w-[90vw] px-4 sm:px-6 lg:px-8">
@@ -32,8 +42,7 @@ export const FolderPage = ({
                     <ArrowLeftIcon className="size-6" />
                 </button>
                 <h1 className="text-2xl sm:text-3xl font-semibold">
-                    {storage?.find((item) => item.id === folderId)?.name ||
-                        'Carpeta'}
+                    {currentFolder?.name || 'Carpeta'}
                 </h1>
             </nav>
 
@@ -42,6 +51,10 @@ export const FolderPage = ({
                 documents={folderContent.documents}
                 loading={loading}
                 error={error}
+                onRename={onRename}
+                onDelete={onDelete}
+                onRefetchStorage={onRefetchStorage}
+                isSharedFolder={isSharedFolder}
             />
 
             {/* Botón flotante para subir archivos */}

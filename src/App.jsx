@@ -16,6 +16,8 @@ import { ProfilePage } from './pages/ProfilePage.jsx';
 // Página 404
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
 import { UsersListPage } from './pages/UsersListPage.jsx';
+import { SharedLinkPage } from './pages/SharedLinkPage.jsx';
+import { DownloadPage } from './pages/DownloadPage.jsx';
 
 function App() {
     return (
@@ -34,6 +36,14 @@ function App() {
                             element={<ValidationPage />}
                         />
                     </Route>
+                    <Route
+                        path="/storage/share/link/:shareToken"
+                        element={<SharedLinkPage />}
+                    />
+                    <Route
+                        path="/storage/share/download/:shareToken"
+                        element={<DownloadPage />}
+                    />
                 </Route>
 
                 {/* Rutas Privadas */}
