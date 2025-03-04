@@ -94,7 +94,17 @@ export const LoginForm = () => {
                         >
                             ¿Olvidaste tu contraseña?
                         </Link>
+<<<<<<< HEAD
                     </div>
+=======
+                    </p>
+                    <Link
+                        to="/users/recovery-email"
+                        className="text-[#00B4D8] hover:text-[#0096B4] font-medium hover:underline"
+                    >
+                        ¿Olvidaste tu contraseña?
+                    </Link>
+>>>>>>> 16d5c5b1b809c811c1363a7d4ecb4aef78f894e3
                 </div>
             </Form>
         </Boundary>
