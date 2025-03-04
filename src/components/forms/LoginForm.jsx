@@ -83,14 +83,14 @@ export const LoginForm = () => {
                             ¿No tienes una cuenta?{' '}
                             <Link
                                 to="/users/register"
-                                className="text-[#00B4D8] hover:text-[#0096B4] font-medium hover:underline"
+                                className="text-[#009EB5] hover:text-[#009ec3] font-medium hover:underline"
                             >
                                 Regístrate aquí
                             </Link>
                         </p>
                         <Link
                             to="/users/recovery"
-                            className="text-[#00B4D8] hover:text-[#0096B4] font-medium hover:underline"
+                            className="text-[#009EB5] hover:text-[#009ec3] font-medium hover:underline"
                         >
                             ¿Olvidaste tu contraseña?
                         </Link>
@@ -98,7 +98,7 @@ export const LoginForm = () => {
 
                     <Link
                         to="/users/recovery-email"
-                        className="text-[#00B4D8] hover:text-[#0096B4] font-medium hover:underline"
+                        className="text-[#009EB5] hover:text-[#009ec3] font-medium hover:underline"
                     >
                         ¿Olvidaste tu contraseña?
                     </Link>

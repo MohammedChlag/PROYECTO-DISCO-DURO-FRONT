@@ -93,7 +93,7 @@ export const PasswordForm = () => {
                 </fieldset>
                 <Button
                     type="submit"
-                    className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
+                    className="w-full bg-[#009EB5] hover:bg-[#009ec3] text-white font-semibold py-3 rounded-md transition-colors"
                     disabled={loading}
                 >
                     {loading ? 'Actualizando...' : 'Actualizar Contraseña'}

@@ -218,7 +218,7 @@ export const ProfileForm = () => {
                                     <Button
                                         type="button"
                                         handleClick={handleAvatarClick}
-                                        className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-md"
+                                        className="bg-[#009EB5] hover:bg-[#009ec3] text-white p-2 rounded-full shadow-md"
                                         title="Cambiar avatar"
                                         aria-label="Cambiar avatar"
                                     >
@@ -253,7 +253,7 @@ export const ProfileForm = () => {
                                 <Button
                                     type="button"
                                     handleClick={handleAvatarClick}
-                                    className="absolute -bottom-2 right-0 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-md"
+                                    className="absolute -bottom-2 right-0 bg-[#009EB5] hover:bg-[#009ec3] text-white p-2 rounded-full shadow-md"
                                     title="Añadir avatar"
                                     aria-label="Añadir avatar"
                                 >
@@ -322,7 +322,7 @@ export const ProfileForm = () => {
                     <Button
                         type="button"
                         handleClick={handleEdit}
-                        className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
+                        className="flex-1 bg-[#009EB5] hover:bg-[#009ec3] text-white font-semibold py-3 rounded-md transition-colors"
                         aria-label={
                             isEditing
                                 ? 'Cancelar edición'
@@ -334,7 +334,7 @@ export const ProfileForm = () => {
                     {isEditing && (
                         <Button
                             type="submit"
-                            className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-md transition-colors"
+                            className="flex-1 bg-[#009EB5] hover:bg-[#009ec3] text-white font-semibold py-3 rounded-md transition-colors"
                             disabled={loading}
                             aria-label={
                                 loading

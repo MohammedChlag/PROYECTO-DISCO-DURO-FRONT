@@ -115,7 +115,7 @@ export const RegisterForm = () => {
                 <div className="space-y-4">
                     <Button
                         type="submit"
-                        className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] active:translate-y-[1px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                        className="w-full bg-[#009EB5] hover:bg-[#009ec3] text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] active:translate-y-[1px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                         disabled={loading}
                     >
                         {loading ? 'Creando cuenta...' : 'Crear cuenta'}
@@ -125,7 +125,7 @@ export const RegisterForm = () => {
                         ¿Ya tienes una cuenta?{' '}
                         <Link
                             to="/users/login"
-                            className="text-[#00B4D8] hover:text-[#0096B4] font-medium hover:underline"
+                            className="text-[#009EB5] hover:text-[#009ec3] font-medium hover:underline"
                         >
                             Inicia sesión aquí
                         </Link>
