@@ -220,11 +220,15 @@ export const AssessmentPreview = () => {
     }
 
     if (error) {
-        return null;
+        return (
+            <section className="text-center py-3 text-gray-600 text-sm">
+                <p>No se pudieron cargar las valoraciones en este momento.</p>
+            </section>
+        );
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-3xl mx-auto">
             {/* Mensajes de estado para eliminación */}
             {deleteLoading && (
                 <div className="col-span-1 lg:col-span-2 bg-blue-100 border border-blue-300 text-blue-700 px-4 py-2 rounded mb-2 flex items-center justify-center text-xs sm:text-sm">
@@ -246,25 +250,25 @@ export const AssessmentPreview = () => {
             )}
 
             {/* Resumen de valoraciones */}
-            <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100">
-                <h4 className="text-base sm:text-lg font-semibold text-gray-800 mb-1 sm:mb-2">
+            <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <h4 className="text-sm sm:text-base font-semibold text-gray-800 mb-1 sm:mb-2">
                     <span className="text-[#009EB5]">★</span> Puntuación global
                 </h4>
                 <div className="flex items-center">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#009EB5] mr-2">
+                    <span className="text-xl sm:text-2xl font-bold text-[#009EB5] mr-2">
                         {averageRating}
                     </span>
                     <div className="flex">
                         {renderStars(Math.round(averageRating))}
                     </div>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                     Basado en {assessments.length} valoraciones
                 </p>
                 <div className="mt-1 sm:mt-2">
                     <Link
                         to="/assessments"
-                        className="text-xs sm:text-sm text-[#009EB5] hover:underline font-medium"
+                        className="text-xs text-[#009EB5] hover:underline font-medium"
                     >
                         Ver todas las valoraciones →
                     </Link>
@@ -273,8 +277,8 @@ export const AssessmentPreview = () => {
 
             {/* Carrusel de valoraciones */}
             {topAssessments.length > 0 && (
-                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100">
-                    <h4 className="text-base sm:text-lg font-semibold text-gray-800 mb-1 sm:mb-2">
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <h4 className="text-sm sm:text-base font-semibold text-gray-800 mb-1 sm:mb-2">
                         <span className="text-[#009EB5]">❝</span> Experiencias
                         reales
                     </h4>
@@ -307,17 +311,17 @@ export const AssessmentPreview = () => {
                                             <TrashIcon className="h-4 w-4" />
                                         </button>
                                     )}
-                                    <div className="flex mb-1 sm:mb-2">
+                                    <div className="flex mb-1">
                                         {renderStars(assessment.vote)}
                                     </div>
 
-                                    <div className="h-16 sm:h-20 overflow-y-auto mb-1 sm:mb-2">
-                                        <p className="text-xs sm:text-sm text-gray-700 italic">
+                                    <div className="h-14 sm:h-16 overflow-y-auto mb-1">
+                                        <p className="text-xs text-gray-600 italic">
                                             "{assessment.comment}"
                                         </p>
                                     </div>
 
-                                    <div className="flex items-center mt-1 sm:mt-2 pt-1 sm:pt-2 border-t border-gray-100">
+                                    <div className="flex items-center mt-1 pt-1 border-t border-gray-100">
                                         {assessment.userId ? (
                                             <div className="flex items-center">
                                                 {(() => {
