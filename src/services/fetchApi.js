@@ -489,22 +489,180 @@ export const deleteUserService = async (userId, token) => {
 export const getSharedLinkService = async (shareToken) => {
     try {
         const response = await fetch(
-            `${apiPath}/storage/share/link/${shareToken}`,
-            {
-                method: 'GET',
-            }
+            `${apiPath}/storage/share/link/${shareToken}`
+        );
+
+        const responseData = await response.json();
+        console.log(
+            'Respuesta completa de getSharedLinkService:',
+            responseData
         );
 
         if (!response.ok) {
-            const error = await response.json();
+            const { message } = responseData;
+            throw new Error(message);
+        }
+
+        // Devolver la respuesta completa en lugar de solo data
+        return responseData;
+    } catch (error) {
+        console.error('Error en getSharedLinkService:', error);
+        throw error;
+    }
+};
+
+export const getAssessmentsService = async () => {
+    try {
+        console.log('getAssessmentsService - Obteniendo valoraciones');
+
+        const response = await fetch(`${apiPath}/assessments`);
+
+        const responseData = await response.json();
+        console.log(
+            'getAssessmentsService - Respuesta completa:',
+            responseData
+        );
+
+        const { status, message, data } = responseData;
+
+        // Verificar si el status es "ok" o "Ok" (aceptar ambos)
+        if (!response.ok || (status !== 'ok' && status !== 'Ok')) {
+            console.error(
+                'getAssessmentsService - Error en la respuesta:',
+                responseData
+            );
+            throw new Error(message || 'Error al obtener las valoraciones');
+        }
+
+        console.log('getAssessmentsService - Datos obtenidos:', data);
+
+        // Devolver un objeto con la estructura esperada por la página
+        return {
+            message,
+            count: responseData.count || 0,
+            result: data || [], // Mantener la propiedad 'result' para compatibilidad
+        };
+    } catch (error) {
+        console.error('Error en getAssessmentsService:', error);
+        throw error;
+    }
+};
+
+export const createAssessmentService = async (assessmentData, token) => {
+    try {
+        console.log(
+            'createAssessmentService - Datos a enviar:',
+            assessmentData
+        );
+        console.log(
+            'createAssessmentService - Token:',
+            token ? token.substring(0, 10) + '...' : 'No token'
+        );
+
+        const response = await fetch(`${apiPath}/assessments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(assessmentData),
+        });
+
+        const responseData = await response.json();
+        console.log(
+            'createAssessmentService - Respuesta completa:',
+            responseData
+        );
+
+        // Extraer status y message/messages (puede venir en singular o plural)
+        const { status, message, messages } = responseData;
+        const responseMessage = messages || message || 'Operación completada';
+
+        // Verificar si el status es "ok" o "Ok" (aceptar ambos)
+        if (!response.ok || (status !== 'ok' && status !== 'Ok')) {
+            console.error(
+                'createAssessmentService - Error en la respuesta:',
+                responseData
+            );
+            throw new Error(responseMessage || 'Error al enviar la valoración');
+        }
+
+        return { success: true, message: responseMessage };
+    } catch (error) {
+        console.error('Error en createAssessmentService:', error);
+        throw error;
+    }
+};
+
+export const getUserByIdService = async (userId) => {
+    try {
+        console.log(
+            'getUserByIdService - Obteniendo información del usuario:',
+            userId
+        );
+
+        if (!userId) {
+            throw new Error('ID de usuario no proporcionado');
+        }
+
+        const response = await fetch(`${apiPath}/users/${userId}`);
+        const responseData = await response.json();
+
+        console.log('getUserByIdService - Respuesta completa:', responseData);
+
+        const { status, data } = responseData;
+
+        // Verificar si el status es "ok" o "Ok" (aceptar ambos)
+        if (!response.ok || (status !== 'ok' && status !== 'Ok')) {
+            console.error(
+                'getUserByIdService - Error en la respuesta:',
+                responseData
+            );
             throw new Error(
-                error.message || 'Error al obtener la carpeta compartida'
+                responseData.message ||
+                    'Error al obtener la información del usuario'
             );
         }
 
-        return await response.json();
+        console.log('getUserByIdService - Datos del usuario obtenidos:', data);
+
+        if (data && data.avatar && !data.avatar.startsWith('http')) {
+            // La ruta correcta es /uploads/userId/avatars/avatarName
+            data.avatarUrl = `${apiPath}/uploads/${data.id}/avatars/${data.avatar}`;
+        } else if (data && data.avatar) {
+            data.avatarUrl = data.avatar;
+        }
+
+        return {
+            user: data, // Devolver los datos del usuario
+        };
     } catch (error) {
-        console.error('Error en getSharedLinkService:', error);
+        console.error('Error en getUserByIdService:', error);
+        throw error;
+    }
+};
+
+export const deleteAssessmentService = async (assessmentId, token) => {
+    try {
+        const response = await fetch(`${apiPath}/assessments/${assessmentId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                responseData.message || 'Error al eliminar la valoración'
+            );
+        }
+
+        return responseData.message || 'Valoración eliminada correctamente';
+    } catch (error) {
+        console.error('Error en deleteAssessmentService:', error);
         throw error;
     }
 };

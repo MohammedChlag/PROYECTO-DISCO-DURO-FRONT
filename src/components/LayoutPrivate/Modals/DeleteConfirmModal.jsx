@@ -12,6 +12,8 @@ export const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, type }) => {
                 return 'este archivo';
             case 'avatar':
                 return 'tu avatar';
+            case 'assessment':
+                return 'esta valoración';
             default:
                 return 'este elemento';
         }

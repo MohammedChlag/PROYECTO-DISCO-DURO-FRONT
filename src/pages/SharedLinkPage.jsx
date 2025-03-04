@@ -4,13 +4,10 @@ import {
     getSharedLinkService,
     downloadSharedFileService,
 } from '../services/fetchApi';
-import {
-    FolderIcon,
-    DocumentIcon,
-    ArrowDownTrayIcon,
-} from '@heroicons/react/24/outline';
+import { FolderIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getFileIcon } from '../utils/helpers.js';
 
 export const SharedLinkPage = () => {
     const { shareToken } = useParams();
@@ -25,12 +22,25 @@ export const SharedLinkPage = () => {
         const fetchSharedData = async () => {
             try {
                 setLoading(true);
-                const data = await getSharedLinkService(shareToken);
-                console.log('Datos recibidos:', data);
+                const responseData = await getSharedLinkService(shareToken);
+                console.log('Datos recibidos:', responseData);
 
-                // La respuesta del backend ya tiene resource y files directamente
-                setResource(data.data);
-                setFiles(data.files);
+                // La estructura es { data: {...}, files: [...] }
+                if (responseData && responseData.data) {
+                    setResource(responseData.data);
+                } else {
+                    console.warn(
+                        'No se encontró la estructura de resource esperada'
+                    );
+                    setResource(null);
+                }
+
+                if (responseData && responseData.files) {
+                    setFiles(responseData.files);
+                } else {
+                    console.warn('No se encontraron archivos en la respuesta');
+                    setFiles([]);
+                }
 
                 setLoading(false);
             } catch (err) {
@@ -153,7 +163,7 @@ export const SharedLinkPage = () => {
                                         >
                                             <div className="flex items-start justify-between">
                                                 <div className="flex items-start flex-1 min-w-0 mr-2">
-                                                    <DocumentIcon className="h-8 w-8 text-[#00B4D8] mr-3 flex-shrink-0" />
+                                                    {getFileIcon(file.name)}
                                                     <div className="min-w-0">
                                                         <p className="text-sm font-medium text-gray-900 truncate w-full">
                                                             {file.name}
