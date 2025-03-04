@@ -89,19 +89,12 @@ export const LoginForm = () => {
                             </Link>
                         </p>
                         <Link
-                            to="/users/recovery"
+                            to="/users/recovery-email"
                             className="text-[#009EB5] hover:text-[#009ec3] font-medium hover:underline"
                         >
                             ¿Olvidaste tu contraseña?
                         </Link>
                     </div>
-
-                    <Link
-                        to="/users/recovery-email"
-                        className="text-[#009EB5] hover:text-[#009ec3] font-medium hover:underline"
-                    >
-                        ¿Olvidaste tu contraseña?
-                    </Link>
                 </div>
             </Form>
         </Boundary>
