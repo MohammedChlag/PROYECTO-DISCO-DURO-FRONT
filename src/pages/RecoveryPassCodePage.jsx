@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { resetPasswordService } from '../services/fetchApi.js';
-import { Form } from '../components/forms/Form.jsx';
 import { Input } from '../components/forms/Input.jsx';
 import { Button } from '../components/Button.jsx';
 
@@ -54,37 +53,39 @@ export const RecoveryPassCodePage = () => {
     };
 
     return (
-        <Form
-            className="flex flex-col gap-6 p-8 bg-white rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
-            handleSubmitt={handleSubmit}
-        >
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                Restablecer Contraseña
-            </h3>
-            <Input
-                label="Nueva contraseña"
-                type="password"
-                placeholder="Nueva contraseña"
-                name="newPassword"
-                value={formData.newPassword}
-                handleChange={handleChange}
-                required
-            />
-            <Input
-                label="Confirmar Contraseña"
-                type="password"
-                placeholder="Confirmar nueva contraseña"
-                name="confirmNewPassword"
-                value={formData.confirmNewPassword}
-                handleChange={handleChange}
-                required
-            />
-            <Button
-                type="submit"
-                className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] active:translate-y-[1px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+        <div>
+            <form
+                className="flex flex-col gap-6 p-8 bg-white rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
+                onSubmit={handleSubmit}
             >
-                Cambiar Contraseña
-            </Button>
-        </Form>
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Restablecer Contraseña
+                </h3>
+                <Input
+                    label="Nueva contraseña"
+                    type="password"
+                    placeholder="Nueva contraseña"
+                    name="newPassword"
+                    value={formData.newPassword}
+                    handleChange={handleChange}
+                    required
+                />
+                <Input
+                    label="Confirmar Contraseña"
+                    type="password"
+                    placeholder="Confirmar nueva contraseña"
+                    name="confirmNewPassword"
+                    value={formData.confirmNewPassword}
+                    handleChange={handleChange}
+                    required
+                />
+                <Button
+                    type="submit"
+                    className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] active:translate-y-[1px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                    Cambiar Contraseña
+                </Button>
+            </form>
+        </div>
     );
 };
