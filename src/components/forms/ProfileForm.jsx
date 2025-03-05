@@ -12,7 +12,6 @@ import {
 } from '@heroicons/react/24/solid';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal.jsx';
-import { Boundary } from '../../services/ErrorBoundary.jsx';
 
 export const ProfileForm = () => {
     const { token, refreshCurrentUser } = useAuthHook();

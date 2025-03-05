@@ -9,11 +9,13 @@ import {
 import { RenameModal } from '../LayoutPrivate/Modals/RenameModal.jsx';
 import { ShareModal } from '../LayoutPrivate/Modals/ShareModal';
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
+import { FilePreviewModal } from '../LayoutPrivate/Modals/FilePreviewModal';
 import { useItemsHook } from '../../hooks/useItemsHook.js';
 import { getFileIcon } from '../../utils/helpers.js';
 import { toast } from 'react-toastify';
 import { shareStorageItemService } from '../../services/fetchApi.js';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
+import { useState } from 'react';
 
 const formatFileSize = (bytes) => {
     if (!bytes) return '0 B';
@@ -90,10 +92,22 @@ export const Archivo = ({
     // Determinar si debemos mostrar la opción "Habilitar descarga"
     const showEnableDownload = isSharedFolder && !file.shareToken;
 
+    // Estado para controlar la visibilidad del modal de vista previa
+    const [showPreviewModal, setShowPreviewModal] = useState(false);
+
+    // Función para manejar el clic en el archivo y mostrar la vista previa
+    const handlePreviewClick = (e) => {
+        e.stopPropagation();
+        setShowPreviewModal(true);
+    };
+
     return (
         <>
             <li className="relative group flex flex-col p-2 sm:p-4 border rounded-lg hover:bg-gray-50">
-                <article className="flex items-center mb-2">
+                <article
+                    className="flex items-center mb-2 cursor-pointer"
+                    onClick={handlePreviewClick}
+                >
                     {getFileIcon(file.name)}
                     <div className="flex flex-col min-w-0">
                         <h3 className="text-xs sm:text-sm font-medium text-gray-900 truncate">
@@ -209,6 +223,13 @@ export const Archivo = ({
                 urls={shareUrls}
                 type="file"
                 title={file.name}
+            />
+
+            {/* Modal de vista previa de archivos */}
+            <FilePreviewModal
+                isOpen={showPreviewModal}
+                onClose={() => setShowPreviewModal(false)}
+                file={file}
             />
         </>
     );

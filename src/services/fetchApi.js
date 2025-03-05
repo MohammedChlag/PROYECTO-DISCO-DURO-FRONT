@@ -56,8 +56,6 @@ export const registerUserService = async (value) => {
                 : value.birthday,
     };
 
-    console.log('Datos formateados a enviar:', formattedData);
-
     const response = await fetch(`${apiPath}/users/register`, {
         method: 'POST',
         headers: {
@@ -173,8 +171,6 @@ export const shareStorageItemService = async (id, token) => {
 
         const data = await response.json();
 
-        console.log('RESPUESTA DEL SERVICIO SHARE:', data);
-
         if (!response.ok) {
             throw new Error(data.message || 'Error al compartir el elemento');
         }
@@ -197,9 +193,6 @@ export const shareStorageItemService = async (id, token) => {
 };
 
 export const updateUserService = async (info, token) => {
-    console.log('updateUserService - Info a enviar:', info);
-    console.log('updateUserService - Token:', token);
-
     const response = await fetch(`${apiPath}/users/own`, {
         method: 'PUT',
         headers: {
@@ -210,10 +203,8 @@ export const updateUserService = async (info, token) => {
     });
 
     const responseData = await response.json();
-    console.log('updateUserService - Respuesta completa:', responseData);
 
     if (!response.ok) {
-        console.error('updateUserService - Error:', responseData.message);
         throw new Error(responseData.message);
     }
 
@@ -221,8 +212,6 @@ export const updateUserService = async (info, token) => {
 };
 
 export const updatePasswordService = async (passwords, token) => {
-    console.log('updatePasswordService - Actualizando contraseña');
-
     const response = await fetch(`${apiPath}/users/password`, {
         method: 'PUT',
         headers: {
@@ -237,10 +226,8 @@ export const updatePasswordService = async (passwords, token) => {
     });
 
     const responseData = await response.json();
-    console.log('updatePasswordService - Respuesta:', responseData);
 
     if (!response.ok) {
-        console.error('updatePasswordService - Error:', responseData.message);
         throw new Error(responseData.message);
     }
 
@@ -248,15 +235,12 @@ export const updatePasswordService = async (passwords, token) => {
 };
 
 export const updateAvatarService = async (file, token) => {
-    console.log('Token', token);
     if (!file) {
         throw new Error('Debes enviar un archivo.');
     }
 
     const formData = new FormData();
     formData.append('avatar', file);
-
-    console.log('FormData enviado:', formData); // Para debug
 
     const response = await fetch(`${apiPath}/users/avatar`, {
         method: 'PUT',
@@ -421,8 +405,6 @@ export const searchStorageService = async ({ query, token }) => {
 };
 
 export const getAllUsersService = async (token) => {
-    console.log('getAllUsersService - Obteniendo lista de usuarios');
-
     const response = await fetch(`${apiPath}/users/list`, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -432,7 +414,6 @@ export const getAllUsersService = async (token) => {
     const responseData = await response.json();
 
     if (!response.ok) {
-        console.error('getAllUsersService - Error:', responseData.message);
         throw new Error(responseData.message || 'Error al obtener usuarios');
     }
 
@@ -440,11 +421,6 @@ export const getAllUsersService = async (token) => {
 };
 
 export const toggleUserActiveService = async (userId, currentActive, token) => {
-    console.log(
-        'toggleUserActiveService - Cambiando estado del usuario:',
-        userId
-    );
-
     const response = await fetch(`${apiPath}/users/status/${userId}`, {
         method: 'PUT',
         headers: {
@@ -457,7 +433,6 @@ export const toggleUserActiveService = async (userId, currentActive, token) => {
     const responseData = await response.json();
 
     if (!response.ok) {
-        console.error('toggleUserActiveService - Error:', responseData.message);
         throw new Error(
             responseData.message || 'Error al cambiar estado del usuario'
         );
@@ -467,8 +442,6 @@ export const toggleUserActiveService = async (userId, currentActive, token) => {
 };
 
 export const deleteUserService = async (userId, token) => {
-    console.log('deleteUserService - Eliminando usuario:', userId);
-
     const response = await fetch(`${apiPath}/admin/user/${userId}`, {
         method: 'DELETE',
         headers: {
@@ -479,12 +452,12 @@ export const deleteUserService = async (userId, token) => {
     const responseData = await response.json();
 
     if (!response.ok) {
-        console.error('deleteUserService - Error:', responseData.message);
         throw new Error(responseData.message || 'Error al eliminar usuario');
     }
 
     return responseData;
 };
+
 // Service que envia el email del usuario al backend
 export const recoveryPasswordService = async (email) => {
     //Envia codigo al correo del usuario
@@ -498,7 +471,6 @@ export const recoveryPasswordService = async (email) => {
         });
 
         const data = await response.json();
-        console.log('Respuesta del backend:', data);
 
         if (!response.ok) {
             throw new Error(data.message || 'No se pudo enviar el código');
@@ -510,27 +482,6 @@ export const recoveryPasswordService = async (email) => {
     }
 };
 
-export const resetPasswordService = async (recoveryPassCode, newPassword) => {
-    //Usa el código para cambiar contraseña
-
-    const response = await fetch(`${apiPath}/users/password/recover`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ recoveryPassCode, newPassword }),
-    });
-    const responseData = await response.json();
-    console.log('Respuesta del backend:', responseData);
-
-    if (!response.ok) {
-        throw new Error(
-            responseData.message || 'No se pudo restablecer la contraseña'
-        );
-    }
-    return true; // Éxito
-};
-
 export const getSharedLinkService = async (shareToken) => {
     try {
         const response = await fetch(
@@ -538,10 +489,6 @@ export const getSharedLinkService = async (shareToken) => {
         );
 
         const responseData = await response.json();
-        console.log(
-            'Respuesta completa de getSharedLinkService:',
-            responseData
-        );
 
         if (!response.ok) {
             const { message } = responseData;
@@ -558,28 +505,27 @@ export const getSharedLinkService = async (shareToken) => {
 
 export const getAssessmentsService = async () => {
     try {
-        console.log('getAssessmentsService - Obteniendo valoraciones');
-
         const response = await fetch(`${apiPath}/assessments`);
 
+        // Si es 404, significa que no hay valoraciones, devolvemos un array vacío
+        if (response.status === 404) {
+            console.log('No hay valoraciones disponibles aún');
+            return {
+                message: 'No hay valoraciones disponibles aún',
+                count: 0,
+                result: [],
+                noAssessments: true, // Flag para indicar que no hay valoraciones
+            };
+        }
+
         const responseData = await response.json();
-        console.log(
-            'getAssessmentsService - Respuesta completa:',
-            responseData
-        );
 
         const { status, message, data } = responseData;
 
         // Verificar si el status es "ok" o "Ok" (aceptar ambos)
         if (!response.ok || (status !== 'ok' && status !== 'Ok')) {
-            console.error(
-                'getAssessmentsService - Error en la respuesta:',
-                responseData
-            );
             throw new Error(message || 'Error al obtener las valoraciones');
         }
-
-        console.log('getAssessmentsService - Datos obtenidos:', data);
 
         // Devolver un objeto con la estructura esperada por la página
         return {
@@ -588,22 +534,23 @@ export const getAssessmentsService = async () => {
             result: data || [], // Mantener la propiedad 'result' para compatibilidad
         };
     } catch (error) {
-        console.error('Error en getAssessmentsService:', error);
-        throw error;
+        // Si es un error diferente a 404, lo propagamos
+        if (error.message !== 'No hay valoraciones disponibles aún') {
+            console.error('Error en getAssessmentsService:', error);
+            throw error;
+        }
+        // Si llegamos aquí con el mensaje de 404, devolvemos el resultado vacío
+        return {
+            message: 'No hay valoraciones disponibles au00fan',
+            count: 0,
+            result: [],
+            noAssessments: true,
+        };
     }
 };
 
 export const createAssessmentService = async (assessmentData, token) => {
     try {
-        console.log(
-            'createAssessmentService - Datos a enviar:',
-            assessmentData
-        );
-        console.log(
-            'createAssessmentService - Token:',
-            token ? token.substring(0, 10) + '...' : 'No token'
-        );
-
         const response = await fetch(`${apiPath}/assessments`, {
             method: 'POST',
             headers: {
@@ -614,10 +561,6 @@ export const createAssessmentService = async (assessmentData, token) => {
         });
 
         const responseData = await response.json();
-        console.log(
-            'createAssessmentService - Respuesta completa:',
-            responseData
-        );
 
         // Extraer status y message/messages (puede venir en singular o plural)
         const { status, message, messages } = responseData;
@@ -625,10 +568,6 @@ export const createAssessmentService = async (assessmentData, token) => {
 
         // Verificar si el status es "ok" o "Ok" (aceptar ambos)
         if (!response.ok || (status !== 'ok' && status !== 'Ok')) {
-            console.error(
-                'createAssessmentService - Error en la respuesta:',
-                responseData
-            );
             throw new Error(responseMessage || 'Error al enviar la valoración');
         }
 
@@ -641,11 +580,6 @@ export const createAssessmentService = async (assessmentData, token) => {
 
 export const getUserByIdService = async (userId) => {
     try {
-        console.log(
-            'getUserByIdService - Obteniendo información del usuario:',
-            userId
-        );
-
         if (!userId) {
             throw new Error('ID de usuario no proporcionado');
         }
@@ -653,23 +587,15 @@ export const getUserByIdService = async (userId) => {
         const response = await fetch(`${apiPath}/users/${userId}`);
         const responseData = await response.json();
 
-        console.log('getUserByIdService - Respuesta completa:', responseData);
-
         const { status, data } = responseData;
 
         // Verificar si el status es "ok" o "Ok" (aceptar ambos)
         if (!response.ok || (status !== 'ok' && status !== 'Ok')) {
-            console.error(
-                'getUserByIdService - Error en la respuesta:',
-                responseData
-            );
             throw new Error(
                 responseData.message ||
                     'Error al obtener la información del usuario'
             );
         }
-
-        console.log('getUserByIdService - Datos del usuario obtenidos:', data);
 
         if (data && data.avatar && !data.avatar.startsWith('http')) {
             // La ruta correcta es /uploads/userId/avatars/avatarName
@@ -711,30 +637,6 @@ export const deleteAssessmentService = async (assessmentId, token) => {
         throw error;
     }
 };
-// Service que envia el email del usuario al backend
-export const recoveryPasswordService = async (email) => {
-    //Envia codigo al correo del usuario
-    try {
-        const response = await fetch(`${apiPath}/users/password/recover`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email }),
-        });
-
-        const data = await response.json();
-        console.log('Respuesta del backend:', data);
-
-        if (!response.ok) {
-            throw new Error(data.message || 'No se pudo enviar el código');
-        }
-        return true; //Èxito
-    } catch (error) {
-        console.error('Error en recoveryPasswordService:', error);
-        return false; //falló
-    }
-};
 
 export const resetPasswordService = async (recoveryPassCode, newPassword) => {
     //Usa el código para cambiar contraseña
@@ -747,7 +649,6 @@ export const resetPasswordService = async (recoveryPassCode, newPassword) => {
         body: JSON.stringify({ recoveryPassCode, newPassword }),
     });
     const responseData = await response.json();
-    console.log('Respuesta del backend:', responseData);
 
     if (!response.ok) {
         throw new Error(
@@ -755,4 +656,93 @@ export const resetPasswordService = async (recoveryPassCode, newPassword) => {
         );
     }
     return true; // Éxito
+};
+
+export const getFilePreviewService = async (id, token, file) => {
+    try {
+        console.log(`Solicitando vista previa para archivo ID: ${id}`);
+        const response = await fetch(`${apiPath}/files/${id}/preview`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!response.ok) {
+            let errorMsg = 'Error al obtener la vista previa';
+            try {
+                const error = await response.json();
+                errorMsg = error.message || errorMsg;
+            } catch (e) {
+                console.error('Error al parsear respuesta de error:', e);
+            }
+            throw new Error(errorMsg);
+        }
+
+        // Obtener el tipo de contenido
+        const contentType = response.headers.get('content-type');
+
+        // Si es una imagen, devolver la URL del blob
+        if (contentType && contentType.startsWith('image/')) {
+            const blob = await response.blob();
+            return {
+                type: 'image',
+                content: URL.createObjectURL(blob),
+                contentType,
+            };
+        }
+
+        // Si es un PDF
+        else if (contentType && contentType === 'application/pdf') {
+            console.log('Procesando PDF...');
+            const blob = await response.blob();
+            // Creamos un objeto URL con tipo específico para PDFs
+            const objectUrl = URL.createObjectURL(blob);
+            return {
+                type: 'pdf',
+                content: objectUrl,
+                contentType,
+                filename: file?.name || 'documento.pdf',
+            };
+        }
+
+        // Si es un video
+        else if (contentType && contentType.startsWith('video/')) {
+            const blob = await response.blob();
+            return {
+                type: 'video',
+                content: URL.createObjectURL(blob),
+                contentType,
+            };
+        }
+
+        // Si es texto (incluye html, css, js, json, etc)
+        else if (
+            contentType &&
+            (contentType.startsWith('text/') ||
+                contentType === 'application/json' ||
+                contentType === 'application/javascript' ||
+                contentType === 'application/xml')
+        ) {
+            const text = await response.text();
+            return {
+                type: 'text',
+                content: text,
+                contentType,
+            };
+        }
+
+        // Para otros tipos de archivo, solo devolver informaciu00f3n
+        else {
+            console.log('Tipo de archivo no soportado:', contentType);
+            return {
+                type: 'unsupported',
+                contentType: contentType || 'desconocido',
+                message:
+                    'Este tipo de archivo no tiene vista previa disponible',
+            };
+        }
+    } catch (error) {
+        console.error('Error en getFilePreviewService:', error);
+        throw error;
+    }
 };

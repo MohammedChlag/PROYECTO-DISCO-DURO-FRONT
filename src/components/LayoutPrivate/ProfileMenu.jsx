@@ -89,14 +89,14 @@ export const ProfileMenu = () => {
         {
             label: 'About',
             onClick: () => {
-                navigate('/aboutUse');
+                navigate('/aboutUs');
                 setShowMenu(false);
             },
         },
         {
             label: 'Cerrar sesión',
             onClick: () => {
-                navigate('/about');
+                navigate('/aboutUs');
                 onLogout();
                 setShowMenu(false);
             },

@@ -4,7 +4,7 @@ import { useAuthHook } from '../hooks/useAuthHook.js';
 
 export const Logofooter = () => {
     const { currentUser } = useAuthHook();
-    const redirectPath = currentUser ? '/storage' : '/';
+    const redirectPath = currentUser ? '/storage' : '/aboutUs';
 
     return (
         <Link to={redirectPath}>

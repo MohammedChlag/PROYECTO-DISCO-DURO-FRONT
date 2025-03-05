@@ -31,7 +31,7 @@ export const HomePage = () => {
     const { token } = useAuthHook();
     // veamos que llevas de equipaje
     const { storage, error, loading, refetchStorage } = useStorageHook();
-    // de todas manera te enseñare el layout
+    // de todas maneras te enseñare el layout
     const [activeTab, setActiveTab] = useState('principal');
     const [isSearching, setIsSearching] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
@@ -57,11 +57,11 @@ export const HomePage = () => {
                 }
                 return acc;
             },
-            // aquí ya habre dividio el sotarage en dos :P
+            // aquí ya habre divididoo el sotarage en dos :P
             { folders: [], documents: [] }
         );
 
-        // no me gustan los elsif infinitos, swithc es más elegante
+        // no me gustan los elsif infinitos, switch es más elegante
         switch (activeTab) {
             // no debería explicarlo pero bueno
             case 'compartidos':
@@ -144,7 +144,7 @@ export const HomePage = () => {
     };
 
     // usamos la referencia del intup oculto
-    // para simpular un click y se abra el selector
+    // para simular un click y se abra el selector
     const handleUpload = () => {
         fileInputRef.current.click();
     };
@@ -157,7 +157,7 @@ export const HomePage = () => {
 
         // try catch para no morir
         try {
-            // buscamos el nombre de la carpeta si esque tiene
+            // buscamos el nombre de la carpeta si es que tiene
             // aquí selectedFolderId es un estado, mas abajo su handler
             const folderName = selectedFolderId
                 ? storage.find((item) => {
