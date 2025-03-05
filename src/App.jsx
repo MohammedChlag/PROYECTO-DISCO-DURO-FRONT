@@ -20,16 +20,6 @@ import { ProfilePage } from './pages/ProfilePage.jsx';
 import { UsersListPage } from './pages/UsersListPage.jsx';
 // Página 404
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
-<<<<<<< Updated upstream
-import { UsersListPage } from './pages/UsersListPage.jsx';
-import { SharedLinkPage } from './pages/SharedLinkPage.jsx';
-import { DownloadPage } from './pages/DownloadPage.jsx';
-
-import { RecoveryPassCodePage } from './pages/RecoveryPassCodePage.jsx';
-import { RecoveryEmailPage } from './pages/RecoveryEmailPage.jsx';
-import { AssessmentsPage } from './pages/AssessmentsPage.jsx';
-=======
->>>>>>> Stashed changes
 
 function App() {
     return (
@@ -38,11 +28,8 @@ function App() {
                 {/* Rutas Públicas */}
                 <Route path="/" element={<LayoutPublic />}>
                     <Route index element={<LandingPage />} />
-<<<<<<< Updated upstream
-                    <Route path='/assessments' element={<AssessmentsPage />} />
-=======
                     <Route path="/assessments" element={<AssessmentsPage />} />
->>>>>>> Stashed changes
+                    <Route path="/assessments" element={<AssessmentsPage />} />
                     <Route path="/users">
                         <Route path="login" element={<LoginPage />} />
                         <Route path="register" element={<RegisterPage />} />

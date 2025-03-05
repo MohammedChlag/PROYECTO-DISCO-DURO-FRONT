@@ -3,10 +3,7 @@ import nubelogo from '../assets/img/5390309.png';
 import { Button } from '../components/Button';
 import { Link } from 'react-router-dom';
 import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview.jsx';
-<<<<<<< Updated upstream
-=======
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
->>>>>>> Stashed changes
 
 export const LandingPage = () => {
     // Referencia para la sección de valoraciones y la sección principal
@@ -34,11 +31,14 @@ export const LandingPage = () => {
         const handleScrollPosition = () => {
             if (valoracionesRef.current && heroRef.current) {
                 const scrollPosition = window.scrollY;
-                const valoracionesPosition = valoracionesRef.current.getBoundingClientRect().top + window.scrollY;
-                
+                const valoracionesPosition =
+                    valoracionesRef.current.getBoundingClientRect().top +
+                    window.scrollY;
+
                 // Determinar si estamos más cerca de la sección de valoraciones
-                const nearValoraciones = scrollPosition >= (valoracionesPosition - 200);
-                
+                const nearValoraciones =
+                    scrollPosition >= valoracionesPosition - 200;
+
                 // Actualizar el estado solo si ha cambiado
                 if (isAtTop === nearValoraciones) {
                     setIsAtTop(!nearValoraciones);
@@ -48,7 +48,7 @@ export const LandingPage = () => {
 
         // Escuchar el evento de desplazamiento
         window.addEventListener('scroll', handleScrollPosition);
-        
+
         // Verificar la posición inicial
         handleScrollPosition();
 

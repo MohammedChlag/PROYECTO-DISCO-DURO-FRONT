@@ -4,13 +4,8 @@ import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 import { Button } from '../../Button';
-<<<<<<< Updated upstream
-
-=======
 import { createAssessmentService } from '../../../services/fetchApi';
->>>>>>> Stashed changes
 import { toast } from 'react-toastify';
-import { createAssessmentService } from '../../../services/fetchApi.js';
 
 export const AssessmentsModal = ({
     isOpen,
