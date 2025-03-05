@@ -1,20 +1,31 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { downloadFileService } from '../services/fetchApi.js';
+import {
+    downloadFileService,
+    shareStorageItemService,
+} from '../services/fetchApi.js';
 import { useAuthHook } from './useAuthHook.js';
 
+// customHook para interaciones con folders o files
+// recibe por params el items en cuestión, el type(por defecto, file) y dos callbacks
 export const useItemsHook = (
     item,
     type = 'file',
-    { onDelete, onShare } = {}
+    { onDelete, onRefetchStorage } = {}
 ) => {
+    /* Estados internos */
+    // token
     const { token } = useAuthHook();
+    // estado para setear las opciones
     const [showOptions, setShowOptions] = useState(false);
+    // estados para manejar los modales
     const [showRenameModal, setShowRenameModal] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    // estado para las urls a la hora de compartir
     const [shareUrls, setShareUrls] = useState(null);
 
+    // handle para alternar las opciones
     const handleOptionsClick = (e) => {
         if (e) {
             e.stopPropagation();
@@ -22,56 +33,49 @@ export const useItemsHook = (
         setShowOptions(!showOptions);
     };
 
+    // arrow para cerrar el menu opciones
     const closeOptions = () => {
         setShowOptions(false);
     };
 
+    // handle para abrir el modal de renombrado
     const handleRename = () => {
         setShowRenameModal(true);
         closeOptions();
     };
 
+    // este es es el más complejo
     const handleShare = async () => {
         try {
-            console.log('1. Iniciando handleShare en hook para:', {
-                id: item.id,
-                type,
-            });
+            console.log(`Compartiendo ${type}: ${item.name} (ID: ${item.id})`);
 
-            // Reiniciar estados
+            // Resetear el estado de URLs antes de la nueva solicitud
             setShareUrls(null);
+
+            // Abrir el modal primero para mostrar el estado de carga
             setShowShareModal(true);
             closeOptions();
 
-            console.log('3. Estado inicial del modal:', { showShareModal });
+            // Llamar al servicio para compartir
+            const response = await shareStorageItemService(item.id, token);
 
-            console.log('4. Llamando a onShare');
-            const response = await onShare(item.id);
-            console.log('5. Respuesta del servicio:', response);
+            console.log('Respuesta del servicio de compartir:', response);
 
-            if (response?.status === 'ok') {
-                const urls =
-                    type === 'folder'
-                        ? { url: response.url }
-                        : { download: response.download };
+            // Actualizar el estado con las URLs recibidas
+            setShareUrls(response);
 
-                console.log('6. URLs transformadas:', urls);
-                setShareUrls(urls);
-                // Mantener el modal abierto
-                setShowShareModal(true);
-
-                console.log('7. Estado actualizado:', {
-                    showShareModal: true,
-                    shareUrls: urls,
-                });
-            } else {
-                console.log('5.1 No hay respuesta válida del servicio');
-                toast.error('Error al obtener el enlace de compartir');
-                setShowShareModal(false);
-            }
+            // No actualizamos el almacenamiento aquí para evitar que se cierre el modal
+            // La actualización se hará cuando el usuario cierre el modal
         } catch (error) {
-            console.error('Error en handleShare:', error);
-            toast.error(error.message || 'Error al compartir el elemento');
+            console.error('Error al compartir:', error);
+            toast.error(
+                error.message ||
+                    `Error al compartir ${
+                        type === 'file' ? 'el archivo' : 'la carpeta'
+                    }`
+            );
+
+            // Cerrar el modal en caso de error
             setShowShareModal(false);
         }
     };
@@ -103,6 +107,14 @@ export const useItemsHook = (
         }
     };
 
+    const handleCloseShareModal = () => {
+        setShowShareModal(false);
+        if (onRefetchStorage) {
+            console.log('Actualizando almacenamiento después de compartir');
+            onRefetchStorage();
+        }
+    };
+
     return {
         showOptions,
         showRenameModal,
@@ -119,5 +131,6 @@ export const useItemsHook = (
         setShowShareModal,
         setShowDeleteModal,
         handleDownload,
+        handleCloseShareModal,
     };
 };

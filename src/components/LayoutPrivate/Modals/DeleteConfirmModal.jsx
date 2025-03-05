@@ -3,6 +3,22 @@ import React from 'react';
 export const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, type }) => {
     if (!isOpen) return null;
 
+    // Función para determinar el mensaje según el tipo
+    const getMessage = () => {
+        switch (type) {
+            case 'folder':
+                return 'esta carpeta';
+            case 'file':
+                return 'este archivo';
+            case 'avatar':
+                return 'tu avatar';
+            case 'assessment':
+                return 'esta valoración';
+            default:
+                return 'este elemento';
+        }
+    };
+
     return (
         <div className="fixed inset-0 z-50 overflow-y-auto">
             {/* Overlay oscuro */}
@@ -22,11 +38,8 @@ export const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, type }) => {
                     {/* Contenido */}
                     <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                            ¿Estás seguro de que deseas eliminar{' '}
-                            {type === 'folder'
-                                ? 'esta carpeta'
-                                : 'este archivo'}
-                            ? Esta acción no se puede deshacer.
+                            ¿Estás seguro de que deseas eliminar {getMessage()}?
+                            Esta acción no se puede deshacer.
                         </p>
                     </div>
 

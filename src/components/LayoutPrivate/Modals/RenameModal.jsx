@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
+// funcion auxiliar para recortar el nombre
 const truncateName = (name, type, maxLength = 25) => {
     if (name.length <= maxLength) return name;
 
@@ -15,6 +16,7 @@ const truncateName = (name, type, maxLength = 25) => {
     return `${truncatedName}.${extension}`;
 };
 
+// modal de renombrado
 export const RenameModal = ({
     isOpen,
     onClose,
@@ -22,9 +24,11 @@ export const RenameModal = ({
     currentName = '',
     type = '',
 }) => {
+    // recibe por props el nombre actual y el tipo de archivo/folder
     const [newName, setNewName] = useState(currentName || '');
     const [error, setError] = useState('');
 
+    // submit del formulario
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!newName.trim()) {

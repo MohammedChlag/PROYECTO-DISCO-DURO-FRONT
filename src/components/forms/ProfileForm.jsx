@@ -11,9 +11,10 @@ import {
     PencilIcon,
 } from '@heroicons/react/24/solid';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
+import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal.jsx';
 
 export const ProfileForm = () => {
-    const { token } = useAuthHook();
+    const { token, refreshCurrentUser } = useAuthHook();
     const fileInputRef = useRef(null);
     const {
         user,
@@ -23,9 +24,10 @@ export const ProfileForm = () => {
         updateAvatar,
         deleteAvatar,
         setError,
-    } = useUserHook(null, token); // Pasamos null como id y el token
+    } = useUserHook(null, token, refreshCurrentUser); // Pasamos refreshCurrentUser como tercer parámetro
     const [isEditing, setIsEditing] = useState(false);
     const [avatarError, setAvatarError] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [formData, setFormData] = useState({
         username: '',
         firstName: '',
@@ -97,6 +99,11 @@ export const ProfileForm = () => {
             if (result) {
                 setAvatarError(false);
                 toast.success('Avatar actualizado correctamente');
+
+                // Esperar un momento para que el toast sea visible y luego recargar la página
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
             }
         } catch (error) {
             console.error(
@@ -113,10 +120,7 @@ export const ProfileForm = () => {
             '%c Click en eliminar avatar',
             'background: #222; color: #bada55'
         );
-        // Por ahora solo confirmamos con un Alert :/
-        if (window.confirm('¿Estás seguro de que deseas eliminar tu avatar?')) {
-            handleDeleteAvatar();
-        }
+        setShowDeleteModal(true);
     };
 
     const handleDeleteAvatar = async () => {
@@ -125,6 +129,11 @@ export const ProfileForm = () => {
             if (result.success) {
                 setAvatarError(false);
                 toast.success('Avatar eliminado correctamente');
+
+                // Esperar un momento para que el toast sea visible y luego recargar la página
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             } else {
                 toast.error(result.error || 'Error al eliminar el avatar');
             }
@@ -346,6 +355,17 @@ export const ProfileForm = () => {
                         </Button>
                     )}
                 </footer>
+
+                {/* Modal de confirmación para eliminar avatar */}
+                <DeleteConfirmModal
+                    isOpen={showDeleteModal}
+                    onClose={() => setShowDeleteModal(false)}
+                    onConfirm={() => {
+                        setShowDeleteModal(false);
+                        handleDeleteAvatar();
+                    }}
+                    type="avatar"
+                />
             </Form>
         </Boundary>
     );

@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
+// modal a la hora de crear carpetas
 export const CreateFolderModal = ({ isOpen, onClose, onCreateFolder }) => {
+    // recibe por props isOpen, onClose y onCreateFolder
     const [folderName, setFolderName] = useState('');
     const [error, setError] = useState('');
 
+    // submit del form
     const handleSubmit = (e) => {
         e.preventDefault();
 

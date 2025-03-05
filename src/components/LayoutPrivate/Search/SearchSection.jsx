@@ -1,7 +1,13 @@
 import { Archivo } from '../../Storage/Archivo.jsx';
 import { Carpeta } from '../../Storage/Carpeta.jsx';
 
-export const SearchSection = ({ results, onFolderClick }) => {
+export const SearchSection = ({
+    results,
+    onFolderClick,
+    onRename,
+    onDelete,
+    onRefetchStorage,
+}) => {
     // Asegurarnos de que results sea un array
     const searchResults = Array.isArray(results?.data) ? results.data : [];
 
@@ -30,6 +36,9 @@ export const SearchSection = ({ results, onFolderClick }) => {
                                 key={folder.id}
                                 folder={folder}
                                 onFolderClick={onFolderClick}
+                                onRename={onRename}
+                                onDelete={onDelete}
+                                onRefetchStorage={onRefetchStorage}
                             />
                         ))}
                     </div>
@@ -43,7 +52,13 @@ export const SearchSection = ({ results, onFolderClick }) => {
                     </h2>
                     <div className="space-y-2">
                         {files.map((file) => (
-                            <Archivo key={file.id} file={file} />
+                            <Archivo
+                                key={file.id}
+                                file={file}
+                                onRename={onRename}
+                                onDelete={onDelete}
+                                onRefetchStorage={onRefetchStorage}
+                            />
                         ))}
                     </div>
                 </section>
