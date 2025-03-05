@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import nubelogo from '../assets/img/5390309.png';
 import { Button } from '../components/Button';
 import { Link } from 'react-router-dom';
+import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview.jsx';
 
 export const LandingPage = () => {
     // Referencia para la sección de valoraciones y la sección principal
@@ -106,6 +107,7 @@ export const LandingPage = () => {
                     <span className="text-[#009EB5]">♥</span> La voz de nuestra
                     comunidad
                 </h3>
+                <AssessmentPreview />
             </section>
         </div>
     );

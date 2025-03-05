@@ -8,9 +8,10 @@ import {
     deleteAssessmentService,
 } from '../../services/fetchApi';
 import { Button } from '../Button';
-import { AssessmentsModal } from '../LayoutPublic/AssessmentsModal';
+
 import { useAuthHook } from '../../hooks/useAuthHook';
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
+import { AssessmentsModal } from '../LayoutPrivate/Modals/AssessmentsModal.jsx';
 
 export const AssessmentComponent = () => {
     const { currentUser, token, isAdmin } = useAuthHook();

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logo-hackloud-solo.png';
+import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview.jsx';
 
 export const AboutPage = () => {
     const navigate = useNavigate();
@@ -47,6 +48,7 @@ export const AboutPage = () => {
                     <span className="text-[#009EB5]">♥</span> Opiniones de
                     nuestra comunidad
                 </h3>
+                <AssessmentPreview />
             </div>
         </section>
     );

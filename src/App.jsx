@@ -20,6 +20,7 @@ import { DownloadPage } from './pages/DownloadPage.jsx';
 
 import { RecoveryPassCodePage } from './pages/RecoveryPassCodePage.jsx';
 import { RecoveryEmailPage } from './pages/RecoveryEmailPage.jsx';
+import { AssessmentsPage } from './pages/AssessmentsPage.jsx';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                 {/* Rutas Públicas */}
                 <Route path="/" element={<LayoutPublic />}>
                     <Route index element={<LandingPage />} />
+                    <Route path='/assessments' element={<AssessmentsPage />} />
                     <Route path="/users">
                         <Route path="login" element={<LoginPage />} />
                         <Route path="register" element={<RegisterPage />} />
