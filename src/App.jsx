@@ -16,6 +16,8 @@ import { ProfilePage } from './pages/ProfilePage.jsx';
 // Página 404
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
 import { UsersListPage } from './pages/UsersListPage.jsx';
+import { SharedLinkPage } from './pages/SharedLinkPage.jsx';
+import { DownloadPage } from './pages/DownloadPage.jsx';
 
 import { RecoveryPassCodePage } from './pages/RecoveryPassCodePage.jsx';
 import { RecoveryEmailPage } from './pages/RecoveryEmailPage.jsx';
@@ -44,13 +46,21 @@ function App() {
                             element={<RecoveryPassCodePage />}
                         />
                     </Route>
+                    <Route
+                        path="/storage/share/link/:shareToken"
+                        element={<SharedLinkPage />}
+                    />
+                    <Route
+                        path="/storage/share/download/:shareToken"
+                        element={<DownloadPage />}
+                    />
                 </Route>
 
                 {/* Rutas Privadas */}
                 <Route element={<LayoutPrivate />}>
                     <Route path="/storage" element={<HomePage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/aboutUs" element={<AboutPage />} />{' '}
+                    <Route path="/aboutUs" element={<AboutPage />} />
                     <Route
                         path="/assessmentsUse"
                         element={<AssessmentsPage />}

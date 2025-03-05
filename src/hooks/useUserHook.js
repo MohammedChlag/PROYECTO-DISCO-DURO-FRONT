@@ -8,7 +8,7 @@ import {
     updatePasswordService,
 } from '../services/fetchApi.js';
 
-export const useUserHook = (id, token) => {
+export const useUserHook = (id, token, refreshCallback = null) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -80,6 +80,18 @@ export const useUserHook = (id, token) => {
             // Actualizamos el estado con los datos actualizados
             setUser(updatedUser);
 
+            // Refrescar el currentUser en el AuthContext si existe el callback
+            if (refreshCallback && typeof refreshCallback === 'function') {
+                try {
+                    await refreshCallback();
+                } catch (refreshError) {
+                    console.error(
+                        'Error al refrescar currentUser:',
+                        refreshError
+                    );
+                }
+            }
+
             return { success: true, user: updatedUser };
         } catch (error) {
             console.error('updateUser - Error:', error);
@@ -105,6 +117,19 @@ export const useUserHook = (id, token) => {
             // Obtener datos actualizados del usuario
             const updatedUser = await getOwnUserService(token);
             setUser(updatedUser);
+
+            // Refrescar el currentUser en el AuthContext si existe el callback
+            if (refreshCallback && typeof refreshCallback === 'function') {
+                try {
+                    await refreshCallback();
+                } catch (refreshError) {
+                    console.error(
+                        'Error al refrescar currentUser:',
+                        refreshError
+                    );
+                }
+            }
+
             return { success: true };
         } catch (error) {
             console.error('Error en updateAvatar:', error);
@@ -130,6 +155,19 @@ export const useUserHook = (id, token) => {
             // Obtener datos actualizados del usuario
             const updatedUser = await getOwnUserService(token);
             setUser(updatedUser);
+
+            // Refrescar el currentUser en el AuthContext si existe el callback
+            if (refreshCallback && typeof refreshCallback === 'function') {
+                try {
+                    await refreshCallback();
+                } catch (refreshError) {
+                    console.error(
+                        'Error al refrescar currentUser:',
+                        refreshError
+                    );
+                }
+            }
+
             return { success: true };
         } catch (error) {
             console.error('Error en deleteAvatar:', error);

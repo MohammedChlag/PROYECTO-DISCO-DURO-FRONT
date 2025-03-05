@@ -6,4 +6,5 @@ export const AuthContext = createContext({
     isAdmin: false,
     onLogin: () => undefined,
     onLogout: () => undefined,
+    refreshCurrentUser: () => undefined,
 });

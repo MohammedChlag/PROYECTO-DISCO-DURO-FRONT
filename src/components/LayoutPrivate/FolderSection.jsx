@@ -6,7 +6,7 @@ export const FolderSection = ({
     onFolderClick,
     onRename,
     onDelete,
-    onShare,
+    onRefetchStorage,
 }) => {
     if (loading) {
         return (
@@ -57,7 +57,7 @@ export const FolderSection = ({
                             onFolderClick={onFolderClick}
                             onRename={onRename}
                             onDelete={onDelete}
-                            onShare={onShare}
+                            onRefetchStorage={onRefetchStorage}
                         />
                     ))}
                 </ul>

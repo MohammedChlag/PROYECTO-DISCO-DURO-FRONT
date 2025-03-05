@@ -1,5 +1,4 @@
 import {
-    DocumentIcon,
     PencilIcon,
     TrashIcon,
     EllipsisVerticalIcon,
@@ -7,14 +6,16 @@ import {
     UsersIcon,
     ArrowDownTrayIcon,
 } from '@heroicons/react/24/outline';
-import { useState } from 'react';
 import { RenameModal } from '../LayoutPrivate/Modals/RenameModal.jsx';
 import { ShareModal } from '../LayoutPrivate/Modals/ShareModal';
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
-import { downloadFileService } from '../../services/fetchApi.js';
-import { useAuthHook } from '../../hooks/useAuthHook.js';
+import { FilePreviewModal } from '../LayoutPrivate/Modals/FilePreviewModal';
 import { useItemsHook } from '../../hooks/useItemsHook.js';
+import { getFileIcon } from '../../utils/helpers.js';
 import { toast } from 'react-toastify';
+import { shareStorageItemService } from '../../services/fetchApi.js';
+import { useAuthHook } from '../../hooks/useAuthHook.js';
+import { useState } from 'react';
 
 const formatFileSize = (bytes) => {
     if (!bytes) return '0 B';
@@ -33,7 +34,13 @@ const truncateFileName = (name, maxLength = 25) => {
     return `${truncatedName}.${extension}`;
 };
 
-export const Archivo = ({ file, onRename, onDelete, onShare }) => {
+export const Archivo = ({
+    file,
+    onRename,
+    onDelete,
+    onRefetchStorage,
+    isSharedFolder = false,
+}) => {
     const { token } = useAuthHook();
     const {
         showOptions,
@@ -50,7 +57,8 @@ export const Archivo = ({ file, onRename, onDelete, onShare }) => {
         setShowRenameModal,
         setShowShareModal,
         setShowDeleteModal,
-    } = useItemsHook(file, 'file', { onDelete, onShare });
+        handleDownload,
+    } = useItemsHook(file, 'file', { onDelete, onRefetchStorage });
 
     console.log('Estado del modal en Archivo:', { showShareModal, shareUrls });
 
@@ -59,47 +67,82 @@ export const Archivo = ({ file, onRename, onDelete, onShare }) => {
         setShowRenameModal(false);
     };
 
-    const handleDownload = async () => {
+    // Función para habilitar la descarga del archivo
+    const handleEnableDownload = async () => {
         try {
-            const message = await downloadFileService(file.id, token);
             closeOptions();
-            toast.success(message);
+            toast.info('Habilitando descarga...', { autoClose: 2000 });
+
+            // Usamos el mismo servicio que se usa para compartir
+            await shareStorageItemService(file.id, token);
+
+            // Mostramos un toast de éxito
+            toast.success('Descarga habilitada correctamente');
+
+            // Actualizamos el almacenamiento para reflejar los cambios
+            if (onRefetchStorage) {
+                onRefetchStorage();
+            }
         } catch (error) {
-            toast.error(error.message || 'Error al descargar el archivo');
+            console.error('Error al habilitar descarga:', error);
+            toast.error('Error al habilitar la descarga');
         }
+    };
+
+    // Determinar si debemos mostrar la opción "Habilitar descarga"
+    const showEnableDownload = isSharedFolder && !file.shareToken;
+
+    // Estado para controlar la visibilidad del modal de vista previa
+    const [showPreviewModal, setShowPreviewModal] = useState(false);
+
+    // Función para manejar el clic en el archivo y mostrar la vista previa
+    const handlePreviewClick = (e) => {
+        e.stopPropagation();
+        setShowPreviewModal(true);
     };
 
     return (
         <>
-            <li className="relative group flex flex-col p-4 border rounded-lg hover:bg-gray-50">
-                <article className="flex items-center mb-3">
-                    <DocumentIcon className="h-6 w-6 text-gray-500 mr-3 flex-shrink-0" />
+            <li className="relative group flex flex-col p-2 sm:p-4 border rounded-lg hover:bg-gray-50">
+                <article
+                    className="flex items-center mb-2 cursor-pointer"
+                    onClick={handlePreviewClick}
+                >
+                    {getFileIcon(file.name)}
                     <div className="flex flex-col min-w-0">
-                        <h3 className="text-sm font-medium text-gray-900 truncate">
-                            {truncateFileName(file.name)}
+                        <h3 className="text-xs sm:text-sm font-medium text-gray-900 truncate">
+                            {truncateFileName(
+                                file.name,
+                                window.innerWidth < 640 ? 15 : 25
+                            )}
                         </h3>
-                        <div className="flex items-center mt-1">
-                            <UsersIcon className="h-4 w-4 text-gray-400 mr-1 flex-shrink-0" />
-                            <span className="text-xs text-gray-500 ml-4">
+                        <div className="flex items-center mt-0.5">
+                            {file.shareToken && (
+                                <UsersIcon
+                                    className="h-3 w-3 sm:h-4 sm:w-4 text-blue-500 mr-1 flex-shrink-0"
+                                    title="Archivo compartido"
+                                />
+                            )}
+                            <span className="text-xs text-gray-500 ml-1">
                                 {formatFileSize(file.size)}
                             </span>
                         </div>
                     </div>
                 </article>
 
-                <div className="flex items-center justify-end space-x-1 mt-2">
+                <div className="flex items-center justify-end space-x-0.5 sm:space-x-1 mt-1 sm:mt-2">
                     <button
                         onClick={handleDownload}
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                        className="p-1 sm:p-2 hover:bg-gray-100 rounded-full transition-colors"
                         title="Descargar"
                     >
-                        <ArrowDownTrayIcon className="h-5 w-5 text-gray-500" />
+                        <ArrowDownTrayIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500" />
                     </button>
                     <button
                         onClick={handleOptionsClick}
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors relative"
+                        className="p-1 sm:p-2 hover:bg-gray-100 rounded-full transition-colors relative"
                     >
-                        <EllipsisVerticalIcon className="h-5 w-5 text-gray-500" />
+                        <EllipsisVerticalIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500" />
                     </button>
 
                     {showOptions && (
@@ -108,7 +151,7 @@ export const Archivo = ({ file, onRename, onDelete, onShare }) => {
                                 className="fixed inset-0 z-10"
                                 onClick={closeOptions}
                             />
-                            <div className="absolute right-0 top-full mt-2 z-20 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+                            <div className="absolute right-6 bottom-12 z-20 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
                                 <button
                                     onClick={handleRename}
                                     className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
@@ -116,13 +159,26 @@ export const Archivo = ({ file, onRename, onDelete, onShare }) => {
                                     <PencilIcon className="h-4 w-4 mr-2" />
                                     <span>Renombrar</span>
                                 </button>
-                                <button
-                                    onClick={handleShare}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                                >
-                                    <ShareIcon className="h-4 w-4 mr-2" />
-                                    <span>Compartir</span>
-                                </button>
+
+                                {/* Mostrar "Compartir" o "Habilitar descarga" según el contexto */}
+                                {showEnableDownload ? (
+                                    <button
+                                        onClick={handleEnableDownload}
+                                        className="flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left px-3 py-2 rounded-md"
+                                    >
+                                        <ArrowDownTrayIcon className="h-4 w-4" />
+                                        Habilitar descarga
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleShare}
+                                        className="flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left px-3 py-2 rounded-md"
+                                    >
+                                        <ShareIcon className="h-4 w-4" />
+                                        Compartir
+                                    </button>
+                                )}
+
                                 <button
                                     onClick={handleDelete}
                                     className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100"
@@ -156,10 +212,24 @@ export const Archivo = ({ file, onRename, onDelete, onShare }) => {
                 onClose={() => {
                     console.log('Cerrando modal');
                     setShowShareModal(false);
+                    // Actualizar el almacenamiento cuando se cierra el modal
+                    if (onRefetchStorage) {
+                        console.log(
+                            'Actualizando almacenamiento después de cerrar modal de compartir'
+                        );
+                        onRefetchStorage();
+                    }
                 }}
                 urls={shareUrls}
                 type="file"
                 title={file.name}
+            />
+
+            {/* Modal de vista previa de archivos */}
+            <FilePreviewModal
+                isOpen={showPreviewModal}
+                onClose={() => setShowPreviewModal(false)}
+                file={file}
             />
         </>
     );
