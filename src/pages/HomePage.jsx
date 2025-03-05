@@ -23,6 +23,7 @@ import {
     renameStorageItemService,
     deleteStorageItemService,
 } from '../services/fetchApi.js';
+import { Boundary } from '../services/ErrorBoundary.jsx';
 
 // Bienvenidos a la homepage :D
 export const HomePage = () => {
@@ -34,6 +35,7 @@ export const HomePage = () => {
     const [activeTab, setActiveTab] = useState('principal');
     const [isSearching, setIsSearching] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
+    const [currentSearchQuery, setCurrentSearchQuery] = useState('');
     const [showActionMenu, setShowActionMenu] = useState(false);
     const [selectedFolderId, setSelectedFolderId] = useState(null);
     const [showCreateFolderModal, setShowCreateFolderModal] = useState(false);
@@ -93,6 +95,8 @@ export const HomePage = () => {
     const handleSearch = async ({ query }) => {
         // seteamos el estado
         setIsSearching(true);
+        // Guardamos la query actual para poder reutilizarla
+        setCurrentSearchQuery(query);
         // bloque try por si las moscas
         try {
             // esperamos la respuesta, mandamos query y token al srvs
@@ -115,6 +119,28 @@ export const HomePage = () => {
     // este para la limpieza
     const handleClearSearch = () => {
         setSearchResults(null);
+        setCurrentSearchQuery('');
+    };
+
+    // Función para actualizar los resultados de búsqueda
+    const refreshSearchResults = async () => {
+        if (searchResults && currentSearchQuery) {
+            // Pequeña pausa para asegurar que el backend se ha actualizado
+            setTimeout(async () => {
+                setIsSearching(true);
+                try {
+                    const response = await searchStorageService({
+                        query: currentSearchQuery,
+                        token,
+                    });
+                    setSearchResults(response);
+                } catch (error) {
+                    console.error('Error al actualizar búsqueda:', error);
+                } finally {
+                    setIsSearching(false);
+                }
+            }, 300);
+        }
     };
 
     // usamos la referencia del intup oculto
@@ -201,6 +227,10 @@ export const HomePage = () => {
                 token
             );
             await refetchStorage();
+
+            // Actualizar resultados de búsqueda si es necesario
+            await refreshSearchResults();
+
             // toast y listo
             toast.success(message);
         } catch (error) {
@@ -215,6 +245,10 @@ export const HomePage = () => {
             // token, id y tipo al service
             await deleteStorageItemService(itemId, type, token);
             await refetchStorage();
+
+            // Actualizar resultados de búsqueda si es necesario
+            await refreshSearchResults();
+
             // toast y listo
             toast.success('Elemento eliminado correctamente');
         } catch (error) {
@@ -241,6 +275,9 @@ export const HomePage = () => {
                     <SearchSection
                         results={searchResults}
                         onFolderClick={handleFolderClick}
+                        onDelete={handleDeleteItem}
+                        onRename={handleRenameItem}
+                        onRefetchStorage={refetchStorage}
                     />
                 </div>
             ) : (
@@ -249,47 +286,56 @@ export const HomePage = () => {
                     {/* Mostrar el navbar solo si no hay una carpeta seleccionada */}
                     {!selectedFolderId && (
                         <div className="flex flex-col w-full min-w-0">
-                            <nav className="flex items-start gap-2 sm:gap-4 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-white shadow-sm animate-fade text-sm sm:text-base">
-                                <TabButton
-                                    active={activeTab === 'principal'}
-                                    onClick={() => setActiveTab('principal')}
-                                >
-                                    Principal
-                                </TabButton>
-                                <TabButton
-                                    active={activeTab === 'documentos'}
-                                    onClick={() => setActiveTab('documentos')}
-                                >
-                                    Archivos
-                                </TabButton>
-                                <TabButton
-                                    active={activeTab === 'compartidos'}
-                                    onClick={() => setActiveTab('compartidos')}
-                                >
-                                    Compartidos
-                                </TabButton>
-                            </nav>
-
-                            <div className="flex flex-col min-w-0 gap-4 py-3 mt-2 px-4 sm:px-6 lg:px-8">
-                                {activeTab !== 'documentos' && (
-                                    <FolderSection
-                                        folders={filteredContent.folders}
+                            <Boundary>
+                                <nav className="flex items-start gap-2 sm:gap-4 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-white shadow-sm animate-fade text-sm sm:text-base">
+                                    <TabButton
+                                        active={activeTab === 'principal'}
+                                        onClick={() =>
+                                            setActiveTab('principal')
+                                        }
+                                    >
+                                        Principal
+                                    </TabButton>
+                                    <TabButton
+                                        active={activeTab === 'documentos'}
+                                        onClick={() =>
+                                            setActiveTab('documentos')
+                                        }
+                                    >
+                                        Archivos
+                                    </TabButton>
+                                    <TabButton
+                                        active={activeTab === 'compartidos'}
+                                        onClick={() =>
+                                            setActiveTab('compartidos')
+                                        }
+                                    >
+                                        Compartidos
+                                    </TabButton>
+                                </nav>
+                            </Boundary>
+                            <Boundary>
+                                <div className="flex flex-col min-w-0 gap-4 py-3 mt-2 px-4 sm:px-6 lg:px-8">
+                                    {activeTab !== 'documentos' && (
+                                        <FolderSection
+                                            folders={filteredContent.folders}
+                                            loading={loading}
+                                            onFolderClick={handleFolderClick}
+                                            onRename={handleRenameItem}
+                                            onDelete={handleDeleteItem}
+                                            onRefetchStorage={refetchStorage}
+                                        />
+                                    )}
+                                    <DocumentsSection
+                                        documents={filteredContent.documents}
                                         loading={loading}
-                                        onFolderClick={handleFolderClick}
+                                        error={error}
                                         onRename={handleRenameItem}
                                         onDelete={handleDeleteItem}
                                         onRefetchStorage={refetchStorage}
                                     />
-                                )}
-                                <DocumentsSection
-                                    documents={filteredContent.documents}
-                                    loading={loading}
-                                    error={error}
-                                    onRename={handleRenameItem}
-                                    onDelete={handleDeleteItem}
-                                    onRefetchStorage={refetchStorage}
-                                />
-                            </div>
+                                </div>
+                            </Boundary>
                         </div>
                     )}
 
@@ -312,18 +358,20 @@ export const HomePage = () => {
 
             {/* Botón de acción flotante - Solo visible cuando no hay carpeta seleccionada */}
             {!selectedFolderId && (
-                <aside className="fixed bottom-16 right-4 sm:bottom-28 sm:right-8 z-50">
-                    <ActionButton
-                        onClick={() => setShowActionMenu(!showActionMenu)}
-                    />
-                    <ActionMenu
-                        show={showActionMenu}
-                        onClose={() => setShowActionMenu(false)}
-                        onUpload={handleUpload}
-                        onCreateFolder={handleCreateFolder}
-                        className="absolute bottom-12 right-10 sm:bottom-14 sm:right-12"
-                    />
-                </aside>
+                <Boundary>
+                    <aside className="fixed bottom-16 right-4 sm:bottom-28 sm:right-8 z-50">
+                        <ActionButton
+                            onClick={() => setShowActionMenu(!showActionMenu)}
+                        />
+                        <ActionMenu
+                            show={showActionMenu}
+                            onClose={() => setShowActionMenu(false)}
+                            onUpload={handleUpload}
+                            onCreateFolder={handleCreateFolder}
+                            className="absolute bottom-12 right-10 sm:bottom-14 sm:right-12"
+                        />
+                    </aside>
+                </Boundary>
             )}
 
             {/* Botón de acción flotante - Solo visible cuando hay carpeta seleccionada */}
@@ -340,11 +388,14 @@ export const HomePage = () => {
                 onChange={handleFileChange}
                 className="hidden"
             />
-            <CreateFolderModal
-                isOpen={showCreateFolderModal}
-                onClose={() => setShowCreateFolderModal(false)}
-                onCreateFolder={handleCreateFolderSubmit}
-            />
+
+            <Boundary>
+                <CreateFolderModal
+                    isOpen={showCreateFolderModal}
+                    onClose={() => setShowCreateFolderModal(false)}
+                    onCreateFolder={handleCreateFolderSubmit}
+                />
+            </Boundary>
         </>
     );
 };

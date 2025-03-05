@@ -1,36 +1,3 @@
-// import { Link } from 'react-router-dom';
-// import { Logo } from '../Logo.jsx';
-// import { useAuthHook } from '../../hooks/useAuthHook.js';
-// import { ProfileMenu } from '../LayoutPrivate/ProfileMenu.jsx';
-
-// export const Header = () => {
-//     const { currentUser } = useAuthHook();
-
-//     return (
-//         <header className="flex items-center justify-between w-[90vw] mx-auto gap-3 border-b-2 border-black py-4 h-15">
-//             <Logo />
-//             {currentUser ? (
-//                 <ProfileMenu />
-//             ) : (
-//                 <nav className="space-x-3 text-xs md:text-base">
-//                     <Link
-//                         className="hover:bg-gray-200 border-b-2 border-transparent outline-yellow-300 hover:border-yellow-300 p-1 rounded-md"
-//                         to="/users/register"
-//                     >
-//                         Registrarse
-//                     </Link>
-//                     <Link
-//                         to="/users/login"
-//                         className="hover:bg-gray-200 border-b-2 border-transparent hover:border-green-300 p-1 rounded-md"
-//                     >
-//                         Iniciar Sesión
-//                     </Link>
-//                 </nav>
-//             )}
-//         </header>
-//     );
-// };
-
 import { Link } from 'react-router-dom';
 import { Logo } from '../Logo.jsx';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
@@ -51,14 +18,14 @@ export const Header = () => {
             ) : (
                 <nav className="space-x-2 sm:space-x-4 text-xs sm:text-sm md:text-base">
                     <Link
-                        className="hover:bg-gray-200 border-b-2 border-transparent hover:border-yellow-300 p-1 rounded-md"
+                        className="hover:bg-gray-200 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
                         to="/users/register"
                     >
                         Registrarse
                     </Link>
                     <Link
                         to="/users/login"
-                        className="hover:bg-gray-200 border-b-2 border-transparent hover:border-green-300 p-1 rounded-md"
+                        className="hover:bg-gray-200 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
                     >
                         Iniciar Sesión
                     </Link>

@@ -19,6 +19,9 @@ import { UsersListPage } from './pages/UsersListPage.jsx';
 import { SharedLinkPage } from './pages/SharedLinkPage.jsx';
 import { DownloadPage } from './pages/DownloadPage.jsx';
 
+import { RecoveryPassCodePage } from './pages/RecoveryPassCodePage.jsx';
+import { RecoveryEmailPage } from './pages/RecoveryEmailPage.jsx';
+
 function App() {
     return (
         <>
@@ -34,6 +37,14 @@ function App() {
                         <Route
                             path="validation/:registrationCode"
                             element={<ValidationPage />}
+                        />
+                        <Route
+                            path="recovery-email"
+                            element={<RecoveryEmailPage />}
+                        />
+                        <Route
+                            path="recovery"
+                            element={<RecoveryPassCodePage />}
                         />
                     </Route>
                     <Route

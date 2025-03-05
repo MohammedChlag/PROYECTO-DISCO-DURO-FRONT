@@ -10,9 +10,9 @@ export const ActionButton = ({
         <button
             onClick={onClick}
             className={`
-                p-3 sm:p-4 bg-cyan-400 text-white
+                p-3 sm:p-4 bg-[#009EB5] text-white
                 rounded-full shadow-lg
-                hover:bg-[#0096b4]
+                hover:bg-[#009ec3]
                 active:scale-95
                 transition-all
                 focus:outline-none focus:ring-2 focus:ring-[#67e8f9] focus:ring-offset-2

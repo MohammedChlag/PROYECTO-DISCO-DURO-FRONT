@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const ValidationPage = () => {
     const { registrationCode } = useParams();
@@ -65,38 +66,40 @@ export const ValidationPage = () => {
 
     return (
         <div className="min-h-[60vh] flex items-center justify-center">
-            <div className="text-center p-8 max-w-md mx-auto">
-                {status === 'loading' && (
-                    <div className="space-y-4">
-                        <div className="animate-spin h-12 w-12 mx-auto border-4 border-cyan-300 border-t-transparent rounded-full"></div>
-                        <p className="text-gray-600">Validando tu cuenta...</p>
-                    </div>
-                )}
-
-                {status === 'success' && (
-                    <div className="space-y-4">
-                        <div className="text-green-500 text-6xl">✓</div>
-                        <h2 className="text-2xl font-semibold text-gray-800">
-                            ¡Cuenta validada!
-                        </h2>
-                        <p className="text-gray-600">
-                            Redirigiendo al inicio de sesión...
-                        </p>
-                    </div>
-                )}
-
-                {status === 'error' && (
-                    <div className="space-y-4">
-                        <div className="text-red-500 text-6xl">✗</div>
-                        <h2 className="text-2xl font-semibold text-gray-800">
-                            Error de validación
-                        </h2>
-                        <p className="text-gray-600">
-                            Redirigiendo al inicio de sesión...
-                        </p>
-                    </div>
-                )}
-            </div>
+            <Boundary>
+                <div className="text-center p-8 max-w-md mx-auto">
+                    {status === 'loading' && (
+                        <div className="space-y-4">
+                            <div className="animate-spin h-12 w-12 mx-auto border-4 border-cyan-300 border-t-transparent rounded-full"></div>
+                            <p className="text-gray-600">
+                                Validando tu cuenta...
+                            </p>
+                        </div>
+                    )}
+                    {status === 'success' && (
+                        <div className="space-y-4">
+                            <div className="text-green-500 text-6xl">✓</div>
+                            <h2 className="text-2xl font-semibold text-gray-800">
+                                ¡Cuenta validada!
+                            </h2>
+                            <p className="text-gray-600">
+                                Redirigiendo al inicio de sesión...
+                            </p>
+                        </div>
+                    )}
+                    {status === 'error' && (
+                        <div className="space-y-4">
+                            <div className="text-red-500 text-6xl">✗</div>
+                            <h2 className="text-2xl font-semibold text-gray-800">
+                                Error de validación
+                            </h2>
+                            <p className="text-gray-600">
+                                Redirigiendo al inicio de sesión...
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </Boundary>
         </div>
     );
 };

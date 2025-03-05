@@ -3,6 +3,7 @@ import nubelogo from '../assets/img/5390309.png';
 import { Button } from '../components/Button';
 import { Link } from 'react-router-dom';
 import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview';
+import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const LandingPage = () => {
     // Referencia para la sección de valoraciones y la sección principal

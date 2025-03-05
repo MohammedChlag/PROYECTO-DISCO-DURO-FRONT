@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logo-hackloud-solo.png';
 import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview';
+import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const AboutPage = () => {
     const navigate = useNavigate();

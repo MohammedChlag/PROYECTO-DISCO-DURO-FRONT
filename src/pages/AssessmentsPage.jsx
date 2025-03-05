@@ -1,5 +1,6 @@
 import React from 'react';
 import { AssessmentComponent } from '../components/Assessments/AssessmentComponent';
+import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const AssessmentsPage = () => {
     return (
