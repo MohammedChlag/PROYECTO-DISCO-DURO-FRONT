@@ -27,7 +27,6 @@ function App() {
                 {/* Rutas Públicas */}
                 <Route path="/" element={<LayoutPublic />}>
                     <Route index element={<LandingPage />} />
-                    <Route path="/about" element={<AboutPage />} />
                     <Route path="/assessments" element={<AssessmentsPage />} />
                     <Route path="/users">
                         <Route path="login" element={<LoginPage />} />
@@ -51,7 +50,7 @@ function App() {
                 <Route element={<LayoutPrivate />}>
                     <Route path="/storage" element={<HomePage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/aboutUse" element={<AboutPage />} />{' '}
+                    <Route path="/aboutUs" element={<AboutPage />} />{' '}
                     <Route
                         path="/assessmentsUse"
                         element={<AssessmentsPage />}
