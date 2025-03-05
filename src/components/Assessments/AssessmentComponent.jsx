@@ -8,7 +8,10 @@ import {
     deleteAssessmentService,
 } from '../../services/fetchApi';
 import { Button } from '../Button';
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import { useAuthHook } from '../../hooks/useAuthHook';
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
 import { AssessmentsModal } from '../LayoutPrivate/Modals/AssessmentsModal.jsx';

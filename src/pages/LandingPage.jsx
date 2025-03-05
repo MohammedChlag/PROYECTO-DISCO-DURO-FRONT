@@ -3,13 +3,17 @@ import nubelogo from '../assets/img/5390309.png';
 import { Button } from '../components/Button';
 import { Link } from 'react-router-dom';
 import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview.jsx';
+<<<<<<< Updated upstream
+=======
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+>>>>>>> Stashed changes
 
 export const LandingPage = () => {
     // Referencia para la sección de valoraciones y la sección principal
     const valoracionesRef = useRef(null);
     const heroRef = useRef(null);
 
-    // Estado para controlar la dirección de la flecha
+    // Estado para controlar la dirección de la flecha y la posición
     const [isAtTop, setIsAtTop] = useState(true);
 
     // Función para desplazarse suavemente a la sección de valoraciones o al inicio
@@ -17,32 +21,40 @@ export const LandingPage = () => {
         if (isAtTop) {
             // Si estamos arriba, desplazarse a las valoraciones
             valoracionesRef.current.scrollIntoView({ behavior: 'smooth' });
+            setIsAtTop(false); // Cambiar el estado inmediatamente
         } else {
             // Si estamos abajo, desplazarse al inicio
             heroRef.current.scrollIntoView({ behavior: 'smooth' });
+            setIsAtTop(true); // Cambiar el estado inmediatamente
         }
     };
 
     // Detectar la posición de desplazamiento para cambiar la dirección de la flecha
     useEffect(() => {
         const handleScrollPosition = () => {
-            // Obtener la posición de la sección de valoraciones
-            if (valoracionesRef.current) {
-                const valoracionesPosition =
-                    valoracionesRef.current.getBoundingClientRect().top;
-                // Si la sección de valoraciones está visible (o casi visible), cambiar la flecha
-                setIsAtTop(valoracionesPosition > window.innerHeight / 2);
+            if (valoracionesRef.current && heroRef.current) {
+                const scrollPosition = window.scrollY;
+                const valoracionesPosition = valoracionesRef.current.getBoundingClientRect().top + window.scrollY;
+                
+                // Determinar si estamos más cerca de la sección de valoraciones
+                const nearValoraciones = scrollPosition >= (valoracionesPosition - 200);
+                
+                // Actualizar el estado solo si ha cambiado
+                if (isAtTop === nearValoraciones) {
+                    setIsAtTop(!nearValoraciones);
+                }
             }
         };
 
         // Escuchar el evento de desplazamiento
         window.addEventListener('scroll', handleScrollPosition);
+        
         // Verificar la posición inicial
         handleScrollPosition();
 
         // Limpiar el event listener al desmontar
         return () => window.removeEventListener('scroll', handleScrollPosition);
-    }, []);
+    }, [isAtTop]);
 
     return (
         <div className="max-w-6xl mx-auto px-4">
@@ -73,27 +85,16 @@ export const LandingPage = () => {
             <div className="relative py-8 md:py-12">
                 <button
                     onClick={handleScroll}
-                    className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-md hover:shadow-lg transition-shadow cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#009EB5] focus:ring-opacity-50"
+                    className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#009EB5] focus:ring-opacity-50 hover:bg-gray-50 border border-gray-200 hover:border-[#009EB5]"
                     aria-label={
                         isAtTop ? 'Desplazarse a valoraciones' : 'Volver arriba'
                     }
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-6 w-6 text-[#009EB5] transition-transform duration-300 ${
-                            isAtTop ? '' : 'transform rotate-180'
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                        />
-                    </svg>
+                    {isAtTop ? (
+                        <ChevronDownIcon className="h-6 w-6 text-[#009EB5]" />
+                    ) : (
+                        <ChevronUpIcon className="h-6 w-6 text-[#009EB5]" />
+                    )}
                 </button>
                 <hr className="border-gray-200" />
             </div>
