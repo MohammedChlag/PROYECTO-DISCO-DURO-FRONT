@@ -1,37 +1,26 @@
-import { StarIcon } from '@heroicons/react/24/outline';
-import { Button } from '../components/Button.jsx';
-import { Boundary } from '../services/ErrorBoundary.jsx';
+import React from "react";
+import { AssessmentComponent } from "../components/Assessments/AssessmentComponent";
 
 export const AssessmentsPage = () => {
-    return (
-        <>
-            <Boundary>
-                <div className="flex flex-col justify-center items-center text-center px-6 py-8 ">
-                    <h2 className="text-2xl font-semibold mb-2 ">
-                        Valorar plataforma
-                    </h2>
-                    <div className="w-16 h-1 bg-[#009EB5] mb-16 "></div>
-                    <div>
-                        <div className="flex justify-center items-center gap-4 cursor-pointer ">
-                            <StarIcon className="h-5 w-5 text-yellow-500 " />
-                            <StarIcon className="h-5 w-5 text-yellow-500 " />
-                            <StarIcon className="h-5 w-5 text-yellow-500 " />
-                            <StarIcon className="h-5 w-5 text-yellow-500 " />
-                            <StarIcon className="h-5 w-5 text-yellow-500 " />
-                        </div>
-                        <p className=" text-md mt-3 py-5 font-medium ">
-                            Deja un comentario
-                        </p>
-                        <form className="max-w-md">
-                            <textarea
-                                placeholder="Escribe un mensaje"
-                                className="w-full px-3 rounded border bg-slate-200 py-7 outline-none  focus:border-[#00B4D8]"
-                            />
-                            <Button>Enviar</Button>
-                        </form>
-                    </div>
-                </div>
-            </Boundary>
-        </>
-    );
+  return (
+    <main className="bg-gradient-to-b from-white to-gray-50">
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        <header className="max-w-4xl mx-auto text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Valoraciones de Hackloud
+          </h1>
+          <div className="w-24 h-1 bg-[#009EB5] mx-auto mb-6"></div>
+          <p className="text-gray-600 text-lg mb-0 max-w-3xl mx-auto">
+            Conoce las opiniones de nuestros usuarios sobre Hackloud. Tu opinión
+            es importante para nosotros y nos ayuda a mejorar continuamente
+            nuestro servicio.
+          </p>
+        </header>
+
+        <div className="max-w-7xl mx-auto">
+          <AssessmentComponent />
+        </div>
+      </div>
+    </main>
+  );
 };
