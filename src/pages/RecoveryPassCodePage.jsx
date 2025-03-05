@@ -50,7 +50,9 @@ export const RecoveryPassCodePage = () => {
                 toast.error('Error al cambiar la contraseña');
             }
         } catch (error) {
-            toast.error('Hubo un error al procesar la solicitud');
+            toast.error(
+                error.message || 'Hubo un error al procesar la solicitud'
+            );
         }
     };
 
