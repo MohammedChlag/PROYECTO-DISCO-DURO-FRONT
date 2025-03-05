@@ -343,7 +343,7 @@ export const AssessmentPreview = () => {
 
                                     <div className="h-14 sm:h-16 overflow-y-auto mb-1">
                                         <p className="text-xs text-gray-600 italic">
-                                            "{assessment.comment}"
+                                            {assessment.comment}
                                         </p>
                                     </div>
 
