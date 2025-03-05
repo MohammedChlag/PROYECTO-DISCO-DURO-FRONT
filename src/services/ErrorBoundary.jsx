@@ -29,7 +29,7 @@ export class Boundary extends React.Component {
                     <p>{this.state.errorMessage}</p>
                     <button
                         className="px-4 py-2 rounded bg-[#009EB5] hover:bg-[#009ec3] active:outline text-sm"
-                        onclick={() => window.location.reload()}
+                        onClick={() => window.location.reload()}
                     >
                         Recargar la página{''}
                     </button>

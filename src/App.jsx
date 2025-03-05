@@ -6,7 +6,6 @@ import { LayoutPrivate } from './components/LayoutPrivate/LayoutPrivate.jsx';
 // Páginas Publicas
 import { LandingPage } from './pages/LandingPage.jsx';
 import { AboutPage } from './pages/AboutPage.jsx';
-import { AssessmentsPage } from './pages/AssessmentsPage.jsx';
 import { RegisterPage } from './pages/RegisterPage.jsx';
 import { LoginPage } from './pages/LoginPage.jsx';
 import { ValidationPage } from './pages/ValidationPage.jsx';
@@ -29,7 +28,6 @@ function App() {
                 {/* Rutas Públicas */}
                 <Route path="/" element={<LayoutPublic />}>
                     <Route index element={<LandingPage />} />
-                    <Route path="/assessments" element={<AssessmentsPage />} />
                     <Route path="/users">
                         <Route path="login" element={<LoginPage />} />
                         <Route path="register" element={<RegisterPage />} />
@@ -63,7 +61,7 @@ function App() {
                     <Route path="/aboutUs" element={<AboutPage />} />
                     <Route
                         path="/assessmentsUse"
-                        element={<AssessmentsPage />}
+                        // element={<AssessmentsPage />}
                     />
                     <Route path="/admin/users" element={<UsersListPage />} />
                 </Route>
