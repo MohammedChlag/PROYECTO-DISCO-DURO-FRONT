@@ -14,8 +14,6 @@ export const ProfileMenu = () => {
     const [avatarUrl, setAvatarUrl] = useState(null);
     const menuRef = useRef(null);
 
-    const redirectPath = currentUser ? '/storage' : '/';
-
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -61,7 +59,7 @@ export const ProfileMenu = () => {
               ]
             : []),
         {
-            label: 'Editar perfil',
+            label: 'Perfil',
             onClick: () => {
                 navigate('/profile');
                 setShowMenu(false);
@@ -129,11 +127,12 @@ export const ProfileMenu = () => {
                         className={`h-8 w-8 rounded-full object-cover ${
                             isAdmin
                                 ? 'ring-2 ring-red-500'
-                                : 'ring-2 ring-white'
+                                : 'ring-2 ring-blue-400'
                         }`}
                         onError={(e) => {
                             console.error(
-                                'Error al cargar el avatar en ProfileMenu'
+                                e.message ||
+                                    'Error al cargar el avatar en ProfileMenu'
                             );
                             setAvatarError(true);
                         }}
@@ -159,6 +158,7 @@ export const ProfileMenu = () => {
                     items={menuItems}
                     userAvatar={avatarUrl}
                     userName={currentUser?.username || 'Usuario'}
+                    isAdmin={isAdmin}
                 />
             )}
         </div>

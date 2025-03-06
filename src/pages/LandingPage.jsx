@@ -20,40 +20,69 @@ export const LandingPage = () => {
             valoracionesRef.current.scrollIntoView({ behavior: 'smooth' });
             setIsAtTop(false); // Cambiar el estado inmediatamente
         } else {
-            // Si estamos abajo, desplazarse al inicio
-            heroRef.current.scrollIntoView({ behavior: 'smooth' });
+            // Si estamos abajo, desplazarse al inicio de la página
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setIsAtTop(true); // Cambiar el estado inmediatamente
         }
     };
 
     // Detectar la posición de desplazamiento para cambiar la dirección de la flecha
+    // Usando un enfoque más robusto que funciona con diferentes niveles de zoom (Alex ya lo solucioné)
     useEffect(() => {
         const handleScrollPosition = () => {
-            if (valoracionesRef.current && heroRef.current) {
-                const scrollPosition = window.scrollY;
-                const valoracionesPosition =
-                    valoracionesRef.current.getBoundingClientRect().top +
-                    window.scrollY;
+            if (!valoracionesRef.current || !heroRef.current) return;
 
-                // Determinar si estamos más cerca de la sección de valoraciones
-                const nearValoraciones =
-                    scrollPosition >= valoracionesPosition - 200;
+            // Obtener las posiciones relativas a la ventana (viewport)
+            const valoracionesRect =
+                valoracionesRef.current.getBoundingClientRect();
+            const heroRect = heroRef.current.getBoundingClientRect();
 
-                // Actualizar el estado solo si ha cambiado
-                if (isAtTop === nearValoraciones) {
-                    setIsAtTop(!nearValoraciones);
-                }
+            // Altura de la ventana
+            const windowHeight = window.innerHeight;
+
+            // Determinar si la sección de valoraciones está visible en la ventana
+            // Consideramos que está visible si al menos 1/3 de la sección está en la ventana
+            const valoracionesVisible =
+                valoracionesRect.top < windowHeight * 0.8 &&
+                valoracionesRect.bottom > 0;
+
+            // Determinar si la sección hero está visible
+            const heroVisible =
+                heroRect.top < windowHeight * 0.5 && heroRect.bottom > 0;
+
+            // Si las valoraciones son más visibles que el hero, estamos abajo
+            // Si el hero es más visible o ambos son igualmente visibles, estamos arriba
+            const shouldBeAtTop = heroVisible && !valoracionesVisible;
+
+            // Solo actualizar si hay un cambio
+            if (isAtTop !== shouldBeAtTop) {
+                setIsAtTop(shouldBeAtTop);
             }
         };
 
-        // Escuchar el evento de desplazamiento
-        window.addEventListener('scroll', handleScrollPosition);
+        // Escuchar el evento de desplazamiento con throttling para mejor rendimiento
+        let ticking = false;
+        const scrollListener = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    handleScrollPosition();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('scroll', scrollListener);
+        window.addEventListener('resize', handleScrollPosition); // También escuchar eventos de cambio de tamaño
 
         // Verificar la posición inicial
         handleScrollPosition();
 
-        // Limpiar el event listener al desmontar
-        return () => window.removeEventListener('scroll', handleScrollPosition);
+        // Limpiar los event listeners al desmontar
+        return () => {
+            window.removeEventListener('scroll', scrollListener);
+            window.removeEventListener('resize', handleScrollPosition);
+        };
     }, [isAtTop]);
 
     return (

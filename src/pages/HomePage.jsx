@@ -47,7 +47,7 @@ export const HomePage = () => {
             return { folders: [], documents: [] };
         }
 
-        // supongamos que llevas algo, .reduce acc folder e items de una
+        // supongamos que llevas algo, .reduce acc folders e items de una
         const { folders, documents } = storage.reduce(
             (acc, item) => {
                 if (item.type === 'folder') {
@@ -57,7 +57,7 @@ export const HomePage = () => {
                 }
                 return acc;
             },
-            // aquí ya habre divididoo el sotarage en dos :P
+            // aquí ya habre dividido el sotarage en dos :P
             { folders: [], documents: [] }
         );
 
