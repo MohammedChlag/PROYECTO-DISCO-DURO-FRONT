@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { resetPasswordService } from '../services/fetchApi.js';
 import { Input } from '../components/forms/Input.jsx';
-import { Button } from '../components/Button.jsx';
+import { Button } from '../components/layout/Button.jsx';
 
 export const RecoveryPassCodePage = () => {
     const [searchParams] = useSearchParams(); //Obtenemos el código de la URL

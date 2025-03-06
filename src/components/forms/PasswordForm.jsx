@@ -4,7 +4,7 @@ import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { toast } from 'react-toastify';
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
-import { Button } from '../Button.jsx';
+import { Button } from '../layout/Button.jsx';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 
 export const PasswordForm = () => {

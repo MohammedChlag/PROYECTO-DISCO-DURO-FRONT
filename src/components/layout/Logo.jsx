@@ -1,6 +1,6 @@
-import logo from '../assets/img/logo-hackloud-solo.png';
+import logo from '../../assets/img/logo-hackloud-solo.png';
 import { Link } from 'react-router-dom';
-import { useAuthHook } from '../hooks/useAuthHook.js';
+import { useAuthHook } from '../../hooks/useAuthHook.js';
 
 export const Logo = () => {
     const { currentUser } = useAuthHook();

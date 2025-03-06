@@ -4,14 +4,14 @@ import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { toast } from 'react-toastify';
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
-import { Button } from '../Button.jsx';
+import { Button } from '../layout/Button.jsx';
 import {
     UserCircleIcon,
     TrashIcon,
     PencilIcon,
 } from '@heroicons/react/24/solid';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
-import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal.jsx';
+import { DeleteConfirmModal } from '../layout/Modals/DeleteConfirmModal.jsx';
 
 export const ProfileForm = () => {
     const { token, refreshCurrentUser } = useAuthHook();

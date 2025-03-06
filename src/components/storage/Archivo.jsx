@@ -6,10 +6,10 @@ import {
     UsersIcon,
     ArrowDownTrayIcon,
 } from '@heroicons/react/24/outline';
-import { RenameModal } from '../LayoutPrivate/Modals/RenameModal.jsx';
-import { ShareModal } from '../LayoutPrivate/Modals/ShareModal';
-import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
-import { FilePreviewModal } from '../LayoutPrivate/Modals/FilePreviewModal';
+import { RenameModal } from '../layout/Modals/RenameModal.jsx';
+import { ShareModal } from '../layout/Modals/ShareModal.jsx';
+import { DeleteConfirmModal } from '../layout/Modals/DeleteConfirmModal.jsx';
+import { FilePreviewModal } from '../layout/Modals/FilePreviewModal.jsx';
 import { useItemsHook } from '../../hooks/useItemsHook.js';
 import { getFileIcon } from '../../utils/helpers.js';
 import { toast } from 'react-toastify';

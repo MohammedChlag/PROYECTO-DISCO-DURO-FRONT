@@ -3,15 +3,7 @@ import { useMemo, useRef, useState } from 'react';
 import { useAuthHook } from '../hooks/useAuthHook.js';
 import { useStorageHook } from '../hooks/useStorageHook.js';
 // Nav, sections y modals
-import { TabButton } from '../components/LayoutPrivate/TabButton.jsx';
-import { SearchBar } from '../components/LayoutPrivate/Search/SearchBar.jsx';
-import { FolderSection } from '../components/LayoutPrivate/FolderSection.jsx';
-import { DocumentsSection } from '../components/LayoutPrivate/DocumentsSection.jsx';
-import { SearchSection } from '../components/LayoutPrivate/Search/SearchSection.jsx';
-import { CreateFolderModal } from '../components/LayoutPrivate/Modals/CreateFolderModal.jsx';
 // Botón acción
-import { ActionButton } from '../components/LayoutPrivate/ActionButton.jsx';
-import { ActionMenu } from '../components/LayoutPrivate/ActionMenu.jsx';
 // Folderpage
 import { FolderPage } from './FolderPage.jsx';
 import { toast } from 'react-toastify';
@@ -23,7 +15,15 @@ import {
     renameStorageItemService,
     deleteStorageItemService,
 } from '../services/fetchApi.js';
+import { SearchBar } from '../components/storage/Search/SearchBar.jsx';
+import { SearchSection } from '../components/storage/SearchSection.jsx';
 import { Boundary } from '../services/ErrorBoundary.jsx';
+import { TabButton } from '../components/profile/TabButton.jsx';
+import { FolderSection } from '../components/storage/FolderSection.jsx';
+import { DocumentsSection } from '../components/storage/DocumentsSection.jsx';
+import { ActionMenu } from '../components/profile/ActionMenu.jsx';
+import { CreateFolderModal } from '../components/layout/Modals/CreateFolderModal.jsx';
+import { ActionButton } from '../components/profile/ActionButton.jsx';
 
 // Bienvenidos a la homepage :D
 export const HomePage = () => {

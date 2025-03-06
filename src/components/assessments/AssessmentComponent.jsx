@@ -6,11 +6,11 @@ import {
     getAssessmentsService,
     getUserByIdService,
     deleteAssessmentService,
-} from '../../services/fetchApi';
-import { Button } from '../Button.jsx';
-import { useAuthHook } from '../../hooks/useAuthHook';
-import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
-import { AssessmentsModal } from '../LayoutPrivate/Modals/AssessmentsModal.jsx';
+} from '../../services/fetchApi.js';
+import { Button } from '../layout/Button.jsx';
+import { useAuthHook } from '../../hooks/useAuthHook.js';
+import { AssessmentsModal } from '../layout/Modals/AssessmentsModal.jsx';
+import { DeleteConfirmModal } from '../layout/Modals/DeleteConfirmModal.jsx';
 
 export const AssessmentComponent = () => {
     const { currentUser, token, isAdmin } = useAuthHook();

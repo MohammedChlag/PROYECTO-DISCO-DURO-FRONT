@@ -1,5 +1,5 @@
-import { Archivo } from '../../Storage/Archivo.jsx';
-import { Carpeta } from '../../Storage/Carpeta.jsx';
+import { Archivo } from './Archivo.jsx';
+import { Carpeta } from './Carpeta.jsx';
 
 export const SearchSection = ({
     results,

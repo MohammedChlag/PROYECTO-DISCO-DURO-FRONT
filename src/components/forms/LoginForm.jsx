@@ -4,7 +4,7 @@ import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { useNavigate } from 'react-router-dom';
 import { loginUserService } from '../../services/fetchApi.js';
 import { Form } from './Form.jsx';
-import { Button } from '../Button.jsx';
+import { Button } from '../layout/Button.jsx';
 import { toast } from 'react-toastify';
 import { loginUserSchema } from '../../schemas/users/loginUserSchema.js';
 import { Input } from './Input.jsx';

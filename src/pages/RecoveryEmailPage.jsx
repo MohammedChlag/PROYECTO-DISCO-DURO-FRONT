@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { recoveryPasswordService } from '../services/fetchApi.js';
 import { toast } from 'react-toastify';
 import { Input } from '../components/forms/Input.jsx';
-import { Button } from '../components/Button.jsx';
+import { Button } from '../components/layout/Button.jsx';
 import { Form } from '../components/forms/Form.jsx';
 
 export const RecoveryEmailPage = () => {

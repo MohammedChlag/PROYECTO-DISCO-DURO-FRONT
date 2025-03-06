@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
-import { Icon } from '../Icon.jsx';
-import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { UserCircleIcon, ChevronDownIcon } from '@heroicons/react/24/outline'; // Importamos el nuevo icono
 import { ProfileOptions } from './ProfileOptions.jsx';
 
 export const ProfileMenu = () => {
@@ -46,7 +45,6 @@ export const ProfileMenu = () => {
     }, [avatarUrl]);
 
     const menuItems = [
-        // Opción de Inicio solo visible si no estamos en la página principal
         ...(location.pathname !== '/storage'
             ? [
                   {
@@ -65,7 +63,6 @@ export const ProfileMenu = () => {
                 setShowMenu(false);
             },
         },
-        // Opción solo visible para administradores
         ...(isAdmin
             ? [
                   {
@@ -101,7 +98,6 @@ export const ProfileMenu = () => {
         },
     ];
 
-    // Si no hay usuario, mostrar el icono por defecto
     if (!currentUser) {
         return (
             <div className="relative z-40">
@@ -150,7 +146,7 @@ export const ProfileMenu = () => {
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                     </span>
                 )}
-                <Icon name="expand_more" className="text-gray-600" />
+                <ChevronDownIcon className="h-5 w-5 text-gray-600" />
             </button>
 
             {showMenu && (

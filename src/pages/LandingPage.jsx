@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import nubelogo from '../assets/img/5390309.png';
-import { Button } from '../components/Button';
+import nubelogo from '../assets/img/nube.png';
+import { Button } from '../components/layout/Button.jsx';
 import { Link } from 'react-router-dom';
-import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview.jsx';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+import { AssessmentPreview } from '../components/assessments/AssessmentsPreview.jsx';
 
 export const LandingPage = () => {
     // Referencia para la sección de valoraciones y la sección principal

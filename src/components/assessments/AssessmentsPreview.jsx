@@ -9,7 +9,7 @@ import {
     deleteAssessmentService,
 } from '../../services/fetchApi';
 import { useAuthHook } from '../../hooks/useAuthHook';
-import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
+import { DeleteConfirmModal } from '../layout/Modals/DeleteConfirmModal';
 
 export const AssessmentPreview = () => {
     const { isAdmin, token } = useAuthHook();

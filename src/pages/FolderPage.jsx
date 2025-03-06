@@ -1,7 +1,7 @@
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { useMemo } from 'react';
-import { DocumentsSection } from '../components/LayoutPrivate/DocumentsSection.jsx';
-import { ActionButton } from '../components/LayoutPrivate/ActionButton.jsx';
+import { DocumentsSection } from '../components/storage/DocumentsSection.jsx';
+import { ActionButton } from '../components/profile/ActionButton.jsx';
 
 export const FolderPage = ({
     folderId,

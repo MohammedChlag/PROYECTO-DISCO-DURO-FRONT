@@ -1,6 +1,6 @@
-import logoFooter from '../assets/img/logo-hackloud-solo-blanco.png';
+import logoFooter from '../../assets/img/logo-hackloud-solo-blanco.png';
 import { Link } from 'react-router-dom';
-import { useAuthHook } from '../hooks/useAuthHook.js';
+import { useAuthHook } from '../../hooks/useAuthHook.js';
 
 export const Logofooter = () => {
     const { currentUser } = useAuthHook();

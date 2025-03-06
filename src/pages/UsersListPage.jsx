@@ -11,7 +11,7 @@ import {
     ArrowPathIcon,
     EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
-import { DeleteUserModal } from '../components/LayoutPrivate/Modals/DeleteUserModal';
+import { DeleteUserModal } from '../components/layout/Modals/DeleteUserModal.jsx';
 import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const UsersListPage = () => {

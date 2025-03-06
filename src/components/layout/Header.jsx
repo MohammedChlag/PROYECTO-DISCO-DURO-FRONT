@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Logo } from '../Logo.jsx';
+import { Logo } from './Logo.jsx';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
-import { ProfileMenu } from '../LayoutPrivate/ProfileMenu.jsx';
+import { ProfileMenu } from '../profile/ProfileMenu.jsx';
 
 export const Header = () => {
     const { currentUser } = useAuthHook();

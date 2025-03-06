@@ -1,18 +1,19 @@
-import { Carpeta } from '../Storage/Carpeta';
+import { Archivo } from './Archivo';
 
-export const FolderSection = ({
-    folders = [],
+export const DocumentsSection = ({
+    documents = [],
     loading,
-    onFolderClick,
+    error,
     onRename,
     onDelete,
     onRefetchStorage,
+    isSharedFolder = false,
 }) => {
     if (loading) {
         return (
             <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
                 <h2 className="text-base sm:text-lg font-semibold mb-4">
-                    Carpetas
+                    Archivos
                 </h2>
                 <div className="flex flex-col">
                     <section className="flex items-center justify-center py-4 sm:py-6">
@@ -20,7 +21,7 @@ export const FolderSection = ({
                             className="animate-pulse text-gray-500"
                             role="status"
                         >
-                            Cargando carpetas...
+                            Cargando archivos...
                         </p>
                     </section>
                 </div>
@@ -28,15 +29,28 @@ export const FolderSection = ({
         );
     }
 
-    if (!folders.length) {
+    if (error) {
         return (
             <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
                 <h2 className="text-base sm:text-lg font-semibold mb-4">
-                    Carpetas
+                    Archivos
+                </h2>
+                <div className="flex flex-col">
+                    <p className="text-red-500">Error al cargar los archivos</p>
+                </div>
+            </section>
+        );
+    }
+
+    if (!documents.length) {
+        return (
+            <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
+                <h2 className="text-base sm:text-lg font-semibold mb-4">
+                    Archivos
                 </h2>
                 <div className="flex flex-col">
                     <p className="text-gray-500">
-                        No hay carpetas para mostrar
+                        No hay archivos para mostrar
                     </p>
                 </div>
             </section>
@@ -46,18 +60,18 @@ export const FolderSection = ({
     return (
         <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
             <h2 className="text-base sm:text-lg font-semibold mb-4">
-                Carpetas
+                Archivos
             </h2>
             <div className="flex flex-col">
-                <ul className="space-y-2 sm:space-y-3 list-none p-0">
-                    {folders.map((folder) => (
-                        <Carpeta
-                            key={folder.id}
-                            folder={folder}
-                            onFolderClick={onFolderClick}
+                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 list-none p-0">
+                    {documents.map((file) => (
+                        <Archivo
+                            key={file.id}
+                            file={file}
                             onRename={onRename}
                             onDelete={onDelete}
                             onRefetchStorage={onRefetchStorage}
+                            isSharedFolder={isSharedFolder}
                         />
                     ))}
                 </ul>

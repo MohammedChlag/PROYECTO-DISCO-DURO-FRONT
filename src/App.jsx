@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { LayoutPublic } from './components/LayoutPublic/LayoutPublic.jsx';
-import { LayoutPrivate } from './components/LayoutPrivate/LayoutPrivate.jsx';
+import { Layout } from './components/layout/Layout.jsx';
 
 // Páginas Publicas
 import { LandingPage } from './pages/LandingPage.jsx';
@@ -25,11 +24,12 @@ function App() {
     return (
         <>
             <Routes>
-                {/* Rutas Públicas */}
-                <Route path="/" element={<LayoutPublic />}>
+                {/* Layout */}
+                <Route element={<Layout />}>
+                    {/* Rutas Públicas */}
                     <Route index element={<LandingPage />} />
                     <Route path="/assessments" element={<AssessmentsPage />} />
-                    <Route path="/assessments" element={<AssessmentsPage />} />
+                    <Route path="/aboutUs" element={<AboutPage />} />
                     <Route path="/users">
                         <Route path="login" element={<LoginPage />} />
                         <Route path="register" element={<RegisterPage />} />
@@ -54,17 +54,10 @@ function App() {
                         path="/storage/share/download/:shareToken"
                         element={<DownloadPage />}
                     />
-                </Route>
 
-                {/* Rutas Privadas */}
-                <Route element={<LayoutPrivate />}>
+                    {/* Rutas Privadas */}
                     <Route path="/storage" element={<HomePage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/aboutUs" element={<AboutPage />} />
-                    <Route
-                        path="/assessmentsUse"
-                        // element={<AssessmentsPage />}
-                    />
                     <Route path="/admin/users" element={<UsersListPage />} />
                 </Route>
 

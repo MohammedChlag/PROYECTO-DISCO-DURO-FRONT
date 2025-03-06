@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useFormHook } from '../../hooks/useFormHook.js';
-import { Icon } from '../Icon.jsx';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { PasswordStrength } from './PasswordStrength.jsx';
 
 export const Input = ({
@@ -74,13 +74,11 @@ export const Input = ({
                             onClick={() => setShowPassword(!showPassword)}
                             className="text-gray-500 hover:text-gray-700 focus:outline-none"
                         >
-                            <Icon
-                                name={
-                                    showPassword
-                                        ? 'visibility_off'
-                                        : 'visibility'
-                                }
-                            />
+                            {showPassword ? (
+                                <EyeSlashIcon className="h-5 w-5" />
+                            ) : (
+                                <EyeIcon className="h-5 w-5" />
+                            )}
                         </button>
                     </div>
                 )}
