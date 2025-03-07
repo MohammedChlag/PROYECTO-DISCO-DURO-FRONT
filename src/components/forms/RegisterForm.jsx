@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFormHook } from '../../hooks/useFormHook.js';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { useFormHook } from '../../hooks/useFormHook.js';
+
+// Imports de componentes
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
 import { Button } from '../Button.jsx';
-import { registerUserService } from '../../services/fetchApi.js';
+
+// Import de service
+import { registerUserService } from '../../services/fetchUserApi.js';
+
 import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
-import { Link } from 'react-router-dom';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 
 export const RegisterForm = () => {

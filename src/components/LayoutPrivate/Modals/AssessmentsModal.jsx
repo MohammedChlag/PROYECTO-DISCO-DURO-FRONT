@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+// Imports de iconos
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+
 import { Button } from '../../Button';
 
-import { toast } from 'react-toastify';
-import { createAssessmentService } from '../../../services/fetchApi.js';
+import { createAssessmentService } from '../../../services/fetchAssessmentsApi.js';
 
 export const AssessmentsModal = ({
     isOpen,

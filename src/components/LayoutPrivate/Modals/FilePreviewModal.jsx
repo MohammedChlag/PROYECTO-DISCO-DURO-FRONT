@@ -1,7 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { getFilePreviewService } from '../../../services/fetchApi';
+
 import { useAuthHook } from '../../../hooks/useAuthHook';
+
+import { getFilePreviewService } from '../../../services/fetchStorageApi.js';
+
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 // El modal más chulo para ver archivos
 export const FilePreviewModal = ({ isOpen, onClose, file }) => {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { downloadSharedFileService } from '../services/fetchApi';
+
+import { downloadSharedFileService } from '../services/fetchStorageApi.js';
+
 import { ArrowDownTrayIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 export const DownloadPage = () => {

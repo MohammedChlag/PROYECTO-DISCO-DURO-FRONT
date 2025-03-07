@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import {
-    getUserService,
-    getOwnUserService,
-    updateUserService,
-    updateAvatarService,
-    deleteAvatarService,
-    updatePasswordService,
-} from '../services/fetchApi.js';
+
+// Import de services
+import { getUserService } from '../services/fetchUserApi.js';
+import { getOwnUserService } from '../services/fetchUserApi.js';
+import { updateUserService } from '../services/fetchUserApi.js';
+import { updateAvatarService } from '../services/fetchUserApi.js';
+import { deleteAvatarService } from '../services/fetchUserApi.js';
+import { updatePasswordService } from '../services/fetchUserApi.js';
 
 export const useUserHook = (id, token, refreshCallback = null) => {
     const [user, setUser] = useState(null);

@@ -1,14 +1,21 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+// Imports de hooks
 import { useFormHook } from '../../hooks/useFormHook.js';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
-import { useNavigate } from 'react-router-dom';
-import { loginUserService } from '../../services/fetchApi.js';
+
+// Import de service
+import { loginUserService } from '../../services/fetchUserApi.js';
+
+// Imports de componentes
 import { Form } from './Form.jsx';
 import { Button } from '../Button.jsx';
-import { toast } from 'react-toastify';
-import { loginUserSchema } from '../../schemas/users/loginUserSchema.js';
 import { Input } from './Input.jsx';
-import { Link } from 'react-router-dom';
+
+import { loginUserSchema } from '../../schemas/users/loginUserSchema.js';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 
 export const LoginForm = () => {

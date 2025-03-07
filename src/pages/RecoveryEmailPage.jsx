@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { recoveryPasswordService } from '../services/fetchApi.js';
 import { toast } from 'react-toastify';
+
+import { recoveryPasswordService } from '../services/fetchUserApi.js';
+// Imports de componentes
 import { Input } from '../components/forms/Input.jsx';
 import { Button } from '../components/Button.jsx';
 import { Form } from '../components/forms/Form.jsx';
-
 export const RecoveryEmailPage = () => {
     const [email, setEmail] = useState('');
 

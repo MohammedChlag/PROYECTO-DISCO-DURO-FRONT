@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import {
-    downloadFileService,
-    shareStorageItemService,
-} from '../services/fetchApi.js';
+
 import { useAuthHook } from './useAuthHook.js';
+
+// Imports de services
+import { downloadFileService } from '../services/fetchStorageApi.js';
+import { shareStorageItemService } from '../services/fetchStorageApi.js';
 
 // customHook para interaciones con folders o files
 // recibe por params el items en cuestión, el type(por defecto, file) y dos callbacks

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthHook } from '../../hooks/useAuthHook';
 import { Link } from 'react-router-dom';
+
+// Imports de iconos
 import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import {
-    getAssessmentsService,
-    getUserByIdService,
-    deleteAssessmentService,
-} from '../../services/fetchApi';
-import { useAuthHook } from '../../hooks/useAuthHook';
+
+// Imports de services
+import { getAssessmentsService } from '../../services/fetchAssessmentsApi.js';
+import { getUserByIdService } from '../../services/fetchUserApi.js';
+import { deleteAssessmentService } from '../../services/fetchAssessmentsApi.js';
+
+// Import de modal
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
 
 export const AssessmentPreview = () => {

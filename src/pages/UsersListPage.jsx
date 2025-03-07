@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthHook } from '../hooks/useAuthHook';
-import {
-    getAllUsersService,
-    toggleUserActiveService,
-    deleteUserService,
-} from '../services/fetchApi';
 import { toast } from 'react-toastify';
+
+import { useAuthHook } from '../hooks/useAuthHook';
+
+// Imports de services
+import { getAllUsersService } from '../services/fetchAdminApi.js';
+import { toggleUserActiveService } from '../services/fetchAdminApi.js';
+import { deleteUserService } from '../services/fetchAdminApi.js';
+
+// Imports de iconos
 import {
     ArrowPathIcon,
     EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
+
 import { DeleteUserModal } from '../components/LayoutPrivate/Modals/DeleteUserModal';
+
 import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const UsersListPage = () => {

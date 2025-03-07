@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
+
+import { useAuthHook } from '../../hooks/useAuthHook';
+import { Button } from '../Button';
+
+// Imports de iconos
 import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import {
-    getAssessmentsService,
-    getUserByIdService,
-    deleteAssessmentService,
-} from '../../services/fetchApi';
-import { Button } from '../Button';
 
-import { useAuthHook } from '../../hooks/useAuthHook';
+// Imports de services
+import { getAssessmentsService } from '../../services/fetchAssessmentsApi.js';
+import { getUserByIdService } from '../../services/fetchUserApi.js';
+import { deleteAssessmentService } from '../../services/fetchAssessmentsApi.js';
+
+// Imports de modals
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
 import { AssessmentsModal } from '../LayoutPrivate/Modals/AssessmentsModal.jsx';
 
