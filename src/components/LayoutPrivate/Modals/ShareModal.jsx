@@ -48,7 +48,7 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
                 <div
-                    className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left shadow-xl transition-all"
+                    className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-[#000000] p-6 text-left shadow-xl transition-all"
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Botón cerrar */}
@@ -61,7 +61,7 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                     </button>
 
                     {/* Título */}
-                    <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
+                    <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white mb-4">
                         Compartir {type === 'file' ? 'archivo' : 'carpeta'}:{' '}
                         {title}
                     </h3>
@@ -113,7 +113,8 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                                                 type="text"
                                                 readOnly
                                                 value={urls.download}
-                                                className="flex-1 rounded-l-md border border-gray-300 px-3 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                className="flex-1 rounded-l-md border border-gray-300 px-3 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                                dark:bg-[#3d3d3d] focus:border-transparent"
                                             />
                                             <button
                                                 onClick={() =>

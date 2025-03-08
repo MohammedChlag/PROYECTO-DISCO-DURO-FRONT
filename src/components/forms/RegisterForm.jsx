@@ -53,20 +53,20 @@ export const RegisterForm = () => {
     return (
         <>
             <Form
-                className="flex flex-col gap-6 p-8 bg-white rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
+                className="flex flex-col gap-6 p-8 bg-white dark:bg-[#2c2c2c] rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
                 handleSubmit={handleSubmit}
             >
                 <div className="text-center space-y-2">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                         Crear cuenta
                     </h3>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-white">
                         Únete a Hackloud hoy mismo
                     </p>
                 </div>
 
                 <Boundary>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
                         <Input
                             id="firstName"
                             label="Nombre"
@@ -167,7 +167,7 @@ export const RegisterForm = () => {
                             {loading ? 'Creando cuenta...' : 'Crear cuenta'}
                         </Button>
 
-                        <p className="text-center text-sm text-gray-600">
+                        <p className="text-center text-sm text-gray-600 dark:text-white">
                             ¿Ya tienes una cuenta?{' '}
                             <Link
                                 to="/users/login"

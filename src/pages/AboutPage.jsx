@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logo-hackloud-solo.png';
+import logoLight from '../assets/img/logo-hackloud-solo.png'
+import logoDark from '../assets/img/logo-hackloud-solo-blanco.png'
 import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview.jsx';
 
 export const AboutPage = () => {
@@ -10,11 +12,20 @@ export const AboutPage = () => {
             <h2 className="text-xl sm:text-2xl font-semibold mb-2">About us</h2>
             <div className="w-12 h-1 bg-[#009EB5] mb-6"></div>
 
-            <img src={logo} alt="Hackloud Logo" className="w-32 sm:w-40 mb-4" />
+            {/* <img src={logo} alt="Hackloud Logo" className="w-32 sm:w-40 mb-4" /> */}
+            <img
+                src={logoLight}
+                alt="Hackloud Logo Light"
+                className="w-32 sm:w-40 mb-4 dark:hidden" />
+            
+            <img
+                src={logoDark}
+                alt="Hackloud Logo Dark"
+                className="w-32 sm:w-40 mb-4 hidden dark:block" />
 
             <p className="text-base sm:text-lg font-medium">Save it ALL</p>
 
-            <div className="max-w-2xl mx-auto text-gray-700 space-y-4 mt-4">
+            <div className="max-w-2xl mx-auto text-gray-700 dark:text-gray-400 space-y-4 mt-4">
                 <p>
                     Soy tu espacio seguro en la nube. Guarda, organiza y accede
                     a tus archivos desde cualquier dispositivo, en cualquier
@@ -44,7 +55,7 @@ export const AboutPage = () => {
 
             {/* Sección de valoraciones */}
             <div id="valoraciones" className="w-full max-w-4xl mx-auto mt-4">
-                <h3 className="text-xl font-semibold text-gray-800 mb-6">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
                     <span className="text-[#009EB5]">♥</span> Opiniones de
                     nuestra comunidad
                 </h3>

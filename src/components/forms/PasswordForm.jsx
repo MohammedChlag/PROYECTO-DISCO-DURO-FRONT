@@ -53,9 +53,9 @@ export const PasswordForm = () => {
         <Boundary>
             <Form
                 handleSubmit={handleSubmit}
-                className="flex flex-col items-center gap-4 p-6 bg-white rounded-lg shadow-md w-full max-w-lg mx-auto text-center mt-6 border border-gray-200"
+                className="flex flex-col items-center gap-4 p-6 bg-white dark:bg-[#2c2c2c] rounded-lg shadow-md w-full max-w-lg mx-auto text-center mt-6 border border-gray-200"
             >
-                <h3 className="text-2xl font-bold text-gray-700 mb-4">
+                <h3 className="text-2xl font-bold text-gray-700 dark:text-white mb-4">
                     Cambiar Contraseña
                 </h3>
                 {error && <p className="text-red-500 text-sm">{error}</p>}

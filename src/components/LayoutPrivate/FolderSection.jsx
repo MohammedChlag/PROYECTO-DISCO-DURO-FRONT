@@ -17,7 +17,7 @@ export const FolderSection = ({
                 <div className="flex flex-col">
                     <section className="flex items-center justify-center py-4 sm:py-6">
                         <p
-                            className="animate-pulse text-gray-500"
+                            className="animate-pulse text-gray-500 dark:text-white"
                             role="status"
                         >
                             Cargando carpetas...
@@ -30,12 +30,12 @@ export const FolderSection = ({
 
     if (!folders.length) {
         return (
-            <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
+            <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1 rounded-lg px-4 sm:py-6">
                 <h2 className="text-base sm:text-lg font-semibold mb-4">
                     Carpetas
                 </h2>
                 <div className="flex flex-col">
-                    <p className="text-gray-500">
+                    <p className="text-gray-500 dark:text-white">
                         No hay carpetas para mostrar
                     </p>
                 </div>
@@ -44,8 +44,8 @@ export const FolderSection = ({
     }
 
     return (
-        <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
-            <h2 className="text-base sm:text-lg font-semibold mb-4">
+        <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1  rounded-lg px-4 sm:py-6">
+            <h2 className="text-base dark:text-white sm:text-lg font-semibold mb-4">
                 Carpetas
             </h2>
             <div className="flex flex-col">

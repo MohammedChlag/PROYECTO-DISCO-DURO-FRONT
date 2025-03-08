@@ -21,10 +21,12 @@ import { DownloadPage } from './pages/DownloadPage.jsx';
 import { RecoveryPassCodePage } from './pages/RecoveryPassCodePage.jsx';
 import { RecoveryEmailPage } from './pages/RecoveryEmailPage.jsx';
 import { AssessmentsPage } from './pages/AssessmentsPage.jsx';
+import { ThemeUserMode } from './components/ThemeUserMode.jsx';
 
 function App() {
     return (
         <>
+            <ThemeUserMode />
             <Routes>
                 {/* Rutas Públicas */}
                 <Route path="/" element={<LayoutPublic />}>

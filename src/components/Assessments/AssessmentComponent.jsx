@@ -242,10 +242,10 @@ export const AssessmentComponent = () => {
 
             {/* Resumen de valoraciones */}
             {!loading && !error && assessments.length > 0 && (
-                <article className="bg-[#e6f7f9] rounded-lg p-8 mb-12 shadow-sm">
+                <article className="bg-[#e6f7f9] dark:bg-[#283e45] rounded-lg p-8 mb-12 shadow-sm">
                     <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
                         <div className="text-center lg:text-left">
-                            <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+                            <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                                 Valoración media
                             </h2>
                             <div className="flex items-center justify-center lg:justify-start">
@@ -256,12 +256,12 @@ export const AssessmentComponent = () => {
                                     {renderStars(Math.round(averageRating))}
                                 </div>
                             </div>
-                            <p className="text-gray-600 mt-3">
+                            <p className="text-gray-600 dark:text-gray-400 mt-3">
                                 Basado en {assessments.length} valoraciones
                             </p>
                         </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm w-full lg:w-auto">
-                            <h3 className="text-lg font-medium text-gray-700 mb-4">
+                        <div className="bg-white dark:bg-[#222222] p-6 rounded-lg shadow-sm w-full lg:w-auto">
+                            <h3 className="text-lg font-medium text-gray-700 dark:text-white mb-4">
                                 Distribución de valoraciones
                             </h3>
                             <div className="flex items-center space-x-1 mb-3">
@@ -306,12 +306,12 @@ export const AssessmentComponent = () => {
                                                 className={`h-4 w-4 ${
                                                     star <= rating
                                                         ? 'text-yellow-500'
-                                                        : 'text-gray-300'
+                                                        : 'text-gray-300 dark:text-gray-400'
                                                 }`}
                                             />
                                         ))}
                                     </div>
-                                    <div className="w-48 h-3 bg-gray-200 rounded-full overflow-hidden ml-2">
+                                    <div className="w-48 h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden ml-2">
                                         <div
                                             className="h-full bg-[#009EB5]"
                                             style={{
@@ -325,7 +325,7 @@ export const AssessmentComponent = () => {
                                             }}
                                         ></div>
                                     </div>
-                                    <span className="text-xs text-gray-500 ml-2 min-w-[20px] text-right">
+                                    <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 min-w-[20px] text-right">
                                         {
                                             assessments.filter(
                                                 (a) => a.vote === rating
@@ -365,7 +365,7 @@ export const AssessmentComponent = () => {
                         assessments.map((assessment, index) => (
                             <article
                                 key={index}
-                                className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 flex flex-col transition-transform duration-300 hover:shadow-md hover:-translate-y-1 relative"
+                                className="bg-white dark:bg-[#2c2c2c] rounded-lg shadow-sm p-6 border border-gray-100 dark:border-[#494949] flex flex-col transition-transform duration-300 hover:shadow-md hover:-translate-y-1 relative"
                             >
                                 <header className="flex items-center justify-between mb-4">
                                     <div className="flex">
@@ -373,7 +373,7 @@ export const AssessmentComponent = () => {
                                     </div>
                                     <div className="flex items-center">
                                         <time
-                                            className="text-gray-500 text-sm mr-2"
+                                            className="text-gray-500 dark:text-gray-400 text-sm mr-2"
                                             dateTime={assessment.createdAt}
                                         >
                                             {assessment.createdAt
@@ -402,17 +402,17 @@ export const AssessmentComponent = () => {
 
                                 <div className="flex-grow">
                                     {assessment.comment ? (
-                                        <p className="text-gray-700 mb-4">
+                                        <p className="text-gray-700 dark:text-gray-300 mb-4">
                                             {assessment.comment}
                                         </p>
                                     ) : (
-                                        <p className="text-gray-500 italic mb-4">
+                                        <p className="text-gray-500 dark:text-gray-400 italic mb-4">
                                             Sin comentario
                                         </p>
                                     )}
                                 </div>
 
-                                <footer className="mt-auto pt-4 border-t border-gray-100">
+                                <footer className="mt-auto pt-4 border-t border-gray-100 dark:border-[#494949]">
                                     {assessment.userId ? (
                                         <div className="flex items-center">
                                             {(() => {
@@ -452,7 +452,7 @@ export const AssessmentComponent = () => {
                                                                     .toUpperCase()}
                                                             </span>
                                                         </div>
-                                                        <p className="text-sm text-gray-700 font-medium">
+                                                        <p className="text-sm text-gray-700 dark:text-gray-400 font-medium">
                                                             {username}
                                                         </p>
                                                     </>
@@ -460,7 +460,7 @@ export const AssessmentComponent = () => {
                                             })()}
                                         </div>
                                     ) : (
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">
                                             Usuario: Anónimo
                                         </p>
                                     )}

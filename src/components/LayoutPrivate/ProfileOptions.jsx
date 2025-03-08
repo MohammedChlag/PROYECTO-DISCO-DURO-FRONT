@@ -2,9 +2,9 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 export const ProfileOptions = ({ items, userAvatar, userName }) => {
     return (
-        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-[#000000] ring-1 ring-black ring-opacity-5 dark:ring-gray-600">
             {/* Cabecera del usuario */}
-            <div className="p-4 border-b">
+            <div className="p-4 border-b dark:border-gray-600">
                 <div className="flex items-center space-x-3">
                     {userAvatar ? (
                         <img
@@ -19,7 +19,7 @@ export const ProfileOptions = ({ items, userAvatar, userName }) => {
                         <UserCircleIcon className="h-10 w-10 text-gray-400" />
                     )}
                     <div>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">
                             {userName}
                         </p>
                     </div>
@@ -32,7 +32,7 @@ export const ProfileOptions = ({ items, userAvatar, userName }) => {
                     <button
                         key={index}
                         onClick={item.onClick}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323232] hover:text-gray-900"
                     >
                         {item.label}
                     </button>
