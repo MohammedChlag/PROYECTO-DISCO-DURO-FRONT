@@ -280,7 +280,7 @@ export const AssessmentPreview = () => {
             )}
 
             {/* Resumen de valoraciones */}
-            <div className="bg-white dark:bg-[#393939] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
+            <div className="bg-white dark:bg-[#1f1f1f] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
                 <h4 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-white mb-1 sm:mb-2">
                     <span className="text-[#009EB5]">★</span> Puntuación global
                 </h4>
@@ -307,7 +307,7 @@ export const AssessmentPreview = () => {
 
             {/* Carrusel de valoraciones */}
             {topAssessments.length > 0 && (
-                <div className="bg-white dark:bg-[#393939] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
+                <div className="bg-white dark:bg-[#1f1f1f] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
                     <h4 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-white mb-1 sm:mb-2">
                         <span className="text-[#009EB5]">❝</span> Experiencias
                         reales

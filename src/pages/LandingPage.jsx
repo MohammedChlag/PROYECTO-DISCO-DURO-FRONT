@@ -101,7 +101,7 @@ export const LandingPage = () => {
             {/* Sección de valoraciones con menos protagonismo */}
             <section
                 ref={valoracionesRef}
-                className="py-6 px-4 text-center bg-gray-50 dark:bg-[#2b2b2b] rounded-lg shadow-sm mb-16 opacity-90 hover:opacity-100 transition-opacity"
+                className="py-6 px-4 text-center bg-gray-50 dark:bg-[#283e45] rounded-lg shadow-sm mb-16 opacity-90 hover:opacity-100 transition-opacity"
             >
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-white mb-4">
                     <span className="text-[#009EB5]">♥</span> La voz de nuestra
