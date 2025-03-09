@@ -13,7 +13,7 @@ import { getUserByIdService } from '../../services/fetchUserApi.js';
 import { deleteAssessmentService } from '../../services/fetchAssessmentsApi.js';
 
 // Import de modal
-import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
+import { DeleteConfirmModal } from '../layout/Modals/DeleteConfirmModal';
 
 export const AssessmentPreview = () => {
     const { isAdmin, token } = useAuthHook();

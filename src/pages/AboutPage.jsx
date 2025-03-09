@@ -1,8 +1,7 @@
+// import logo from '../assets/img/logo-hackloud-solo.png';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/img/logo-hackloud-solo.png';
 import logoLight from '../assets/img/logo-hackloud-solo.png';
 import logoDark from '../assets/img/logo-hackloud-solo-blanco.png';
-import { AssessmentPreview } from '../components/Assessments/AssessmentsPreview.jsx';
 import { AssessmentPreview } from '../components/assessments/AssessmentsPreview.jsx';
 
 export const AboutPage = () => {

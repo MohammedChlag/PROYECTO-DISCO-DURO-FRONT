@@ -1,6 +1,6 @@
-import logo from '../assets/img/logo-hackloud-solo.png';
-import logoLight from '../assets/img/logo-hackloud-solo.png';
-import logoDark from '../assets/img/logo-hackloud-solo-blanco.png';
+// import logo from '../assets/img/logo-hackloud-solo.png';
+import logoLight from '../../assets/img/logo-hackloud-solo.png';
+import logoDark from '../../assets/img/logo-hackloud-solo-blanco.png';
 import { Link } from 'react-router-dom';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
 

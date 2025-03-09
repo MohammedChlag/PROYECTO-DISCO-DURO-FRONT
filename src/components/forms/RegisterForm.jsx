@@ -8,12 +8,10 @@ import { useFormHook } from '../../hooks/useFormHook.js';
 // Imports de componentes
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
+import { Button } from '../layout/Button.jsx';
 
 // Import de service
 import { registerUserService } from '../../services/fetchUserApi.js';
-
-import { Button } from '../layout/Button.jsx';
-import { registerUserService } from '../../services/fetchApi.js';
 import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 

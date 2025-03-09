@@ -13,7 +13,7 @@ import { loginUserService } from '../../services/fetchUserApi.js';
 // Imports de componentes
 import { Form } from './Form.jsx';
 import { Button } from '../layout/Button.jsx';
-import { toast } from 'react-toastify';
+import { Input } from './Input.jsx';
 import { loginUserSchema } from '../../schemas/users/loginUserSchema.js';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 

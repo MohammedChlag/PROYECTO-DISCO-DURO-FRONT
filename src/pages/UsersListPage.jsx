@@ -15,7 +15,7 @@ import {
     EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
 
-import { DeleteUserModal } from '../components/LayoutPrivate/Modals/DeleteUserModal';
+import { DeleteUserModal } from '../components/layout/Modals/DeleteUserModal';
 
 import { Boundary } from '../services/ErrorBoundary.jsx';
 

@@ -7,7 +7,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 
-import { Button } from '../../Button';
+import { Button } from '../Button';
 
 import { createAssessmentService } from '../../../services/fetchAssessmentsApi.js';
 
