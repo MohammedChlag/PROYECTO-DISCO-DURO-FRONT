@@ -134,6 +134,36 @@ export const searchStorageService = async ({ query, token }) => {
     }
 };
 
+export const sortStorageService = async ({
+    token,
+    orderBy,
+    orderDirection,
+}) => {
+    if (!token) throw new Error('Token inválido');
+
+    try {
+        let url = `${apiPath}/storage/search?orderBy=${orderBy}&orderDirection=${orderDirection}`;
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al ordenar los elementos');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error en sortStorage:', error);
+        throw error;
+    }
+};
+
 export const downloadFileService = async (id, token) => {
     const response = await fetch(`${apiPath}/download/files/${id}`, {
         headers: {
@@ -343,7 +373,7 @@ export const getFilePreviewService = async (id, token, file) => {
             };
         }
 
-        // Para otros tipos de archivo, solo devolver informaciu00f3n
+        // Para otros tipos de archivo, solo devolver información
         else {
             console.log('Tipo de archivo no soportado:', contentType);
             return {

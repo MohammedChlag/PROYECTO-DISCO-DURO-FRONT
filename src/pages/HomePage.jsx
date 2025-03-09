@@ -22,6 +22,7 @@ import { FolderPage } from './FolderPage.jsx';
 import { uploadFileService } from '../services/fetchStorageApi.js';
 import { createFolderService } from '../services/fetchStorageApi.js';
 import { searchStorageService } from '../services/fetchStorageApi.js';
+import { sortStorageService } from '../services/fetchStorageApi.js';
 import { renameStorageItemService } from '../services/fetchStorageApi.js';
 import { deleteStorageItemService } from '../services/fetchStorageApi.js';
 import { toast } from 'react-toastify';
@@ -95,7 +96,11 @@ export const HomePage = () => {
     }, [storage, activeTab]);
 
     // Ahora veamos este bonito handler
-    const handleSearch = async ({ query }) => {
+    const handleSearch = async ({
+        query,
+        orderBy = null,
+        orderDirection = null,
+    }) => {
         // seteamos el estado
         setIsSearching(true);
         // Guardamos la query actual para poder reutilizarla
@@ -106,6 +111,8 @@ export const HomePage = () => {
             const response = await searchStorageService({
                 query,
                 token,
+                orderBy,
+                orderDirection,
             });
             // seteamos con la respuesta
             setSearchResults(response);
@@ -135,6 +142,9 @@ export const HomePage = () => {
                     const response = await searchStorageService({
                         query: currentSearchQuery,
                         token,
+                        // Mantener los parámetros de ordenación actuales si existen
+                        orderBy: searchResults.orderBy,
+                        orderDirection: searchResults.orderDirection,
                     });
                     setSearchResults(response);
                 } catch (error) {
@@ -143,6 +153,32 @@ export const HomePage = () => {
                     setIsSearching(false);
                 }
             }, 300);
+        }
+    };
+
+    // Nuevo handler para ordenar elementos
+    const handleSort = async ({ orderBy, orderDirection }) => {
+        // Si no hay parámetros de ordenación, volver a la vista normal
+        if (!orderBy || !orderDirection) {
+            // Limpiar resultados de búsqueda para volver a la vista normal
+            setSearchResults(null);
+            setIsSearching(false);
+            return;
+        }
+
+        setIsSearching(true);
+        try {
+            const response = await sortStorageService({
+                token,
+                orderBy,
+                orderDirection,
+            });
+            setSearchResults(response);
+        } catch (error) {
+            console.error('Error al ordenar:', error);
+            toast.error('Error al ordenar los elementos');
+        } finally {
+            setIsSearching(false);
         }
     };
 
@@ -264,6 +300,7 @@ export const HomePage = () => {
             <SearchBar
                 onSearch={handleSearch}
                 onClearSearch={handleClearSearch}
+                onSort={handleSort}
             />
 
             {/* Contenido principal */}
