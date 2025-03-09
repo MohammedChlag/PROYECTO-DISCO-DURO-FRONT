@@ -2,21 +2,30 @@
 import { useMemo, useRef, useState } from 'react';
 import { useAuthHook } from '../hooks/useAuthHook.js';
 import { useStorageHook } from '../hooks/useStorageHook.js';
+
 // Nav, sections y modals
+import { TabButton } from '../components/LayoutPrivate/TabButton.jsx';
+import { SearchBar } from '../components/LayoutPrivate/Search/SearchBar.jsx';
+import { FolderSection } from '../components/LayoutPrivate/FolderSection.jsx';
+import { DocumentsSection } from '../components/LayoutPrivate/DocumentsSection.jsx';
+import { SearchSection } from '../components/LayoutPrivate/Search/SearchSection.jsx';
+import { CreateFolderModal } from '../components/LayoutPrivate/Modals/CreateFolderModal.jsx';
+
 // Botón acción
+import { ActionButton } from '../components/LayoutPrivate/ActionButton.jsx';
+import { ActionMenu } from '../components/LayoutPrivate/ActionMenu.jsx';
+
 // Folderpage
 import { FolderPage } from './FolderPage.jsx';
 import { toast } from 'react-toastify';
+
 // Services
-import {
-    uploadFileService,
-    createFolderService,
-    searchStorageService,
-    renameStorageItemService,
-    deleteStorageItemService,
-} from '../services/fetchApi.js';
-import { SearchBar } from '../components/storage/Search/SearchBar.jsx';
-import { SearchSection } from '../components/storage/SearchSection.jsx';
+import { uploadFileService } from '../services/fetchStorageApi.js';
+import { createFolderService } from '../services/fetchStorageApi.js';
+import { searchStorageService } from '../services/fetchStorageApi.js';
+import { renameStorageItemService } from '../services/fetchStorageApi.js';
+import { deleteStorageItemService } from '../services/fetchStorageApi.js';
+
 import { Boundary } from '../services/ErrorBoundary.jsx';
 import { TabButton } from '../components/profile/TabButton.jsx';
 import { FolderSection } from '../components/storage/FolderSection.jsx';
@@ -287,7 +296,7 @@ export const HomePage = () => {
                     {!selectedFolderId && (
                         <div className="flex flex-col w-full min-w-0">
                             <Boundary>
-                                <nav className="flex items-start gap-2 sm:gap-4 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-white shadow-sm animate-fade text-sm sm:text-base">
+                                <nav className="flex items-start gap-2 sm:gap-4 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-white dark:bg-[#1f1f1f] shadow-sm animate-fade text-sm sm:text-base">
                                     <TabButton
                                         active={activeTab === 'principal'}
                                         onClick={() =>

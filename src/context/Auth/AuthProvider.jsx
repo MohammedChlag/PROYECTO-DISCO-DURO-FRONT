@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getFromLocalStorage, setToLocalStorage } from '../../utils/helpers.js';
+
 import { AuthContext } from './AuthContext.js';
-import { getOwnUserService } from '../../services/fetchApi.js';
+
+import { getFromLocalStorage, setToLocalStorage } from '../../utils/helpers.js';
+
+import { getOwnUserService } from '../../services/fetchUserApi.js';
 
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(getFromLocalStorage('DDToken') || null);

@@ -19,10 +19,19 @@ import { ProfilePage } from './pages/ProfilePage.jsx';
 import { UsersListPage } from './pages/UsersListPage.jsx';
 // Página 404
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
+import { UsersListPage } from './pages/UsersListPage.jsx';
+import { SharedLinkPage } from './pages/SharedLinkPage.jsx';
+import { DownloadPage } from './pages/DownloadPage.jsx';
+
+import { RecoveryPassCodePage } from './pages/RecoveryPassCodePage.jsx';
+import { RecoveryEmailPage } from './pages/RecoveryEmailPage.jsx';
+import { AssessmentsPage } from './pages/AssessmentsPage.jsx';
+import { ThemeUserMode } from './components/ThemeUserMode.jsx';
 
 function App() {
     return (
         <>
+            <ThemeUserMode />
             <Routes>
                 {/* Layout */}
                 <Route element={<Layout />}>

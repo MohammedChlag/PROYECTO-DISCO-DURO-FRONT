@@ -29,9 +29,9 @@ export const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, type }) => {
 
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
-                <div className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left shadow-xl transition-all">
+                <div className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-[#000000] p-6 text-left shadow-xl transition-all">
                     {/* Título */}
-                    <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
+                    <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white mb-4">
                         Confirmar eliminación
                     </h3>
 
@@ -47,7 +47,7 @@ export const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, type }) => {
                     <div className="mt-6 flex justify-end space-x-3">
                         <button
                             onClick={onClose}
-                            className="bg-white px-4 py-2 text-sm font-medium text-gray-700"
+                            className="bg-white dark:bg-[#323232] px-4 py-2 text-sm font-medium text-gray-700 dark:text-white"
                         >
                             Cancelar
                         </button>

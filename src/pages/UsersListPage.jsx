@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthHook } from '../hooks/useAuthHook';
-import {
-    getAllUsersService,
-    toggleUserActiveService,
-    deleteUserService,
-} from '../services/fetchApi';
 import { toast } from 'react-toastify';
+
+import { useAuthHook } from '../hooks/useAuthHook';
+
+// Imports de services
+import { getAllUsersService } from '../services/fetchAdminApi.js';
+import { toggleUserActiveService } from '../services/fetchAdminApi.js';
+import { deleteUserService } from '../services/fetchAdminApi.js';
+
+// Imports de iconos
 import {
     ArrowPathIcon,
     EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
-import { DeleteUserModal } from '../components/layout/Modals/DeleteUserModal.jsx';
+
+import { DeleteUserModal } from '../components/LayoutPrivate/Modals/DeleteUserModal';
+
 import { Boundary } from '../services/ErrorBoundary.jsx';
 
 export const UsersListPage = () => {
@@ -120,23 +125,25 @@ export const UsersListPage = () => {
     return (
         <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <header className="mb-6 flex justify-between items-center">
-                <h1 className="text-2xl font-bold text-gray-900">Usuarios</h1>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    Usuarios
+                </h1>
                 <button
                     onClick={loadUsers}
-                    className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#323232] transition-colors"
                     aria-label="Actualizar lista de usuarios"
                 >
                     <ArrowPathIcon className="h-5 w-5" />
                 </button>
             </header>
 
-            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6">
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3  gap-4 sm:gap-6">
                 {users
                     .filter((user) => user.role !== 'admin')
                     .map((user) => (
                         <article
                             key={user.id}
-                            className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col"
+                            className="bg-white dark:bg-[#373737] rounded-lg shadow-sm border border-gray-200 dark:border-[#494949] p-4 flex flex-col"
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <Boundary>
@@ -158,10 +165,10 @@ export const UsersListPage = () => {
                                             </span>
                                         )}
                                         <figcaption className="flex-1 min-w-0">
-                                            <p className="font-medium text-gray-900 truncate">
+                                            <p className="font-medium text-gray-900 dark:text-white truncate">
                                                 {user.username}
                                             </p>
-                                            <p className="text-sm text-gray-500 truncate">
+                                            <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
                                                 {user.email}
                                             </p>
                                         </figcaption>
@@ -176,7 +183,7 @@ export const UsersListPage = () => {
                                         }
                                     >
                                         <button
-                                            className="p-1 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
+                                            className="p-1 text-gray-400 hover:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-[#323232]"
                                             onClick={() =>
                                                 setOpenMenuId(
                                                     openMenuId === user.id
@@ -192,10 +199,10 @@ export const UsersListPage = () => {
                                             <EllipsisVerticalIcon className="h-5 w-5" />
                                         </button>
                                         {openMenuId === user.id && (
-                                            <menu className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                            <menu className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-[#1b1b1b] ring-1 ring-black ring-opacity-5 z-50">
                                                 <li className="py-1">
                                                     <button
-                                                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                        className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323232] "
                                                         onClick={() =>
                                                             handleToggleActive(
                                                                 user.id,
@@ -208,7 +215,7 @@ export const UsersListPage = () => {
                                                             : 'Habilitar'}
                                                     </button>
                                                     <button
-                                                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                                                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-[#323232]"
                                                         onClick={() =>
                                                             handleDeleteUser(
                                                                 user.id,

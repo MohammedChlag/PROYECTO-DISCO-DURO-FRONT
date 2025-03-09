@@ -20,7 +20,7 @@ const truncateFolderName = (name, maxLength = 25) => {
     return name.slice(0, maxLength - 3) + '...';
 };
 
-// Componenete carpeta recibe funciones y se maneja con el hook
+// Componenente carpeta recibe funciones y se maneja con el hook
 export const Carpeta = ({
     folder,
     onFolderClick,
@@ -63,21 +63,21 @@ export const Carpeta = ({
         <>
             <li
                 onClick={handleFolderClick}
-                className="relative flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 group"
+                className="relative flex items-center p-3 border dark:border-[#494949] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-[#1e1e1e] group"
             >
                 <div className="flex items-center flex-1 min-w-0">
                     <div className="flex-shrink-0 mr-2">
                         {folder.shareToken ? (
                             <div className="relative">
                                 <FolderIcon className="h-8 w-8 text-blue-500" />
-                                <UsersIcon className="absolute -bottom-1 -right-1 h-4 w-4 text-green-500 bg-white rounded-full" />
+                                <UsersIcon className="absolute -bottom-1 -right-1 h-4 w-4 text-green-500 bg-white dark:bg-[#2c2c2c] rounded-full" />
                             </div>
                         ) : (
                             <FolderIcon className="h-8 w-8 text-blue-500" />
                         )}
                     </div>
                     <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                             {truncateFolderName(folder.name)}
                         </p>
                     </div>
@@ -86,9 +86,9 @@ export const Carpeta = ({
                 <div className="folder-options relative ml-2">
                     <button
                         onClick={handleOptionsClick}
-                        className="p-1 rounded-full hover:bg-gray-200"
+                        className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-[#323232]"
                     >
-                        <EllipsisVerticalIcon className="h-5 w-5 text-gray-500" />
+                        <EllipsisVerticalIcon className="h-5 w-5 text-gray-500 " />
                     </button>
 
                     {showOptions && (
@@ -97,24 +97,24 @@ export const Carpeta = ({
                                 className="fixed inset-0 z-10"
                                 onClick={closeOptions}
                             ></div>
-                            <div className="absolute right-0 bottom-full mb-2 w-48 bg-white rounded-md shadow-lg z-20 py-1">
+                            <div className="absolute right-0 bottom-full mb-2 w-48 bg-white dark:bg-[#1b1b1b] rounded-md shadow-lg z-20 py-1">
                                 <button
                                     onClick={handleRename}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-white text-left hover:bg-gray-100 dark:hover:bg-[#323232]"
                                 >
                                     <PencilIcon className="h-4 w-4 mr-2" />
                                     <span>Renombrar</span>
                                 </button>
                                 <button
                                     onClick={handleShare}
-                                    className="flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left px-3 py-2 rounded-md"
+                                    className="flex items-center gap-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323232] w-full text-left px-3 py-2 rounded-md"
                                 >
                                     <ShareIcon className="h-4 w-4" />
                                     Compartir
                                 </button>
                                 <button
                                     onClick={handleDelete}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100"
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100 dark:hover:bg-[#323232]"
                                 >
                                     <TrashIcon className="h-4 w-4 mr-2" />
                                     <span>Eliminar</span>

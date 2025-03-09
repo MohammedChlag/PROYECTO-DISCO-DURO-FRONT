@@ -49,8 +49,8 @@ export const SearchBar = ({ onSearch, onClearSearch }) => {
                     value={searchTerm}
                     onChange={handleChange}
                     placeholder="Busca tus archivos..."
-                    className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-300 
-                    bg-cyan-50 shadow-sm
+                    className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-300 dark:border-[#676767] 
+                    bg-cyan-50 dark:bg-[#676767] shadow-sm
                     focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:border-cyan-400
                     transition-all duration-200"
                 />

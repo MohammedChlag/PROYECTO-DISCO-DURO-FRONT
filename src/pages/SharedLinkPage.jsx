@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-    getSharedLinkService,
-    downloadSharedFileService,
-} from '../services/fetchApi';
-import { FolderIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// Imports de services
+import { getSharedLinkService } from '../services/fetchStorageApi.js';
+import { downloadSharedFileService } from '../services/fetchStorageApi.js';
+
+// Imports de iconos
+import { FolderIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+
 import { getFileIcon } from '../utils/helpers.js';
 
 export const SharedLinkPage = () => {

@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { recoveryPasswordService } from '../services/fetchApi.js';
 import { toast } from 'react-toastify';
+
+import { recoveryPasswordService } from '../services/fetchUserApi.js';
+// Imports de componentes
 import { Input } from '../components/forms/Input.jsx';
 import { Button } from '../components/layout/Button.jsx';
 import { Form } from '../components/forms/Form.jsx';
-
 export const RecoveryEmailPage = () => {
     const [email, setEmail] = useState('');
 
@@ -23,10 +24,10 @@ export const RecoveryEmailPage = () => {
 
     return (
         <Form
-            className="flex flex-col gap-6 p-8 bg-white rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
+            className="flex flex-col gap-6 p-8 bg-white dark:bg-[#1f1f1f] rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
             handleSubmit={handleSubmit}
         >
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                 Recuperar Contraseña
             </h3>
             <Input

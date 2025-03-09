@@ -52,7 +52,7 @@ export const RenameModal = ({
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
                 <div
-                    className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left shadow-xl transition-all"
+                    className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-[#000000] p-6 text-left shadow-xl transition-all"
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Botón cerrar */}
@@ -65,7 +65,7 @@ export const RenameModal = ({
                     </button>
 
                     {/* Título */}
-                    <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
+                    <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white mb-4">
                         Renombrar {type === 'folder' ? 'carpeta' : 'archivo'}:{' '}
                         {truncateName(currentName, type)}
                     </h3>
@@ -75,7 +75,7 @@ export const RenameModal = ({
                         <div className="mb-4">
                             <label
                                 htmlFor="newName"
-                                className="block text-sm font-medium text-gray-700 mb-2"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-500 mb-2"
                             >
                                 Nuevo nombre
                             </label>
@@ -87,7 +87,7 @@ export const RenameModal = ({
                                     setNewName(e.target.value);
                                     setError('');
                                 }}
-                                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="w-full rounded-md border border-gray-300 dark:bg-[#3d3d3d] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 placeholder="Nuevo nombre"
                                 autoFocus
                             />
@@ -103,7 +103,7 @@ export const RenameModal = ({
                             <button
                                 type="button"
                                 onClick={onClose}
-                                className="px-4 py-2 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2"
+                                className="bg-white dark:bg-[#323232] px-4 py-2 text-sm font-medium text-gray-700 dark:text-white focus:outline-none focus:ring-2"
                             >
                                 Cancelar
                             </button>

@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
-import { getStorageService } from '../services/fetchApi.js';
+
 import { useAuthHook } from './useAuthHook.js';
+
+import { getStorageService } from '../services/fetchStorageApi.js';
 
 export const useStorageHook = () => {
     const [storage, setStorage] = useState([]);

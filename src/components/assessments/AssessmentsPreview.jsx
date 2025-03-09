@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthHook } from '../../hooks/useAuthHook';
 import { Link } from 'react-router-dom';
+
+// Imports de iconos
 import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import {
-    getAssessmentsService,
-    getUserByIdService,
-    deleteAssessmentService,
-} from '../../services/fetchApi';
-import { useAuthHook } from '../../hooks/useAuthHook';
-import { DeleteConfirmModal } from '../layout/Modals/DeleteConfirmModal';
+
+// Imports de services
+import { getAssessmentsService } from '../../services/fetchAssessmentsApi.js';
+import { getUserByIdService } from '../../services/fetchUserApi.js';
+import { deleteAssessmentService } from '../../services/fetchAssessmentsApi.js';
+
+// Import de modal
+import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal';
 
 export const AssessmentPreview = () => {
     const { isAdmin, token } = useAuthHook();
@@ -276,8 +280,8 @@ export const AssessmentPreview = () => {
             )}
 
             {/* Resumen de valoraciones */}
-            <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <h4 className="text-sm sm:text-base font-semibold text-gray-800 mb-1 sm:mb-2">
+            <div className="bg-white dark:bg-[#1f1f1f] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
+                <h4 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-white mb-1 sm:mb-2">
                     <span className="text-[#009EB5]">★</span> Puntuación global
                 </h4>
                 <div className="flex items-center">
@@ -288,7 +292,7 @@ export const AssessmentPreview = () => {
                         {renderStars(Math.round(averageRating))}
                     </div>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                     Basado en {assessments.length} valoraciones
                 </p>
                 <div className="mt-1 sm:mt-2">
@@ -303,8 +307,8 @@ export const AssessmentPreview = () => {
 
             {/* Carrusel de valoraciones */}
             {topAssessments.length > 0 && (
-                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                    <h4 className="text-sm sm:text-base font-semibold text-gray-800 mb-1 sm:mb-2">
+                <div className="bg-white dark:bg-[#1f1f1f] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
+                    <h4 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-white mb-1 sm:mb-2">
                         <span className="text-[#009EB5]">❝</span> Experiencias
                         reales
                     </h4>
@@ -342,12 +346,12 @@ export const AssessmentPreview = () => {
                                     </div>
 
                                     <div className="h-14 sm:h-16 overflow-y-auto mb-1">
-                                        <p className="text-xs text-gray-600 italic">
+                                        <p className="text-xs text-gray-600 dark:text-gray-400 italic">
                                             {assessment.comment}
                                         </p>
                                     </div>
 
-                                    <div className="flex items-center mt-1 pt-1 border-t border-gray-100">
+                                    <div className="flex items-center mt-1 pt-1 border-t border-gray-100 dark:border-gray-500">
                                         {assessment.userId ? (
                                             <div className="flex items-center">
                                                 {(() => {
@@ -381,7 +385,7 @@ export const AssessmentPreview = () => {
                                                                             : 'flex',
                                                                 }}
                                                             >
-                                                                <span className="text-gray-600 text-xs sm:text-sm font-medium">
+                                                                <span className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm font-medium">
                                                                     {username
                                                                         .charAt(
                                                                             0
@@ -389,7 +393,7 @@ export const AssessmentPreview = () => {
                                                                         .toUpperCase()}
                                                                 </span>
                                                             </div>
-                                                            <span className="text-xs sm:text-base text-gray-700 font-medium">
+                                                            <span className="text-xs sm:text-base text-gray-700 dark:text-gray-400 font-medium">
                                                                 {username}
                                                             </span>
                                                         </>
@@ -397,7 +401,7 @@ export const AssessmentPreview = () => {
                                                 })()}
                                             </div>
                                         ) : (
-                                            <p className="text-xs sm:text-sm text-gray-500">
+                                            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                                                 Usuario: Anónimo
                                             </p>
                                         )}

@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { resetPasswordService } from '../services/fetchApi.js';
+
+import { resetPasswordService } from '../services/fetchUserApi.js';
+
+// Imports de componentes
 import { Input } from '../components/forms/Input.jsx';
 import { Button } from '../components/layout/Button.jsx';
 
@@ -59,10 +62,10 @@ export const RecoveryPassCodePage = () => {
     return (
         <div>
             <form
-                className="flex flex-col gap-6 p-8 bg-white rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16 border border-cyan-300 "
+                className="flex flex-col gap-6 p-8 bg-white dark:bg-[#1f1f1f] rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16 border border-cyan-300 "
                 onSubmit={handleSubmit}
             >
-                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                     Restablecer Contraseña
                 </h3>
                 <Input

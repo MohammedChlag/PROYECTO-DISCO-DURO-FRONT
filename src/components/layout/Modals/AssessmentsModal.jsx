@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+// Imports de iconos
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
-import { Button } from '../Button';
-import { createAssessmentService } from '../../../services/fetchApi';
-import { toast } from 'react-toastify';
+
+import { Button } from '../../Button';
+
+import { createAssessmentService } from '../../../services/fetchAssessmentsApi.js';
 
 export const AssessmentsModal = ({
     isOpen,
@@ -99,16 +103,16 @@ export const AssessmentsModal = ({
             <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
                 {/* Overlay */}
                 <div
-                    className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"
+                    className="fixed inset-0 transition-opacity bg-black bg-opacity-50"
                     onClick={onClose}
                     aria-hidden="true"
                 ></div>
 
                 {/* Modal */}
-                <div className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white dark:bg-[#000000] rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                     {/* Header */}
-                    <div className="flex items-center justify-between px-6 pt-5 pb-2 border-b">
-                        <h3 className="text-lg font-medium text-gray-900">
+                    <div className="flex items-center justify-between px-6 pt-5 pb-2 border-b dark:border-gray-500">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                             {currentUser
                                 ? 'Valorar Hackloud'
                                 : 'Únete para valorar'}
@@ -127,7 +131,7 @@ export const AssessmentsModal = ({
                         {currentUser ? (
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-6 text-center">
-                                    <p className="mb-3 text-gray-600">
+                                    <p className="mb-3 text-gray-600 dark:text-gray-400">
                                         ¿Cómo valorarías tu experiencia con
                                         Hackloud?
                                     </p>
@@ -148,7 +152,7 @@ export const AssessmentsModal = ({
                                 <div className="mb-6">
                                     <label
                                         htmlFor="comment"
-                                        className="block mb-2 text-sm font-medium text-gray-700"
+                                        className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-400"
                                     >
                                         Comentario *
                                     </label>
@@ -159,7 +163,7 @@ export const AssessmentsModal = ({
                                         onChange={(e) =>
                                             setComment(e.target.value)
                                         }
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#009EB5] focus:border-[#009EB5]"
+                                        className="w-full px-3 py-2 border dark:bg-[#323232] border-gray-300 dark:border-gray-500 rounded-md focus:outline-none focus:ring-[#009EB5] focus:border-[#009EB5]"
                                         placeholder="Comparte tu experiencia con nosotros..."
                                     ></textarea>
                                 </div>
@@ -176,12 +180,12 @@ export const AssessmentsModal = ({
                             </form>
                         ) : (
                             <div className="text-center">
-                                <div className="p-4 mb-4 bg-[#e6f7f9] rounded-lg">
-                                    <p className="text-[#00798a] mb-3">
+                                <div className="p-4 mb-4 bg-[#e6f7f9] dark:bg-[#393939] rounded-lg">
+                                    <p className="text-[#00798a] dark:text-white mb-3">
                                         Para valorar nuestra aplicación,
                                         necesitas iniciar sesión o registrarte.
                                     </p>
-                                    <p className="text-gray-600 text-sm">
+                                    <p className="text-gray-600 dark:text-gray-400 text-sm">
                                         Tus valoraciones nos ayudan a mejorar y
                                         ofrecer un mejor servicio a todos
                                         nuestros usuarios.
@@ -198,7 +202,7 @@ export const AssessmentsModal = ({
                                     </Link>
                                     <Link
                                         to="/users/register"
-                                        className="flex-1 py-2 px-4 text-center border border-[#009EB5] text-[#009EB5] hover:bg-[#e6f7f9] rounded-md"
+                                        className="flex-1 py-2 px-4 text-center border dark:bg-[#191919]  border-[#009EB5] text-[#009EB5] dark:text-white hover:bg-[#e6f7f9] dark:hover:bg-[#242424] rounded-md"
                                         onClick={onClose}
                                     >
                                         Registrarse

@@ -1,3 +1,10 @@
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+
+import { useAuthHook } from '../../hooks/useAuthHook.js';
+import { useItemsHook } from '../../hooks/useItemsHook.js';
+
+// Imports de iconos
 import {
     PencilIcon,
     TrashIcon,
@@ -6,16 +13,16 @@ import {
     UsersIcon,
     ArrowDownTrayIcon,
 } from '@heroicons/react/24/outline';
+
+// Imports de modals
 import { RenameModal } from '../layout/Modals/RenameModal.jsx';
 import { ShareModal } from '../layout/Modals/ShareModal.jsx';
 import { DeleteConfirmModal } from '../layout/Modals/DeleteConfirmModal.jsx';
 import { FilePreviewModal } from '../layout/Modals/FilePreviewModal.jsx';
-import { useItemsHook } from '../../hooks/useItemsHook.js';
+
+import { shareStorageItemService } from '../../services/fetchStorageApi.js';
+
 import { getFileIcon } from '../../utils/helpers.js';
-import { toast } from 'react-toastify';
-import { shareStorageItemService } from '../../services/fetchApi.js';
-import { useAuthHook } from '../../hooks/useAuthHook.js';
-import { useState } from 'react';
 
 const formatFileSize = (bytes) => {
     if (!bytes) return '0 B';
@@ -103,14 +110,14 @@ export const Archivo = ({
 
     return (
         <>
-            <li className="relative group flex flex-col p-2 sm:p-4 border rounded-lg hover:bg-gray-50">
+            <li className="relative group flex flex-col p-2 sm:p-4 border dark:border-[#494949] rounded-lg hover:bg-gray-50 dark:hover:bg-[#1e1e1e]">
                 <article
                     className="flex items-center mb-2 cursor-pointer"
                     onClick={handlePreviewClick}
                 >
                     {getFileIcon(file.name)}
                     <div className="flex flex-col min-w-0">
-                        <h3 className="text-xs sm:text-sm font-medium text-gray-900 truncate">
+                        <h3 className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white truncate">
                             {truncateFileName(
                                 file.name,
                                 window.innerWidth < 640 ? 15 : 25
@@ -123,7 +130,7 @@ export const Archivo = ({
                                     title="Archivo compartido"
                                 />
                             )}
-                            <span className="text-xs text-gray-500 ml-1">
+                            <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
                                 {formatFileSize(file.size)}
                             </span>
                         </div>
@@ -133,14 +140,14 @@ export const Archivo = ({
                 <div className="flex items-center justify-end space-x-0.5 sm:space-x-1 mt-1 sm:mt-2">
                     <button
                         onClick={handleDownload}
-                        className="p-1 sm:p-2 hover:bg-gray-100 rounded-full transition-colors"
+                        className="p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-[#323232] rounded-full transition-colors"
                         title="Descargar"
                     >
                         <ArrowDownTrayIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500" />
                     </button>
                     <button
                         onClick={handleOptionsClick}
-                        className="p-1 sm:p-2 hover:bg-gray-100 rounded-full transition-colors relative"
+                        className="p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-[#323232] rounded-full transition-colors relative"
                     >
                         <EllipsisVerticalIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500" />
                     </button>
@@ -151,10 +158,10 @@ export const Archivo = ({
                                 className="fixed inset-0 z-10"
                                 onClick={closeOptions}
                             />
-                            <div className="absolute right-6 bottom-12 z-20 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+                            <div className="absolute right-6 bottom-12 z-20 w-48 text-gray-700 dark:text-white dark:bg-[#1b1b1b] bg-white rounded-lg shadow-lg border border-gray-200">
                                 <button
                                     onClick={handleRename}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 dark:hover:bg-[#323232]"
                                 >
                                     <PencilIcon className="h-4 w-4 mr-2" />
                                     <span>Renombrar</span>
@@ -172,7 +179,7 @@ export const Archivo = ({
                                 ) : (
                                     <button
                                         onClick={handleShare}
-                                        className="flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left px-3 py-2 rounded-md"
+                                        className="flex items-center gap-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323232] w-full text-left px-3 py-2 rounded-md"
                                     >
                                         <ShareIcon className="h-4 w-4" />
                                         Compartir
@@ -181,7 +188,7 @@ export const Archivo = ({
 
                                 <button
                                     onClick={handleDelete}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100"
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100 dark:hover:bg-[#323232]"
                                 >
                                     <TrashIcon className="h-4 w-4 mr-2" />
                                     <span>Eliminar</span>

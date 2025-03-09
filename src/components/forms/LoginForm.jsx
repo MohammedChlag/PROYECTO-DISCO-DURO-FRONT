@@ -1,14 +1,20 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+// Imports de hooks
 import { useFormHook } from '../../hooks/useFormHook.js';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
-import { useNavigate } from 'react-router-dom';
-import { loginUserService } from '../../services/fetchApi.js';
+
+// Import de service
+import { loginUserService } from '../../services/fetchUserApi.js';
+
+// Imports de componentes
 import { Form } from './Form.jsx';
 import { Button } from '../layout/Button.jsx';
 import { toast } from 'react-toastify';
 import { loginUserSchema } from '../../schemas/users/loginUserSchema.js';
-import { Input } from './Input.jsx';
-import { Link } from 'react-router-dom';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 
 export const LoginForm = () => {
@@ -39,14 +45,14 @@ export const LoginForm = () => {
     return (
         <Boundary>
             <Form
-                className="flex flex-col gap-6 p-8 bg-white rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
+                className="flex flex-col gap-6 p-8 bg-white dark:bg-[#2c2c2c] rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
                 handleSubmit={handleSubmit}
             >
                 <div className="text-center space-y-2">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                         Iniciar sesión
                     </h3>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-white">
                         Bienvenido de nuevo a Hackloud
                     </p>
                 </div>
@@ -79,7 +85,7 @@ export const LoginForm = () => {
                         {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
                     </Button>
                     <div className="flex flex-col items-center gap-3 text-sm">
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 dark:text-white">
                             ¿No tienes una cuenta?{' '}
                             <Link
                                 to="/users/register"

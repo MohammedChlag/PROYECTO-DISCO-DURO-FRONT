@@ -44,12 +44,12 @@ export const DocumentsSection = ({
 
     if (!documents.length) {
         return (
-            <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
+            <section className="bg-gray-50 dark:bg-[#2c2c2c] rounded-lg px-4 sm:py-6">
                 <h2 className="text-base sm:text-lg font-semibold mb-4">
                     Archivos
                 </h2>
                 <div className="flex flex-col">
-                    <p className="text-gray-500">
+                    <p className="text-gray-500 dark:text-white">
                         No hay archivos para mostrar
                     </p>
                 </div>
@@ -58,7 +58,7 @@ export const DocumentsSection = ({
     }
 
     return (
-        <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
+        <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1 rounded-lg px-4 sm:py-6">
             <h2 className="text-base sm:text-lg font-semibold mb-4">
                 Archivos
             </h2>

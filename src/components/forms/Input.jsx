@@ -31,7 +31,7 @@ export const Input = ({
     };
 
     return (
-        <label className={`block ${error ? 'text-red-500' : 'text-gray-600'}`}>
+        <label className={`block ${error ? 'text-red-500' : 'text-gray-600 dark:text-white'}`}>
             {type !== 'checkbox' && (
                 <span className="block mb-1 text-sm font-medium">{label}</span>
             )}
@@ -60,7 +60,7 @@ export const Input = ({
                     className={`${
                         type === 'checkbox'
                             ? 'h-4 w-4 rounded border-gray-300 text-[#00B4D8] focus:ring-[#00B4D8]'
-                            : `w-full p-2 bg-[#cdffff] border rounded-md focus:outline-none focus:ring-2 placeholder-gray-400 ${
+                            : `w-full p-2 bg-[#cdffff] dark:bg-gray-400 border rounded-md focus:outline-none focus:ring-2 placeholder-gray-400 ${
                                   error
                                       ? 'border-red-500 focus:ring-red-200'
                                       : 'border-gray-200 focus:ring-[#00B4D8] focus:border-[#00B4D8]'
@@ -83,7 +83,7 @@ export const Input = ({
                     </div>
                 )}
                 {type === 'checkbox' && (
-                    <span className="text-sm text-gray-600">{label}</span>
+                    <span className="text-sm text-gray-600 dark:text-white">{label}</span>
                 )}
             </div>
             {error && (
