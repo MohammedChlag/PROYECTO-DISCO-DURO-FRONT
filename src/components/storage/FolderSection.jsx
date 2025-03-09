@@ -44,7 +44,7 @@ export const FolderSection = ({
     }
 
     return (
-        <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1  rounded-lg px-4 sm:py-6">
+        <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1 rounded-lg px-4 sm:py-6">
             <h2 className="text-base dark:text-white sm:text-lg font-semibold mb-4">
                 Carpetas
             </h2>
