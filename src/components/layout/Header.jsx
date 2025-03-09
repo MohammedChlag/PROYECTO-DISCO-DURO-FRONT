@@ -16,7 +16,7 @@ export const Header = () => {
         isStoragePage ? 'lg:max-w-screen-xl' : 'lg:max-w-screen-lg'
     } mx-auto ${
         isStoragePage ? 'lg:px-8' : 'px-4 sm:px-6 lg:px-8'
-    } border-b-2 border-black py-3 transition-all duration-300 ease-in-out`;
+    } border-b-2 border-black dark:border-white py-3 transition-all duration-300 ease-in-out`;
 
     return (
         <header className={headerClasses}>
