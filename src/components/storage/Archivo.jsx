@@ -23,6 +23,7 @@ import { FilePreviewModal } from '../layout/Modals/FilePreviewModal.jsx';
 import { shareStorageItemService } from '../../services/fetchStorageApi.js';
 
 import { getFileIcon } from '../../utils/helpers.js';
+import { formatDate } from '../../utils/dayJs.js';
 
 const formatFileSize = (bytes) => {
     if (!bytes) return '0 B';
@@ -132,6 +133,9 @@ export const Archivo = ({
                             )}
                             <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
                                 {formatFileSize(file.size)}
+                            </span>
+                            <span className="text-xs text-gray-500 ml-1">
+                                {formatDate(file.uploadedAt)}
                             </span>
                         </div>
                     </div>
