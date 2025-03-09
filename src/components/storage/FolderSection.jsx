@@ -10,7 +10,7 @@ export const FolderSection = ({
 }) => {
     if (loading) {
         return (
-            <section className="bg-gray-50 rounded-lg px-4 sm:py-6">
+            <section className="bg-gray-50 rounded-lg px-4 sm:py-6 animate-fadeIn transition-all duration-300 ease-in-out">
                 <h2 className="text-base sm:text-lg font-semibold mb-4">
                     Carpetas
                 </h2>
@@ -30,7 +30,7 @@ export const FolderSection = ({
 
     if (!folders.length) {
         return (
-            <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1 rounded-lg px-4 sm:py-6">
+            <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1 rounded-lg px-4 sm:py-6 animate-fadeIn transition-all duration-300 ease-in-out">
                 <h2 className="text-base sm:text-lg font-semibold mb-4">
                     Carpetas
                 </h2>
@@ -44,21 +44,26 @@ export const FolderSection = ({
     }
 
     return (
-        <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1  rounded-lg px-4 sm:py-6">
-            <h2 className="text-base dark:text-white sm:text-lg font-semibold mb-4">
+        <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1 rounded-lg px-4 sm:py-6 animate-fadeIn transition-all duration-300 ease-in-out">
+            <h2 className="text-base sm:text-lg font-semibold mb-4">
                 Carpetas
             </h2>
             <div className="flex flex-col">
                 <ul className="space-y-2 sm:space-y-3 list-none p-0">
-                    {folders.map((folder) => (
-                        <Carpeta
+                    {folders.map((folder, index) => (
+                        <li
                             key={folder.id}
-                            folder={folder}
-                            onFolderClick={onFolderClick}
-                            onRename={onRename}
-                            onDelete={onDelete}
-                            onRefetchStorage={onRefetchStorage}
-                        />
+                            className="animate-fadeIn"
+                            style={{ animationDelay: `${index * 50}ms` }}
+                        >
+                            <Carpeta
+                                folder={folder}
+                                onFolderClick={onFolderClick}
+                                onRename={onRename}
+                                onDelete={onDelete}
+                                onRefetchStorage={onRefetchStorage}
+                            />
+                        </li>
                     ))}
                 </ul>
             </div>

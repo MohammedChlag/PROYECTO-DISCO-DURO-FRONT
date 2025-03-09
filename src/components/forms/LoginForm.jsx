@@ -31,10 +31,10 @@ export const LoginForm = () => {
             const value = await validate(loginUserSchema);
 
             setLoading(true);
-            const { message, token } = await loginUserService(value);
+            const { token } = await loginUserService(value);
             await onLogin(token);
 
-            toast.success(message);
+            toast('Bienvenido 👋🏻');
             navigate('/storage');
         } catch (error) {
             toast.error(error.message);

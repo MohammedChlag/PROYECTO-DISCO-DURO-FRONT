@@ -112,9 +112,7 @@ export const ProfileMenu = () => {
         <div className="relative z-40" ref={menuRef}>
             <button
                 onClick={() => setShowMenu(!showMenu)}
-                className={`flex items-center space-x-2 focus:outline-none focus:ring-2 ${
-                    isAdmin ? 'focus:ring-red-500' : 'focus:ring-blue-500'
-                } focus:ring-offset-2 rounded-full`}
+                className={`flex items-center space-x-2 rounded-full`}
             >
                 {avatarUrl && !avatarError ? (
                     <img

@@ -2,17 +2,17 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 export const ProfileOptions = ({ items, userAvatar, userName, isAdmin }) => {
     return (
-        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-[#000000] ring-1 ring-black ring-opacity-5 dark:ring-gray-600">
+        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-elegant bg-white ring-1 ring-black ring-opacity-5 animate-elegantRise origin-top-right overflow-hidden">
             {/* Cabecera del usuario */}
-            <div className="p-4 border-b dark:border-gray-600">
+            <div className="p-4 border-b bg-gradient-to-r from-cyan-50 to-cyan-100">
                 <div className="flex items-center space-x-3">
                     {userAvatar ? (
                         <img
                             src={userAvatar}
                             alt="Avatar del usuario"
                             className={`h-10 w-10 rounded-full object-cover ring-2 ${
-                                isAdmin ? 'ring-red-500' : 'ring-white'
-                            }`}
+                                isAdmin ? 'ring-red-500' : 'ring-cyan-400'
+                            } shadow-md`}
                             onError={(e) => {
                                 e.target.src = '/default-avatar.png';
                             }}
@@ -21,11 +21,11 @@ export const ProfileOptions = ({ items, userAvatar, userName, isAdmin }) => {
                         <UserCircleIcon
                             className={`h-10 w-10 ${
                                 isAdmin ? 'text-red-500' : 'text-gray-400'
-                            }`}
+                            } drop-shadow-sm`}
                         />
                     )}
                     <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">
+                        <p className="text-sm font-medium text-gray-900">
                             {userName}
                         </p>
                         {isAdmin && (
@@ -43,7 +43,7 @@ export const ProfileOptions = ({ items, userAvatar, userName, isAdmin }) => {
                     <button
                         key={index}
                         onClick={item.onClick}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323232] hover:text-gray-900"
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200 ease-in-out"
                     >
                         {item.label}
                     </button>

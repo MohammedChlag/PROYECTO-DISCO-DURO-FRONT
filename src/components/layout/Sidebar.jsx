@@ -9,7 +9,7 @@ import {
     ArrowUpTrayIcon,
 } from '@heroicons/react/24/outline';
 import { ActionSidebarButton } from './ActionSidebarButton.jsx';
-import { SidebarButton } from './SideBarButton.jsx';
+import { SidebarButton } from './SidebarButton.jsx';
 
 export const Sidebar = ({
     onCreateFolder,
@@ -20,7 +20,7 @@ export const Sidebar = ({
     const location = useLocation();
 
     return (
-        <aside className="hidden lg:flex flex-col w-64 bg-white p-4 border-r border-gray-200 h-screen sticky top-0">
+        <aside className="hidden lg:flex flex-col w-64 bg-white p-4 border-r border-gray-200 h-screen sticky top-0 dark:bg-[#2c2c2c] rounded-lg dark:border-none">
             {/* Botones de acción */}
             <div className="flex flex-col space-y-2 mb-6">
                 <ActionSidebarButton

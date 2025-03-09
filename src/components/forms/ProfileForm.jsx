@@ -128,7 +128,7 @@ export const ProfileForm = () => {
             const result = await deleteAvatar();
             if (result.success) {
                 setAvatarError(false);
-                toast.success('Avatar eliminado correctamente');
+                toast.warn('Avatar eliminado correctamente');
 
                 // Esperar un momento para que el toast sea visible y luego recargar la página
                 setTimeout(() => {
