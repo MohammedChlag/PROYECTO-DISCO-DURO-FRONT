@@ -10,17 +10,15 @@ export const Layout = () => {
     const location = useLocation();
 
     // Determinar si estamos en una ruta privada
-    const isPrivateRoute = [
-        '/storage',
-        '/profile',
-        '/aboutUs',
-        '/assessments',
-        '/admin/users',
-    ].some((route) => location.pathname.startsWith(route));
+    const isPrivateRoute = ['/storage', '/profile', '/admin/users'].some(
+        (route) => location.pathname.startsWith(route)
+    );
 
     // Determinar las clases CSS para el main según la ruta
     const mainClasses = isPrivateRoute
-        ? 'flex-1 relative w-full max-w-screen-lg mx-auto px-2 sm:px-4 py-6'
+        ? location.pathname.startsWith('/storage')
+            ? 'flex-1 relative w-full max-w-screen-xl mx-auto px-0 lg:px-4 py-6' // Rutas con Sidebar
+            : 'flex-1 relative w-full max-w-screen-lg mx-auto px-2 sm:px-4 py-6' // Otras rutas privadas
         : '';
 
     return (
