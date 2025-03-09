@@ -25,15 +25,15 @@ export const ThemeUserMode = () => {
     };
 
     return (
-        <div className="fixed top-3 right-1 z-50">
+        <div className="absolute top-2 right-6 size-1 z-50">
             <button
                 onClick={handleChangeTheme}
                 className="p-1 bg-[#009EB5] dark:bg-[#080808] hover:bg-[#009ec3] dark:hover:bg-[#4d4d4d] text-white rounded"
             >
                 {theme === 'light' ? (
-                    <SunIcon className="h-4 w-4" aria-hidden="true" />
-                ) : (
                     <MoonIcon className="h-4 w-4" aria-hidden="true" />
+                ) : (
+                    <SunIcon className="h-4 w-4" aria-hidden="true" />
                 )}
             </button>
         </div>
