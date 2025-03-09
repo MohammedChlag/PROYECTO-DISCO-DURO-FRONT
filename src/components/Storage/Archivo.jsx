@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import { shareStorageItemService } from '../../services/fetchApi.js';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { useState } from 'react';
+import { formatDate } from '../../utils/dayJs.js';
 
 const formatFileSize = (bytes) => {
     if (!bytes) return '0 B';
@@ -125,6 +126,9 @@ export const Archivo = ({
                             )}
                             <span className="text-xs text-gray-500 ml-1">
                                 {formatFileSize(file.size)}
+                            </span>
+                            <span className="text-xs text-gray-500 ml-1">
+                                {formatDate(file.uploadedAt)}
                             </span>
                         </div>
                     </div>

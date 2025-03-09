@@ -13,6 +13,7 @@ import { useItemsHook } from '../../hooks/useItemsHook.js';
 import { RenameModal } from '../LayoutPrivate/Modals/RenameModal.jsx';
 import { DeleteConfirmModal } from '../LayoutPrivate/Modals/DeleteConfirmModal.jsx';
 import { ShareModal } from '../LayoutPrivate/Modals/ShareModal.jsx';
+import { formatDate } from '../../utils/dayJs.js';
 
 // Esta te la sabes?
 const truncateFolderName = (name, maxLength = 25) => {
@@ -79,6 +80,9 @@ export const Carpeta = ({
                     <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-900 truncate">
                             {truncateFolderName(folder.name)}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                            {formatDate(folder.createdAt)}
                         </p>
                     </div>
                 </div>
