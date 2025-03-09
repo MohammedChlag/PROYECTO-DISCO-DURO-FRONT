@@ -12,11 +12,11 @@ export const Header = () => {
     const isStoragePage = location.pathname.startsWith('/storage');
 
     // Clases del header según la ruta
-    const headerClasses = `flex items-center justify-between w-[90vw] lg:w-full ${
+    const headerClasses = `flex items-center justify-between w-[92vw] lg:w-full ${
         isStoragePage ? 'lg:max-w-screen-xl' : 'lg:max-w-screen-lg'
     } mx-auto ${
-        isStoragePage ? 'lg:px-8' : 'px-4 sm:px-6 lg:px-8'
-    } border-b-2 border-black dark:border-white py-3 transition-all duration-300 ease-in-out`;
+        isStoragePage ? 'lg:px-8' : 'sm:px-6 lg:px-8'
+    } border-b-2 border-black py-3 transition-all duration-300 ease-in-out`;
 
     return (
         <header className={headerClasses}>
@@ -28,7 +28,7 @@ export const Header = () => {
             {currentUser ? (
                 <ProfileMenu />
             ) : (
-                <nav className="space-x-2 sm:space-x-4 text-xs sm:text-sm md:text-base">
+                <nav className="sm:space-x-4 text-xs sm:text-sm md:text-base">
                     <Link
                         className="hover:bg-gray-200 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
                         to="/users/register"
