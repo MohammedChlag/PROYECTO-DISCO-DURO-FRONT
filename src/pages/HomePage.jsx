@@ -328,7 +328,7 @@ export const HomePage = () => {
                         {!selectedFolderId && (
                             <div className="flex flex-col w-full min-w-0">
                                 <Boundary>
-                                    <nav className="flex items-start gap-2 rounded-lg sm:gap-4 py-2 sm:py-3 bg-white dark:bg-gray-800 shadow-sm animate-fade text-sm sm:text-base lg:hidden">
+                                    <nav className="flex items-start gap-2 sm:gap-4 py-2 sm:py-3 bg-white dark:bg-[#1f1f1f] shadow-sm animate-fade text-sm sm:text-base lg:hidden">
                                         <TabButton
                                             active={activeTab === 'principal'}
                                             onClick={() =>
