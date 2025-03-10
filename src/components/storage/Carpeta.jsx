@@ -62,7 +62,7 @@ export const Carpeta = ({
 
     return (
         <>
-            <li
+            <div
                 onClick={handleFolderClick}
                 className="relative flex items-center p-3 border dark:border-[#494949] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-[#1e1e1e] group"
             >
@@ -118,7 +118,7 @@ export const Carpeta = ({
                                 </button>
                                 <button
                                     onClick={handleDelete}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100 dark:hover:bg-[#323232]"
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-[#323232]"
                                 >
                                     <TrashIcon className="h-4 w-4 mr-2" />
                                     <span>Eliminar</span>
@@ -127,7 +127,7 @@ export const Carpeta = ({
                         </>
                     )}
                 </div>
-            </li>
+            </div>
 
             <RenameModal
                 isOpen={showRenameModal}

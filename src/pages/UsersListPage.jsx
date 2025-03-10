@@ -237,8 +237,8 @@ export const UsersListPage = () => {
                                     <span
                                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                                             user.active
-                                                ? 'bg-cyan-100 text-cyan-800'
-                                                : 'bg-red-100 text-red-800'
+                                                ? 'bg-cyan-100 text-cyan-800 dark:bg-cyan-200 dark:text-black'
+                                                : 'bg-red-100 text-red-900'
                                         }`}
                                     >
                                         {user.active

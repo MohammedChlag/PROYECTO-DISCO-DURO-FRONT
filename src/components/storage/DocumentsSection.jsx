@@ -12,13 +12,13 @@ export const DocumentsSection = ({
     if (loading) {
         return (
             <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1 rounded-lg px-4 sm:py-6 animate-fadeIn transition-all duration-300 ease-in-out">
-                <h2 className="text-base sm:text-lg font-semibold mb-4">
+                <h2 className="text-base sm:text-lg font-semibold mb-4 dark:text-white">
                     Archivos
                 </h2>
                 <div className="flex flex-col">
                     <section className="flex items-center justify-center py-4 sm:py-6">
                         <p
-                            className="animate-pulse text-gray-500"
+                            className="animate-pulse text-gray-500 dark:text-gray-300"
                             role="status"
                         >
                             Cargando archivos...
@@ -31,12 +31,14 @@ export const DocumentsSection = ({
 
     if (error) {
         return (
-            <section className="bg-gray-50 rounded-lg px-4 sm:py-6 animate-fadeIn transition-all duration-300 ease-in-out">
-                <h2 className="text-base sm:text-lg font-semibold mb-4">
+            <section className="bg-gray-50 dark:bg-[#2c2c2c] rounded-lg px-4 sm:py-6 animate-fadeIn transition-all duration-300 ease-in-out">
+                <h2 className="text-base sm:text-lg font-semibold mb-4 dark:text-white">
                     Archivos
                 </h2>
                 <div className="flex flex-col">
-                    <p className="text-red-500">Error al cargar los archivos</p>
+                    <p className="text-red-500 dark:text-red-400">
+                        Error al cargar los archivos
+                    </p>
                 </div>
             </section>
         );
@@ -45,11 +47,11 @@ export const DocumentsSection = ({
     if (!documents.length) {
         return (
             <section className="bg-gray-50 dark:bg-[#2c2c2c] rounded-lg px-4 sm:py-6 animate-fadeIn transition-all duration-300 ease-in-out">
-                <h2 className="text-base sm:text-lg font-semibold mb-4">
+                <h2 className="text-base sm:text-lg font-semibold mb-4 dark:text-white">
                     Archivos
                 </h2>
                 <div className="flex flex-col">
-                    <p className="text-gray-500 dark:text-white">
+                    <p className="text-gray-500 dark:text-gray-300">
                         No hay archivos para mostrar
                     </p>
                 </div>
@@ -59,7 +61,7 @@ export const DocumentsSection = ({
 
     return (
         <section className="bg-gray-50 dark:bg-[#2c2c2c] p-1 rounded-lg px-4 sm:py-6 animate-fadeIn transition-all duration-300 ease-in-out">
-            <h2 className="text-base sm:text-lg font-semibold mb-4">
+            <h2 className="text-base sm:text-lg font-semibold mb-4 dark:text-white">
                 Archivos
             </h2>
             <div className="flex flex-col">

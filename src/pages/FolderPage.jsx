@@ -37,11 +37,11 @@ export const FolderPage = ({
             <nav className="flex items-center gap-4 my-4">
                 <button
                     onClick={onBack}
-                    className="flex items-center text-gray-600 hover:text-gray-800"
+                    className="flex items-center text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors"
                 >
                     <ArrowLeftIcon className="size-6" />
                 </button>
-                <h1 className="text-2xl sm:text-3xl font-semibold">
+                <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white">
                     {currentFolder?.name || 'Carpeta'}
                 </h1>
             </nav>

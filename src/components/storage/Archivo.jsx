@@ -111,7 +111,7 @@ export const Archivo = ({
 
     return (
         <>
-            <li className="relative group flex flex-col p-2 sm:p-4 border dark:border-[#494949] rounded-lg hover:bg-gray-50 dark:hover:bg-[#1e1e1e]">
+            <div className="relative group flex flex-col p-2 sm:p-4 border dark:border-[#494949] rounded-lg hover:bg-gray-50 dark:hover:bg-[#1e1e1e]">
                 <article
                     className="flex items-center mb-2 cursor-pointer"
                     onClick={handlePreviewClick}
@@ -162,7 +162,7 @@ export const Archivo = ({
                                 className="fixed inset-0 z-10"
                                 onClick={closeOptions}
                             />
-                            <div className="absolute right-6 bottom-12 z-20 w-48 text-gray-700 dark:text-white dark:bg-[#1b1b1b] bg-white rounded-lg shadow-lg border border-gray-200">
+                            <div className="absolute bottom-10 z-20 w-48 md:right-4 md:bottom-12 text-gray-700 dark:text-white dark:bg-[#1b1b1b] bg-white rounded-lg shadow-lg border border-gray-200 dark:border-none">
                                 <button
                                     onClick={handleRename}
                                     className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 dark:hover:bg-[#323232]"
@@ -175,7 +175,7 @@ export const Archivo = ({
                                 {showEnableDownload ? (
                                     <button
                                         onClick={handleEnableDownload}
-                                        className="flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left px-3 py-2 rounded-md"
+                                        className="flex items-center gap-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323232] w-full text-left px-3 py-2 rounded-md"
                                     >
                                         <ArrowDownTrayIcon className="h-4 w-4" />
                                         Habilitar descarga
@@ -192,7 +192,7 @@ export const Archivo = ({
 
                                 <button
                                     onClick={handleDelete}
-                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100 dark:hover:bg-[#323232]"
+                                    className="flex items-center w-full px-4 py-2 text-sm text-left text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-[#323232]"
                                 >
                                     <TrashIcon className="h-4 w-4 mr-2" />
                                     <span>Eliminar</span>
@@ -201,7 +201,7 @@ export const Archivo = ({
                         </>
                     )}
                 </div>
-            </li>
+            </div>
 
             <RenameModal
                 isOpen={showRenameModal}

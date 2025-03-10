@@ -23,6 +23,7 @@ import {
     renameStorageItemService,
     searchStorageService,
     uploadFileService,
+    sortStorageService,
 } from '../services/fetchStorageApi.js';
 
 import { Boundary } from '../services/ErrorBoundary.jsx';
@@ -122,6 +123,32 @@ export const HomePage = () => {
     const handleClearSearch = () => {
         setSearchResults(null);
         setCurrentSearchQuery('');
+    };
+
+    // Función para ordenar los elementos
+    const handleSort = async ({ orderBy, orderDirection }) => {
+        if (!orderBy || !orderDirection) {
+            // Si no hay parámetros de ordenación, volver a cargar el almacenamiento normal
+            await refetchStorage();
+            return;
+        }
+
+        try {
+            setIsSearching(true);
+            const response = await sortStorageService({
+                token,
+                orderBy,
+                orderDirection,
+            });
+
+            // Actualizar los resultados de búsqueda con los elementos ordenados
+            setSearchResults(response);
+        } catch (error) {
+            console.error('Error al ordenar:', error);
+            toast.error('Error al ordenar los elementos');
+        } finally {
+            setIsSearching(false);
+        }
     };
 
     // Función para actualizar los resultados de búsqueda
@@ -266,6 +293,7 @@ export const HomePage = () => {
                 onUpload={handleUpload}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
+                inFolder={selectedFolderId}
             />
 
             {/* Contenido principal - ajustado para dejar espacio al sidebar en lg */}
@@ -273,13 +301,14 @@ export const HomePage = () => {
                 <SearchBar
                     onSearch={handleSearch}
                     onClearSearch={handleClearSearch}
+                    onSort={handleSort}
                 />
 
                 {/* Contenido principal */}
                 {isSearching ? (
                     // Spinner de carga durante la búsqueda
                     <div className="flex items-center justify-center p-4 md:p-6">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
                     </div>
                 ) : searchResults ? (
                     // Vista de búsqueda
@@ -299,7 +328,7 @@ export const HomePage = () => {
                         {!selectedFolderId && (
                             <div className="flex flex-col w-full min-w-0">
                                 <Boundary>
-                                    <nav className="flex items-start gap-2 sm:gap-4 py-2 sm:py-3 bg-white shadow-sm animate-fade text-sm sm:text-base lg:hidden">
+                                    <nav className="flex items-start gap-2 rounded-lg sm:gap-4 py-2 sm:py-3 bg-white dark:bg-gray-800 shadow-sm animate-fade text-sm sm:text-base lg:hidden">
                                         <TabButton
                                             active={activeTab === 'principal'}
                                             onClick={() =>

@@ -5,6 +5,7 @@ import { ClipboardDocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
     const [loading, setLoading] = useState(true);
     const [copied, setCopied] = useState(false);
+    console.log('Copied', copied);
 
     useEffect(() => {
         // Resetear estados cuando se abre el modal
@@ -48,7 +49,7 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
                 <div
-                    className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-[#000000] p-6 text-left shadow-xl transition-all"
+                    className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 p-6 text-left shadow-xl transition-all animate-popIn"
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Botón cerrar */}
@@ -67,7 +68,7 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                     </h3>
 
                     {/* Contenido */}
-                    <div className="mt-2">
+                    <div className="mt-2 space-y-4">
                         {loading ? (
                             <div className="flex flex-col items-center justify-center py-6">
                                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00B4D8]"></div>
@@ -76,10 +77,10 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                                 </p>
                             </div>
                         ) : urls ? (
-                            <div className="space-y-4">
+                            <>
                                 {type === 'folder' && urls.url && (
                                     <div className="mt-2">
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                                             Enlace para ver:
                                         </label>
                                         <div className="flex items-center">
@@ -87,7 +88,7 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                                                 type="text"
                                                 readOnly
                                                 value={urls.url}
-                                                className="flex-1 rounded-l-md border border-gray-300 px-3 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                className="flex-1 rounded-l-md border border-gray-300 px-3 py-2 bg-gray-50 dark:bg-[#3d3d3d] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:border-none"
                                             />
                                             <button
                                                 onClick={() =>
@@ -97,15 +98,15 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                                                 }
                                                 className="rounded-r-md bg-[#00B4D8] hover:bg-[#0096B4] px-3 py-2 text-white"
                                             >
-                                                <ClipboardDocumentIcon className="h-5 w-5" />
+                                                <ClipboardDocumentIcon className="h-7 w-5" />
                                             </button>
                                         </div>
                                     </div>
                                 )}
 
                                 {urls.download && (
-                                    <div className="mt-4">
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <>
+                                        <label className="block text-sm font-medium mt-4 text-gray-700 dark:text-gray-200 mb-2">
                                             Enlace para descargar:
                                         </label>
                                         <div className="flex items-center">
@@ -113,8 +114,7 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                                                 type="text"
                                                 readOnly
                                                 value={urls.download}
-                                                className="flex-1 rounded-l-md border border-gray-300 px-3 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                                                dark:bg-[#3d3d3d] focus:border-transparent"
+                                                className="flex-1 rounded-l-md border border-gray-300 px-3 py-2 bg-gray-50 dark:bg-[#3d3d3d] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:border-none"
                                             />
                                             <button
                                                 onClick={() =>
@@ -127,7 +127,7 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                                                 <ClipboardDocumentIcon className="h-5 w-5" />
                                             </button>
                                         </div>
-                                    </div>
+                                    </>
                                 )}
 
                                 <p className="text-sm text-gray-500 mt-4">
@@ -137,7 +137,7 @@ export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
                                         : 'acceder a la carpeta'}{' '}
                                     sin necesidad de iniciar sesión.
                                 </p>
-                            </div>
+                            </>
                         ) : (
                             <div className="text-center py-4 text-red-600">
                                 No se pudo generar el enlace. Inténtalo de

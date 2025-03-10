@@ -109,7 +109,7 @@ export const AssessmentsModal = ({
                 ></div>
 
                 {/* Modal */}
-                <div className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white dark:bg-[#000000] rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white dark:bg-gray-800 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-popIn">
                     {/* Header */}
                     <div className="flex items-center justify-between px-6 pt-5 pb-2 border-b dark:border-gray-500">
                         <h3 className="text-lg font-medium text-gray-900 dark:text-white">
