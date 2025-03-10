@@ -30,14 +30,14 @@ export const Header = () => {
             ) : (
                 <nav className="flex sm:space-x-4 text-xs sm:text-sm md:text-base">
                     <Link
-                        className="hover:bg-gray-600 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md dark:text-white"
+                        className=" border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md dark:text-white"
                         to="/users/register"
                     >
                         Registrarse
                     </Link>
                     <Link
                         to="/users/login"
-                        className="hover:bg-gray-600 dark:text-white w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md text-gray-500"
+                        className=" dark:text-white w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
                     >
                         Iniciar Sesión
                     </Link>
