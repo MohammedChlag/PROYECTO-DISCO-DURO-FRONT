@@ -13,8 +13,8 @@ export const SidebarButton = ({ icon: Icon, label, onClick, isActive, to }) => {
     rounded-lg transition-colors duration-200
     ${
         isActive
-            ? 'bg-[#e6f7fa] text-[#00B4D8] font-medium'
-            : 'text-gray-700 hover:bg-gray-100'
+            ? 'bg-[#e6f7fa] dark:bg-[#1e1e1e] text-[#00B4D8] font-medium '
+            : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-[#4d4d4d]'
     }
   `;
 

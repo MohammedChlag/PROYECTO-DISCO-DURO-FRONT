@@ -47,7 +47,7 @@ export const Sidebar = ({
 
             {/* Navegación principal */}
             <h3
-                className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 animate-fadeIn"
+                className="text-xs font-semibold text-gray-500 dark:text-white uppercase tracking-wider mb-3 animate-fadeIn"
                 style={{ '--delay': '0.3s' }}
             >
                 Navegación
