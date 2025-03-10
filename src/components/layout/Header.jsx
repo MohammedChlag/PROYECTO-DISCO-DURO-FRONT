@@ -21,14 +21,14 @@ export const Header = () => {
     return (
         <header className={headerClasses}>
             {/* Ajustamos el tamaño del logo */}
-            <div className="flex items-center">
+            <div className="flex w-[92vw]">
                 <Logo className="w-14 sm:w-20 md:w-24" />
             </div>
 
             {currentUser ? (
                 <ProfileMenu />
             ) : (
-                <nav className="sm:space-x-4 text-xs sm:text-sm md:text-base">
+                <nav className="flex sm:space-x-4 text-xs sm:text-sm md:text-base">
                     <Link
                         className="hover:bg-gray-200 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
                         to="/users/register"
@@ -37,7 +37,7 @@ export const Header = () => {
                     </Link>
                     <Link
                         to="/users/login"
-                        className="hover:bg-gray-200 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
+                        className="hover:bg-gray-200 w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
                     >
                         Iniciar Sesión
                     </Link>
