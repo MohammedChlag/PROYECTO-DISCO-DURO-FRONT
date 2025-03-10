@@ -76,7 +76,7 @@ export const Input = ({
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="text-gray-500 dark:text-white hover:text-gray-700 focus:outline-none"
+                            className="text-gray-500 dark:text-gray-500 hover:text-gray-700 focus:outline-none"
                         >
                             {showPassword ? (
                                 <EyeSlashIcon className="h-5 w-5" />
