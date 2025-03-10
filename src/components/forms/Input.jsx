@@ -31,7 +31,11 @@ export const Input = ({
     };
 
     return (
-        <label className={`block ${error ? 'text-red-500' : 'text-gray-600 dark:text-white'}`}>
+        <label
+            className={`block ${
+                error ? 'text-red-500' : 'text-gray-600 dark:text-white'
+            }`}
+        >
             {type !== 'checkbox' && (
                 <span className="block mb-1 text-sm font-medium">{label}</span>
             )}
@@ -72,7 +76,7 @@ export const Input = ({
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                            className="text-gray-500 dark:text-white hover:text-gray-700 focus:outline-none"
                         >
                             {showPassword ? (
                                 <EyeSlashIcon className="h-5 w-5" />
@@ -83,7 +87,9 @@ export const Input = ({
                     </div>
                 )}
                 {type === 'checkbox' && (
-                    <span className="text-sm text-gray-600 dark:text-white">{label}</span>
+                    <span className="text-sm text-gray-600 dark:text-white">
+                        {label}
+                    </span>
                 )}
             </div>
             {error && (
