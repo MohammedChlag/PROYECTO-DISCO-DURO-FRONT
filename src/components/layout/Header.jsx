@@ -37,11 +37,7 @@ export const Header = () => {
                     </Link>
                     <Link
                         to="/users/login"
-<<<<<<< HEAD
                         className="hover:bg-gray-200 w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
-=======
-                        className="hover:bg-gray-200 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md text-gray-500"
->>>>>>> 1d1e812867adb1eec11a945a51c08734ab6bbb9a
                     >
                         Iniciar Sesión
                     </Link>
