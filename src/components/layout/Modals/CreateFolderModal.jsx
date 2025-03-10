@@ -35,7 +35,7 @@ export const CreateFolderModal = ({ isOpen, onClose, onCreateFolder }) => {
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
                 <div
-                    className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left shadow-xl transition-all"
+                    className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 p-6 text-left shadow-xl transition-all animate-popIn"
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Botón cerrar */}
@@ -47,7 +47,7 @@ export const CreateFolderModal = ({ isOpen, onClose, onCreateFolder }) => {
                     </button>
 
                     {/* Título */}
-                    <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
+                    <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4 dark:text-white">
                         Crear nueva carpeta
                     </h3>
 
@@ -56,7 +56,7 @@ export const CreateFolderModal = ({ isOpen, onClose, onCreateFolder }) => {
                         <div className="mb-4">
                             <label
                                 htmlFor="folderName"
-                                className="block text-sm font-medium text-gray-700 mb-2"
+                                className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-200"
                             >
                                 Nombre de la carpeta
                             </label>
@@ -68,7 +68,7 @@ export const CreateFolderModal = ({ isOpen, onClose, onCreateFolder }) => {
                                     setFolderName(e.target.value);
                                     setError('');
                                 }}
-                                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="w-full rounded-md border border-gray-300 dark:bg-[#3d3d3d] dark:border-gray-500 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 placeholder="Mi carpeta"
                                 autoFocus
                             />
@@ -84,7 +84,7 @@ export const CreateFolderModal = ({ isOpen, onClose, onCreateFolder }) => {
                             <button
                                 type="button"
                                 onClick={onClose}
-                                className="px-4 py-2 text-sm font-medium text-gray-700 focus:outline-none"
+                                className="bg-inherit px-4 py-2 text-sm font-medium text-gray-700 dark:text-white focus:outline-none"
                             >
                                 Cancelar
                             </button>

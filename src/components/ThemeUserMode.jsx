@@ -1,4 +1,5 @@
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { SunIcon } from '@heroicons/react/24/outline';
+import { MoonIcon as MoonSolid } from '@heroicons/react/24/solid';
 import React, { useEffect, useState } from 'react';
 
 export const ThemeUserMode = () => {
@@ -25,15 +26,21 @@ export const ThemeUserMode = () => {
     };
 
     return (
-        <div className="absolute top-2 right-6 size-1 z-50">
+        <div className="block absolute top-2 right-1 z-50">
             <button
                 onClick={handleChangeTheme}
-                className="p-1 bg-[#009EB5] dark:bg-[#080808] hover:bg-[#009ec3] dark:hover:bg-[#4d4d4d] text-white rounded"
+                className="p-1 bg-[#009EB5] hover:bg-[#009ec3] dark:bg-inherit dark:text-yellow-500 dark:hover:bg-[#4d4d4d] text-gray-300 rounded"
             >
                 {theme === 'light' ? (
-                    <MoonIcon className="h-4 w-4" aria-hidden="true" />
+                    <MoonSolid
+                        className="size-4 lg:size-6"
+                        aria-hidden="true"
+                    />
                 ) : (
-                    <SunIcon className="h-4 w-4" aria-hidden="true" />
+                    <SunIcon
+                        className="size-4 lg:size-6 fill-yellow-500"
+                        aria-hidden="true"
+                    />
                 )}
             </button>
         </div>

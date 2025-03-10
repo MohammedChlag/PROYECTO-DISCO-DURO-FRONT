@@ -82,7 +82,7 @@ export const SearchFilters = ({ onSort }) => {
                         className="ml-1 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-[#555555]"
                         title="Restablecer orden"
                     >
-                        <XMarkIcon className="h-4 w-4 text-gray-500" />
+                        <XMarkIcon className="h-4 w-4 text-gray-500 dark:text-white" />
                     </button>
                 )}
             </button>

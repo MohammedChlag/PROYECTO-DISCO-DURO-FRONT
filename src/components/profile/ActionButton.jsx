@@ -12,10 +12,10 @@ export const ActionButton = ({
             className={`
                 p-3 sm:p-4 bg-[#009EB5] text-white
                 rounded-full shadow-lg
-                hover:bg-[#009ec3]
+                hover:bg-[#009ec3] dark:hover:bg-[#00b4d8]
                 active:scale-95
                 transition-all
-                focus:outline-none focus:ring-2 focus:ring-[#67e8f9] focus:ring-offset-2
+                focus:outline-none focus:ring-2 focus:ring-[#67e8f9] dark:focus:ring-[#0891b2] focus:ring-offset-2 dark:focus:ring-offset-gray-800
                 z-90
                 ${className}
             `}

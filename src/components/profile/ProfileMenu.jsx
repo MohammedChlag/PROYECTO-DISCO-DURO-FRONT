@@ -109,7 +109,7 @@ export const ProfileMenu = () => {
     }
 
     return (
-        <div className="relative z-40" ref={menuRef}>
+        <div className="relative z-40 mr-4" ref={menuRef}>
             <button
                 onClick={() => setShowMenu(!showMenu)}
                 className={`flex items-center space-x-2 rounded-full`}
@@ -144,7 +144,7 @@ export const ProfileMenu = () => {
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                     </span>
                 )}
-                <ChevronDownIcon className="h-5 w-5 text-gray-600" />
+                <ChevronDownIcon className="h-5 w-5 text-gray-600 dark:text-white" />
             </button>
 
             {showMenu && (

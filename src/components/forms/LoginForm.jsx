@@ -34,7 +34,9 @@ export const LoginForm = () => {
             const { token } = await loginUserService(value);
             await onLogin(token);
 
-            toast('Bienvenido 👋🏻');
+            toast('Bienvenido 👋🏻', {
+                style: { background: '#009ec3', color: 'white' },
+            });
             navigate('/storage');
         } catch (error) {
             toast.error(error.message);

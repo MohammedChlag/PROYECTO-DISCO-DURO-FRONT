@@ -16,11 +16,13 @@ export const Sidebar = ({
     onUpload,
     activeTab,
     setActiveTab,
+    inFolder = false,
 }) => {
+    console.log('inFolder', inFolder);
     const location = useLocation();
 
     return (
-        <aside className="hidden lg:flex flex-col w-64 bg-white p-4 border-r border-gray-200 h-screen sticky top-0 dark:bg-[#2c2c2c] rounded-lg dark:border-none animate-slideIn">
+        <aside className="hidden lg:flex flex-col w-64 bg-white p-4 border-r border-gray-200 min-h-[80vh] max-h-[90vh] sticky top-0 dark:bg-[#2c2c2c] rounded-lg dark:border-none animate-slideIn">
             {/* Botones de acción */}
             <div className="flex flex-col space-y-2 mb-6 animate-fadeIn">
                 <div
