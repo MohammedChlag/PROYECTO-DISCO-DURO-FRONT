@@ -32,6 +32,8 @@ function App() {
                     <Route index element={<LandingPage />} />
                     <Route path="/assessments" element={<AssessmentsPage />} />
                     <Route path="/aboutUs" element={<AboutPage />} />
+                    {/* Ruta 404 */}
+                    <Route path="*" element={<NotFoundPage />} />
                     <Route path="/users">
                         <Route path="login" element={<LoginPage />} />
                         <Route path="register" element={<RegisterPage />} />
@@ -62,9 +64,6 @@ function App() {
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/admin/users" element={<UsersListPage />} />
                 </Route>
-
-                {/* Ruta 404 */}
-                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </>
     );
