@@ -273,7 +273,7 @@ export const AssessmentComponent = () => {
                                         />
                                     ))}
                                 </div>
-                                <div className="w-48 h-3 bg-gray-200 rounded-full overflow-hidden ml-2">
+                                <div className="w-48 h-3 bg-gray-200  dark:bg-gray-600 rounded-full overflow-hidden ml-2">
                                     <div
                                         className="h-full bg-[#009EB5]"
                                         style={{
