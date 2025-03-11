@@ -4,9 +4,9 @@ import { getFromLocalStorage, setToLocalStorage } from '../utils/helpers.js';
 
 export const ThemeUserMode = () => {
     const [theme, setTheme] = useState(
-        getFromLocalStorage('DbTheme') || 'dark'
+        getFromLocalStorage('DbTheme') || 'light'
     );
-    // const [isChecked, setIsChecked] = useState(theme === 'dark');
+    const [isChecked, setIsChecked] = useState(theme === 'dark');
 
     useEffect(() => {
         if (theme === 'dark') {
@@ -14,6 +14,8 @@ export const ThemeUserMode = () => {
         } else {
             document.querySelector('html').classList.remove('dark');
         }
+
+        setToLocalStorage('DbTheme', theme);
 
         return () => {
             if (theme === 'dark') {
@@ -26,8 +28,7 @@ export const ThemeUserMode = () => {
 
     const handleChangeTheme = () => {
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-        setToLocalStorage('DbTheme', theme);
-        // setIsChecked((prev) => !prev);
+        setIsChecked((prev) => !prev);
     };
 
     return (
@@ -38,7 +39,7 @@ export const ThemeUserMode = () => {
                     theme === 'dark' ? 'bg-gray-600' : 'bg-[#009EB5]'
                 } dark:bg-[#676767]`}
                 role="switch"
-                aria-checked={theme}
+                aria-checked={isChecked}
             >
                 <span className="sr-only">Theme mode</span>
                 <span
