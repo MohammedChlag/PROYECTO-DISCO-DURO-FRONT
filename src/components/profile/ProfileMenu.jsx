@@ -109,7 +109,7 @@ export const ProfileMenu = () => {
     }
 
     return (
-        <div className="relative z-40 mr-4" ref={menuRef}>
+        <div className="relative z-40 " ref={menuRef}>
             <button
                 onClick={() => setShowMenu(!showMenu)}
                 className={`flex items-center space-x-2 rounded-full`}

@@ -57,39 +57,6 @@ export const PasswordStrength = ({ password }) => {
                         style={{ width: strength.width }}
                     />
                 </div>
-                <ul className="mt-2 text-xs text-gray-500 space-y-1">
-                    <li
-                        className={password.length >= 8 ? 'text-green-500' : ''}
-                    >
-                        • Mínimo 8 caracteres
-                    </li>
-                    <li className={/\d/.test(password) ? 'text-green-500' : ''}>
-                        • Al menos un número
-                    </li>
-                    <li
-                        className={
-                            /[A-Z]/.test(password) ? 'text-green-500' : ''
-                        }
-                    >
-                        • Al menos una mayúscula
-                    </li>
-                    <li
-                        className={
-                            /[a-z]/.test(password) ? 'text-green-500' : ''
-                        }
-                    >
-                        • Al menos una minúscula
-                    </li>
-                    <li
-                        className={
-                            /[!@#$%^&*(),.?":{}|<>]/.test(password)
-                                ? 'text-green-500'
-                                : ''
-                        }
-                    >
-                        • Al menos un carácter especial
-                    </li>
-                </ul>
             </div>
         </Boundary>
     );

@@ -12,7 +12,7 @@ export const Header = () => {
     const isStoragePage = location.pathname.startsWith('/storage');
 
     // Clases del header según la ruta
-    const headerClasses = `flex items-center justify-between w-[92vw] lg:w-full ${
+    const headerClasses = `flex items-center justify-between w-[95vw] lg:w-full ${
         isStoragePage ? 'lg:max-w-screen-xl' : 'lg:max-w-screen-lg'
     } mx-auto ${
         isStoragePage ? 'lg:px-8' : 'sm:px-6 lg:px-8'
@@ -21,28 +21,27 @@ export const Header = () => {
     return (
         <header className={headerClasses}>
             {/* Ajustamos el tamaño del logo */}
-            <div className="flex w-[92vw]">
+            <div className="flex justify-between w-[95vw]">
                 <Logo className="w-14 sm:w-20 md:w-24" />
+                {currentUser ? (
+                    <ProfileMenu />
+                ) : (
+                    <nav className="flex sm:space-x-4 text-xs sm:text-sm md:text-base">
+                        <Link
+                            className=" dark:text-white w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
+                            to="/users/register"
+                        >
+                            Registrarse
+                        </Link>
+                        <Link
+                            to="/users/login"
+                            className=" dark:text-white w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
+                        >
+                            Iniciar Sesión
+                        </Link>
+                    </nav>
+                )}
             </div>
-
-            {currentUser ? (
-                <ProfileMenu />
-            ) : (
-                <nav className="flex sm:space-x-4 text-xs sm:text-sm md:text-base">
-                    <Link
-                        className=" border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md dark:text-white"
-                        to="/users/register"
-                    >
-                        Registrarse
-                    </Link>
-                    <Link
-                        to="/users/login"
-                        className=" dark:text-white w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
-                    >
-                        Iniciar Sesión
-                    </Link>
-                </nav>
-            )}
         </header>
     );
 };

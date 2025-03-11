@@ -64,7 +64,7 @@ export const Input = ({
                     className={`${
                         type === 'checkbox'
                             ? 'h-4 w-4 rounded border-gray-300 text-[#00B4D8] focus:ring-[#00B4D8]'
-                            : `w-full p-2 bg-[#cdffff] dark:bg-gray-400 border rounded-md focus:outline-none focus:ring-2 placeholder-gray-400 ${
+                            : `w-full p-2 bg-[#cdffff] dark:bg-gray-400 border rounded-md focus:outline-none focus:ring-2 placeholder-gray-400 dark:placeholder:text-gray-600 ${
                                   error
                                       ? 'border-red-500 focus:ring-red-200'
                                       : 'border-gray-200 focus:ring-[#00B4D8] focus:border-[#00B4D8]'

@@ -1,9 +1,12 @@
 import { MoonIcon as MoonSolid, SunIcon } from '@heroicons/react/24/solid';
 import React, { useEffect, useState } from 'react';
+import { getFromLocalStorage, setToLocalStorage } from '../utils/helpers.js';
 
 export const ThemeUserMode = () => {
-    const [theme, setTheme] = useState('light');
-    const [isChecked, setIsChecked] = useState(theme === 'dark');
+    const [theme, setTheme] = useState(
+        getFromLocalStorage('DbTheme') || 'dark'
+    );
+    // const [isChecked, setIsChecked] = useState(theme === 'dark');
 
     useEffect(() => {
         if (theme === 'dark') {
@@ -23,7 +26,8 @@ export const ThemeUserMode = () => {
 
     const handleChangeTheme = () => {
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-        setIsChecked((prev) => !prev);
+        setToLocalStorage('DbTheme', theme);
+        // setIsChecked((prev) => !prev);
     };
 
     return (
@@ -34,7 +38,7 @@ export const ThemeUserMode = () => {
                     theme === 'dark' ? 'bg-gray-600' : 'bg-[#009EB5]'
                 } dark:bg-[#676767]`}
                 role="switch"
-                aria-checked={isChecked}
+                aria-checked={theme}
             >
                 <span className="sr-only">Theme mode</span>
                 <span

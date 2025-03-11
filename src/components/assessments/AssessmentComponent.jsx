@@ -243,7 +243,7 @@ export const AssessmentComponent = () => {
             {/* Resumen de valoraciones */}
             {!loading && !error && assessments.length > 0 && (
                 <article className="bg-[#e6f7f9] dark:bg-[#283e45] rounded-lg p-8 mb-12 shadow-sm">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                    <div className="flex flex-col lg:flex-row items-center justify-around gap-8">
                         <div className="text-center lg:text-left">
                             <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                                 Valoración media
