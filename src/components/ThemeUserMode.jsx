@@ -45,15 +45,28 @@ export const ThemeUserMode = () => {
                     }`}
                 >
                     {theme === 'dark' ? (
+                        <MoonSolid
+                            className="size-4 fill-black"
+                            aria-hidden="true"
+                        />
+                    ) : (
                         <SunIcon
                             className="size-4 fill-yellow-500"
                             aria-hidden="true"
                         />
-                    ) : (
-                        <MoonSolid className="size-4" aria-hidden="true" />
                     )}
                 </span>
             </button>
         </div>
     );
 };
+
+// {theme === 'dark' ? (
+//     <MoonSolid
+//         className="size-4 fill-yellow-500"
+//         aria-hidden="true"
+//     />
+// ) : (
+//     <SunIcon className="size-4" aria-hidden="true" />
+// )}
+// </span>
