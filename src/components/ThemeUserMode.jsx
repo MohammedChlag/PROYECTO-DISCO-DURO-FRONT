@@ -32,12 +32,12 @@ export const ThemeUserMode = () => {
     };
 
     return (
-        <div className="absolute top-3 left-[30vw] sm:top-4 z-50">
+        <div>
             <button
                 onClick={handleChangeTheme}
                 className={`relative inline-flex h-6 w-12 items-center rounded-full ${
                     theme === 'dark' ? 'bg-gray-600' : 'bg-[#009EB5]'
-                } dark:bg-[#676767]`}
+                } dark:bg-[#676767] absolute top-7 md:top-8 border-black border-2 dark:border-white`}
                 role="switch"
                 aria-checked={isChecked}
             >
@@ -45,8 +45,8 @@ export const ThemeUserMode = () => {
                 <span
                     className={`inline-block h-5 w-5 transform rounded-full bg-white transition duration-200 ease-in-out ${
                         theme === 'dark'
-                            ? 'translate-x-7 flex items-center justify-center'
-                            : 'translate-x-1 flex items-center justify-center'
+                            ? 'translate-x-6 flex items-center justify-center'
+                            : 'translate-x-0 flex items-center justify-center'
                     }`}
                 >
                     {theme === 'dark' ? (

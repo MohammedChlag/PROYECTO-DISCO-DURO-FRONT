@@ -3,6 +3,7 @@ import { Logo } from './Logo.jsx';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
 import { ProfileMenu } from '../profile/ProfileMenu.jsx';
 import { useLocation } from 'react-router-dom';
+import { ThemeUserMode } from '../ThemeUserMode.jsx';
 
 export const Header = () => {
     const { currentUser } = useAuthHook();
@@ -21,21 +22,22 @@ export const Header = () => {
     return (
         <header className={headerClasses}>
             {/* Ajustamos el tamaño del logo */}
-            <div className="flex justify-between w-[95vw]">
+            <div className="flex items-center justify-between w-[95vw]">
                 <Logo className="w-14 sm:w-20 md:w-24" />
+                <ThemeUserMode />
                 {currentUser ? (
                     <ProfileMenu />
                 ) : (
-                    <nav className="flex sm:space-x-4 text-xs sm:text-sm md:text-base">
+                    <nav className="flex sm:space-x-4 text-xs sm:text-sm md:text-base ml-auto">
                         <Link
-                            className=" dark:text-white w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
+                            className=" dark:text-white w-fit border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
                             to="/users/register"
                         >
                             Registrarse
                         </Link>
                         <Link
                             to="/users/login"
-                            className=" dark:text-white w-24 sm:w-28 md:w-32 border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
+                            className=" dark:text-white w-fit border-b-2 border-transparent hover:border-[#009EB5] p-1 rounded-md"
                         >
                             Iniciar Sesión
                         </Link>

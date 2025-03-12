@@ -134,10 +134,10 @@ export const Archivo = ({
                             <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
                                 {formatFileSize(file.size)}
                             </span>
-                            <span className="text-xs text-gray-500 ml-1">
-                                {formatDate(file.uploadedAt)}
-                            </span>
                         </div>
+                        <span className="text-xs mt-1 text-gray-500 ml-1">
+                            {formatDate(file.uploadedAt)}
+                        </span>
                     </div>
                 </article>
 

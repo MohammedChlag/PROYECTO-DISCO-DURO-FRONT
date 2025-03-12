@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './components/layout/Layout.jsx';
-import { ThemeUserMode } from './components/ThemeUserMode.jsx';
+// import { ThemeUserMode } from './components/ThemeUserMode.jsx';
 
 // Páginas Publicas
 import { LandingPage } from './pages/LandingPage.jsx';
@@ -24,7 +24,7 @@ import { NotFoundPage } from './pages/NotFoundPage.jsx';
 function App() {
     return (
         <>
-            <ThemeUserMode />
+            {/* <ThemeUserMode /> */}
             <Routes>
                 {/* Layout */}
                 <Route element={<Layout />}>

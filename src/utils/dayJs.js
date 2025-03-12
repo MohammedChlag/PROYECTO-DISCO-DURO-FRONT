@@ -33,7 +33,7 @@ export const formatDate = (date) => {
 
     // Si la diferencia es menor a 5 minutos, mostrara "hace un momento" para evitar confusiones.
     if (dayjs().diff(localDate, 'minute') < 5) {
-        return 'Hace un momento';
+        return 'hace un momento';
     }
 
     return localDate.fromNow(); //Calcular el tiempo correctamente y luego mostrara "hace minutos/hace horas" etc
