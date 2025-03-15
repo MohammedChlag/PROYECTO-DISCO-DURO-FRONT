@@ -1,3 +1,5 @@
+// Función de formulario genérica
+
 export const Form = ({ handleSubmit, children, className }) => {
     return (
         <form

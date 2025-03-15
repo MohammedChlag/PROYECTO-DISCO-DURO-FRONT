@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+
+// Import de iconos
 import { ClipboardDocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
+// Función de modal de url compartida
 export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
     const [loading, setLoading] = useState(true);
     const [copied, setCopied] = useState(false);

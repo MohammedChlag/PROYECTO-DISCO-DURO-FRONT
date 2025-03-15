@@ -1,4 +1,6 @@
 import { useState } from 'react';
+
+// Import de icono
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 // funcion auxiliar para recortar el nombre

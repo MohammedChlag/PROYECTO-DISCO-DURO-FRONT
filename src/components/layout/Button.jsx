@@ -1,3 +1,4 @@
+// Función de el componente Button
 export const Button = ({
     id,
     type,

@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom';
-import { Logo } from './Logo.jsx';
-import { useAuthHook } from '../../hooks/useAuthHook.js';
-import { ProfileMenu } from '../profile/ProfileMenu.jsx';
 import { useLocation } from 'react-router-dom';
+
+// Import de hook
+import { useAuthHook } from '../../hooks/useAuthHook.js';
+
+// Import de logo para el Header
+import { Logo } from './Logo.jsx';
+
+// Imports de componentes
+import { ProfileMenu } from '../profile/ProfileMenu.jsx';
 import { ThemeUserMode } from '../ThemeUserMode.jsx';
 
+// Función de Header
 export const Header = () => {
     const { currentUser } = useAuthHook();
     const location = useLocation();

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+// Import de Hook
 import { useFormHook } from '../../hooks/useFormHook.js';
 
 // Imports de componentes
@@ -15,6 +16,7 @@ import { registerUserService } from '../../services/fetchUserApi.js';
 import { registerUserSchema } from '../../schemas/users/registerUserShema.js';
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 
+// Función de formulario de registro
 export const RegisterForm = () => {
     const { info, errors, validate, handleChange } = useFormHook();
     const [loading, setLoading] = useState(false);

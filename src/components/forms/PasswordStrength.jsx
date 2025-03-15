@@ -1,5 +1,7 @@
+// Import de ErrorBoundaries
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 
+// Función de los criterios de contraseña
 export const PasswordStrength = ({ password }) => {
     const calculateStrength = (pass) => {
         let strength = 0;

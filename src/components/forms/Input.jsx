@@ -1,8 +1,15 @@
 import { useState } from 'react';
+
+// Import de Hook
 import { useFormHook } from '../../hooks/useFormHook.js';
+
+// Imports de iconos
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+
+// Importamos la estructura de la contraseña
 import { PasswordStrength } from './PasswordStrength.jsx';
 
+// Funcion de Inputs
 export const Input = ({
     label,
     type = 'text',

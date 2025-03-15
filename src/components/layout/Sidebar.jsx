@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+
+// Imports de iconos
 import {
     HomeIcon,
     DocumentTextIcon,
@@ -8,9 +10,12 @@ import {
     FolderPlusIcon,
     ArrowUpTrayIcon,
 } from '@heroicons/react/24/outline';
+
+// Imports de componentes
 import { ActionSidebarButton } from './ActionSidebarButton.jsx';
 import { SidebarButton } from './SidebarButton.jsx';
 
+// Función del sidebar lateral
 export const Sidebar = ({
     onCreateFolder,
     onUpload,

@@ -2,10 +2,15 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// Imports de componentes
 import { Header } from './Header.jsx';
-import { Boundary } from '../../services/ErrorBoundary.jsx';
 import { Footer } from './Footer.jsx';
 
+// Import de ErrorBoundaries
+import { Boundary } from '../../services/ErrorBoundary.jsx';
+
+// Función para definir nuestro Layout
 export const Layout = () => {
     const location = useLocation();
 

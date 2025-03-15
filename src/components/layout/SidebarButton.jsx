@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+// Función para los botones del Sidebar
 export const SidebarButton = ({ icon: Icon, label, onClick, isActive, to }) => {
     const ButtonContent = (
         <>

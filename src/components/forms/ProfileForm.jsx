@@ -1,18 +1,29 @@
 import { useState, useRef, useEffect } from 'react';
+import { toast } from 'react-toastify';
+
+// Imports de Hooks
 import { useUserHook } from '../../hooks/useUserHook.js';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
-import { toast } from 'react-toastify';
+
+// Imports de componentes
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
 import { Button } from '../layout/Button.jsx';
+
+// Imports de Iconos
 import {
     UserCircleIcon,
     TrashIcon,
     PencilIcon,
 } from '@heroicons/react/24/solid';
+
+// Import de ErrorBoundaries
 import { Boundary } from '../../services/ErrorBoundary.jsx';
+
+// Import de componente modal
 import { DeleteConfirmModal } from '../layout/Modals/DeleteConfirmModal.jsx';
 
+// Función de formulario de Perfil
 export const ProfileForm = () => {
     const { token, refreshCurrentUser } = useAuthHook();
     const fileInputRef = useRef(null);

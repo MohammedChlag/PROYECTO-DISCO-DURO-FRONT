@@ -14,9 +14,13 @@ import { loginUserService } from '../../services/fetchUserApi.js';
 import { Form } from './Form.jsx';
 import { Button } from '../layout/Button.jsx';
 import { Input } from './Input.jsx';
+
 import { loginUserSchema } from '../../schemas/users/loginUserSchema.js';
+
+// Import de ErrorBoundaries
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 
+// Función de el formulario de Login
 export const LoginForm = () => {
     const { info, errors, validate, handleChange } = useFormHook();
     const [loading, setLoading] = useState(false);

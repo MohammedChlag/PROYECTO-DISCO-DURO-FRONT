@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Import de modal de borrado de usuario
 export const DeleteUserModal = ({ isOpen, onClose, onConfirm, username }) => {
     if (!isOpen) return null;
 

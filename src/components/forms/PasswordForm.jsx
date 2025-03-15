@@ -1,12 +1,19 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+
+// Imports de Hooks
 import { useUserHook } from '../../hooks/useUserHook.js';
 import { useAuthHook } from '../../hooks/useAuthHook.js';
-import { toast } from 'react-toastify';
+
+// Imports de componentes
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
 import { Button } from '../layout/Button.jsx';
+
+// Imports de ErrorBoundaries
 import { Boundary } from '../../services/ErrorBoundary.jsx';
 
+// Import de formulario de Password
 export const PasswordForm = () => {
     const { token } = useAuthHook();
     const { updatePassword, loading, error } = useUserHook(null, token);

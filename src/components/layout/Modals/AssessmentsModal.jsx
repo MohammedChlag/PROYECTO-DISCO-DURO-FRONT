@@ -7,10 +7,13 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 
+// Import de componente
 import { Button } from '../Button';
 
+// Import de servicio de creacion de valoración
 import { createAssessmentService } from '../../../services/fetchAssessmentsApi.js';
 
+// Función de el modal de valoración
 export const AssessmentsModal = ({
     isOpen,
     onClose,

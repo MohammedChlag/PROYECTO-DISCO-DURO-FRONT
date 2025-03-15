@@ -50,6 +50,7 @@ export const AssessmentPreview = () => {
         }
     };
 
+    // Funcion para conseguir Username y Avatar
     const fetchUserDetails = async (assessmentsList) => {
         try {
             const uniqueUserIds = [

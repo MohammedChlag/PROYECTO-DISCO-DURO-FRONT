@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Import de el modal de confirmación de borrado
 export const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, type }) => {
     if (!isOpen) return null;
 

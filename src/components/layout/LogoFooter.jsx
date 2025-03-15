@@ -1,7 +1,12 @@
-import logoFooter from '../../assets/img/logo-hackloud-solo-blanco.png';
 import { Link } from 'react-router-dom';
+
+// Import de hook
 import { useAuthHook } from '../../hooks/useAuthHook.js';
 
+// Import de logo para el footer
+import logoFooter from '../../assets/img/logo-hackloud-solo-blanco.png';
+
+// Función para redireccionar con el logo del footer
 export const Logofooter = () => {
     const { currentUser } = useAuthHook();
     const redirectPath = currentUser ? '/storage' : '/aboutUs';
