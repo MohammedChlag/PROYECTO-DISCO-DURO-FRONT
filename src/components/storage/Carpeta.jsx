@@ -66,7 +66,7 @@ export const Carpeta = ({
                 onClick={handleFolderClick}
                 className="relative flex items-center p-3 border dark:border-[#494949] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-[#1e1e1e] group"
             >
-                <div className="flex items-center flex-1 min-w-0">
+                <article className="flex items-center flex-1 min-w-0">
                     <div className="flex-shrink-0 mr-2">
                         {folder.shareToken ? (
                             <div className="relative">
@@ -86,9 +86,9 @@ export const Carpeta = ({
                             {formatDate(folder.createdAt)}
                         </p>
                     </div>
-                </div>
+                </article>
 
-                <div className="folder-options relative ml-2">
+                <nav className="folder-options relative ml-2">
                     <button
                         onClick={handleOptionsClick}
                         className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-[#323232]"
@@ -127,7 +127,7 @@ export const Carpeta = ({
                             </div>
                         </>
                     )}
-                </div>
+                </nav>
             </div>
             {/* Modales */}
             <RenameModal

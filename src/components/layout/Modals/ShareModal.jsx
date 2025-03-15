@@ -8,7 +8,6 @@ import { ClipboardDocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 export const ShareModal = ({ isOpen, onClose, urls, type, title }) => {
     const [loading, setLoading] = useState(true);
     const [copied, setCopied] = useState(false);
-    console.log('Copied', copied);
 
     useEffect(() => {
         // Resetear estados cuando se abre el modal

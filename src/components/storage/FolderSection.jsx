@@ -48,25 +48,23 @@ export const FolderSection = ({
             <h2 className="text-base sm:text-lg font-semibold mb-4">
                 Carpetas
             </h2>
-            <div className="flex flex-col">
-                <ul className="space-y-2 sm:space-y-3 list-none p-0">
-                    {folders.map((folder, index) => (
-                        <li
-                            key={folder.id}
-                            className="animate-fadeIn"
-                            style={{ animationDelay: `${index * 50}ms` }}
-                        >
-                            <Carpeta
-                                folder={folder}
-                                onFolderClick={onFolderClick}
-                                onRename={onRename}
-                                onDelete={onDelete}
-                                onRefetchStorage={onRefetchStorage}
-                            />
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <ul className="flex flex-col space-y-2 sm:space-y-3 list-none p-0">
+                {folders.map((folder, index) => (
+                    <li
+                        key={folder.id}
+                        className="animate-fadeIn"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                    >
+                        <Carpeta
+                            folder={folder}
+                            onFolderClick={onFolderClick}
+                            onRename={onRename}
+                            onDelete={onDelete}
+                            onRefetchStorage={onRefetchStorage}
+                        />
+                    </li>
+                ))}
+            </ul>
         </section>
     );
 };

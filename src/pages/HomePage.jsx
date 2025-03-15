@@ -326,7 +326,7 @@ export const HomePage = () => {
                     <>
                         {/* Mostrar el navbar solo si no hay una carpeta seleccionada */}
                         {!selectedFolderId && (
-                            <div className="flex flex-col w-full min-w-0">
+                            <main className="flex flex-col w-full min-w-0">
                                 <Boundary>
                                     <nav className="flex items-start gap-2 sm:gap-4 py-2 sm:py-3 bg-white dark:bg-[#1f1f1f] shadow-sm animate-fade text-sm sm:text-base lg:hidden">
                                         <TabButton
@@ -385,7 +385,7 @@ export const HomePage = () => {
                                         />
                                     </div>
                                 </Boundary>
-                            </div>
+                            </main>
                         )}
 
                         {/* Contenido según el estado */}

@@ -88,8 +88,8 @@ export const SearchFilters = ({ onSort }) => {
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-[#2c2c2c] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="py-1">
+                <nav className="absolute right-0 z-10 mt-2 w-56 py-1 origin-top-right rounded-md bg-white dark:bg-[#2c2c2c] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <>
                         {sortOptions.map((option, index) => (
                             <button
                                 key={index}
@@ -110,8 +110,8 @@ export const SearchFilters = ({ onSort }) => {
                                 </button>
                             </>
                         )}
-                    </div>
-                </div>
+                    </>
+                </nav>
             )}
         </div>
     );

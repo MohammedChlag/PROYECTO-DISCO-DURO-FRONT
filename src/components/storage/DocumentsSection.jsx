@@ -64,25 +64,23 @@ export const DocumentsSection = ({
             <h2 className="text-base sm:text-lg font-semibold mb-4 dark:text-white">
                 Archivos
             </h2>
-            <div className="flex flex-col">
-                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-5 list-none p-0">
-                    {documents.map((file, index) => (
-                        <li
-                            key={file.id}
-                            className="animate-fadeIn"
-                            style={{ animationDelay: `${index * 30}ms` }}
-                        >
-                            <Archivo
-                                file={file}
-                                onRename={onRename}
-                                onDelete={onDelete}
-                                onRefetchStorage={onRefetchStorage}
-                                isSharedFolder={isSharedFolder}
-                            />
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-5 list-none p-0">
+                {documents.map((file, index) => (
+                    <li
+                        key={file.id}
+                        className="animate-fadeIn"
+                        style={{ animationDelay: `${index * 30}ms` }}
+                    >
+                        <Archivo
+                            file={file}
+                            onRename={onRename}
+                            onDelete={onDelete}
+                            onRefetchStorage={onRefetchStorage}
+                            isSharedFolder={isSharedFolder}
+                        />
+                    </li>
+                ))}
+            </ul>
         </section>
     );
 };

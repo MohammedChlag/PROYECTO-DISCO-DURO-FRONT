@@ -70,8 +70,8 @@ export const SearchBar = ({ onSearch, onClearSearch, onSort }) => {
     };
 
     return (
-        <div className="w-full flex justify-center items-center mb-4">
-            <div className="w-[80vw] md:w-[60vw] lg:w-[50vw] flex">
+        <section className="w-full flex justify-center items-center mb-4">
+            <article className="w-[80vw] md:w-[60vw] lg:w-[50vw] flex">
                 <div className="relative flex-grow">
                     <input
                         type="text"
@@ -95,7 +95,7 @@ export const SearchBar = ({ onSearch, onClearSearch, onSort }) => {
                     )}
                 </div>
                 <SearchFilters onSort={handleSort} />
-            </div>
-        </div>
+            </article>
+        </section>
     );
 };

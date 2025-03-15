@@ -68,8 +68,6 @@ export const Archivo = ({
         handleDownload,
     } = useItemsHook(file, 'file', { onDelete, onRefetchStorage });
 
-    console.log('Estado del modal en Archivo:', { showShareModal, shareUrls });
-
     const handleRenameSubmit = async (newName) => {
         await onRename(file.id, newName);
         setShowRenameModal(false);
@@ -163,7 +161,7 @@ export const Archivo = ({
                                 className="fixed inset-0 z-10"
                                 onClick={closeOptions}
                             />
-                            <div className="absolute bottom-10 z-20 w-48 md:right-4 md:bottom-12 text-gray-700 dark:text-white dark:bg-[#1b1b1b] bg-white rounded-lg shadow-lg border border-gray-200 dark:border-none">
+                            <nav className="absolute bottom-10 z-20 w-48 md:right-4 md:bottom-12 text-gray-700 dark:text-white dark:bg-[#1b1b1b] bg-white rounded-lg shadow-lg border border-gray-200 dark:border-none">
                                 <button
                                     onClick={handleRename}
                                     className="flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 dark:hover:bg-[#323232]"
@@ -198,7 +196,7 @@ export const Archivo = ({
                                     <TrashIcon className="h-4 w-4 mr-2" />
                                     <span>Eliminar</span>
                                 </button>
-                            </div>
+                            </nav>
                         </>
                     )}
                 </div>
@@ -226,9 +224,6 @@ export const Archivo = ({
                     setShowShareModal(false);
                     // Actualizar el almacenamiento cuando se cierra el modal
                     if (onRefetchStorage) {
-                        console.log(
-                            'Actualizando almacenamiento después de cerrar modal de compartir'
-                        );
                         onRefetchStorage();
                     }
                 }}

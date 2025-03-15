@@ -17,7 +17,6 @@ export const FilePreviewModal = ({ isOpen, onClose, file }) => {
     const [loading, setLoading] = useState(true); // Para mostrar el spinner mientras carga
     const [error, setError] = useState(null); // Si algo sale mal, lo guardamos aquí
     const modalRef = useRef(null); // Referencia para detectar clics fuera del modal
-    console.log(modalRef);
 
     // Este efecto se ejecuta cuando se abre el modal o cambia el archivo
     useEffect(() => {
