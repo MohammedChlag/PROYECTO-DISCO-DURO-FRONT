@@ -280,43 +280,39 @@ export const AssessmentPreview = () => {
             )}
 
             {/* Resumen de valoraciones */}
-            <div className="bg-white dark:bg-[#1f1f1f] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
+            <article className="flex flex-col items-center gap-2 bg-white dark:bg-[#1f1f1f] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
                 <h4 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-white mb-1 sm:mb-2">
                     <span className="text-[#009EB5]">★</span> Puntuación global
                 </h4>
-                <div className="flex items-center">
-                    <span className="text-xl sm:text-2xl font-bold text-[#009EB5] mr-2">
-                        {averageRating}
-                    </span>
-                    <div className="flex">
-                        {renderStars(Math.round(averageRating))}
-                    </div>
+                <span className="text-xl sm:text-2xl font-bold text-[#009EB5] mr-2">
+                    {averageRating}
+                </span>
+                <div className="flex">
+                    {renderStars(Math.round(averageRating))}
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                     Basado en {assessments.length} valoraciones
                 </p>
-                <div className="mt-1 sm:mt-2">
-                    <Link
-                        to="/assessments"
-                        className="text-xs text-[#009EB5] hover:underline font-medium"
-                    >
-                        Ver todas las valoraciones →
-                    </Link>
-                </div>
-            </div>
+                <Link
+                    to="/assessments"
+                    className="mt-1 sm:mt-2 text-xs text-[#009EB5] hover:underline font-medium"
+                >
+                    Ver todas las valoraciones →
+                </Link>
+            </article>
 
             {/* Carrusel de valoraciones */}
             {topAssessments.length > 0 && (
-                <div className="bg-white dark:bg-[#1f1f1f] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
+                <section className="bg-white dark:bg-[#1f1f1f] rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-500 hover:shadow-md transition-shadow">
                     <h4 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-white mb-1 sm:mb-2">
                         <span className="text-[#009EB5]">❝</span> Experiencias
                         reales
                     </h4>
 
-                    <div className="relative overflow-hidden">
+                    <figure className="relative overflow-hidden">
                         <div className="transition-opacity duration-500">
                             {topAssessments.map((assessment, index) => (
-                                <div
+                                <figcaption
                                     key={index}
                                     className={`${
                                         index ===
@@ -345,15 +341,15 @@ export const AssessmentPreview = () => {
                                         {renderStars(assessment.vote)}
                                     </div>
 
-                                    <div className="h-14 sm:h-16 overflow-y-auto mb-1">
+                                    <section className="h-14 sm:h-16 overflow-y-auto mb-1">
                                         <p className="text-xs text-gray-600 dark:text-gray-400 italic">
                                             {assessment.comment}
                                         </p>
-                                    </div>
+                                    </section>
 
-                                    <div className="flex items-center mt-1 pt-1 border-t border-gray-100 dark:border-gray-500">
+                                    <section className="flex items-center mt-1 pt-1 border-t border-gray-100 dark:border-gray-500">
                                         {assessment.userId ? (
-                                            <div className="flex items-center">
+                                            <>
                                                 {(() => {
                                                     const { username, avatar } =
                                                         getUserDetails(
@@ -399,19 +395,19 @@ export const AssessmentPreview = () => {
                                                         </>
                                                     );
                                                 })()}
-                                            </div>
+                                            </>
                                         ) : (
                                             <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                                                 Usuario: Anónimo
                                             </p>
                                         )}
-                                    </div>
-                                </div>
+                                    </section>
+                                </figcaption>
                             ))}
                         </div>
 
                         {/* Indicadores de navegación */}
-                        <div className="flex justify-center mt-1 sm:mt-2 space-x-1">
+                        <footer className="flex justify-center mt-1 sm:mt-2 space-x-1">
                             {topAssessments.map((_, index) => (
                                 <button
                                     key={index}
@@ -427,9 +423,9 @@ export const AssessmentPreview = () => {
                                     }`}
                                 />
                             ))}
-                        </div>
-                    </div>
-                </div>
+                        </footer>
+                    </figure>
+                </section>
             )}
 
             {/* Modal de confirmación de eliminación */}

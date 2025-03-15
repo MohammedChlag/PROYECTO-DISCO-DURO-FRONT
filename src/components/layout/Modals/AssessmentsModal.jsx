@@ -99,8 +99,8 @@ export const AssessmentsModal = ({
     };
 
     return (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-            <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <>
                 {/* Overlay */}
                 <div
                     className="fixed inset-0 transition-opacity bg-black bg-opacity-50"
@@ -109,9 +109,9 @@ export const AssessmentsModal = ({
                 ></div>
 
                 {/* Modal */}
-                <div className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white dark:bg-gray-800 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-popIn">
+                <dialog className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white dark:bg-gray-800 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-popIn">
                     {/* Header */}
-                    <div className="flex items-center justify-between px-6 pt-5 pb-2 border-b dark:border-gray-500">
+                    <header className="flex items-center justify-between px-6 pt-5 pb-2 border-b dark:border-gray-500">
                         <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                             {currentUser
                                 ? 'Valorar Hackloud'
@@ -124,13 +124,13 @@ export const AssessmentsModal = ({
                         >
                             <XMarkIcon className="w-6 h-6" />
                         </button>
-                    </div>
+                    </header>
 
                     {/* Content */}
-                    <div className="px-6 py-4">
+                    <main className="px-6 py-4">
                         {currentUser ? (
                             <form onSubmit={handleSubmit}>
-                                <div className="mb-6 text-center">
+                                <section className="mb-6 text-center">
                                     <p className="mb-3 text-gray-600 dark:text-gray-400">
                                         ¿Cómo valorarías tu experiencia con
                                         Hackloud?
@@ -147,9 +147,9 @@ export const AssessmentsModal = ({
                                             {rating === 5 && '¡Excelente!'}
                                         </p>
                                     )}
-                                </div>
+                                </section>
 
-                                <div className="mb-6">
+                                <section className="mb-6">
                                     <label
                                         htmlFor="comment"
                                         className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-400"
@@ -166,21 +166,19 @@ export const AssessmentsModal = ({
                                         className="w-full px-3 py-2 border dark:bg-[#323232] border-gray-300 dark:border-gray-500 rounded-md focus:outline-none focus:ring-[#009EB5] focus:border-[#009EB5]"
                                         placeholder="Comparte tu experiencia con nosotros..."
                                     ></textarea>
-                                </div>
+                                </section>
 
-                                <div className="flex justify-end">
-                                    <Button
-                                        type="submit"
-                                        loading={submitting}
-                                        className="w-full py-2 px-4 text-white bg-[#009EB5] hover:bg-[#009ec3] rounded-md shadow-sm"
-                                    >
-                                        Enviar valoración
-                                    </Button>
-                                </div>
+                                <Button
+                                    type="submit"
+                                    loading={submitting}
+                                    className="w-full py-2 px-4 text-white bg-[#009EB5] hover:bg-[#009ec3] rounded-md shadow-sm"
+                                >
+                                    Enviar valoración
+                                </Button>
                             </form>
                         ) : (
-                            <div className="text-center">
-                                <div className="p-4 mb-4 bg-[#e6f7f9] dark:bg-[#393939] rounded-lg">
+                            <dialog className="text-center">
+                                <section className="p-4 mb-4 bg-[#e6f7f9] dark:bg-[#393939] rounded-lg">
                                     <p className="text-[#00798a] dark:text-white mb-3">
                                         Para valorar nuestra aplicación,
                                         necesitas iniciar sesión o registrarte.
@@ -190,9 +188,9 @@ export const AssessmentsModal = ({
                                         ofrecer un mejor servicio a todos
                                         nuestros usuarios.
                                     </p>
-                                </div>
+                                </section>
 
-                                <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                                <section className="flex flex-col sm:flex-row gap-3 mt-6">
                                     <Link
                                         to="/users/login"
                                         className="flex-1 py-2 px-4 text-center text-white bg-[#009EB5] hover:bg-[#009ec3] rounded-md shadow-sm"
@@ -207,12 +205,12 @@ export const AssessmentsModal = ({
                                     >
                                         Registrarse
                                     </Link>
-                                </div>
-                            </div>
+                                </section>
+                            </dialog>
                         )}
-                    </div>
-                </div>
-            </div>
+                    </main>
+                </dialog>
+            </>
         </div>
     );
 };

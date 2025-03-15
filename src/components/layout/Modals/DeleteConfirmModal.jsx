@@ -29,19 +29,17 @@ export const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, type }) => {
 
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
-                <div className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 p-6 text-left shadow-xl transition-all animate-popIn">
+                <section className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 p-6 text-left shadow-xl transition-all animate-popIn">
                     {/* Título */}
                     <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white mb-4">
                         Confirmar eliminación
                     </h3>
 
                     {/* Contenido */}
-                    <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                            ¿Estás seguro de que deseas eliminar {getMessage()}?
-                            Esta acción no se puede deshacer.
-                        </p>
-                    </div>
+                    <p className="mt-2 text-sm text-gray-500">
+                        ¿Estás seguro de que deseas eliminar {getMessage()}?
+                        Esta acción no se puede deshacer.
+                    </p>
 
                     {/* Botones */}
                     <div className="mt-6 flex justify-end space-x-3">
@@ -58,7 +56,7 @@ export const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, type }) => {
                             Eliminar
                         </button>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     );

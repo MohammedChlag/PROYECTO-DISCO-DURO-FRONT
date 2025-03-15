@@ -7,10 +7,10 @@ export const NotFoundPage = () => {
     return (
         <>
             <div className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat">
-                <div className="max-w-md mx-auto text-center bg-white dark:bg-[#1f1f1f] bg-opacity-90 p-4">
-                    <div className="text-8xl font-bold text-cyan-400 mb-4">
+                <section className="max-w-md mx-auto text-center bg-white dark:bg-[#1f1f1f] bg-opacity-90 p-4">
+                    <header className="text-8xl font-bold text-cyan-400 mb-4">
                         404
-                    </div>
+                    </header>
                     <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-6">
                         Oops! Página no encontrada
                     </h1>
@@ -24,7 +24,7 @@ export const NotFoundPage = () => {
                     >
                         Volver
                     </Link>
-                </div>
+                </section>
             </div>
         </>
     );

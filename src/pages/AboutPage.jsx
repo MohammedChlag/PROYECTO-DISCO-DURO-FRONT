@@ -27,7 +27,7 @@ export const AboutPage = () => {
 
             <p className="text-base sm:text-lg font-medium">Save it ALL</p>
 
-            <div className="max-w-2xl mx-auto text-gray-700 dark:text-gray-400 space-y-4 mt-4">
+            <section className="max-w-2xl mx-auto text-gray-700 dark:text-gray-400 space-y-4 mt-4">
                 <p>
                     Soy tu espacio seguro en la nube. Guarda, organiza y accede
                     a tus archivos desde cualquier dispositivo, en cualquier
@@ -44,25 +44,28 @@ export const AboutPage = () => {
                 <p className="font-bold">
                     ¡Prueba la libertad de tener tus archivos siempre contigo!
                 </p>
-            </div>
+            </section>
 
-            <div className="flex justify-center mt-6 mb-8">
+            <section className="flex justify-center mt-6 mb-8">
                 <button
                     onClick={() => navigate('/assessments')}
                     className="text-white px-6 py-2 rounded-lg bg-[#009EB5] shadow-md hover:bg-[#007e94] transition-all"
                 >
                     Dejar una Valoración
                 </button>
-            </div>
+            </section>
 
             {/* Sección de valoraciones */}
-            <div id="valoraciones" className="w-full max-w-4xl mx-auto mt-4">
+            <section
+                id="valoraciones"
+                className="w-full max-w-4xl mx-auto mt-4"
+            >
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
                     <span className="text-[#009EB5]">♥</span> Opiniones de
                     nuestra comunidad
                 </h3>
                 <AssessmentPreview />
-            </div>
+            </section>
         </section>
     );
 };

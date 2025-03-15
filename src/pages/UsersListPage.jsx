@@ -123,7 +123,7 @@ export const UsersListPage = () => {
     }
 
     return (
-        <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <header className="mb-6 flex justify-between items-center">
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                     Usuarios
@@ -143,7 +143,7 @@ export const UsersListPage = () => {
                     .map((user) => (
                         <article
                             key={user.id}
-                            className="bg-white dark:bg-[#373737] rounded-lg shadow-sm border border-gray-200 dark:border-[#494949] p-4 flex flex-col"
+                            className="bg-white dark:bg-[#2c2c2c] rounded-lg shadow-sm border border-gray-200 dark:border-[#494949] p-4 flex flex-col"
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <Boundary>
@@ -265,6 +265,6 @@ export const UsersListPage = () => {
                     username={deleteModal.username}
                 />
             </Boundary>
-        </main>
+        </section>
     );
 };

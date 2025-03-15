@@ -9,7 +9,6 @@ import { downloadSharedFileService } from '../services/fetchStorageApi.js';
 
 // Imports de iconos
 import { FolderIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
-
 import { getFileIcon } from '../utils/helpers.js';
 
 export const SharedLinkPage = () => {
@@ -114,19 +113,19 @@ export const SharedLinkPage = () => {
 
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+            <section className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00B4D8]"></div>
                 <p className="mt-3 text-gray-600">
                     Cargando carpeta compartida...
                 </p>
-            </div>
+            </section>
         );
     }
 
     if (error) {
         return (
             <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-                <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+                <section className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
                     <h2 className="text-2xl font-bold text-red-600 mb-4">
                         Error
                     </h2>
@@ -137,7 +136,7 @@ export const SharedLinkPage = () => {
                     >
                         Volver al inicio
                     </button>
-                </div>
+                </section>
             </div>
         );
     }
@@ -146,32 +145,32 @@ export const SharedLinkPage = () => {
         <div className="py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 {resource && (
-                    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <section className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                         {/* Encabezado de la carpeta */}
-                        <div className="bg-[#00B4D8] bg-opacity-10 p-4 border-b border-[#00B4D8] border-opacity-20">
-                            <h1 className="text-2xl font-bold text-gray-800 flex items-center">
+                        <article className="bg-[#00B4D8] bg-opacity-10 p-4 border-b border-[#00B4D8] border-opacity-20">
+                            <h1 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center">
                                 <FolderIcon className="h-6 w-6 mr-4 text-[#00B4D8]" />
                                 {resource.name}
                             </h1>
-                        </div>
+                        </article>
 
                         {/* Contenido de la carpeta (archivos) */}
-                        <div className="p-6">
+                        <section className="p-6">
                             {files && files.length > 0 ? (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {files.map((file) => (
-                                        <div
+                                        <li
                                             key={file.id}
-                                            className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow bg-white"
+                                            className="border border-gray-200 dark:border-none rounded-lg p-4 hover:shadow-md transition-shadow bg-white dark:bg-gray-500"
                                         >
-                                            <div className="flex items-start justify-between">
-                                                <div className="flex items-start flex-1 min-w-0 mr-2">
+                                            <section className="flex items-start justify-between">
+                                                <article className="flex items-start flex-1 min-w-0 mr-2">
                                                     {getFileIcon(file.name)}
                                                     <div className="min-w-0">
-                                                        <p className="text-sm font-medium text-gray-900 truncate w-full">
+                                                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate w-full">
                                                             {file.name}
                                                         </p>
-                                                        <p className="text-xs text-gray-500">
+                                                        <p className="text-xs text-gray-500 dark:text-white">
                                                             {file.size
                                                                 ? `${(
                                                                       file.size /
@@ -182,15 +181,15 @@ export const SharedLinkPage = () => {
                                                                 : 'Desconocido'}
                                                         </p>
                                                     </div>
-                                                </div>
+                                                </article>
                                                 <button
                                                     onClick={() =>
                                                         handleDownload(file)
                                                     }
                                                     className={`ml-2 p-1 ${
                                                         file.shareToken
-                                                            ? 'text-gray-400 hover:text-[#00B4D8]'
-                                                            : 'text-gray-300 hover:text-yellow-500'
+                                                            ? 'text-gray-400 dark:text-white hover:text-[#00B4D8]'
+                                                            : 'text-gray-300 dark:text-white hover:text-yellow-500'
                                                     } flex-shrink-0`}
                                                     title={
                                                         file.shareToken
@@ -200,10 +199,10 @@ export const SharedLinkPage = () => {
                                                 >
                                                     <ArrowDownTrayIcon className="h-5 w-5" />
                                                 </button>
-                                            </div>
-                                        </div>
+                                            </section>
+                                        </li>
                                     ))}
-                                </div>
+                                </ul>
                             ) : (
                                 <div className="text-center py-10">
                                     <p className="text-gray-500">
@@ -211,8 +210,8 @@ export const SharedLinkPage = () => {
                                     </p>
                                 </div>
                             )}
-                        </div>
-                    </div>
+                        </section>
+                    </section>
                 )}
             </div>
         </div>

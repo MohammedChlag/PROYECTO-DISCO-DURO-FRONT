@@ -3,7 +3,7 @@ import { AssessmentComponent } from '../components/assessments/AssessmentCompone
 
 export const AssessmentsPage = () => {
     return (
-        <main className="bg-gradient-to-b  dark:bg-[#1f1f1f]">
+        <section className="bg-gradient-to-b  dark:bg-[#1f1f1f]">
             <div className="container mx-auto px-4 py-12 md:py-16">
                 <header className="max-w-4xl mx-auto text-center mb-12">
                     <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
@@ -21,6 +21,6 @@ export const AssessmentsPage = () => {
                     <AssessmentComponent />
                 </div>
             </div>
-        </main>
+        </section>
     );
 };
