@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+
+// Importación de iconos
 import {
     HomeIcon,
     DocumentTextIcon,
@@ -8,6 +10,8 @@ import {
     FolderPlusIcon,
     ArrowUpTrayIcon,
 } from '@heroicons/react/24/outline';
+
+// Importación de Layot
 import { ActionSidebarButton } from './ActionSidebarButton.jsx';
 import { SidebarButton } from './SidebarButton.jsx';
 

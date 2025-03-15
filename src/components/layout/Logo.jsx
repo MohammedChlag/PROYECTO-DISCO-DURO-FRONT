@@ -1,4 +1,3 @@
-// import logo from '../assets/img/logo-hackloud-solo.png';
 import logoLight from '../../assets/img/logo-hackloud-solo.png';
 import logoDark from '../../assets/img/logo-hackloud-solo-blanco.png';
 import { Link } from 'react-router-dom';
@@ -10,11 +9,6 @@ export const Logo = () => {
 
     return (
         <Link to={redirectPath}>
-            {/* <img
-                src={logo}
-                alt="Hackloud"
-                className="h-4 w-auto hover:opacity-80 transition-opacity md:h-6"
-            /> */}
             <img
                 src={logoLight}
                 alt="Hackloud Logo Light"
