@@ -15,10 +15,13 @@ import {
     EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
 
+// Import de modal de borrado de usuarios
 import { DeleteUserModal } from '../components/layout/Modals/DeleteUserModal';
 
+// Import de ErrorBoundaries
 import { Boundary } from '../services/ErrorBoundary.jsx';
 
+// Función para la lista de usuarios
 export const UsersListPage = () => {
     const navigate = useNavigate();
     const { token, isAdmin } = useAuthHook();

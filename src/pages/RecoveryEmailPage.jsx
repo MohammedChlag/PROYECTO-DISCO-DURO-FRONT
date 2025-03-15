@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
+// Import de service de recuperación de contraseña
 import { recoveryPasswordService } from '../services/fetchUserApi.js';
+
 // Imports de componentes
 import { Input } from '../components/forms/Input.jsx';
 import { Button } from '../components/layout/Button.jsx';
 import { Form } from '../components/forms/Form.jsx';
+
+// Función de página de email de recuperación
 export const RecoveryEmailPage = () => {
     const [email, setEmail] = useState('');
 
