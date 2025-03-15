@@ -6,9 +6,11 @@ Hackloud ofrece almacenamiento en la nube, permitiendo a múltiles usuarios subi
 
 ## 🛠️ Tecnologías Utílizadas
 
-**Frontend**: React + Vite, Tailwind CSS,
-**Librerías**: Heroicons, joi, dayjs, toastify, react-hook-form.
-**Almacenamiento**: multer-cloud-storage
+-   **Frontend**: React + Vite, Tailwind CSS,
+-   **Librerías**: Heroicons, joi, dayjs, toastify, react-hook-form.
+-   **Almacenamiento**: multer-cloud-storage
+
+## 🚀 Instalación y Configuración
 
 ### 1️⃣ Clonar el repositorio
 
@@ -18,8 +20,8 @@ git clone https://github.com/MohammedChlag/PROYECTO-DISCO-DURO-FRONT
 
 Crea un archivo ".env.local" en la raíz del proyecto y define las siguientes variables:
 
-VITE_BACKEND_STATIC=
-VITE_BACKEND_HOST=
+-   VITE_BACKEND_STATIC=
+-   VITE_BACKEND_HOST=
 
 3️⃣ Instalar Dependencias
 
