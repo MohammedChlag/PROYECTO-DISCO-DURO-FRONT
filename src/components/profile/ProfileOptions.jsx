@@ -1,5 +1,6 @@
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 
+// Función para opciones y efectos en el menu de perfil
 export const ProfileOptions = ({ items, userAvatar, userName, isAdmin }) => {
     return (
         <div className="absolute right-0 mt-2 w-56 rounded-md shadow-elegant bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 animate-elegantRise origin-top-right overflow-hidden">
@@ -20,7 +21,9 @@ export const ProfileOptions = ({ items, userAvatar, userName, isAdmin }) => {
                     ) : (
                         <UserCircleIcon
                             className={`h-10 w-10 ${
-                                isAdmin ? 'text-red-500' : 'text-gray-400 dark:text-gray-300'
+                                isAdmin
+                                    ? 'text-red-500'
+                                    : 'text-gray-400 dark:text-gray-300'
                             } drop-shadow-sm`}
                         />
                     )}

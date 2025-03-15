@@ -1,5 +1,6 @@
 import { CloudArrowUpIcon } from '@heroicons/react/24/solid';
 
+// Función para los botones de accion del perfil
 export const ActionButton = ({
     onClick,
     icon: Icon = CloudArrowUpIcon,

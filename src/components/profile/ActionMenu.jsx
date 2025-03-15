@@ -1,5 +1,7 @@
+// Imports de iconos
 import { ArrowUpTrayIcon, FolderPlusIcon } from '@heroicons/react/24/solid';
 
+// Función de botón de subida de archivos y carpetas
 export const ActionMenu = ({
     show,
     onClose,

@@ -6,7 +6,7 @@ import { MoonIcon as MoonSolid, SunIcon } from '@heroicons/react/24/solid';
 // Importación LocalStorage
 import { getFromLocalStorage, setToLocalStorage } from '../utils/helpers.js';
 
-
+// Función para el modo noche y su button
 export const ThemeUserMode = () => {
     // Almacenamos el tema actual en el localStorage
     const [theme, setTheme] = useState(
@@ -65,7 +65,6 @@ export const ThemeUserMode = () => {
                             : 'translate-x-0 flex items-center justify-center'
                     }`}
                 >
-
                     {/* Aquí le ponemos un icono de sol o luna dependiendo del tema */}
                     {theme === 'dark' ? (
                         <MoonSolid
@@ -83,4 +82,3 @@ export const ThemeUserMode = () => {
         </div>
     );
 };
-

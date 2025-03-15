@@ -1,9 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
+// Import de hook
 import { useAuthHook } from '../../hooks/useAuthHook.js';
+
+// Imports de iconos
 import { UserCircleIcon, ChevronDownIcon } from '@heroicons/react/24/outline'; // Importamos el nuevo icono
+
+// Import de componente
 import { ProfileOptions } from './ProfileOptions.jsx';
 
+// Función de el menu al loguear un usuario
 export const ProfileMenu = () => {
     const navigate = useNavigate();
     const location = useLocation();
