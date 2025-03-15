@@ -1,8 +1,40 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 📁 Hackloud - Disco Duro Online
 
-Currently, two official plugins are available:
+Hackloud ofrece almacenamiento en la nube, permitiendo a múltiles usuarios subir, compartir y gestionar archivos y carpetas de forma rápida y segura.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tecnologías Utílizadas
+
+**Frontend**: React + Vite, Tailwind CSS,
+**Librerías**: Heroicons, joi, dayjs, toastify, react-hook-form.
+**Almacenamiento**: multer-cloud-storage
+
+### 1️⃣ Clonar el repositorio
+
+git clone https://github.com/MohammedChlag/PROYECTO-DISCO-DURO-FRONT
+
+### 2️⃣ Configurar Variables de Entorno
+
+Crea un archivo ".env.local" en la raíz del proyecto y define las siguientes variables:
+
+VITE_BACKEND_STATIC=
+VITE_BACKEND_HOST=
+
+3️⃣ Instalar Dependencias
+
+npm install
+
+4️⃣ Iniciar el Servidor
+
+npm run dev
+
+## Contributors
+
+Estas son las personas que han contribuido en el proyecto y donde puedes localizarlas para cualquier tipo de consulta o ayuda:
+
+Mohammed Chikri Laghzaoui ---- mohammedchikrilag@icloud.com
+Francisco Javier Garrido Valderas ---- fjgarridovalderas@hotmail.com
+Alexmary Rangel Jimenez ---- alexmaryrangel@gmail.com
+Bridinia Agüero Madera ---- bridiniaaguero@gmail.com
+Sebastián Osuna Hidalgo ---- sebasosunah@gmail.com
