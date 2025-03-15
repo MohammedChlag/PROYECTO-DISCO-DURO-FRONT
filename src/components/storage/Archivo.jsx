@@ -135,6 +135,7 @@ export const Archivo = ({
                                 {formatFileSize(file.size)}
                             </span>
                         </div>
+                        {/* Implementamos dayjs al subir archivos */}
                         <span className="text-xs mt-1 text-gray-500 ml-1">
                             {formatDate(file.uploadedAt)}
                         </span>
@@ -202,7 +203,7 @@ export const Archivo = ({
                     )}
                 </div>
             </div>
-
+            {/* Modales */}
             <RenameModal
                 isOpen={showRenameModal}
                 onClose={() => setShowRenameModal(false)}

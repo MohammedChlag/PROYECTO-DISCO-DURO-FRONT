@@ -81,6 +81,7 @@ export const Carpeta = ({
                         <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                             {truncateFolderName(folder.name)}
                         </p>
+                        {/* Implementamos dayjs al crear carpetas */}
                         <p className="text-xs text-gray-500">
                             {formatDate(folder.createdAt)}
                         </p>
@@ -128,7 +129,7 @@ export const Carpeta = ({
                     )}
                 </div>
             </div>
-
+            {/* Modales */}
             <RenameModal
                 isOpen={showRenameModal}
                 onClose={() => setShowRenameModal(false)}
