@@ -35,25 +35,32 @@ function App() {
                     {/* Ruta 404 */}
                     <Route path="*" element={<NotFoundPage />} />
                     <Route path="/users">
+                    {/* Ruta LoginPage */}
                         <Route path="login" element={<LoginPage />} />
+                        {/* Ruta RegisterPage */}
                         <Route path="register" element={<RegisterPage />} />
+                        {/* Ruta ValidationPage */}
                         <Route
                             path="validation/:registrationCode"
                             element={<ValidationPage />}
                         />
+                        {/* Ruta RecoveryEmailPage */}
                         <Route
                             path="recovery-email"
                             element={<RecoveryEmailPage />}
                         />
+                        {/* Ruta RecoveryPassCodePage */}
                         <Route
                             path="recovery"
                             element={<RecoveryPassCodePage />}
                         />
                     </Route>
+                    {/* Ruta SharedLinkPage */}
                     <Route
                         path="/storage/share/link/:shareToken"
                         element={<SharedLinkPage />}
                     />
+                    {/* Ruta DownloadPage */}
                     <Route
                         path="/storage/share/download/:shareToken"
                         element={<DownloadPage />}

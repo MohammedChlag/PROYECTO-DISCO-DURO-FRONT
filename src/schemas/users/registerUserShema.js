@@ -1,6 +1,7 @@
 import joi from 'joi';
 import { joiErrorMessages } from '../joiErrorMessages.js';
 
+// Creamos el esquema para registrar usuario
 export const registerUserSchema = joi.object({
     firstName: joi.string().max(40).allow('', null).messages(joiErrorMessages),
     lastName: joi.string().max(40).allow('', null).messages(joiErrorMessages),
