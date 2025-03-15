@@ -1,9 +1,13 @@
-// import logo from '../assets/img/logo-hackloud-solo.png';
 import { useNavigate } from 'react-router-dom';
+
+// Imports de logos
 import logoLight from '../assets/img/logo-hackloud-solo.png';
 import logoDark from '../assets/img/logo-hackloud-solo-blanco.png';
+
+// Import de componente
 import { AssessmentPreview } from '../components/assessments/AssessmentsPreview.jsx';
 
+// Función de la página de AboutUs
 export const AboutPage = () => {
     const navigate = useNavigate();
 
@@ -12,7 +16,6 @@ export const AboutPage = () => {
             <h2 className="text-xl sm:text-2xl font-semibold mb-2">About us</h2>
             <div className="w-12 h-1 bg-[#009EB5] mb-6"></div>
 
-            {/* <img src={logo} alt="Hackloud Logo" className="w-32 sm:w-40 mb-4" /> */}
             <img
                 src={logoLight}
                 alt="Hackloud Logo Light"

@@ -3,8 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 
 import { downloadSharedFileService } from '../services/fetchStorageApi.js';
 
+// Imports de iconos
 import { ArrowDownTrayIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 
+// Página de descarga de archivo
 export const DownloadPage = () => {
     const { shareToken } = useParams();
     const [downloading, setDownloading] = useState(false);

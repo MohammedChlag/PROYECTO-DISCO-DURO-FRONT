@@ -1,7 +1,9 @@
 // Estados, hooks y referencias
 import { useMemo, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useAuthHook } from '../hooks/useAuthHook.js';
 import { useStorageHook } from '../hooks/useStorageHook.js';
+
 // Nav, sections y modals
 import { TabButton } from '../components/profile/TabButton.jsx';
 import { SearchBar } from '../components/storage/Search/SearchBar.jsx';
@@ -9,13 +11,15 @@ import { SearchSection } from '../components/storage/SearchSection.jsx';
 import { FolderSection } from '../components/storage/FolderSection.jsx';
 import { DocumentsSection } from '../components/storage/DocumentsSection.jsx';
 import { CreateFolderModal } from '../components/layout/Modals/CreateFolderModal.jsx';
+
 // Sidebar botón acción
 import { Sidebar } from '../components/layout/Sidebar.jsx';
 import { ActionButton } from '../components/profile/ActionButton.jsx';
 import { ActionMenu } from '../components/profile/ActionMenu.jsx';
+
 // Folderpage
 import { FolderPage } from './FolderPage.jsx';
-import { toast } from 'react-toastify';
+
 // Services
 import {
     createFolderService,
@@ -26,6 +30,7 @@ import {
     sortStorageService,
 } from '../services/fetchStorageApi.js';
 
+// ErrorBoundary
 import { Boundary } from '../services/ErrorBoundary.jsx';
 
 // Bienvenidos a la homepage :D

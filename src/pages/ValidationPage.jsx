@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+// Import de ErrorBoundaries
 import { Boundary } from '../services/ErrorBoundary.jsx';
 
+// Función para la página de validación
 export const ValidationPage = () => {
     const { registrationCode } = useParams();
     const navigate = useNavigate();

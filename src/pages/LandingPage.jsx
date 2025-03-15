@@ -1,10 +1,17 @@
 import React, { useRef, useState, useEffect } from 'react';
-import nubelogo from '../assets/img/nube.png';
-import { Button } from '../components/layout/Button.jsx';
 import { Link } from 'react-router-dom';
+
+// Imports de iconos
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+
+// Import de icono
+import nubelogo from '../assets/img/nube.png';
+
+// Imports de componentes
+import { Button } from '../components/layout/Button.jsx';
 import { AssessmentPreview } from '../components/assessments/AssessmentsPreview.jsx';
 
+// Función de página de Landing
 export const LandingPage = () => {
     // Referencia para la sección de valoraciones y la sección principal
     const valoracionesRef = useRef(null);

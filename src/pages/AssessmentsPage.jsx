@@ -1,6 +1,9 @@
 import React from 'react';
+
+// Import de componente
 import { AssessmentComponent } from '../components/assessments/AssessmentComponent';
 
+// Función de página de valoraciones
 export const AssessmentsPage = () => {
     return (
         <section className="bg-gradient-to-b  dark:bg-[#1f1f1f]">
