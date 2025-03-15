@@ -1,7 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
+<<<<<<< HEAD
 // Imports de iconos
+=======
+// Importación de iconos
+>>>>>>> 27cb40e27b3c4df26cfa107a23905ab0cff7b5d5
 import {
     HomeIcon,
     DocumentTextIcon,
@@ -11,7 +15,11 @@ import {
     ArrowUpTrayIcon,
 } from '@heroicons/react/24/outline';
 
+<<<<<<< HEAD
 // Imports de componentes
+=======
+// Importación de Layot
+>>>>>>> 27cb40e27b3c4df26cfa107a23905ab0cff7b5d5
 import { ActionSidebarButton } from './ActionSidebarButton.jsx';
 import { SidebarButton } from './SidebarButton.jsx';
 
