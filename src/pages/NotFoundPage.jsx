@@ -1,6 +1,9 @@
-import { useAuthHook } from '../hooks/useAuthHook.js';
 import { Link } from 'react-router-dom';
 
+// Import de hook
+import { useAuthHook } from '../hooks/useAuthHook.js';
+
+// Función para la página de NotFound
 export const NotFoundPage = () => {
     const { currentUser } = useAuthHook();
     const redirectPath = currentUser ? '/storage' : '/';

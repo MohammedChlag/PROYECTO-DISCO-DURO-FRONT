@@ -1,8 +1,13 @@
-import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { useMemo } from 'react';
+
+// Import de icono
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+
+// Imports de componentes
 import { DocumentsSection } from '../components/storage/DocumentsSection.jsx';
 import { ActionButton } from '../components/profile/ActionButton.jsx';
 
+// Función de sección de archivos de la página Homepage
 export const FolderPage = ({
     folderId,
     storage,

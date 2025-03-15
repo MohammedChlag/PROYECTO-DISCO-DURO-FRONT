@@ -8,6 +8,7 @@ import { resetPasswordService } from '../services/fetchUserApi.js';
 import { Input } from '../components/forms/Input.jsx';
 import { Button } from '../components/layout/Button.jsx';
 
+// Función para la página de recuperación de contraseña
 export const RecoveryPassCodePage = () => {
     const [searchParams] = useSearchParams(); //Obtenemos el código de la URL
     const recoveryPassCode = searchParams.get('recoveryPassCode');

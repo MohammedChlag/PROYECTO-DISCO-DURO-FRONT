@@ -11,6 +11,7 @@ import { downloadSharedFileService } from '../services/fetchStorageApi.js';
 import { FolderIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { getFileIcon } from '../utils/helpers.js';
 
+// Función de página de link compartido
 export const SharedLinkPage = () => {
     const { shareToken } = useParams();
     const navigate = useNavigate();
