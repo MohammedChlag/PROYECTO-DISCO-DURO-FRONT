@@ -54,15 +54,15 @@ export const LoginForm = () => {
                 className="flex flex-col gap-6 p-8 bg-white dark:bg-[#2c2c2c] rounded-xl shadow-lg w-full max-w-md mx-auto my-8 sm:my-16"
                 handleSubmit={handleSubmit}
             >
-                <div className="text-center space-y-2">
+                <header className="text-center space-y-2">
                     <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                         Iniciar sesión
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-white">
                         Bienvenido de nuevo a Hackloud
                     </p>
-                </div>
-                <div className="space-y-4">
+                </header>
+                <fieldset className="space-y-4">
                     <Input
                         id="email"
                         label="Correo Electrónico"
@@ -81,8 +81,8 @@ export const LoginForm = () => {
                         errors={errors}
                         handleChange={handleChange}
                     />
-                </div>
-                <div className="space-y-4">
+                </fieldset>
+                <footer className="space-y-4">
                     <Button
                         type="submit"
                         className="w-full bg-[#009EB5] hover:bg-[#009ec3] text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] active:translate-y-[1px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
@@ -90,7 +90,7 @@ export const LoginForm = () => {
                     >
                         {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
                     </Button>
-                    <div className="flex flex-col items-center gap-3 text-sm">
+                    <section className="flex flex-col items-center gap-3 text-sm">
                         <p className="text-gray-600 dark:text-white">
                             ¿No tienes una cuenta?{' '}
                             <Link
@@ -106,8 +106,8 @@ export const LoginForm = () => {
                         >
                             ¿Olvidaste tu contraseña?
                         </Link>
-                    </div>
-                </div>
+                    </section>
+                </footer>
             </Form>
         </Boundary>
     );

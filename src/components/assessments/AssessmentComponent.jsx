@@ -244,7 +244,7 @@ export const AssessmentComponent = () => {
             {!loading && !error && assessments.length > 0 && (
                 <article className="bg-[#e6f7f9] dark:bg-[#283e45] rounded-lg p-8 mb-12 shadow-sm">
                     <div className="flex flex-col lg:flex-row items-center justify-around gap-8">
-                        <div className="text-center lg:text-left">
+                        <section className="text-center lg:text-left">
                             <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                                 Valoración media
                             </h2>
@@ -259,12 +259,12 @@ export const AssessmentComponent = () => {
                             <p className="text-gray-600 dark:text-gray-400 mt-3">
                                 Basado en {assessments.length} valoraciones
                             </p>
-                        </div>
-                        <div className="bg-white dark:bg-[#222222] p-6 rounded-lg shadow-sm w-full lg:w-auto">
+                        </section>
+                        <section className="bg-white dark:bg-[#222222] p-6 rounded-lg shadow-sm w-full lg:w-auto">
                             <h3 className="text-lg font-medium text-gray-700 dark:text-white mb-4">
                                 Distribución de valoraciones
                             </h3>
-                            <div className="flex items-center space-x-1 mb-3">
+                            <article className="flex items-center space-x-1 mb-3">
                                 <div className="flex">
                                     {[1, 2, 3, 4, 5].map((star) => (
                                         <StarSolid
@@ -293,9 +293,9 @@ export const AssessmentComponent = () => {
                                             .length
                                     }
                                 </span>
-                            </div>
+                            </article>
                             {[4, 3, 2, 1].map((rating) => (
-                                <div
+                                <article
                                     key={rating}
                                     className="flex items-center space-x-1 mb-3"
                                 >
@@ -332,21 +332,21 @@ export const AssessmentComponent = () => {
                                             ).length
                                         }
                                     </span>
-                                </div>
+                                </article>
                             ))}
-                        </div>
+                        </section>
                     </div>
                 </article>
             )}
 
             {/* Estado de carga */}
             {loading && (
-                <div className="text-center py-16">
+                <section className="text-center py-16">
                     <div className="inline-block animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#009EB5]"></div>
                     <p className="mt-4 text-gray-600 font-medium">
                         Cargando valoraciones...
                     </p>
-                </div>
+                </section>
             )}
 
             {/* Mensaje de error */}
@@ -360,7 +360,7 @@ export const AssessmentComponent = () => {
 
             {/* Lista de valoraciones */}
             {!loading && !error && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
                     {assessments.length > 0 ? (
                         assessments.map((assessment, index) => (
                             <article
@@ -475,7 +475,7 @@ export const AssessmentComponent = () => {
                             </p>
                         </div>
                     )}
-                </div>
+                </section>
             )}
 
             {/* Modal de valoración */}

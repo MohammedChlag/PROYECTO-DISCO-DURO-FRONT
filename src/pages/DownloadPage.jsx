@@ -58,11 +58,11 @@ export const DownloadPage = () => {
     };
 
     return (
-        <section className="container mx-auto py-12 px-4">
-            <div className="max-w-xl mx-auto">
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="container mx-auto py-12 px-4">
+            <section className="max-w-xl mx-auto">
+                <div className="bg-white dark:bg-[#1e1e1e] rounded-xl shadow-lg overflow-hidden">
                     {/* Cabecera con estado de descarga */}
-                    <div className="bg-gradient-to-r from-[#009EB5] to-[#009ec3] p-6 text-white">
+                    <header className="bg-gradient-to-r from-[#009EB5] to-[#009ec3] dark:from-[#00798a] dark:to-[#00808f] p-6 text-white">
                         <h1 className="text-2xl font-bold mb-2">
                             {downloadComplete
                                 ? '¡Descarga completada!'
@@ -77,7 +77,7 @@ export const DownloadPage = () => {
                                 ? error
                                 : 'Estamos preparando tu archivo para descargar...'}
                         </p>
-                    </div>
+                    </header>
 
                     {/* Contenido principal */}
                     <div className="p-6">
@@ -86,7 +86,7 @@ export const DownloadPage = () => {
                             <button
                                 onClick={handleManualDownload}
                                 disabled={downloading}
-                                className="flex items-center justify-center gap-2 bg-[#009EB5] hover:bg-[#009ec3] text-white font-medium py-3 px-4 rounded-lg w-full mb-6 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+                                className="flex items-center justify-center gap-2 bg-[#009EB5] hover:bg-[#009ec3] dark:bg-[#00798a] dark:hover:bg-[#00808f] text-white font-medium py-3 px-4 rounded-lg w-full mb-6 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
                             >
                                 <ArrowDownTrayIcon className="h-5 w-5" />
                                 {downloading
@@ -96,43 +96,43 @@ export const DownloadPage = () => {
                         )}
 
                         {/* Mensaje promocional */}
-                        <div className="mt-4 p-5 bg-[#e6f7f9] rounded-lg border border-[#c5edf2]">
-                            <h2 className="text-lg font-semibold text-[#00798a] mb-2">
+                        <section className="mt-4 p-5 bg-[#e6f7f9] dark:bg-[#2a2a2a] rounded-lg border border-[#c5edf2] dark:border-[#3c3c3c]">
+                            <h2 className="text-lg font-semibold text-[#00798a] dark:text-[#66c2d2] mb-2">
                                 ¿Necesitas compartir tus propios archivos?
                             </h2>
-                            <p className="text-[#009EB5] mb-4">
+                            <p className="text-[#009EB5] dark:text-[#66c2d2] mb-4">
                                 Únete a Hackloud y disfruta de almacenamiento
                                 seguro, compartición de archivos y mucho más.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3 justify-center">
                                 <Link
                                     to="/users/register"
-                                    className="bg-[#009EB5] hover:bg-[#009ec3] text-white font-medium py-2 px-4 rounded-lg transition-colors shadow-sm flex-1 text-center"
+                                    className="bg-[#009EB5] hover:bg-[#009ec3] dark:bg-[#00798a] dark:hover:bg-[#00808f] text-white font-medium py-2 px-4 rounded-lg transition-colors shadow-sm flex-1 text-center"
                                 >
                                     Registrarse gratis
                                 </Link>
                                 <Link
                                     to="/users/login"
-                                    className="bg-white border border-[#009EB5] hover:bg-[#e6f7f9] text-[#009EB5] font-medium py-2 px-4 rounded-lg transition-colors flex-1 text-center"
+                                    className="bg-white border border-[#009EB5] hover:bg-[#e6f7f9] dark:bg-[#1e1e1e] dark:border-[#66c2d2] dark:hover:bg-[#2a2a2a] text-[#009EB5] dark:text-[#66c2d2] font-medium py-2 px-4 rounded-lg transition-colors flex-1 text-center"
                                 >
                                     Iniciar sesión
                                 </Link>
                             </div>
-                        </div>
+                        </section>
 
                         {/* Enlace para volver */}
-                        <div className="mt-6 text-center">
+                        <footer className="mt-6 text-center">
                             <Link
                                 to="/"
-                                className="inline-flex items-center justify-center gap-1 text-gray-600 hover:text-[#009EB5] transition-colors"
+                                className="inline-flex items-center justify-center gap-1 text-gray-600 hover:text-[#009EB5] dark:text-gray-300 dark:hover:text-[#66c2d2] transition-colors"
                             >
                                 <ArrowLeftIcon className="h-4 w-4" />
                                 Volver a la página principal
                             </Link>
-                        </div>
+                        </footer>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     );
 };

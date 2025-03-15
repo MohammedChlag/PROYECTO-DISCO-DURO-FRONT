@@ -78,35 +78,18 @@ export const ProfileForm = () => {
     };
 
     const handleAvatarClick = () => {
-        console.log(
-            '%c Click en editar avatar',
-            'background: #222; color: #bada55'
-        );
         fileInputRef.current?.click();
     };
 
     const handleAvatarChange = async (e) => {
         const file = e.target.files?.[0];
         if (!file) {
-            console.log(
-                '%c No se seleccionó ningún archivo',
-                'background: #222; color: #ff0000'
-            );
             return;
         }
 
-        console.log(
-            '%c Archivo seleccionado:',
-            'background: #222; color: #00ff00',
-            file.name
-        );
+        console.log('Archivo seleccionado:', file.name);
         try {
             const result = await updateAvatar(file);
-            console.log(
-                '%c Resultado updateAvatar:',
-                'background: #222; color: #00ff00',
-                result
-            );
             if (result) {
                 setAvatarError(false);
                 toast.success('Avatar actualizado correctamente');
@@ -117,20 +100,11 @@ export const ProfileForm = () => {
                 }, 1500);
             }
         } catch (error) {
-            console.error(
-                '%c Error en handleAvatarChange:',
-                'background: #222; color: #ff0000',
-                error
-            );
             toast.error('Error al actualizar el avatar');
         }
     };
 
     const handleDeleteClick = () => {
-        console.log(
-            '%c Click en eliminar avatar',
-            'background: #222; color: #bada55'
-        );
         setShowDeleteModal(true);
     };
 

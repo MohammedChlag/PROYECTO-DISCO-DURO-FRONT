@@ -21,16 +21,14 @@ export const DeleteUserModal = ({ isOpen, onClose, onConfirm, username }) => {
                     </h3>
 
                     {/* Contenido */}
-                    <div className="mt-2">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                            ¿Estás seguro de que deseas eliminar al usuario{' '}
-                            <span className="font-medium text-gray-700 dark:text-white">
-                                {username}
-                            </span>
-                            ? Esta acción no se puede deshacer y el usuario
-                            perderá todo acceso al sistema.
-                        </p>
-                    </div>
+                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                        ¿Estás seguro de que deseas eliminar al usuario{' '}
+                        <span className="font-medium text-gray-700 dark:text-white">
+                            {username}
+                        </span>
+                        ? Esta acción no se puede deshacer y el usuario perderá
+                        todo acceso al sistema.
+                    </p>
 
                     {/* Botones */}
                     <div className="mt-6 flex justify-end space-x-3">

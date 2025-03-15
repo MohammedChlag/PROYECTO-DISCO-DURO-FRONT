@@ -6,12 +6,8 @@ export const ProfilePage = () => {
     return (
         <FormProvider>
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full min-w-0 p-4 sm:p-6">
-                <div className="w-full">
-                    <ProfileForm />
-                </div>
-                <div className="w-full">
-                    <PasswordForm />
-                </div>
+                <ProfileForm />
+                <PasswordForm />
             </section>
         </FormProvider>
     );
