@@ -91,7 +91,6 @@ export const useItemsHook = (
             await onDelete(item.id, type);
             setShowDeleteModal(false);
         } catch (error) {
-            console.error('Error al eliminar:', error);
             toast.error(error.message || 'Error al eliminar el elemento');
         }
     };
@@ -111,7 +110,6 @@ export const useItemsHook = (
     const handleCloseShareModal = () => {
         setShowShareModal(false);
         if (onRefetchStorage) {
-            console.log('Actualizando almacenamiento después de compartir');
             onRefetchStorage();
         }
     };

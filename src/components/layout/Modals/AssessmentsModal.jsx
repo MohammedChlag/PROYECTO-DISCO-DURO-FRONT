@@ -46,8 +46,6 @@ export const AssessmentsModal = ({
 
         try {
             setSubmitting(true);
-            console.log('Enviando valoración:', { vote: rating, comment });
-            console.log('Token utilizado:', token.substring(0, 10) + '...');
 
             // Enviar los datos con los nombres de campo que espera el backend
             const result = await createAssessmentService(
@@ -166,7 +164,7 @@ export const AssessmentsModal = ({
                                         onChange={(e) =>
                                             setComment(e.target.value)
                                         }
-                                        className="w-full px-3 py-2 border dark:bg-[#323232] border-gray-300 dark:border-gray-500 rounded-md focus:outline-none focus:ring-[#009EB5] focus:border-[#009EB5]"
+                                        className="w-full px-3 py-2 border dark:bg-[#323232] dark:text-white border-gray-300 dark:border-gray-500 rounded-md focus:outline-none focus:ring-[#009EB5] focus:border-[#009EB5]"
                                         placeholder="Comparte tu experiencia con nosotros..."
                                     ></textarea>
                                 </section>

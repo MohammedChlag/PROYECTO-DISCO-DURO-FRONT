@@ -92,7 +92,7 @@ export const getAssessmentsService = async () => {
         }
         // Si llegamos aquí con el mensaje de 404, devolvemos el resultado vacío
         return {
-            message: 'No hay valoraciones disponibles au00fan',
+            message: 'No hay valoraciones disponibles aún',
             count: 0,
             result: [],
             noAssessments: true,

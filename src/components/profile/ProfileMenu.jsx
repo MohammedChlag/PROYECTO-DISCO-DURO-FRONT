@@ -35,7 +35,6 @@ export const ProfileMenu = () => {
 
     // Actualizar el avatarUrl cuando cambia currentUser
     useEffect(() => {
-        console.log('ProfileMenu: currentUser cambió', currentUser);
         if (currentUser?.avatar) {
             const newAvatarUrl = `/uploads/${currentUser.id}/avatars/${currentUser.avatar}`;
             console.log('ProfileMenu: nuevo avatarUrl', newAvatarUrl);

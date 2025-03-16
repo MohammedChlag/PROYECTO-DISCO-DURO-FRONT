@@ -34,8 +34,6 @@ export const useUserHook = (id, token, refreshCallback = null) => {
                     ? await getUserService(id)
                     : await getOwnUserService(token);
 
-                console.log('Datos de usuario recibidos:', data);
-
                 if (isSubscribed) {
                     setUser(data);
                     setError(null);

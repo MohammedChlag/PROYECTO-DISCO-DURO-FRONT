@@ -34,7 +34,6 @@ export const AssessmentComponent = () => {
         try {
             setLoading(true);
             const data = await getAssessmentsService();
-            console.log('AssessmentComponent - Datos recibidos:', data);
 
             // Establecer las valoraciones desde data.result
             const assessmentsList = data.result || [];
@@ -63,7 +62,6 @@ export const AssessmentComponent = () => {
                     assessmentsList.map((a) => a.userId).filter(Boolean)
                 ),
             ];
-            console.log('IDs de usuario únicos:', uniqueUserIds);
 
             // Objeto para almacenar los detalles de usuario
             const userDetailsObj = {};
@@ -71,7 +69,6 @@ export const AssessmentComponent = () => {
             // Obtener detalles de cada usuario
             for (const userId of uniqueUserIds) {
                 try {
-                    console.log('Obteniendo detalles del usuario:', userId);
                     const { user } = await getUserByIdService(userId);
                     userDetailsObj[userId] = user;
                     console.log(

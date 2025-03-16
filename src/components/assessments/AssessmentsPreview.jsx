@@ -69,12 +69,6 @@ export const AssessmentPreview = () => {
                                 username: user.username || 'Usuario',
                                 avatar: user.avatarUrl || user.avatar || null,
                             };
-                            console.log(
-                                'Usuario obtenido:',
-                                user.username,
-                                'para ID:',
-                                userId
-                            );
                         }
                     } catch (error) {
                         console.error(
@@ -232,12 +226,12 @@ export const AssessmentPreview = () => {
         // Si es el caso especial de "no hay valoraciones", mostramos un mensaje amigable
         if (error === 'no-assessments') {
             return (
-                <section className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 text-center py-3">
-                    <h4 className="text-base font-semibold text-gray-800 mb-2">
+                <section className="bg-white dark:bg-[#1f1f1f] rounded-lg p-4 shadow-sm border border-gray-100 dark:border-gray-500 text-center py-3">
+                    <h4 className="text-base font-semibold text-gray-800 mb-2 dark:text-white">
                         <span className="text-[#009EB5]">★</span> Aún no hay
                         valoraciones
                     </h4>
-                    <p className="text-gray-600 text-sm mb-3">
+                    <p className="text-gray-600 text-sm mb-3 dark:text-gray-400">
                         ¡Sé el primero en compartir tu experiencia con Hackloud!
                     </p>
                     <Link

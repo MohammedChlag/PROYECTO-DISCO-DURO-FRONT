@@ -57,10 +57,6 @@ export const AuthProvider = ({ children }) => {
     const refreshCurrentUser = async () => {
         if (token) {
             try {
-                console.log('Refrescando currentUser en AuthContext');
-                console.log('Token actual:', token.substring(0, 10) + '...');
-                console.log('currentUser antes de refrescar:', currentUser);
-
                 const user = await getOwnUserService(token);
                 console.log('Datos de usuario obtenidos:', user);
 
@@ -75,7 +71,6 @@ export const AuthProvider = ({ children }) => {
                 return false;
             }
         }
-        console.log('No hay token para refrescar currentUser');
         return false;
     };
 
