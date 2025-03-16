@@ -1,42 +1,61 @@
-# React + Vite
-
 # 📁 Hackloud - Disco Duro Online
 
-Hackloud ofrece almacenamiento en la nube, permitiendo a múltiles usuarios subir, compartir y gestionar archivos y carpetas de forma rápida y segura.
+**Hackloud** ofrece almacenamiento en la nube, permitiendo a múltiples usuarios subir, compartir y gestionar archivos y carpetas de forma rápida y segura.
 
-## 🛠️ Tecnologías Utílizadas
+## 🛠️ Tecnologías Utilizadas
 
--   **Frontend**: React + Vite, Tailwind CSS,
--   **Librerías**: Heroicons, joi, dayjs, toastify, react-hook-form.
--   **Almacenamiento**: multer-cloud-storage
+### Frontend
+
+-   React + Vite
+-   Tailwind CSS
+
+### Librerías
+
+-   Heroicons
+-   Joi
+-   Dayjs
+-   Toastify
+-   React-hook-form
+
+### Almacenamiento
+
+-   multer-cloud-storage
 
 ## 🚀 Instalación y Configuración
 
 ### 1️⃣ Clonar el repositorio
 
+```bash
 git clone https://github.com/MohammedChlag/PROYECTO-DISCO-DURO-FRONT
+```
 
 ### 2️⃣ Configurar Variables de Entorno
 
-Crea un archivo ".env.local" en la raíz del proyecto y define las siguientes variables:
+Crea un archivo `.env.local` en la raíz del proyecto y define las siguientes variables:
 
--   VITE_BACKEND_STATIC=
--   VITE_BACKEND_HOST=
+```env
+VITE_BACKEND_STATIC=
+VITE_BACKEND_HOST=
+```
 
-3️⃣ Instalar Dependencias
+### 3️⃣ Instalar dependencias
 
+```bash
 npm install
+```
 
-4️⃣ Iniciar el Servidor
+### 4️⃣ Iniciar el servidor
 
+```bash
 npm run dev
+```
 
-## Contributors
+## 📌 Colaboradores
 
-Estas son las personas que han contribuido en el proyecto y donde puedes localizarlas para cualquier tipo de consulta o ayuda:
+Personas que han colaborado en el proyecto, disponibles para consultas o ayuda:
 
--   Mohammed Chikri Laghzaoui ---- mohammedchikrilag@icloud.com
--   Francisco Javier Garrido Valderas ---- fjgarridovalderas@hotmail.com
--   Alexmary Rangel Jimenez ---- alexmaryrangel@gmail.com
--   Bridinia Agüero Madera ---- bridiniaaguero@gmail.com
--   Sebastián Osuna Hidalgo ---- sebasosunah@gmail.com
+-   **Mohammed Chikri Laghzaoui** - [mohammedchikrilag@icloud.com](mailto:mohammedchikrilag@icloud.com)
+-   **Francisco Javier Garrido Valderas** - [fjgarridovalderas@hotmail.com](mailto:fjgarridovalderas@hotmail.com)
+-   **Alexmary Rangel Jimenez** - [alexmaryrangel@gmail.com](mailto:alexmaryrangel@gmail.com)
+-   **Bridinia Agüero Madera** - [bridiniaaguero@gmail.com](mailto:bridiniaaguero@gmail.com)
+-   **Sebastián Osuna Hidalgo** - [sebasosunah@gmail.com](mailto:sebasosunah@gmail.com)
