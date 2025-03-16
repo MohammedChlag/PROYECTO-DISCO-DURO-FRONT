@@ -17,10 +17,6 @@
 -   Toastify
 -   React-hook-form
 
-### Almacenamiento
-
--   multer-cloud-storage
-
 ## 🚀 Instalación y Configuración
 
 ### 1️⃣ Clonar el repositorio
